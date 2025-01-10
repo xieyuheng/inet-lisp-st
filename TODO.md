@@ -1,3 +1,14 @@
+change project name to inet-lisp
+
+inet -- 打造一个可以在 GPU 上运行的实用并行语言。
+
+- inet-lisp -- 用 lisp 语法，实现更一般的 graph rewrite。
+  多 principle ports 依然可以保证 inet 作为 rewrite system 的良好属性
+
+- 为这个项目服务，还是需要一个带有 GC 的 x-lisp。
+  为了处理 lisp 语法，需要在 c 里以深嵌入的方式，
+  写一个 sexp 的 pattern matching library。
+
 # later
 
 [example] cellular automata -- 1997-interaction-combinators.pdf
