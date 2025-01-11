@@ -1,10 +1,10 @@
+list.fth -- update to lisp syntax
+list.play.fth -- update to lisp syntax
+
 combinators.fth -- update to lisp syntax
 forever.play.fth -- update to lisp syntax
 lambda.fth -- update to lisp syntax
-list.fth -- update to lisp syntax
-list.play.fth -- update to lisp syntax
-nat.fth -- update to lisp syntax
-nat.play.fth -- update to lisp syntax
+
 
 module -- update to lisp syntax
 datatypes -- update to lisp syntax
