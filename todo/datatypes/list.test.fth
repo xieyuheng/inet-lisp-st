@@ -1,24 +1,19 @@
-define-node null -- value! end
-define-node cons tail head -- value! end
-define-node append target! rest -- result end
+(define-node null value!)
+(define-node cons head tail value!)
+(define-node append target! rest result)
 
-define-rule null append
-  ( rest result )
-  rest result connect
-end
+(define-rule (append (null) rest result)
+  (connect rest result))
 
-define-rule cons append
-  ( rest result ) ( tail head )
-  tail rest append
-  head cons result connect
-end
+(define-rule (append (cons head tail) rest result)
+  (cons head (append tail rest) result))
 
-define-node sole -- value! end
+(define-node sole value!)
 
-null sole cons sole cons sole cons
-null sole cons sole cons sole cons
-append
+(define (inspect-run wire)
+  (wire-print-net (run (wire-print-net wire))))
 
-wire-print-net
-run
-wire-print-net
+(inspect-run
+  (append
+    (cons (sole) (cons (sole) (cons (sole) (null))))
+    (cons (sole) (cons (sole) (cons (sole) (null))))))
