@@ -1,2 +1,2 @@
-null null eq ok
-null true eq not ok
+true true eq ok
+true false eq not ok

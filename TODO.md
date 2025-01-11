@@ -1,4 +1,3 @@
-examples/ -- rename nil to null
 update examples to new syntax
 examples/ -- change nadd back to add -- primitive function can use + as name
 
