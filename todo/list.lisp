@@ -10,10 +10,10 @@
 
 (define-node sole value!)
 
-(define (test wire)
+(define (inspect-run wire)
   (wire-print-net (run (wire-print-net wire))))
 
-(test
+(inspect-run
   (append
     (cons (sole) (cons (sole) (cons (sole) (null))))
     (cons (sole) (cons (sole) (cons (sole) (null))))))
