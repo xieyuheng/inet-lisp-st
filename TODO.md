@@ -1,11 +1,26 @@
-inet -- 打造一个可以在 GPU 上运行的实用并行语言。
+update example to new syntax
+update readme to new syntax
 
-- inet-lisp -- 用 lisp 语法，实现更一般的 graph rewrite。
-  多 principle ports 依然可以保证 inet 作为 rewrite system 的良好属性
+# sexp
 
-- 为这个项目服务，还是需要一个带有 GC 的 x-lisp。
-  为了处理 lisp 语法，需要在 c 里以深嵌入的方式，
-  写一个 sexp 的 pattern matching library。
+[sexp] API for pattern matching
+
+# aim
+
+「目标」以 inet 理论为基础，打造一个实用的，可以在 GPU 上并行运行的语言。
+「约束」用 lisp 语法，以保持语法设计的灵活性。
+
+# GC
+
+为这个项目服务，还是需要一个带有 GC 的 x-lisp。
+为了处理 lisp 语法，需要在 c 里以深嵌入的方式，
+写一个 sexp 的 。
+
+# multiple principle ports
+
+实现更一般的 graph rewrite。
+多 principle ports 依然可以保证
+inet 作为 rewrite system 的良好属性。
 
 # later
 
