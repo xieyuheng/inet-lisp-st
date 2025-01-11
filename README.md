@@ -27,7 +27,7 @@ to interaction combinators will be explored only later.
 ```xml
 (define-node <name> <ports>)
 (define-rule <pattern> <function-body>)
-(define <name> <function-body>)
+(define (<name> <args>) <function-body>)
 ```
 
 ## Examples

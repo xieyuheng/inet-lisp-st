@@ -1,4 +1,3 @@
-datatypes/nat.test.fth -- update to lisp syntax
 datatypes/diff-list.test.fth -- update to lisp syntax
 datatypes/bool.test.fth -- update to lisp syntax
 
