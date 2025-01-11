@@ -2,7 +2,7 @@ define my-drop
   ( x )
 end
 
-1 2 my-drop 1 eq ok
+1 2 my-drop 1 eq assert
 
 define my-swap
   ( x y )
@@ -10,5 +10,5 @@ define my-swap
 end
 
 1 2 swap
-1 eq ok
-2 eq ok
+1 eq assert
+2 eq assert
