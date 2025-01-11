@@ -1,8 +1,8 @@
-remove xnull from primitive value
-rename nil to null
-
+examples/ -- rename nil to null
 update examples to new syntax
 examples/ -- change nadd back to add -- primitive function can use + as name
+
+remove xnull from primitive value
 
 # aim
 

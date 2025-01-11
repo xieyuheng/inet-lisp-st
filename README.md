@@ -135,11 +135,11 @@ The whole program with test:
 ### List
 
 ```
-(define-node nil value!)
+(define-node null value!)
 (define-node cons head tail value!)
 (define-node append target! rest result)
 
-(define-rule (append (nil) rest result)
+(define-rule (append (null) rest result)
   (connect rest result))
 
 (define-rule (append (cons head tail) rest result)
@@ -152,8 +152,8 @@ The whole program with test:
 
 (test
   (append
-    (cons sole (cons sole (cons sole nil)))
-    (cons sole (cons sole (cons sole nil)))))
+    (cons sole (cons sole (cons sole null)))
+    (cons sole (cons sole (cons sole null)))))
 ```
 
 <details>
@@ -171,13 +171,13 @@ The whole program with test:
 (sole₁₃)-value!-<>-head-(cons₁₄)
 (cons₁₀)-value!-<>-tail-(cons₁₂)
 (sole₁₁)-value!-<>-head-(cons₁₂)
-(nil₈)-value!-<>-tail-(cons₁₀)
+(null₈)-value!-<>-tail-(cons₁₀)
 (sole₉)-value!-<>-head-(cons₁₀)
 (cons₅)-value!-<>-tail-(cons₇)
 (sole₆)-value!-<>-head-(cons₇)
 (cons₃)-value!-<>-tail-(cons₅)
 (sole₄)-value!-<>-head-(cons₅)
-(nil₁)-value!-<>-tail-(cons₃)
+(null₁)-value!-<>-tail-(cons₃)
 (sole₂)-value!-<>-head-(cons₃)
 </body>
 </net>
@@ -197,7 +197,7 @@ The whole program with test:
 (sole₁₃)-value!-<>-head-(cons₁₄)
 (cons₁₀)-value!-<>-tail-(cons₁₂)
 (sole₁₁)-value!-<>-head-(cons₁₂)
-(nil₈)-value!-<>-tail-(cons₁₀)
+(null₈)-value!-<>-tail-(cons₁₀)
 (sole₉)-value!-<>-head-(cons₁₀)
 </body>
 </net>
