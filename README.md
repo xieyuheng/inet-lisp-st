@@ -15,7 +15,8 @@ because we do not yet fully understand the logic behind
 the type system of this model of computation.
 
 We use a lisp-like meta language to build interaction nets.
-lisp-like syntax help us to keep the design simple and the syntax flexible.
+lisp-like syntax helps us to keep the design flexible
+and the implementation simple.
 
 And we program with interaction nets directly first,
 compiling more conventional functional programs
