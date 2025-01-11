@@ -1,4 +1,7 @@
-primitives -- update to lisp syntax
+primitives/bool -- update to lisp syntax
+primitives/int -- update to lisp syntax
+primitives/float -- update to lisp syntax
+primitives/console -- update to lisp syntax
 
 # docs
 
