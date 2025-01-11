@@ -1,7 +1,5 @@
 update examples to new syntax
 
-remove xnull from primitive value
-
 # aim
 
 「目标」以 inet 理论为基础，打造一个实用的，可以在 GPU 上并行运行的语言。
