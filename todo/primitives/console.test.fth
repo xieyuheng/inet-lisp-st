@@ -1,5 +1,5 @@
-#t print drop newline
-#f print drop newline
+true print drop newline
+false print drop newline
 
 1 2 add print drop newline
 -1 -2 add print drop newline

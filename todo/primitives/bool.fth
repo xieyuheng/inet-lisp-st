@@ -1,4 +1,4 @@
-#f #f and not ok
-#f #t and not ok
-#t #f and not ok
-#t #t and ok
+false false and not ok
+false true and not ok
+true false and not ok
+true true and ok
