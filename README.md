@@ -9,7 +9,7 @@ as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_langua
 
 ## Syntax
 
-```lisp
+```xml
 (define-node <name> <ports>)
 (define-rule <pattern> <function-body>)
 (define <name> <function-body>)
@@ -19,7 +19,7 @@ as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_langua
 
 ### Natural Number
 
-```lisp
+```
 (define-node zero value!)
 (define-node add1 prev value!)
 (define-node add target! addend result)
@@ -80,7 +80,7 @@ Example interaction:
 
 The whole program with test:
 
-```lisp
+```
 (define-node zero value!)
 (define-node add1 prev value!)
 (define-node add target! addend result)
@@ -134,7 +134,7 @@ The whole program with test:
 
 ### List
 
-```lisp
+```
 (define-node null value!)
 (define-node cons head tail value!)
 (define-node append target! rest result)
