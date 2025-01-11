@@ -1,10 +1,10 @@
-# inet-forth
+# inet-lisp
 
 An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
-as a [forth-like language](https://en.wikipedia.org/wiki/Forth_(programming_language)).
+as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
 
 - Untyped.
-- Using a stack-based meta language to build nets.
+- Using a meta language to build nets.
 - Programming with interaction nets directly (no compilation via combinators).
 
 ## Syntax
@@ -263,17 +263,17 @@ Dependencies:
 Compile:
 
 ```
-git clone https://github.com/cicada-lang/inet-forth
-cd inet-forth
+git clone https://github.com/cicada-lang/inet-lisp
+cd inet-lisp
 make -j
 make test
 ```
 
-The compiled binary `./bin/inet-forth` is the command-line program.
+The compiled binary `./bin/inet-lisp` is the command-line program.
 
 ```sh
-$ ./bin/inet-forth
-inet-forth 0.1.0
+$ ./bin/inet-lisp
+inet-lisp 0.1.0
 
 commands:
   run -- run files
@@ -285,7 +285,7 @@ commands:
 For examples:
 
 ```sh
-./bin/inet-forth run examples/nat.fth
+./bin/inet-lisp run examples/nat.fth
 ```
 
 ## Development
@@ -308,10 +308,6 @@ make clean    # clean up compiled files
 
 - [1990-interaction-nets](./docs/references/1990-interaction-nets.pdf)
 - [1997-interaction-combinators](./docs/references/1997-interaction-combinators.pdf)
-
-**Inspirations**:
-
-- [forth](https://en.wikipedia.org/wiki/Forth_(programming_language))
 
 **Books**:
 

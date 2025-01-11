@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bin=./bin/inet-forth
+bin=./bin/inet-lisp
 ext=fth
 
 for example in $(find examples -name "*.${ext}" -not -name "*.test.${ext}" -not -name "*.error.${ext}" -not -name "*.play.${ext}"); do

@@ -1,5 +1,3 @@
-change project name to inet-lisp
-
 inet -- 打造一个可以在 GPU 上运行的实用并行语言。
 
 - inet-lisp -- 用 lisp 语法，实现更一般的 graph rewrite。
