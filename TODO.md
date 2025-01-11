@@ -1,5 +1,3 @@
-primitives/console -- update to lisp syntax
-
 # docs
 
 update docs/articles/ to new syntax -- to see the end first
