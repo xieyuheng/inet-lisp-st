@@ -1,4 +1,3 @@
-datatypes/diff-list.test.fth -- update to lisp syntax
 datatypes/bool.test.fth -- update to lisp syntax
 
 module -- update to lisp syntax
