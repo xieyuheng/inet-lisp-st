@@ -1,2 +1,2 @@
-(ok (eq? (true) (true)))
-(ok (not (eq? (true) (false))))
+(ok (eq? #t #t))
+(ok (not (eq? #t #f)))
