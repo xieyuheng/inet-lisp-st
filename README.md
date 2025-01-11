@@ -19,7 +19,7 @@ lisp-like syntax helps us to keep the design flexible
 and the implementation simple.
 
 And we will program with interaction nets directly first,
-compiling more conventional functional programs
+compiling (more conventional) functional programs
 to interaction combinators will be explored only later.
 
 ## Syntax
