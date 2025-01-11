@@ -1,4 +1,4 @@
-(import zero add1 add "nat.fth")
+(import zero add1 add "nat.lisp")
 
 (define (one) (add1 (zero)))
 (define (two) (add1 (one)))

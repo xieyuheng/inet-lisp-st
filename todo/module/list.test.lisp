@@ -1,5 +1,5 @@
-(import null cons append "list.fth")
-(import sole "trivial.fth")
+(import null cons append "list.lisp")
+(import sole "trivial.lisp")
 
 (inspect-run
   (append
