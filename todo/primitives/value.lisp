@@ -1,2 +1,2 @@
-(ok (eq? (true) (true)))
-(ok (not (eq? (true) (false))))
+(assert (eq? true true))
+(assert (not (eq? true false)))
