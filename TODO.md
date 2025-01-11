@@ -2,6 +2,10 @@ module -- update to lisp syntax
 datatypes -- update to lisp syntax
 primitives -- update to lisp syntax
 
+# docs
+
+update docs/articles/ to new syntax -- to see the end first
+
 # aim
 
 「目标」以 inet 理论为基础，打造一个实用的，可以在 GPU 上并行运行的语言。
@@ -11,13 +15,9 @@ primitives -- update to lisp syntax
 
 [sexp] API for pattern matching -- deep embedded in c
 
-# docs
-
-update docs/articles/ to new syntax
-
 # later
 
-[example] cellular automata -- 1997-interaction-combinators.pdf
+[example] `examples/cellular-automata.lisp` -- 1997-interaction-combinators.pdf
 [example] `examples/lambda.lisp` -- use interaction combinators to implement lambda
 [example] `examples/turing.lisp` -- coding turing machine -- 2008-the-annotated-turing.djvu
 
