@@ -9,7 +9,7 @@ so that when you write a program in this language,
 the running of the program can automatically make use of
 any number threads on the machine.
 
-The language has dynamicly typed,
+The language uses dynamic type tag,
 i.e. it has no static type checking,
 because we do not yet fully understand the logic behind
 the type system of this model of computation.
