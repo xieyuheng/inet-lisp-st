@@ -8,9 +8,9 @@
 (define-rule (add (add1 prev) addend result)
   (add1 (add prev addend) result))
 
-(define two (add1 (add1 (zero))))
+(define (two) (add1 (add1 (zero))))
 
 (define (test wire)
   (wire-print-net (run (wire-print-net wire))))
 
-(test (add two two))
+(test (add (two) (two)))

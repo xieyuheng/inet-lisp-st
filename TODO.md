@@ -1,5 +1,3 @@
-rename project to inet
-use .inet file extension -- instead of .lisp
 module -- update to lisp syntax
 datatypes -- update to lisp syntax
 primitives -- update to lisp syntax

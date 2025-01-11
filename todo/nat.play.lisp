@@ -8,9 +8,9 @@
 (define-rule (add (add1 prev) addend result)
   (add1 (add prev addend) result))
 
-(define two (add1 (add1 (zero))))
+(define (two) (add1 (add1 (zero))))
 
 (wire-debug
   (add
-    (add two two)
-    (add two two)))
+    (add (two) (two))
+    (add (two) (two))))

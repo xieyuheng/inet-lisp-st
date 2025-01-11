@@ -91,12 +91,12 @@ The whole program with test:
 (define-rule (add (zero) addend result)
   (connect addend result))
 
-(define two (add1 (add1 (zero))))
+(define (two) (add1 (add1 (zero))))
 
 (define (test wire)
   (wire-print-net (run (wire-print-net wire))))
 
-(test (add two two))
+(test (add (two) (two)))
 ```
 
 <details>
@@ -152,8 +152,8 @@ The whole program with test:
 
 (test
   (append
-    (cons sole (cons sole (cons sole null)))
-    (cons sole (cons sole (cons sole null)))))
+    (cons (sole) (cons (sole) (cons (sole) (null))))
+    (cons (sole) (cons (sole) (cons (sole) (null))))))
 ```
 
 <details>
