@@ -2,7 +2,6 @@ primitives/int -- update to lisp syntax
 
 - add i prefix to int functions -- just like f prefix for float functions
 
-primitives/float -- update to lisp syntax
 primitives/console -- update to lisp syntax
 
 # docs
