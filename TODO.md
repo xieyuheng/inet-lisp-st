@@ -10,11 +10,6 @@ primitives -- update to lisp syntax
 
 update docs/articles/ to new syntax -- to see the end first
 
-# aim
-
-「目标」以 inet 理论为基础，打造一个实用的，可以在 GPU 上并行运行的语言。
-「约束」用 lisp 语法，以保持语法设计的灵活性。
-
 # sexp
 
 [sexp] API for pattern matching -- deep embedded in c
