@@ -10,9 +10,9 @@ as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_langua
 ## Syntax
 
 ```xml
-define-node <name> <input-ports> -- <output-ports> end
-define-rule <name> <name> <function-body> end
-define <name> <function-body> end
+(define-node <name> <ports>)
+(define-rule <pattern> <function-body>)
+(define <name> <function-body>)
 ```
 
 ## Examples
@@ -20,9 +20,9 @@ define <name> <function-body> end
 ### Natural Number
 
 ```
-define-node nzero -- value! end
-define-node nadd1 prev -- value! end
-define-node nadd target! addend -- result end
+(define-node nzero value!)
+(define-node nadd1 prev value!)
+(define-node nadd target! addend result)
 ```
 
 The rule between `(nadd1)` and `(nadd)` as ASCII art:
@@ -40,23 +40,9 @@ The rule between `(nadd1)` and `(nadd)` as ASCII art:
 Define the rule between `(nadd1)` and `(nadd)`:
 
 ```
-define-rule nadd1 nadd
-  ( addend result ) ( prev )
-  prev addend nadd
-  nadd1 result connect
-end
+(define-rule (nadd (nadd1 prev) addend result)
+  (nadd1 (nadd prev addend) result))
 ```
-
-To apply this rule is to disconnect and delete `(nadd1)` and `(nadd)` and reconnect newly exposed wires:
-
-- `( addend result )` save the wires that were connected to `(nadd)` to local variable `addend` and `result`.
-- `( prev )` save the wire that was connected to `(nadd1)` to local variable `prev`.
-- `prev` push local variable to the stack.
-- `addend` push local variable to the stack.
-- `nadd` take two arguments from the stack and create a new `(nadd)` node.
-- `nadd1` take one argument from the stack and create a new `(nadd1)` node.
-- `result` push local variable to the stack.
-- `connect` take two wires from the stack and connect them.
 
 The rule between `(nzero)` and `(nadd)` as ASCII art:
 
@@ -71,18 +57,9 @@ The rule between `(nzero)` and `(nadd)` as ASCII art:
 Define the rule between `(nzero)` and `(nadd)`:
 
 ```
-define-rule nzero nadd
-  ( addend result )
-  addend result connect
-end
+(define-rule (nadd (nzero) addend result)
+  (connect addend result))
 ```
-
-To apply this rule is to disconnect and delete `(nzero)` and `(nadd)` and reconnect newly exposed wires:
-
-- `( addend result )` save the wires that were connected to `(nadd)` to local variable `addend` and `result`.
-- `addend` push local variable to the stack.
-- `result` push local variable to the stack.
-- `connect` take two wires from the stack and connect them.
 
 Example interaction:
 
@@ -104,28 +81,22 @@ Example interaction:
 The whole program with test:
 
 ```
-define-node nzero -- value! end
-define-node nadd1 prev -- value! end
-define-node nadd target! addend -- result end
+(define-node nzero value!)
+(define-node nadd1 prev value!)
+(define-node nadd target! addend result)
 
-define-rule nzero nadd
-  ( addend result )
-  addend result connect
-end
+(define-rule (nadd (nadd1 prev) addend result)
+  (nadd1 (nadd prev addend) result))
 
-define-rule nadd1 nadd
-  ( addend result ) ( prev )
-  prev addend nadd
-  nadd1 result connect
-end
+(define-rule (nadd (nzero) addend result)
+  (connect addend result))
 
-define two
-  nzero nadd1 nadd1
-end
+(define two (nadd1 (nadd1 (nzero))))
 
-wire-print-net
-run
-wire-print-net
+(define (test wire)
+  (wire-print-net (run (wire-print-net wire))))
+
+(test (nadd two two))
 ```
 
 <details>
@@ -164,30 +135,25 @@ wire-print-net
 ### List
 
 ```
-define-node nil -- value! end
-define-node cons tail head -- value! end
-define-node append target! rest -- result end
+(define-node nil value!)
+(define-node cons head tail value!)
+(define-node append target! rest result)
 
-define-rule nil append
-  ( rest result )
-  rest result connect
-end
+(define-rule (append (nil) rest result)
+  (connect rest result))
 
-define-rule cons append
-  ( rest result ) ( tail head )
-  tail rest append
-  head cons result connect
-end
+(define-rule (append (cons head tail) rest result)
+  (cons head (append tail rest) result))
 
-define-node sole -- value! end
+(define-node sole value!)
 
-nil sole cons sole cons sole cons
-nil sole cons sole cons sole cons
-append
+(define (test wire)
+  (wire-print-net (run (wire-print-net wire))))
 
-wire-print-net
-run
-wire-print-net
+(test
+  (append
+    (cons sole (cons sole (cons sole nil)))
+    (cons sole (cons sole (cons sole nil)))))
 ```
 
 <details>
@@ -297,10 +263,12 @@ make test     # compile and run test
 make clean    # clean up compiled files
 ```
 
-## Other Implementations
+## Implementations
 
 - [inet-cute](https://github.com/cicada-lang/inet-cute)
 - [inet-js](https://github.com/cicada-lang/inet-js)
+- [inet-forth](https://github.com/cicada-lang/inet-forth)
+- [inet-lisp](https://github.com/cicada-lang/inet-lisp)
 
 ## References
 

@@ -1,41 +1,35 @@
-update example to new syntax
-update readme to new syntax
+readme -- change nadd back to add -- primitive function can use + as name
+remove xnull from primitive value
+rename nil to null
 
-# sexp
-
-[sexp] API for pattern matching
+update examples to new syntax
+examples/ -- change nadd back to add -- primitive function can use + as name
 
 # aim
 
 「目标」以 inet 理论为基础，打造一个实用的，可以在 GPU 上并行运行的语言。
 「约束」用 lisp 语法，以保持语法设计的灵活性。
 
-# GC
+# sexp
 
-为这个项目服务，还是需要一个带有 GC 的 x-lisp。
-为了处理 lisp 语法，需要在 c 里以深嵌入的方式，
-写一个 sexp 的 。
+[sexp] API for pattern matching -- deep embedded in c
 
-# multiple principle ports
+# docs
 
-实现更一般的 graph rewrite。
-多 principle ports 依然可以保证
-inet 作为 rewrite system 的良好属性。
+update docs/articles/ to new syntax
 
 # later
 
 [example] cellular automata -- 1997-interaction-combinators.pdf
-[example] `examples/lambda.fth` -- use interaction combinators to implement lambda
-[example] `examples/turing.fth` -- coding turing machine -- 2008-the-annotated-turing.djvu
+[example] `examples/lambda.lisp` -- use interaction combinators to implement lambda
+[example] `examples/turing.lisp` -- coding turing machine -- 2008-the-annotated-turing.djvu
 
 # primitive value
 
 [design] node ports can store any value -- not only wire, but also primitive values
-[design] the most important primitive value is function
-[design] write `list-map` as example
-- use explicit `copy` -- keep linear variable like simple
-- use `{ ... }` for un-named program -- just program, no closure over linear variables
-[question] is it possible to have a generic `copy` that can copy any net with a root wire?
+[design] the most important primitive value is function (closure)
+[design] write `list-map` as example that uses function
+[design] use explicit `copy` -- keep linear variable like simple
 
 # debug
 
