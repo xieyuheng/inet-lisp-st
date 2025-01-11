@@ -1,4 +1,3 @@
-module/list -- update to lisp syntax
 module/diff-list -- update to lisp syntax
 primitives -- update to lisp syntax
 
