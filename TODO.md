@@ -1,4 +1,3 @@
-readme -- change nadd back to add -- primitive function can use + as name
 remove xnull from primitive value
 rename nil to null
 

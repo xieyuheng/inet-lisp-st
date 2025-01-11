@@ -20,44 +20,44 @@ as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_langua
 ### Natural Number
 
 ```
-(define-node nzero value!)
-(define-node nadd1 prev value!)
-(define-node nadd target! addend result)
+(define-node zero value!)
+(define-node add1 prev value!)
+(define-node add target! addend result)
 ```
 
-The rule between `(nadd1)` and `(nadd)` as ASCII art:
+The rule between `(add1)` and `(add)` as ASCII art:
 
 ```
      value             value            value
        |                 |                |
-    (nadd)     =>                =>    (nadd1)
+    (add)       =>                =>    (add1)
      /   \                 \              |
-(nadd1)   addend           addend       (nadd)
+(add1)   addend           addend        (add)
    |                 |                  /   \
  prev              prev              prev   addend
 ```
 
-Define the rule between `(nadd1)` and `(nadd)`:
+Define the rule between `(add1)` and `(add)`:
 
 ```
-(define-rule (nadd (nadd1 prev) addend result)
-  (nadd1 (nadd prev addend) result))
+(define-rule (add (add1 prev) addend result)
+  (add1 (add prev addend) result))
 ```
 
-The rule between `(nzero)` and `(nadd)` as ASCII art:
+The rule between `(zero)` and `(add)` as ASCII art:
 
 ```
      value          value         value
        |              |             |
-     (nadd)     =>             =>   |
+     (add)     =>             =>    |
      /   \              \            \
-(nzero)   addend        addend       addend
+(zero)   addend        addend       addend
 ```
 
-Define the rule between `(nzero)` and `(nadd)`:
+Define the rule between `(zero)` and `(add)`:
 
 ```
-(define-rule (nadd (nzero) addend result)
+(define-rule (add (zero) addend result)
   (connect addend result))
 ```
 
@@ -65,38 +65,38 @@ Example interaction:
 
 ```
        |                   |                   |              |
-    (nadd)              (nadd1)             (nadd1)        (nadd1)
+     (add)               (add1)              (add1)         (add1)
      /   \                 |                   |              |
-(nadd1)  (nadd1)        (nadd)              (nadd1)        (nadd1)
+(add1)    (add1)         (add)               (add1)         (add1)
    |        |    =>      /   \       =>        |        =>    |
-(nadd1)  (nadd1)    (nadd1)  (nadd1)         (nadd)        (nadd1)
+(add1)    (add1)    (add1)    (add1)         (add)          (add1)
    |        |          |        |            /   \            |
-(nzero)  (nzero)    (nzero)  (nadd1)    (nzero) (nadd1)    (nadd1)
+(zero)    (zero)    (zero)    (add1)    (zero)   (add1)     (add1)
                                 |                  |          |
-                             (nzero)            (nadd1)    (nzero)
+                              (zero)             (add1)     (zero)
                                                    |
-                                                (nzero)
+                                                 (zero)
 ```
 
 The whole program with test:
 
 ```
-(define-node nzero value!)
-(define-node nadd1 prev value!)
-(define-node nadd target! addend result)
+(define-node zero value!)
+(define-node add1 prev value!)
+(define-node add target! addend result)
 
-(define-rule (nadd (nadd1 prev) addend result)
-  (nadd1 (nadd prev addend) result))
+(define-rule (add (add1 prev) addend result)
+  (add1 (add prev addend) result))
 
-(define-rule (nadd (nzero) addend result)
+(define-rule (add (zero) addend result)
   (connect addend result))
 
-(define two (nadd1 (nadd1 (nzero))))
+(define two (add1 (add1 (zero))))
 
 (define (test wire)
   (wire-print-net (run (wire-print-net wire))))
 
-(test (nadd two two))
+(test (add two two))
 ```
 
 <details>
@@ -105,27 +105,27 @@ The whole program with test:
 ```xml
 <net>
 <root>
-(nadd₇)-result-<>-
+(add₇)-result-<>-
 </root>
 <body>
-(nadd1₃)-value!-<>-!target-(nadd₇)
-(nadd1₆)-value!-<>-addend-(nadd₇)
-(nadd1₅)-value!-<>-prev-(nadd1₆)
-(nzero₄)-value!-<>-prev-(nadd1₅)
-(nadd1₂)-value!-<>-prev-(nadd1₃)
-(nzero₁)-value!-<>-prev-(nadd1₂)
+(add1₃)-value!-<>-!target-(add₇)
+(add1₆)-value!-<>-addend-(add₇)
+(add1₅)-value!-<>-prev-(add1₆)
+(zero₄)-value!-<>-prev-(add1₅)
+(add1₂)-value!-<>-prev-(add1₃)
+(zero₁)-value!-<>-prev-(add1₂)
 </body>
 </net>
 
 <net>
 <root>
-(nadd1₉)-value!-<>-
+(add1₉)-value!-<>-
 </root>
 <body>
-(nadd1₁₁)-value!-<>-prev-(nadd1₉)
-(nadd1₆)-value!-<>-prev-(nadd1₁₁)
-(nadd1₅)-value!-<>-prev-(nadd1₆)
-(nzero₄)-value!-<>-prev-(nadd1₅)
+(add1₁₁)-value!-<>-prev-(add1₉)
+(add1₆)-value!-<>-prev-(add1₁₁)
+(add1₅)-value!-<>-prev-(add1₆)
+(zero₄)-value!-<>-prev-(add1₅)
 </body>
 </net>
 ```
