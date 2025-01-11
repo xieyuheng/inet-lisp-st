@@ -46,10 +46,10 @@ run(commander_t *commander) {
         if (string_starts_with(path, "--"))
             continue;
 
-        if (string_ends_with(path, ".fth")) {
+        if (string_ends_with(path, ".lisp")) {
             run_file(path, log_level);
         } else  {
-            fprintf(stderr, "[run] file name must ends with .fth, given file name: %s\n", path);
+            fprintf(stderr, "[run] file name must ends with .lisp, given file name: %s\n", path);
             exit(1);
         }
     }
