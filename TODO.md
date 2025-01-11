@@ -1,6 +1,3 @@
-combinators.fth -- update to lisp syntax
-forever.play.fth -- update to lisp syntax
-
 module -- update to lisp syntax
 datatypes -- update to lisp syntax
 primitives -- update to lisp syntax
