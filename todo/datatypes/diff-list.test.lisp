@@ -13,12 +13,6 @@
 ;; (define-rule (diff-append (diff front back) rest result)
 ;;   (diff-open (diff front :value result) rest back))
 
-define-rule diff diff-open
-  ( new-back old-back ) ( front back )
-  back new-back connect
-  front old-back connect
-end
-
 (define-rule (diff-open (diff front back) new-back old-back)
   (connect back new-back)
   (connect front old-back))

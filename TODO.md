@@ -1,7 +1,3 @@
-# docs
-
-update docs/articles/ to new syntax -- to see the end first
-
 # sexp
 
 [sexp] API for pattern matching -- deep embedded in c

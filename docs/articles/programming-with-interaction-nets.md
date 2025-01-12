@@ -69,7 +69,7 @@ We can represent 0 + 1 as the following:
        |
      (add)
      /   \
-(zero)  (add1)
+(zero)   (add1)
            |
          (zero)
 ```
@@ -80,11 +80,11 @@ and 2 + 2 as the following:
        |
      (add)
      /   \
-(add1)  (add1)
+(add1)   (add1)
   |        |
-(add1)  (add1)
+(add1)   (add1)
   |        |
-(zero)  (zero)
+(zero)   (zero)
 ```
 
 By defining the interaction rules between `(add)` and neighbor nodes,
@@ -97,7 +97,7 @@ and connect the `value` of `(add)` with the `addend` of `(add)` directly.
 ```
      value           value
        |               |
-     (add)     =>     |
+     (add)     =>      |
      /   \              \
 (zero)   addend        addend
 ```
@@ -108,9 +108,9 @@ move `(add1)` above `(add)`.
 ```
      value           value
        |               |
-     (add)     =>   (add1)
+     (add)     =>    (add1)
      /   \             |
-(add1)   addend     (add)
+(add1)   addend      (add)
   |                  /   \
 prev              prev   addend
 ```
@@ -120,17 +120,17 @@ will become 4 through the following interaction:
 
 ```
        |                  |                 |            |
-     (add)            (add1)           (add1)      (add1)
+     (add)              (add1)            (add1)       (add1)
      /   \                |                 |            |
-(add1) (add1)        (add)            (add1)      (add1)
+(add1)   (add1)         (add)             (add1)       (add1)
   |        |    =>      /   \      =>       |       =>   |
-(add1) (add1)   (add1)  (add1)        (add)      (add1)
+(add1)   (add1)   (add1)    (add1)        (add)        (add1)
   |        |         |        |           /   \          |
-(zero) (zero)   (zero)  (add1)   (zero) (add1)  (add1)
+(zero)   (zero)   (zero)    (add1)    (zero)  (add1)   (add1)
                               |                 |        |
-                           (zero)           (add1)  (zero)
+                            (zero)            (add1)   (zero)
                                                 |
-                                             (zero)
+                                              (zero)
 ```
 
 # 4
@@ -212,9 +212,9 @@ We design the statement to define node as follows:
 The aforementioned nodes are defined as follows:
 
 ```
-define-node zero -- value! end
-define-node add1 prev -- value! end
-define-node add target! addend -- result end
+(define-node zero value!)
+(define-node add1 prev value!)
+(define-node add target! addend result)
 ```
 
 # 5
@@ -226,9 +226,9 @@ Let's review the interaction rule between `(add1)` and `(add)`:
 ```
      result          value
        |               |
-     (add)     =>  (add1)
+     (add)     =>    (add1)
      /   \             |
-(add1)  addend      (add)
+(add1)  addend       (add)
   |                  /   \
 prev            target   addend
 ```
@@ -248,11 +248,8 @@ We design the statement for defining rule as follows:
 The the rule between `(add1)` and `(add)` as an example:
 
 ```
-define-rule add1 add
-  ( addend result ) ( prev )
-  prev addend add
-  add1 result connect
-end
+(define-rule (add (add1 prev) addend result)
+  (add1 (add prev addend) result))
 ```
 
 The rule between `(zero)` and `(add)` is a little special,
@@ -260,10 +257,8 @@ because during reconnecting the exposed ports,
 it does not introduce any new nodes.
 
 ```
-define-rule zero add
-  ( addend result )
-  addend result connect
-end
+(define-rule (add (zero) addend result)
+  (connect addend result))
 ```
 
 # 6
@@ -275,31 +270,24 @@ In which we will use `define` to define new words,
 and use `--` to comment a line.
 
 ```
-define-node zero -- value! end
-define-node add1 prev -- value! end
-define-node add target! addend -- result end
+(define-node zero value!)
+(define-node add1 prev value!)
+(define-node add target! addend result)
 
-define-rule zero add
-  ( addend result )
-  addend result connect
-end
+(define-rule (add (zero) addend result)
+  (connect addend result))
 
-define-rule add1 add
-  ( addend result ) ( prev )
-  prev addend add
-  add1 result connect
-end
+(define-rule (add (add1 prev) addend result)
+  (add1 (add prev addend) result))
 
--- test
+;; test
 
-define one zero add1 end
-define two one one add end
-define three two one add end
-define four two two add end
+(define (two) (add1 (add1 (zero))))
 
-two two add
-two two add
-add
+(define (inspect-run wire)
+  (wire-print-net (run (wire-print-net wire))))
+
+(inspect-run (add (two) (two)))
 ```
 
 # 7
@@ -381,7 +369,7 @@ first!   second
 Node definition:
 
 ```
-define-node nat-max first! second -- result end
+(define-node nat-max first! second result)
 ```
 
 The interaction between `(zero)` and `(zero)` is simple:
@@ -397,10 +385,8 @@ The interaction between `(zero)` and `(zero)` is simple:
 Rule definition:
 
 ```
-define-rule zero nat-max
-  ( second result )
-  second result connect
-end
+(define-rule (nat-max (zero) second result)
+  (connect second result))
 ```
 
 For the `(add1)` and `(zero)`,
@@ -410,9 +396,9 @@ we can imagine the following interaction:
 ```
      result           result
        |                |
-   (nat-max)    =>   (add1)
+   (nat-max)    =>    (add1)
      /    \             |
-(add1)  (add1)    (nat-max)
+(add1)    (add1)    (nat-max)
    |        |         /   \
  prev      prev    prev   prev
 ```
@@ -421,12 +407,12 @@ But because of single-principal-port constraint,
 we have to introduce an auxiliary node and some auxiliary rules,
 to explicitly choose between two interactable edges.
 
-We call the auxiliary node `(nat-max-aux)`.
+We call the auxiliary node `(nat-max-add1)`.
 
 ```
      result
        |
-  (nat-max-aux)
+  (nat-max-add1)
      /    \
 first    second!
 ```
@@ -434,7 +420,7 @@ first    second!
 Node definition:
 
 ```
-define-node nat-max-aux first second! -- result end
+(define-node nat-max-add1 first second! result)
 ```
 
 Using the auxiliary node to define
@@ -443,7 +429,7 @@ the rule between `(add1)` and `(nat-max)`:
 ```
      result             result
        |                  |
-   (nat-max)     => (nat-max-aux)
+   (nat-max)     => (nat-max-add1)
      /    \             /   \
 (add1)   second      prev   second
    |
@@ -453,39 +439,35 @@ the rule between `(add1)` and `(nat-max)`:
 Rule definition:
 
 ```
-define-rule add1 nat-max
-  ( second result ) ( prev )
-  prev second nat-max-aux result connect
-end
+(define-rule (nat-max (add1 prev) second result)
+  (nat-max-add1 prev second result))
 ```
 
-The rule between `(zero)` and `(nat-max-aux)`:
+The rule between `(zero)` and `(nat-max-add1)`:
 
 ```
      result            result
        |                 |
- (nat-max-aux)    =>  (add1)
+ (nat-max-add1)    =>  (add1)
      /    \              |
- first   (zero)       first
+ first   (zero)        first
 ```
 
 Rule definition:
 
 ```
-define-rule zero nat-max-aux
-  ( first result )
-  first add1 result connect
-end
+(define-rule (nat-max-add1 (zero) first result)
+  (add1 first result))
 ```
 
-The rule between `(add1)` and `(nat-max-aux)`:
+The rule between `(add1)` and `(nat-max-add1)`:
 
 ```
      result            result
        |                 |
- (nat-max-aux)   =>   (add1)
+ (nat-max-add1)   =>   (add1)
      /    \              |
- first  (add1)      (nat-max)
+ first   (add1)      (nat-max)
            |           /   \
           prev     first   prev
 ```
@@ -493,39 +475,27 @@ The rule between `(add1)` and `(nat-max-aux)`:
 Rule definition:
 
 ```
-define-rule add1 nat-max-aux
-  ( first result ) ( prev )
-  first prev nat-max
-  add1 result connect
-end
+(define-rule (nat-max-add1 (add1 prev) first result)
+  (add1 (nat-max first prev) result))
 ```
 
 ```
-define-node nat-max first! second -- result end
-define-node nat-max-aux first second! -- result end
+(define-node nat-max first! second result)
+(define-node nat-max-add1 first second! result)
 
-define-rule zero nat-max
-  ( second result )
-  second result connect
-end
+(define-rule (nat-max (zero) second result)
+  (connect second result))
 
-define-rule add1 nat-max
-  ( second result ) ( prev )
-  prev second nat-max-aux result connect
-end
+(define-rule (nat-max (add1 prev) second result)
+  (nat-max-add1 prev second result))
 
-define-rule zero nat-max-aux
-  ( first result )
-  first add1 result connect
-end
+(define-rule (nat-max-add1 (zero) first result)
+  (add1 first result))
 
-define-rule add1 nat-max-aux
-  ( first result ) ( prev )
-  first prev nat-max
-  add1 result connect
-end
+(define-rule (nat-max-add1 (add1 prev) first result)
+  (add1 (nat-max first prev) result))
 
-one two nat-max
+(inspect-run (nat-max (one) (two)))
 ```
 
 # 9
@@ -560,48 +530,35 @@ Thus when we want to factor out a subsequence from a sequence of words,
 there will be no complicated syntax preventing us from doing so.
 
 ```
-define-node nat-erase target! -- end
+(define-node nat-erase target!)
 
-define-rule zero nat-erase end
+(define-rule (nat-erase (zero)))
+(define-rule (nat-erase (add1 prev)) (nat-erase prev))
 
-define-rule add1 nat-erase
-  ( prev )
-  prev nat-erase
-end
+(define-node nat-dup target! first second)
 
-define-node nat-dup target! -- first second end
+(define-rule (nat-dup (zero) first second)
+  (connect first (zero))
+  (connect second (zero)))
 
-define-rule zero nat-dup
-  ( first second )
-  zero first connect
-  zero second connect
-end
+(define-rule (nat-dup (add1 prev) first second)
+  (let ([prev-first prev-second (nat-dup prev)])
+    (connect first (add1 prev-first))
+    (connect second (add1 prev-second))))
 
-define-rule add1 nat-dup
-  ( first second ) ( prev )
-  prev nat-dup
-  ( prev-first prev-second )
-  prev-second add1 second connect
-  prev-first add1 first connect
-end
+(define-node mul target! mulend result)
 
-define-node mul target! mulend -- result end
+(define-rule (mul (zero) mulend result)
+  (nat-erase mulend)
+  (zero result))
 
-define-rule zero mul
-  ( mulend result )
-  mulend nat-erase
-  zero result connect
-end
+(define-rule (mul (add1 prev) mulend result)
+  (let ([mulend-first mulend-second (nat-dup mulend)])
+    (add (mul mulend-second prev)
+         mulend-first
+         result)))
 
-define-rule add1 mul
-  ( mulend result ) ( prev )
-  mulend nat-dup
-  ( mulend-first mulend-second )
-  prev mulend-second swap mul
-  mulend-first add result connect
-end
-
-two two mul
+(inspect-run (mul (two) (two)))
 ```
 
 # 10
@@ -617,28 +574,24 @@ The difference is that the `(add1)` of natural number only add one node,
 while the `(cons)` of list add one node and link to an extra node.
 
 ```
-define-node null -- value! end
-define-node cons tail head -- value! end
-define-node append target! rest -- result end
+(define-node null value!)
+(define-node cons head tail value!)
+(define-node append target! rest result)
 
-define-rule null append
-  ( rest result )
-  rest result connect
-end
+(define-rule (append (null) rest result)
+  (connect rest result))
 
-define-rule cons append
-  ( rest result ) ( tail head )
-  tail rest append
-  head cons result connect
-end
+(define-rule (append (cons head tail) rest result)
+  (cons head (append tail rest) result))
 
--- test
+;; test
 
-define-node sole -- value! end
+(define-node sole value!)
 
-null sole cons sole cons sole cons
-null sole cons sole cons sole cons
-append
+(inspect-run
+  (append
+    (cons (sole) (cons (sole) (cons (sole) (null))))
+    (cons (sole) (cons (sole) (cons (sole) (null))))))
 ```
 
 # 11
@@ -669,37 +622,31 @@ But in interaction nets,
 the relationship between all nodes is symmetric.
 
 ```
-define-node diff front -- back value! end
-define-node diff-append target! rest -- result end
-define-node diff-open new-back target! -- old-back end
+(define-node diff front back value!)
+(define-node diff-append target! rest result)
+(define-node diff-open new-back target! old-back)
 
-define-rule diff diff-append
-  ( rest result ) ( front back )
-  front diff result connect
-  rest diff-open back connect
-end
+(define-rule (diff-append (diff front back) rest result)
+  (let ([new-back value (diff front)])
+    (connect value result)
+    (diff-open new-back rest back)))
 
-define-rule diff diff-open
-  ( new-back old-back ) ( front back )
-  back new-back connect
-  front old-back connect
-end
+(define-rule (diff-open (diff front back) new-back old-back)
+  (connect back new-back)
+  (connect front old-back))
 
--- test
+;; test
 
-define-node sole -- value! end
+(define (sole-diff-list)
+  (let* ([front front-op (wire-pair)]
+         [back value (diff front)])
+    (cons (sole) (cons (sole) back) front-op)
+    value))
 
-define sole-diff-list
-  wire-pair ( front front-op )
-  front diff ( back value )
-  back sole cons sole cons
-  front-op connect
-  value
-end
-
-sole-diff-list
-sole-diff-list
-diff-append
+(inspect-run
+ (diff-append
+  (sole-diff-list)
+  (sole-diff-list)))
 ```
 
 # 12
