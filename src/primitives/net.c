@@ -115,20 +115,3 @@ x_define_node(vm_t *vm) {
     list_destroy(&output_token_list);
 }
 
-void
-x_define_rule(vm_t *vm) {
-    token_t *first_token = list_shift(vm->token_list);
-    token_t *second_token = list_shift(vm->token_list);
-
-    char *first_name = first_token->string;
-    char *second_name = second_token->string;
-
-    check_node_name_defined(vm, first_name, first_token);
-    check_node_name_defined(vm, second_name, second_token);
-
-    function_t *function = compile_function(vm);
-    mod_define_rule(vm->mod, first_name, second_name, function);
-
-    token_destroy(&first_token);
-    token_destroy(&second_token);
-}

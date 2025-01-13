@@ -1,11 +1,11 @@
-remove primitives
-remove execute and compile from lang
 remove token from vm
 
 [lang] setup exp
 [lang] setup stmt
 [lang] parse sexp to stmt -- hand written parser
 [lang] execute stmt
+
+remove primitives
 
 # later
 

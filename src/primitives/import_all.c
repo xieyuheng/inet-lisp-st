@@ -51,8 +51,7 @@ import_all(mod_t *mod) {
     define_primitive_vm_fn(mod, "wire-debug", x_wire_debug);
     define_primitive_vm_fn(mod, "debug", x_debug);
     define_primitive_vm_fn(mod, "define-node", x_define_node);
-    define_primitive_vm_fn(mod, "define-rule", x_define_rule);
-
+   
     // console
 
     define_primitive_1_fn(mod, "print", x_print);
@@ -64,8 +63,4 @@ import_all(mod_t *mod) {
     // constant
 
     define_primitive_vm_fn(mod, "define-constant", x_define_constant);
-
-    // function
-
-    define_primitive_vm_fn(mod, "define", x_define_function);
 }

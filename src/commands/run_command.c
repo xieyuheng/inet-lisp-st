@@ -22,7 +22,7 @@ run_file(const char *path, size_t log_level) {
     vm_t *vm = vm_new(mod);
     vm->log_level = log_level;
 
-    execute_all(vm);
+    // execute_all(vm);
 
     mod_destroy(&mod);
     vm_destroy(&vm);
