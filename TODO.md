@@ -1,9 +1,8 @@
-[lang] setup exp
-[lang] exp_t
+[vm] op use real tagged union
 
-[lang] let_exp_t
-[lang] var_exp_t
-[lang] ap_exp_t
+[lang] exp_var
+[lang] exp_ap
+[lang] exp_let
 
 [lang] setup pattern
 [lang] pattern_t
