@@ -47,18 +47,18 @@ step_net(vm_t *vm) {
     activity_destroy(&activity);
 
     stack_push(vm->return_stack, frame);
-    run_vm_until(vm, base_length);
+    run_until(vm, base_length);
 }
 
 void
-run_vm_until(vm_t *vm, size_t base_length) {
+run_until(vm_t *vm, size_t base_length) {
     if (vm->log_level > 0) {
         vm_print(vm, stdout);
         fprintf(stdout, "\n");
     }
 
     while (stack_length(vm->return_stack) > base_length) {
-        step_vm(vm);
+        step(vm);
 
         if (vm->log_level > 0) {
             vm_print(vm, stdout);
@@ -99,7 +99,7 @@ step_operation(vm_t *vm, frame_t *frame, op_t *unknown_op) {
 }
 
 void
-step_vm(vm_t *vm) {
+step(vm_t *vm) {
     if (stack_is_empty(vm->return_stack)) return;
 
     frame_t *frame = stack_pop(vm->return_stack);
