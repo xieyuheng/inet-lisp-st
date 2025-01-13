@@ -68,7 +68,7 @@ run_until(vm_t *vm, size_t base_length) {
 }
 
 static void
-step_operation(vm_t *vm, frame_t *frame, op_t *op) {
+step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
     case OP_CALL: {
         call(vm, op->call.def);
@@ -112,7 +112,7 @@ step(vm_t *vm) {
         stack_push(vm->return_stack, frame);
     }
 
-    step_operation(vm, frame, op);
+    step_op(vm, frame, op);
 
     if (finished) {
         frame_destroy(&frame);
