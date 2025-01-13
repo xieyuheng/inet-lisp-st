@@ -1,5 +1,3 @@
-remove token from vm
-
 [lang] setup exp
 [lang] setup stmt
 [lang] parse sexp to stmt -- hand written parser

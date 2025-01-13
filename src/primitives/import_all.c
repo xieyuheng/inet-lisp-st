@@ -50,8 +50,7 @@ import_all(mod_t *mod) {
     define_primitive_vm_fn(mod, "run", x_run);
     define_primitive_vm_fn(mod, "wire-debug", x_wire_debug);
     define_primitive_vm_fn(mod, "debug", x_debug);
-    define_primitive_vm_fn(mod, "define-node", x_define_node);
-   
+       
     // console
 
     define_primitive_1_fn(mod, "print", x_print);
@@ -59,8 +58,4 @@ import_all(mod_t *mod) {
     define_primitive_vm_fn(mod, "print-vm", x_print_vm);
     define_primitive_vm_fn(mod, "print-value-stack", x_print_value_stack);
     define_primitive_vm_fn(mod, "print-return-stack", x_print_return_stack);
-
-    // constant
-
-    define_primitive_vm_fn(mod, "define-constant", x_define_constant);
 }

@@ -7,5 +7,4 @@
 #include "net.h"
 #include "vm.h"
 #include "console.h"
-#include "constant.h"
 #include "import_all.h"
