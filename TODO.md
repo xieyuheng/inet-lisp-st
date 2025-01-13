@@ -1,6 +1,11 @@
-# sexp
+remove primitives
+remove execute and compile from lang
+remove token from vm
 
-[sexp] API for pattern matching -- deep embedded in c
+[lang] setup exp
+[lang] setup stmt
+[lang] parse sexp to stmt -- hand written parser
+[lang] execute stmt
 
 # later
 
