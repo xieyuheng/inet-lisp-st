@@ -14,3 +14,5 @@ struct exp_t {
         // TODO let;
     };
 };
+
+exp_t *exp_var(char *name);
