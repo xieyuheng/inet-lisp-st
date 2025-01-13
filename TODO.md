@@ -1,5 +1,6 @@
-[lang] exp_ap
 [lang] exp_let
+
+[lang] exp_destroy
 
 [lang] setup pattern
 [lang] pattern_t

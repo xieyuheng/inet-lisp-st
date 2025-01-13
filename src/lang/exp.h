@@ -16,3 +16,4 @@ struct exp_t {
 };
 
 exp_t *exp_var(char *name);
+exp_t *exp_ap(exp_t *target, size_t size);
