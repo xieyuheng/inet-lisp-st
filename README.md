@@ -24,10 +24,12 @@ to interaction combinators will be explored only later.
 
 ## Syntax
 
+Statements:
+
 ```xml
 (define-node <name> <ports>)
-(define-rule <pattern> <function-body>)
-(define (<name> <args>) <function-body>)
+(define-rule <pattern> <exps>)
+(define (<name> <arg-names>) <exps>)
 ```
 
 ## Examples
