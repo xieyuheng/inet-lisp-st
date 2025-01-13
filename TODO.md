@@ -1,5 +1,3 @@
-[vm] op use real tagged union
-
 [lang] exp_var
 [lang] exp_ap
 [lang] exp_let
