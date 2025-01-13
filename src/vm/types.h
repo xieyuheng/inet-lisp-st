@@ -1,12 +1,5 @@
 #pragma once
 
-typedef enum {
-    CALL_OP,
-    LITERAL_OP,
-    LOCAL_GET_OP,
-    LOCAL_SET_OP,
-} op_kind_t;
-
 typedef struct mod_t mod_t;
 typedef struct function_t function_t;
 typedef struct frame_t frame_t;

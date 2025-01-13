@@ -1,9 +1,20 @@
 [lang] setup exp
+[lang] exp_t
+
+[lang] let_exp_t
+[lang] var_exp_t
+[lang] ap_exp_t
+
+[lang] setup pattern
+[lang] pattern_t
+
 [lang] setup stmt
+[lang] stmt_t
+
 [lang] parse sexp to stmt -- hand written parser
 [lang] execute stmt
 
-remove primitives
+update primitives
 
 # later
 
