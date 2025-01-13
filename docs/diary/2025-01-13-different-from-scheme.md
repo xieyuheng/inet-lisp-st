@@ -26,6 +26,6 @@ application 的参数个数不够时可能应该处理成 lambda 的 curry。
 
 ```scheme
 (claim list-map
-  (! (forall ([A type-t] [B type-t])
+  (! (forall ([A (! type-t)] [B (! type-t)])
        (-o (list-t A) (! (-o A B)) (list-t B)))))
 ```
