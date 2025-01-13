@@ -35,8 +35,8 @@
     (C car-second cdr-second second)))
 
 (define (forever)
-  (let ([car car-op (wire-pair)]
-        [first second (D (C car (E)))])
+  (let* ([car car-op (wire-pair)]
+         [first second (D (C car (E)))])
     (E first)
     (connect car-op second)))
 
