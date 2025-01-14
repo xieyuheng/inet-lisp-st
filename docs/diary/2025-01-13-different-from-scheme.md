@@ -29,3 +29,9 @@ application 的参数个数不够时可能应该处理成 lambda 的 curry。
   (! (forall ([A (! type-t)] [B (! type-t)])
        (-o (list-t A) (! (-o A B)) (list-t B)))))
 ```
+
+在 inet-lisp 中，只要先不去实现 closure 就可以避免 linear variable 的问题。
+
+此时：
+- 所有顶层的定义都是带有 `!` 的。
+- 所有局部变量都是 linear 的。
