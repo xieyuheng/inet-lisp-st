@@ -13,7 +13,22 @@
 (define-rule (conj (f) y z) (bool-erase y) (f z))
 
 (define-rule (conj-t (t) z) (t z))
-(define-rule (conj-t (t) z) (f z))
+(define-rule (conj-t (f) z) (f z))
+
+;;;
+
+(define-node conj x! y! z)
+
+(define-rule (conj (t) (t) z) (t z))
+(define-rule (conj (f) y z) (f z) (bool-erase y))
+(define-rule (conj x (f) z) (f z) (bool-erase x))
+
+(define-rule (conj (t) (t) z) (t z))
+(define-rule (conj (t) (f) z) (f z))
+(define-rule (conj (f) (t) z) (f z))
+(define-rule (conj (f) (f) z) (f z))
+
+;;;
 
 (define-node disj x! y z)
 (define-node disj-f y! z)
