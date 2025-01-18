@@ -38,7 +38,7 @@ exp_destroy(exp_t **self_pointer) {
         exp_t *self = *self_pointer;
         switch (self->kind) {
         case EXP_VAR: {
-            free(self->var.name);
+            string_destroy(&self->var.name);
             break;
         }
 

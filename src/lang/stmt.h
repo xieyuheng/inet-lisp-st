@@ -17,3 +17,5 @@ struct stmt_t {
 
 stmt_t *stmt_define_function(char *name);
 stmt_t *stmt_define_node(char *name);
+
+void stmt_destroy(stmt_t **self_pointer);

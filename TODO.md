@@ -1,5 +1,3 @@
-[lang] stmt_destroy
-
 [lang] setup pattern
 [lang] pattern_t
 
