@@ -40,32 +40,27 @@ op_destroy(op_t **self_pointer) {
         op_t *self = *self_pointer;
         switch (self->kind) {
         case OP_CALL: {
-            free(self);
-            *self_pointer = NULL;
-            return;
+            break;
         }
 
         case OP_LITERAL: {
-            free(self);
-            *self_pointer = NULL;
-            return;
+            break;
         }
 
         case OP_LOCAL_GET: {
-            free(self);
-            *self_pointer = NULL;
-            return;
+            break;
         }
 
         case OP_LOCAL_SET: {
-            free(self);
-            *self_pointer = NULL;
-            return;
+            break;
         }
         }
+
+        free(self);
+        *self_pointer = NULL;
+        return;
     }
 }
-
 
 void
 op_print(const op_t *op, file_t *file) {
@@ -91,6 +86,4 @@ op_print(const op_t *op, file_t *file) {
         return;
     }
     }
-
-    assert(false);
 }

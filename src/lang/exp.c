@@ -25,3 +25,33 @@ exp_let(void) {
     self->let.body = list_new(); // TODO exp_list_new()
     return self;
 }
+
+void
+exp_destroy(exp_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        exp_t *self = *self_pointer;
+        switch (self->kind) {
+        case EXP_VAR: {
+            free(self->var.name);
+            break;
+        }
+
+        case EXP_AP: {
+            exp_destroy(&self->ap.target);
+            list_destroy(&self->ap.arg_list);
+            break;
+        }
+
+        case EXP_LET: {
+            list_destroy(&self->let.binding_list);
+            list_destroy(&self->let.body);
+            break;
+        }
+        }
+
+        free(self);
+        *self_pointer = NULL;
+        return;
+    }
+}
