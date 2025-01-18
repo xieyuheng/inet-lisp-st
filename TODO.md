@@ -1,6 +1,7 @@
-[lang] exp_let
-
+[lang] binding_t
+[lang] exp_let -- has binding_list
 [lang] exp_destroy
+[lang] exp_list_new -- setup exp_destroy
 
 [lang] setup pattern
 [lang] pattern_t

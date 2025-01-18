@@ -10,10 +10,10 @@ struct exp_t {
     exp_kind_t kind;
     union {
         struct { char *name; } var;
-        struct { exp_t *target; size_t size; exp_t **args; } ap;
-        // TODO let;
+        struct { exp_t *target; list_t *arg_list; } ap;
+        struct { list_t *binding_list; list_t *body; } let;
     };
 };
 
 exp_t *exp_var(char *name);
-exp_t *exp_ap(exp_t *target, size_t size);
+exp_t *exp_ap(exp_t *target, list_t *arg_list);
