@@ -11,7 +11,9 @@ struct stmt_t {
     stmt_kind_t kind;
     union {
         struct { char *name; list_t *arg_name_list; list_t *body; } define_function;
+        struct { char *name; list_t *port_name_list; } define_node;
     };
 };
 
 stmt_t *stmt_define_function(char *name);
+stmt_t *stmt_define_node(char *name);
