@@ -15,7 +15,7 @@
 [lang] parse sexp to stmt -- hand written parser
 [lang] execute stmt
 
-update primitives
+[vm] op_call -- always has artiy
 
 # later
 
