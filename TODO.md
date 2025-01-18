@@ -1,11 +1,12 @@
-[lang] pattern_t
+[lang] parse_stmt -- take sexp_list as input
+[lang] parse_stmt_list -- call parse_stmt in a loop
+[lang] execute -- take stmt
+[lang] execute -- test define-node
 
+[lang] pattern_t
 [lang] stmt_define_rule -- need pattern
 
-[lang] parse sexp to stmt -- hand written parser
-[lang] execute -- take stmt
-
-[vm] op_call -- always has artiy
+[vm] op_call -- has artiy
 
 # later
 
