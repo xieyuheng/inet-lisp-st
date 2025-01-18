@@ -1,5 +1,5 @@
 [lang] parse_stmt -- take sexp_list as input
-[lang] parse_stmt_list -- call parse_stmt in a loop
+
 [lang] execute -- take stmt
 [lang] execute -- test define-node
 
