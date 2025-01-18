@@ -1,4 +1,8 @@
-[lang] stmt_t
+[lang] stmt_define
+[lang] stmt_define_node
+[lang] stmt_define_rule -- need pattern
+
+[lang] stmt_destroy
 
 [lang] setup pattern
 [lang] pattern_t
