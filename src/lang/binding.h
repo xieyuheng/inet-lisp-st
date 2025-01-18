@@ -5,4 +5,4 @@ struct binding_t {
     list_t *body;
 };
 
-binding_t *binding_new();
+binding_t *binding_new(void);
