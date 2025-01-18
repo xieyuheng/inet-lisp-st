@@ -1,4 +1,7 @@
 [lang] binding_t
+[lang] binding_new
+[lang] binding_destroy
+
 [lang] exp_let -- has binding_list
 [lang] exp_destroy
 [lang] exp_list_new -- setup exp_destroy
