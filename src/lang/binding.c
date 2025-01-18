@@ -4,7 +4,7 @@ binding_t *
 binding_new(void) {
     binding_t *self = new(binding_t);
     self->name_list = list_new_with((destroy_fn_t *) string_destroy);
-    self->body = list_new(); // TODO
+    self->body = exp_list_new();
     return self;
 }
 
