@@ -1,4 +1,3 @@
-[lang] stmt_define
 [lang] stmt_define_node
 [lang] stmt_define_rule -- need pattern
 
