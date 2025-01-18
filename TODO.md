@@ -1,4 +1,4 @@
-[lang] parse_stmt -- take sexp_list as input
+[lang] parse_stmt -- take sexp as input
 
 [lang] execute -- take stmt
 [lang] execute -- test define-node
