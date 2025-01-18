@@ -1,5 +1,3 @@
-[lang] exp_let -- call binding_list_new
-
 [lang] exp_destroy
 
 [lang] exp_list_new -- setup exp_destroy
