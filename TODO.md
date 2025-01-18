@@ -1,8 +1,7 @@
+[lang] stmt_t
+
 [lang] setup pattern
 [lang] pattern_t
-
-[lang] setup stmt
-[lang] stmt_t
 
 [lang] parse sexp to stmt -- hand written parser
 [lang] execute stmt
