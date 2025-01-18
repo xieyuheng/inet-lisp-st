@@ -4,6 +4,7 @@
 [lang] exp_let -- has binding_list
 [lang] exp_destroy
 [lang] exp_list_new -- setup exp_destroy
+[lang] exp_ap -- call exp_list_new
 
 [lang] setup pattern
 [lang] pattern_t
