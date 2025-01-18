@@ -11,6 +11,6 @@
 (define (two) (add1 (add1 (zero))))
 
 (wire-debug
-  (add
-    (add (two) (two))
-    (add (two) (two))))
+ (add
+  (add (two) (two))
+  (add (two) (two))))

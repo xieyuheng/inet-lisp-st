@@ -1,10 +1,9 @@
-[lang] setup pattern
 [lang] pattern_t
 
 [lang] stmt_define_rule -- need pattern
 
 [lang] parse sexp to stmt -- hand written parser
-[lang] execute stmt
+[lang] execute -- take stmt
 
 [vm] op_call -- always has artiy
 
