@@ -1,4 +1,3 @@
-[lang] binding_t
 [lang] binding_new
 [lang] binding_destroy
 
