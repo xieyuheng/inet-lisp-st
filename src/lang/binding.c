@@ -19,3 +19,8 @@ binding_destroy(binding_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+list_t *
+binding_list_new(void) {
+    return list_new_with((destroy_fn_t *) binding_destroy);
+}
