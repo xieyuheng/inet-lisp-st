@@ -1,3 +1,9 @@
+remove primitive_def_t
+remove constant_def_t
+
+def_t be like op_t
+inline function_def_t to def_t
+
 op.call_function v.s. op.call_node
 
 [lang] parse_define_function
