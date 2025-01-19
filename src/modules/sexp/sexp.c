@@ -164,3 +164,17 @@ sexp_print(const sexp_t *self, file_t *file) {
     }
     }
 }
+
+bool
+is_atom_sexp(const sexp_t *self) {
+    return self->kind == ATOM_SEXP;
+}
+
+bool is_list_sexp(const sexp_t *self) {
+    return self->kind == LIST_SEXP;
+}
+
+// bool
+// sexp_starts_with(const sexp_t *self, const char *string) {
+//     if sexp
+// }

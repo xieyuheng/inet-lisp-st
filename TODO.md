@@ -1,7 +1,14 @@
+[sexp] sexp_starts_with
+
 [lang] parse_stmt -- take sexp as input
+
+[lang] parse_define_node
+[lang] parse_define_function
 
 [lang] execute -- take stmt
 [lang] execute -- test define-node
+
+[lang] parse_define_rule
 
 [lang] pattern_t
 [lang] stmt_define_rule -- need pattern

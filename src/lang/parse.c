@@ -4,6 +4,11 @@ stmt_t *
 parse_stmt(sexp_t *sexp) {
     (void) sexp;
     return NULL;
+    // if (sexp_starts_with(sexp, "define-node"))
+    //     return parse_define_node(sexp);
+    // else if (sexp_starts_with(sexp, "define"))
+    //     return parse_define_function(sexp);
+    // else assert(false && "[parse_stmt] unknown sexp");
 }
 
 list_t *
