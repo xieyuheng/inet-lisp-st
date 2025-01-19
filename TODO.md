@@ -1,5 +1,7 @@
 [lang] parse_define_function
 [lang] execute -- handle stmt_define_function
+[lang] compile_exp
+[lang] compile_exp_list
 
 [lang] parse_define_rule
 
