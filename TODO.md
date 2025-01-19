@@ -1,5 +1,3 @@
-[lang] remove binding
-
 [lang] parse_define_function
 [lang] execute -- handle stmt_define_function
 
