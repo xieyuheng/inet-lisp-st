@@ -11,7 +11,7 @@ struct exp_t {
     union {
         struct { char *name; } var;
         struct { exp_t *target; list_t *arg_list; } ap;
-        struct { list_t *binding_list; list_t *body; } let;
+        struct { list_t *binding_list; list_t *exp_list; } let;
     };
 };
 

@@ -22,7 +22,7 @@ exp_let(void) {
     exp_t *self = new(exp_t);
     self->kind = EXP_LET;
     self->let.binding_list = binding_list_new();
-    self->let.body = exp_list_new();
+    self->let.exp_list = exp_list_new();
     return self;
 }
 
@@ -50,7 +50,7 @@ exp_destroy(exp_t **self_pointer) {
 
         case EXP_LET: {
             list_destroy(&self->let.binding_list);
-            list_destroy(&self->let.body);
+            list_destroy(&self->let.exp_list);
             break;
         }
         }
