@@ -1,4 +1,3 @@
-remove primitive
 op.call_function v.s. op.call_node
 
 [lang] parse_define_function
