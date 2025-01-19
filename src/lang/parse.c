@@ -8,9 +8,14 @@ parse_define_node(sexp_t *sexp) {
     assert(string_equal(sexp_string(first_sexp), "define-node"));
     sexp_t *name_sexp = list_next(sexp_list);
     char *name = string_copy(sexp_string(name_sexp));
-    (void) name;
-    // TODO
-    return NULL;
+    list_t *port_name_list = list_new_with((destroy_fn_t *) string_destroy);
+    sexp_t *port_name_sexp = list_next(sexp_list);
+    while (port_name_sexp) {
+        list_push(port_name_list, string_copy(sexp_string(port_name_sexp)));
+        port_name_sexp = list_next(sexp_list);
+    }
+
+    return stmt_define_node(name, port_name_list);
 }
 
 static stmt_t *
