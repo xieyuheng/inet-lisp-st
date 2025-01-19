@@ -1,5 +1,3 @@
-remove exp from exp.assign
-
 remove primitive
 op.call_function v.s. op.call_node
 
