@@ -1,5 +1,3 @@
-[list] string_list_new
-
 [lang] execute -- take stmt
 [lang] execute -- test define-node
 
