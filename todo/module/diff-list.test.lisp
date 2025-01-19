@@ -3,10 +3,10 @@
 (import sole "trivial.lisp")
 
 (define (sole-diff-list)
-  (let* ([front front-op (wire-pair)]
-         [back value (diff front)])
-    (cons (sole) (cons (sole) back) front-op)
-    value))
+  (= front front-op (wire-pair))
+  (= back value (diff front))
+  (cons (sole) (cons (sole) back) front-op)
+  value)
 
 (inspect-run
  (diff-append

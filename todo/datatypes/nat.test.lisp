@@ -34,9 +34,9 @@
   (connect second (zero)))
 
 (define-rule (nat-dup (add1 prev) first second)
-  (let ([prev-first prev-second (nat-dup prev)])
-    (connect first (add1 prev-first))
-    (connect second (add1 prev-second))))
+  (= prev-first prev-second (nat-dup prev))
+  (connect first (add1 prev-first))
+  (connect second (add1 prev-second)))
 
 (define-node mul target! mulend result)
 
@@ -45,10 +45,10 @@
   (zero result))
 
 (define-rule (mul (add1 prev) mulend result)
-  (let ([mulend-first mulend-second (nat-dup mulend)])
-    (add (mul mulend-second prev)
-         mulend-first
-         result)))
+  (= mulend-first mulend-second (nat-dup mulend))
+  (add (mul mulend-second prev)
+       mulend-first
+       result))
 
 (inspect-run (mul (two) (two)))
 

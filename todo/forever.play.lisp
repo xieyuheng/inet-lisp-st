@@ -29,16 +29,16 @@
   (E second))
 
 (define-rule (D (C car cdr) first second)
-  (let ([car-first car-second (D car)]
-        [cdr-first cdr-second (D cdr)])
-    (C car-first cdr-first first)
-    (C car-second cdr-second second)))
+  (= car-first car-second (D car))
+  (= cdr-first cdr-second (D cdr))
+  (C car-first cdr-first first)
+  (C car-second cdr-second second))
 
 (define (forever)
-  (let* ([car car-op (wire-pair)]
-         [first second (D (C car (E)))])
-    (E first)
-    (connect car-op second)))
+  (= car car-op (wire-pair))
+  (= first second (D (C car (E))))
+  (E first)
+  (connect car-op second))
 
 (forever)
 (debug)
