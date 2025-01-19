@@ -18,11 +18,11 @@ exp_ap(exp_t *target) {
 }
 
 exp_t *
-exp_let(void) {
+exp_assign(void) {
     exp_t *self = new(exp_t);
-    self->kind = EXP_LET;
-    self->let.binding_list = binding_list_new();
-    self->let.exp_list = exp_list_new();
+    self->kind = EXP_ASSIGN;
+    self->assign.binding_list = binding_list_new();
+    self->assign.exp_list = exp_list_new();
     return self;
 }
 
@@ -48,9 +48,9 @@ exp_destroy(exp_t **self_pointer) {
             break;
         }
 
-        case EXP_LET: {
-            list_destroy(&self->let.binding_list);
-            list_destroy(&self->let.exp_list);
+        case EXP_ASSIGN: {
+            list_destroy(&self->assign.binding_list);
+            list_destroy(&self->assign.exp_list);
             break;
         }
         }
