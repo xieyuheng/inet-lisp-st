@@ -1,7 +1,4 @@
-[lang] execute -- take stmt
-[lang] execute -- test define-node
-
-run_command -- call execute
+[lang] execute -- handle stmt_define_node
 
 [lang] parse_define_function
 

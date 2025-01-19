@@ -24,8 +24,14 @@ run_file(const char *path, size_t log_level) {
 
     list_t *sexp_list = sexp_parse_list(code) ;
     list_t *stmt_list = parse_stmt_list(sexp_list);
-    (void) stmt_list;
+    stmt_t *stmt = list_first(stmt_list);
+    while (stmt) {
+        execute(vm, stmt);
+        stmt = list_next(stmt_list);
+    }
 
+    list_destroy(&sexp_list);
+    list_destroy(&stmt_list);
     mod_destroy(&mod);
     vm_destroy(&vm);
 }
