@@ -6,7 +6,7 @@ parse_define_node(sexp_t *sexp) {
     (void) list_first(sexp_list);
     sexp_t *name_sexp = list_next(sexp_list);
     char *name = string_copy(sexp_string(name_sexp));
-    list_t *port_name_list = list_new_with((destroy_fn_t *) string_destroy);
+    list_t *port_name_list = string_list_new();
     sexp_t *port_name_sexp = list_next(sexp_list);
     while (port_name_sexp) {
         list_push(port_name_list, string_copy(sexp_string(port_name_sexp)));

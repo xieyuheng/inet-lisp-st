@@ -10,3 +10,4 @@
 #include "pattern.h"
 #include "stmt.h"
 #include "parse.h"
+#include "execute.h"
