@@ -9,10 +9,10 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_DEFINE_NODE: {
-        // stmt->define_node.name;
-        // stmt->define_node.port_name_list;
-        (void) vm;
-        (void) stmt;
+        define_node(
+            vm->mod,
+            stmt->define_node.name,
+            stmt->define_node.port_name_list);
         return;
     }
 
