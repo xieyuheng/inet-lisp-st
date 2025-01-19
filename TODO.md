@@ -1,4 +1,3 @@
-[lang] exp.assign -- inline binding
 [lang] remove binding
 
 [lang] parse_define_function
