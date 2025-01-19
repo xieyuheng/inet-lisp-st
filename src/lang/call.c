@@ -8,11 +8,6 @@ call(vm_t *vm, const def_t *def) {
         return;
     }
 
-    case CONSTANT_DEF: {
-        call_constant(vm, def->as_constant_def);
-        return;
-    }
-
     case NODE_DEF: {
         // TODO
         // call_node(vm, def->as_node_def);

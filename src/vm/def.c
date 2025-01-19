@@ -9,14 +9,6 @@ def_from_function_def(function_def_t *function_def) {
 }
 
 def_t *
-def_from_constant_def(constant_def_t *constant_def) {
-    def_t *self = new(def_t);
-    self->kind = CONSTANT_DEF;
-    self->as_constant_def = constant_def;
-    return self;
-}
-
-def_t *
 def_from_node_def(node_def_t *node_def) {
     def_t *self = new(def_t);
     self->kind = NODE_DEF;
@@ -34,11 +26,6 @@ def_destroy(def_t **self_pointer) {
         switch (self->kind) {
         case FUNCTION_DEF: {
             function_def_destroy(&self->as_function_def);
-            break;
-        }
-
-        case CONSTANT_DEF: {
-            constant_def_destroy(&self->as_constant_def);
             break;
         }
 
@@ -60,10 +47,6 @@ def_name(const def_t *def) {
         return def->as_function_def->name;
     }
 
-    case CONSTANT_DEF: {
-        return def->as_constant_def->name;
-    }
-
     case NODE_DEF: {
         return def->as_node_def->name;
     }
@@ -77,10 +60,6 @@ def_kind_name(def_kind_t kind) {
     switch (kind) {
     case FUNCTION_DEF: {
         return "function";
-    }
-
-    case CONSTANT_DEF: {
-        return "constant";
     }
 
     case NODE_DEF: {
@@ -100,11 +79,6 @@ def_print(const def_t *def, file_t *file) {
         return;
     }
 
-    case CONSTANT_DEF: {
-        fprintf(file, "define-constant %s ", def->as_constant_def->name);
-        return;
-    }
-
     case NODE_DEF: {
         fprintf(file, "define-node %s ", def->as_node_def->name);
         for (port_index_t i = 0; i < def->as_node_def->arity; i++) {
@@ -119,6 +93,4 @@ def_print(const def_t *def, file_t *file) {
         return;
     }
     }
-
-    assert(false);
 }
