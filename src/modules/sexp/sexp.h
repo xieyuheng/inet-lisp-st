@@ -42,5 +42,6 @@ atom_sexp_t *as_atom_sexp(sexp_t *self);
 list_sexp_t *as_list_sexp(sexp_t *self);
 
 const char *sexp_string(sexp_t *self);
+list_t *sexp_sexp_list(sexp_t *self);
 
 bool sexp_starts_with(sexp_t *self, const char *string);

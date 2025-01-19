@@ -2,10 +2,8 @@
 
 static stmt_t *
 parse_define_node(sexp_t *sexp) {
-    list_sexp_t *list_sexp = as_list_sexp(sexp);
-    list_t *sexp_list = list_sexp->sexp_list;
-    sexp_t *first_sexp = list_first(sexp_list);
-    assert(string_equal(sexp_string(first_sexp), "define-node"));
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
     sexp_t *name_sexp = list_next(sexp_list);
     char *name = string_copy(sexp_string(name_sexp));
     list_t *port_name_list = list_new_with((destroy_fn_t *) string_destroy);

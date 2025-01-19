@@ -192,6 +192,12 @@ sexp_string(sexp_t *self) {
     return atom_sexp->token->string;
 }
 
+list_t *
+sexp_sexp_list(sexp_t *self) {
+    list_sexp_t *list_sexp = as_list_sexp(self);
+    return list_sexp->sexp_list;
+}
+
 bool
 sexp_starts_with(sexp_t *self, const char *string) {
     if (!is_list_sexp(self)) return false;
