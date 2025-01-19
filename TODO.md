@@ -1,4 +1,3 @@
-stmt_define_node -- take port_name_list
 binding_new -- take name_list and exp
 
 [lang] parse_stmt -- take sexp as input

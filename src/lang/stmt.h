@@ -16,6 +16,6 @@ struct stmt_t {
 };
 
 stmt_t *stmt_define_function(char *name, list_t *arg_name_list, list_t *body);
-stmt_t *stmt_define_node(char *name);
+stmt_t *stmt_define_node(char *name, list_t *port_name_list);
 
 void stmt_destroy(stmt_t **self_pointer);

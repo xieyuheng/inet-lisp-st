@@ -11,12 +11,11 @@ stmt_define_function(char *name, list_t *arg_name_list, list_t *body) {
 }
 
 stmt_t *
-stmt_define_node(char *name) {
+stmt_define_node(char *name, list_t *port_name_list) {
     stmt_t *self = new(stmt_t);
     self->kind = STMT_DEFINE_NODE;
     self->define_node.name = name;
-    self->define_node.port_name_list =
-        list_new_with((destroy_fn_t *) string_destroy);
+    self->define_node.port_name_list = port_name_list;
     return self;
 }
 
