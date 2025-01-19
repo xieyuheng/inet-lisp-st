@@ -1,5 +1,3 @@
-[sexp] sexp_starts_with
-
 [lang] parse_stmt -- take sexp as input
 
 [lang] parse_define_node
