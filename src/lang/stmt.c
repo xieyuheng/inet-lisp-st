@@ -1,13 +1,12 @@
 #include "index.h"
 
 stmt_t *
-stmt_define_function(char *name) {
+stmt_define_function(char *name, list_t *arg_name_list, list_t *body) {
     stmt_t *self = new(stmt_t);
     self->kind = STMT_DEFINE_FUNCTION;
     self->define_function.name = name;
-    self->define_function.arg_name_list =
-        list_new_with((destroy_fn_t *) string_destroy);
-    self->define_function.body = exp_list_new();
+    self->define_function.arg_name_list = arg_name_list;
+    self->define_function.body = body;
     return self;
 }
 
@@ -30,7 +29,7 @@ stmt_destroy(stmt_t **self_pointer) {
         case STMT_DEFINE_FUNCTION: {
             string_destroy(&self->define_function.name);
             list_destroy(&self->define_function.arg_name_list);
-            list_destroy(&self->define_function.body);            
+            list_destroy(&self->define_function.body);
             break;
         }
 

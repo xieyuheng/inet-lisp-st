@@ -186,6 +186,12 @@ as_list_sexp(sexp_t *self) {
     return (list_sexp_t *) self;
 }
 
+const char *
+sexp_string(sexp_t *self) {
+    atom_sexp_t *atom_sexp = as_atom_sexp(self);
+    return atom_sexp->token->string;
+}
+
 bool
 sexp_starts_with(sexp_t *self, const char *string) {
     if (!is_list_sexp(self)) return false;
@@ -193,9 +199,8 @@ sexp_starts_with(sexp_t *self, const char *string) {
     list_sexp_t *list_sexp = as_list_sexp(self);
     if (list_length(list_sexp->sexp_list) < 1) return false;
 
-    sexp_t *sexp = list_get(list_sexp->sexp_list, 0);
-    if (!is_atom_sexp(sexp)) return false;
+    sexp_t *first_sexp = list_get(list_sexp->sexp_list, 0);
+    if (!is_atom_sexp(first_sexp)) return false;
 
-    atom_sexp_t *atom_sexp = as_atom_sexp(sexp);
-    return string_equal(atom_sexp->token->string, string);
+    return string_equal(sexp_string(first_sexp), string);
 }
