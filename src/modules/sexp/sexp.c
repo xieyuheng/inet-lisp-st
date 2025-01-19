@@ -174,7 +174,19 @@ bool is_list_sexp(const sexp_t *self) {
     return self->kind == LIST_SEXP;
 }
 
+atom_sexp_t *
+as_atom_sexp(sexp_t *self) {
+    assert(is_atom_sexp(self));
+    return (atom_sexp_t *) self;
+}
+
+list_sexp_t *
+as_list_sexp(sexp_t *self) {
+    assert(is_list_sexp(self));
+    return (list_sexp_t *) self;
+}
+
 // bool
 // sexp_starts_with(const sexp_t *self, const char *string) {
-//     if sexp
+//     if (!is_list_sexp(sexp)) return false;
 // }
