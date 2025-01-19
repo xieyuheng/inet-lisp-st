@@ -1,16 +1,10 @@
 #include "index.h"
 
 node_def_t *
-node_def_new(
-    const char *name,
-    port_index_t input_arity,
-    port_index_t output_arity
-) {
+node_def_new(const char *name, port_index_t arity) {
     node_def_t *self = new(node_def_t);
     self->name = string_copy(name);
-    self->input_arity = input_arity;
-    self->output_arity = output_arity;
-    self->arity = input_arity + output_arity;
+    self->arity = arity;
     self->port_defs = allocate_pointers(self->arity);
     return self;
 }

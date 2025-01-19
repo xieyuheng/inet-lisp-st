@@ -5,6 +5,8 @@
 
 [lang] parse_define_rule
 
+[lang] call fix call_node
+
 [lang] pattern_t
 [lang] stmt_define_rule -- need pattern
 
