@@ -1,4 +1,3 @@
-remove primitive_def_t
 remove constant_def_t
 
 def_t be like op_t

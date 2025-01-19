@@ -7,7 +7,6 @@ typedef struct activity_t activity_t;
 typedef struct vm_t vm_t;
 typedef struct rule_t rule_t;
 
-typedef struct primitive_def_t primitive_def_t;
 typedef struct function_def_t function_def_t;
 typedef struct constant_def_t constant_def_t;
 typedef struct def_t def_t;
