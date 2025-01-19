@@ -29,14 +29,14 @@
   (E second))
 
 (define-rule (D (C car cdr) first second)
-  (= car-first car-second (D car))
-  (= cdr-first cdr-second (D cdr))
+  (D car) (=> car-first car-second)
+  (D cdr) (=> cdr-first cdr-second)
   (C car-first cdr-first first)
   (C car-second cdr-second second))
 
 (define (forever)
-  (= car car-op (wire-pair))
-  (= first second (D (C car (E))))
+  (wire-pair) (=> car car-op)
+  (D (C car (E))) (=> first second)
   (E first)
   (connect car-op second))
 

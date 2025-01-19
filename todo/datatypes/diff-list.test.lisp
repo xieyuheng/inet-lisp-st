@@ -5,7 +5,7 @@
 ;; plug the front of the `target` to the back of `rest`.
 
 (define-rule (diff-append (diff front back) rest result)
-  (= new-back value (diff front))
+  (diff front) (=> new-back value)
   (connect value result)
   (diff-open new-back rest back))
 
@@ -37,8 +37,8 @@
   (wire-print-net (run (wire-print-net wire))))
 
 (define (sole-diff-list)
-  (= front front-op (wire-pair))
-  (= back value (diff front))
+  (wire-pair) (=> front front-op)
+  (diff front) (=> back value)
   (cons (sole) (cons (sole) back) front-op)
   value)
 

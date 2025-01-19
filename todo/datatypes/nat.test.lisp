@@ -34,7 +34,7 @@
   (connect second (zero)))
 
 (define-rule (nat-dup (add1 prev) first second)
-  (= prev-first prev-second (nat-dup prev))
+  (nat-dup prev) (=> prev-first prev-second)
   (connect first (add1 prev-first))
   (connect second (add1 prev-second)))
 
@@ -45,7 +45,7 @@
   (zero result))
 
 (define-rule (mul (add1 prev) mulend result)
-  (= mulend-first mulend-second (nat-dup mulend))
+  (nat-dup mulend) (=> mulend-first mulend-second)
   (add (mul mulend-second prev)
        mulend-first
        result))

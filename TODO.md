@@ -1,11 +1,16 @@
+remove exp from exp.assign
+
+remove primitive
+op.call_function v.s. op.call_node
+
 [lang] parse_define_function
 [lang] execute -- handle stmt_define_function
+[lang] call with arity -- fix call_node
 [lang] compile_exp
 [lang] compile_exp_list
+[lang] compile_function
 
 [lang] parse_define_rule
-
-[lang] call fix call_node
 
 [lang] pattern_t
 [lang] stmt_define_rule -- need pattern
