@@ -1,4 +1,3 @@
-[lang] define_node
 [lang] execute -- handle stmt_define_node
 
 [lang] parse_define_function
