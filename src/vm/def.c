@@ -1,18 +1,18 @@
 #include "index.h"
 
 def_t *
-def_from_function_def(function_def_t *function_def) {
+def_function(function_def_t *function_def) {
     def_t *self = new(def_t);
-    self->kind = FUNCTION_DEF;
-    self->as_function_def = function_def;
+    self->kind = DEF_FUNCTION;
+    self->function = function_def;
     return self;
 }
 
 def_t *
-def_from_node_def(node_def_t *node_def) {
+def_node(node_def_t *node_def) {
     def_t *self = new(def_t);
-    self->kind = NODE_DEF;
-    self->as_node_def = node_def;
+    self->kind = DEF_NODE;
+    self->node = node_def;
     return self;
 }
 
@@ -24,13 +24,13 @@ def_destroy(def_t **self_pointer) {
         def_t *self = *self_pointer;
 
         switch (self->kind) {
-        case FUNCTION_DEF: {
-            function_def_destroy(&self->as_function_def);
+        case DEF_FUNCTION: {
+            function_def_destroy(&self->function);
             break;
         }
 
-        case NODE_DEF: {
-            node_def_destroy(&self->as_node_def);
+        case DEF_NODE: {
+            node_def_destroy(&self->node);
             break;
         }
         }
@@ -43,12 +43,12 @@ def_destroy(def_t **self_pointer) {
 const char *
 def_name(const def_t *def) {
     switch (def->kind) {
-    case FUNCTION_DEF: {
-        return def->as_function_def->name;
+    case DEF_FUNCTION: {
+        return def->function->name;
     }
 
-    case NODE_DEF: {
-        return def->as_node_def->name;
+    case DEF_NODE: {
+        return def->node->name;
     }
     }
 
@@ -58,11 +58,11 @@ def_name(const def_t *def) {
 const char *
 def_kind_name(def_kind_t kind) {
     switch (kind) {
-    case FUNCTION_DEF: {
+    case DEF_FUNCTION: {
         return "function";
     }
 
-    case NODE_DEF: {
+    case DEF_NODE: {
         return "node";
     }
     }
@@ -73,16 +73,16 @@ def_kind_name(def_kind_t kind) {
 void
 def_print(const def_t *def, file_t *file) {
     switch (def->kind) {
-    case FUNCTION_DEF: {
-        fprintf(file, "define %s ", def->as_function_def->name);
-        function_print(def->as_function_def->function, file);
+    case DEF_FUNCTION: {
+        fprintf(file, "define %s ", def->function->name);
+        function_print(def->function->function, file);
         return;
     }
 
-    case NODE_DEF: {
-        fprintf(file, "define-node %s ", def->as_node_def->name);
-        for (port_index_t i = 0; i < def->as_node_def->arity; i++) {
-            port_def_t *port_def = def->as_node_def->port_defs[i];
+    case DEF_NODE: {
+        fprintf(file, "define-node %s ", def->node->name);
+        for (port_index_t i = 0; i < def->node->arity; i++) {
+            port_def_t *port_def = def->node->port_defs[i];
             if (port_def->is_principal) {
                 fprintf(file, "%s! ", port_def->name);
             } else {

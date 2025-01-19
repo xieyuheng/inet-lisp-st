@@ -50,7 +50,7 @@ check_node_name_defined(
         exit(1);
     }
 
-    if (found->kind != NODE_DEF) {
+    if (found->kind != DEF_NODE) {
         fprintf(stderr, "[compiler-error] expect name defined as node instead of: %s\n", def_kind_name(found->kind));
         fprintf(stderr, "[src] %s\n", mod->src);
         code_print_context(stderr, mod->code, token->start, token->end);
@@ -68,7 +68,7 @@ check_port_name_defined(
     check_node_name_defined(vm, node_name, token);
     mod_t *mod = vm->mod;
     const def_t *found = mod_find_def(mod, node_name);
-    const node_def_t *def = found->as_node_def;
+    const node_def_t *def = found->node;
     for (port_index_t i = 0; i < def->arity; i++) {
         port_def_t *port_def = def->port_defs[i];
         if (string_equal(port_def->name, port_name)) return;

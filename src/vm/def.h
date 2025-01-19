@@ -1,20 +1,20 @@
 #pragma once
 
 typedef enum {
-    FUNCTION_DEF,
-    NODE_DEF,
+    DEF_FUNCTION,
+    DEF_NODE,
 } def_kind_t;
 
 struct def_t {
     def_kind_t kind;
     union {
-        function_def_t *as_function_def;
-        node_def_t *as_node_def;
+        function_def_t *function;
+        node_def_t *node;
     };
 };
 
-def_t *def_from_function_def(function_def_t *function_def);
-def_t *def_from_node_def(node_def_t *node_def);
+def_t *def_function(function_def_t *function_def);
+def_t *def_node(node_def_t *node_def);
 
 void def_destroy(def_t **self_pointer);
 

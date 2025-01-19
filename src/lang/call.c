@@ -3,14 +3,14 @@
 void
 call(vm_t *vm, const def_t *def) {
     switch (def->kind) {
-    case FUNCTION_DEF: {
-        call_function(vm, def->as_function_def);
+    case DEF_FUNCTION: {
+        call_function(vm, def->function);
         return;
     }
 
-    case NODE_DEF: {
+    case DEF_NODE: {
         // TODO
-        // call_node(vm, def->as_node_def);
+        // call_node(vm, def->node);
         return;
     }
     }
