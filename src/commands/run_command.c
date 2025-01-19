@@ -22,7 +22,9 @@ run_file(const char *path, size_t log_level) {
     vm_t *vm = vm_new(mod);
     vm->log_level = log_level;
 
-    // execute_all(vm);
+    list_t *sexp_list = sexp_parse_list(code) ;
+    list_t *stmt_list = parse_stmt_list(sexp_list);
+    (void) stmt_list;
 
     mod_destroy(&mod);
     vm_destroy(&vm);

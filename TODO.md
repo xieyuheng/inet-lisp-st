@@ -1,7 +1,9 @@
-[lang] parse_define_function
-
 [lang] execute -- take stmt
 [lang] execute -- test define-node
+
+run_command -- call execute
+
+[lang] parse_define_function
 
 [lang] parse_define_rule
 
