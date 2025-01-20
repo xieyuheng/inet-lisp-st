@@ -1,9 +1,8 @@
 #include "index.h"
 
 static exp_t *
-parse_assign(sexp_t *sexp) {
-    (void) sexp;
-    return NULL;
+parse_var(sexp_t *sexp) {
+    return exp_var(string_copy(sexp_string(sexp)));
 }
 
 static exp_t *
@@ -13,7 +12,7 @@ parse_ap(sexp_t *sexp) {
 }
 
 static exp_t *
-parse_var(sexp_t *sexp) {
+parse_assign(sexp_t *sexp) {
     (void) sexp;
     return NULL;
 }

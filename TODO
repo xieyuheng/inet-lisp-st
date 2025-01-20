@@ -1,4 +1,3 @@
-[lang] parse_var
 [lang] parse_assign
 [lang] parse_ap
 
