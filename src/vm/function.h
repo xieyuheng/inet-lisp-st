@@ -1,6 +1,6 @@
 #pragma once
 
-function_t *function_new(void);
+function_t *function_new(size_t arity);
 void function_destroy(function_t **self_pointer);
 
 size_t function_length(const function_t *self);

@@ -1,14 +1,16 @@
 #include "index.h"
 
 struct function_t {
+    size_t arity;
     list_t *op_list;
     size_t length;
     op_t **ops;
 };
 
 function_t *
-function_new(void) {
+function_new(size_t arity) {
     function_t *self = new(function_t);
+    self->arity = arity;
     self->op_list = list_new_with((destroy_fn_t *) op_destroy);
     self->length = 0;
     self->ops = NULL;
