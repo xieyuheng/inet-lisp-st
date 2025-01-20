@@ -21,10 +21,12 @@ static exp_t *
 parse_exp(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "="))
         return parse_assign(sexp);
-    else if (is_list_sexp(sexp))
+    else if (is_atom_sexp(sexp))
+        return parse_var(sexp);
+    else if (list_length(sexp_sexp_list(sexp)) > 1)
         return parse_ap(sexp);
     else
-        return parse_var(sexp);
+        assert(false && "[parse_exp] can not handle empty list sexp");
 }
 
 static stmt_t *
