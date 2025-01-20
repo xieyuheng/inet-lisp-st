@@ -71,7 +71,7 @@ static void
 step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
     case OP_CALL: {
-        call(vm, op->call.def);
+        call(vm, op->call.def, op->call.arity);
         return;
     }
 

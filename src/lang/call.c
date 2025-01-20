@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-call(vm_t *vm, const def_t *def) {
+call(vm_t *vm, const def_t *def, size_t arity) {
     switch (def->kind) {
     case DEF_FUNCTION: {
         call_function(vm, def->function);
@@ -9,8 +9,7 @@ call(vm_t *vm, const def_t *def) {
     }
 
     case DEF_NODE: {
-        // TODO
-        // call_node(vm, def->node);
+        call_node(vm, def->node, arity);
         return;
     }
     }
