@@ -1,6 +1,9 @@
+[lang] parse_var
 [lang] parse_assign
 [lang] parse_ap
-[lang] parse_var
+
+[lang] node and function as value
+[lang] simplify call to take target from stack
 
 [lang] execute -- handle stmt_define_function
 [lang] compile_exp
