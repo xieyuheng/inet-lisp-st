@@ -16,7 +16,6 @@ def_node(node_def_t *node_def) {
     return self;
 }
 
-
 void
 def_destroy(def_t **self_pointer) {
     assert(self_pointer);

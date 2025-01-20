@@ -10,14 +10,14 @@ typedef enum {
 struct op_t {
     op_kind_t kind;
     union {
-        struct { const def_t *def; } call;
+        struct { const def_t *def; size_t arity; } call;
         struct { value_t value; } literal;
         struct { size_t index; } local_get;
         struct { size_t index; } local_set;
     };
 };
 
-op_t *op_call(const def_t *def);
+op_t *op_call(const def_t *def, size_t arity);
 op_t *op_literal(value_t value);
 op_t *op_local_get(size_t index);
 op_t *op_local_set(size_t index);

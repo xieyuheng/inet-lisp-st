@@ -1,5 +1,4 @@
-op.call_function v.s. op.call_node
-inline function_def_t to def_t
+function_t has arity
 
 [lang] parse_define_function
 [lang] execute -- handle stmt_define_function

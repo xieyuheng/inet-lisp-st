@@ -1,10 +1,11 @@
 #include "index.h"
 
 op_t *
-op_call(const def_t *def) {
+op_call(const def_t *def, size_t arity) {
     op_t *self = new(op_t);
     self->kind = OP_CALL;
     self->call.def = def;
+    self->call.arity = arity;
     return self;
 }
 
@@ -15,7 +16,6 @@ op_literal(value_t value) {
     self->literal.value = value;
     return self;
 }
-
 
 op_t *
 op_local_get(size_t index) {
