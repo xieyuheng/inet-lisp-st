@@ -1,5 +1,33 @@
 #include "index.h"
 
+static exp_t *
+parse_assign(sexp_t *sexp) {
+    (void) sexp;
+    return NULL;
+}
+
+static exp_t *
+parse_ap(sexp_t *sexp) {
+    (void) sexp;
+    return NULL;
+}
+
+static exp_t *
+parse_var(sexp_t *sexp) {
+    (void) sexp;
+    return NULL;
+}
+
+static exp_t *
+parse_exp(sexp_t *sexp) {
+    if (sexp_starts_with(sexp, "="))
+        return parse_assign(sexp);
+    else if (is_list_sexp(sexp))
+        return parse_ap(sexp);
+    else
+        return parse_var(sexp);
+}
+
 static stmt_t *
 parse_define_node(sexp_t *sexp) {
     list_t *sexp_list = sexp_sexp_list(sexp);
@@ -14,12 +42,6 @@ parse_define_node(sexp_t *sexp) {
     }
 
     return stmt_define_node(name, port_name_list);
-}
-
-static exp_t *
-parse_exp(sexp_t *sexp) {
-    (void) sexp;
-    return NULL;
 }
 
 static stmt_t *

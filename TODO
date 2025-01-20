@@ -1,4 +1,6 @@
-[lang] parse_exp
+[lang] parse_assign
+[lang] parse_ap
+[lang] parse_var
 
 [lang] execute -- handle stmt_define_function
 [lang] compile_exp
