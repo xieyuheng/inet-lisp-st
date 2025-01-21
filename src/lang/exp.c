@@ -87,12 +87,17 @@ exp_print(const exp_t *self, file_t *file) {
     }
 
     case EXP_AP: {
+        if (list_is_empty(self->ap.arg_list)) {
+            fprintf(file, "(");
+            exp_print(self->ap.target, file);
+            fprintf(file, ")");
+            return;
+        }
+
         fprintf(file, "(");
         exp_print(self->ap.target, file);
-        if (!list_is_empty(self->ap.arg_list)) {
-            fprintf(file, " ");
-            exp_list_print(self->ap.arg_list, file);
-        }
+        fprintf(file, " ");
+        exp_list_print(self->ap.arg_list, file);
         fprintf(file, ")");
         return;
     }
