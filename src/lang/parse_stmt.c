@@ -55,7 +55,8 @@ parse_stmt(sexp_t *sexp) {
         return parse_define_function(sexp);
     else if (is_list_sexp(sexp))
         return parse_compute_exp(sexp);
-    else assert(false && "[parse_stmt] unknown sexp");
+    else
+        assert(false && "[parse_stmt] can not handle atom sexp");
 }
 
 list_t *

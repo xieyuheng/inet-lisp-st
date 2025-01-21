@@ -22,3 +22,6 @@ exp_t *exp_assign(list_t *name_list);
 list_t *exp_list_new(void);
 
 void exp_destroy(exp_t **self_pointer);
+
+void exp_list_print(const list_t *exp_list, file_t *file);
+void exp_print(const exp_t *self, file_t *file);

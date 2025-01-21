@@ -174,6 +174,11 @@ list_find(list_t *self, const void *value) {
     return NULL;
 }
 
+bool
+list_cursor_is_end(const list_t *self) {
+    return self->cursor == self->last;
+}
+
 static void *
 list_current(const list_t *self) {
     assert(self);

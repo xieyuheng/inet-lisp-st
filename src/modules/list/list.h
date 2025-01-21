@@ -31,6 +31,8 @@ bool list_remove(list_t *self, const void *value);
 // Sets the cursor to the found value, if any.
 void *list_find(list_t *self, const void *value);
 
+bool list_cursor_is_end(const list_t *self);
+
 // move the cursor.
 
 void *list_first(list_t *self);

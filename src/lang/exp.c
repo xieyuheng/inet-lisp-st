@@ -58,3 +58,50 @@ exp_destroy(exp_t **self_pointer) {
         return;
     }
 }
+
+void
+exp_list_print(const list_t *exp_list, file_t *file) {
+    (void) exp_list;
+    (void) file;
+    return;
+}
+
+void
+exp_print(const exp_t *self, file_t *file) {
+    switch (self->kind) {
+    case EXP_VAR: {
+        fprintf(file, "%s", self->var.name);
+        return;
+    }
+
+    case EXP_AP: {
+        fprintf(file, "(");
+        exp_print(self->ap.target, file);
+        if (!list_is_empty(self->ap.arg_list)) {
+            fprintf(file, " ");
+            exp_list_print(self->ap.arg_list, file);
+        }
+        fprintf(file, ")");
+        return;
+    }
+
+    case EXP_ASSIGN: {
+        if (list_is_empty(self->assign.name_list)) {
+            fprintf(file, "(=)");
+            return;
+        }
+
+        fprintf(file, "(= ");
+        char *name = list_first(self->assign.name_list);
+        if (name) {
+            if (list_cursor_is_end(self->assign.name_list))
+                fprintf(file, "%s", name);
+            else
+                fprintf(file, "%s ", name);
+            name = list_next(self->assign.name_list);
+        }
+        fprintf(file, ")");
+        return;
+    }
+    }
+}
