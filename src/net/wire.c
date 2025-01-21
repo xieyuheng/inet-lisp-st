@@ -10,7 +10,6 @@ wire_new(void) {
     wire_t *self = new(wire_t);
     self->spec = &wire_object_spec;
     self->node = NULL;
-    self->index = -1;
     self->opposite = NULL;
     return self;
 }
