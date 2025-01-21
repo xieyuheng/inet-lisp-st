@@ -66,6 +66,18 @@ exp_list_print(const list_t *exp_list, file_t *file) {
     return;
 }
 
+static void
+name_list_print(const list_t *name_list, file_t *file) {
+    char *name = list_first(name_list);
+    if (name) {
+        if (list_cursor_is_end(name_list))
+            fprintf(file, "%s", name);
+        else
+            fprintf(file, "%s ", name);
+        name = list_next(name_list);
+    }
+}
+
 void
 exp_print(const exp_t *self, file_t *file) {
     switch (self->kind) {
@@ -92,14 +104,7 @@ exp_print(const exp_t *self, file_t *file) {
         }
 
         fprintf(file, "(= ");
-        char *name = list_first(self->assign.name_list);
-        if (name) {
-            if (list_cursor_is_end(self->assign.name_list))
-                fprintf(file, "%s", name);
-            else
-                fprintf(file, "%s ", name);
-            name = list_next(self->assign.name_list);
-        }
+        name_list_print(self->assign.name_list, file);
         fprintf(file, ")");
         return;
     }
