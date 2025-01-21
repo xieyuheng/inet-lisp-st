@@ -1,5 +1,7 @@
 #pragma once
 
+extern object_spec_t function_object_spec;
+
 function_t *function_new(size_t arity);
 void function_destroy(function_t **self_pointer);
 

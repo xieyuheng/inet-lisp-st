@@ -1,5 +1,3 @@
-[lang] function as value
-
 [lang] simplify call to take target from stack
 
 [lang] execute -- handle stmt_define_function -- call compile_function

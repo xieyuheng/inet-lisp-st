@@ -1,6 +1,12 @@
 #include "index.h"
 
+object_spec_t function_object_spec = {
+    .name = "function",
+    .print_fn = (print_fn_t *) function_print,
+};
+
 struct function_t {
+    object_spec_t *spec;
     size_t arity;
     list_t *op_list;
     size_t length;
@@ -10,6 +16,7 @@ struct function_t {
 function_t *
 function_new(size_t arity) {
     function_t *self = new(function_t);
+    self->spec = &function_object_spec;
     self->arity = arity;
     self->op_list = list_new_with((destroy_fn_t *) op_destroy);
     self->length = 0;
