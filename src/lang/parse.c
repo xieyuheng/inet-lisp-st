@@ -9,6 +9,11 @@ static exp_t *
 parse_ap(sexp_t *sexp) {
     (void) sexp;
     return NULL;
+    // list_t *sexp_list = sexp_sexp_list(sexp);
+    // assert(!list_is_empty(sexp_list));
+    // exp_t *target = parse_exp(list_first(sexp_list));
+    // list_t *arg_list = exp_list_new();
+    // return exp_ap(target, arg_list);
 }
 
 static exp_t *
@@ -25,13 +30,13 @@ parse_assign(sexp_t *sexp) {
     return exp_assign(name_list);
 }
 
-static exp_t *
+exp_t *
 parse_exp(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "="))
         return parse_assign(sexp);
     else if (is_atom_sexp(sexp))
         return parse_var(sexp);
-    else if (list_length(sexp_sexp_list(sexp)) > 1)
+    else if (!list_is_empty(sexp_sexp_list(sexp)))
         return parse_ap(sexp);
     else
         assert(false && "[parse_exp] can not handle empty list sexp");
