@@ -13,4 +13,4 @@
 (define (inspect-run wire)
   (wire-print-net (run (wire-print-net wire))))
 
-;; (inspect-run (add (two) (two)))
+(inspect-run (add (two) (two)))

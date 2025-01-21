@@ -42,12 +42,19 @@ parse_define_function(sexp_t *sexp) {
     return stmt_define_function(name, arg_name_list, exp_list);
 }
 
+static stmt_t *
+parse_compute_exp(sexp_t *sexp) {
+    return stmt_compute_exp(parse_exp(sexp));
+}
+
 stmt_t *
 parse_stmt(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "define-node"))
         return parse_define_node(sexp);
     else if (sexp_starts_with(sexp, "define"))
         return parse_define_function(sexp);
+    else if (is_list_sexp(sexp))
+        return parse_compute_exp(sexp);
     else assert(false && "[parse_stmt] unknown sexp");
 }
 
