@@ -26,6 +26,8 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_COMPUTE_EXP: {
+        stmt_print(stmt, stdout);
+        fprintf(stdout, "\n");
         // TODO
         return;
     }
