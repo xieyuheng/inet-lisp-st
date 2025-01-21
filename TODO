@@ -1,5 +1,3 @@
-[vm] is_function & as_function -- for value
-
 [lang] fix apply_function
 [lang] fix apply
 
