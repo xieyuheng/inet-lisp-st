@@ -30,8 +30,7 @@ node_destroy(node_t **self_pointer) {
 bool
 is_node(value_t value) {
     if (!is_xobject(value)) return false;
-    object_t *object = as_object(value);
-    return object->spec == &node_object_spec;
+    return as_object(value)->spec == &node_object_spec;
 }
 
 node_t *
