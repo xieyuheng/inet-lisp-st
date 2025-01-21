@@ -1,12 +1,20 @@
+[lang] exp_print -- for testing
+[lang] stmt_print -- for testing
+
+[lang] execute -- handle stmt_define_function -- call stmt_print for testing
+[lang] execute -- handle stmt_compute_exp -- call stmt_print for testing
+
 [lang] node and function as value
 [lang] simplify call to take target from stack
 
-[lang] execute -- handle stmt_define_function
-[lang] compile_exp
-[lang] compile_exp_list
+[lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
+[lang] compile_exp_list
+[lang] compile_exp
 
 [lang] call -- fix call_function
+
+[lang] execute -- handle stmt_compute_exp -- call compile_function and run
 
 [lang] parse_define_rule
 

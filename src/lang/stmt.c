@@ -19,6 +19,14 @@ stmt_define_node(char *name, list_t *port_name_list) {
     return self;
 }
 
+stmt_t *
+stmt_compute_exp(exp_t *exp) {
+    stmt_t *self = new(stmt_t);
+    self->kind = STMT_COMPUTE_EXP;
+    self->compute_exp.exp = exp;
+    return self;
+}
+
 void
 stmt_destroy(stmt_t **self_pointer) {
     assert(self_pointer);
@@ -39,6 +47,11 @@ stmt_destroy(stmt_t **self_pointer) {
         }
 
         case STMT_DEFINE_RULE: {
+            // TODO
+            break;
+        }
+
+        case STMT_COMPUTE_EXP: {
             // TODO
             break;
         }

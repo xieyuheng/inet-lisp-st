@@ -20,5 +20,10 @@ execute(vm_t *vm, stmt_t *stmt) {
         // TODO
         return;
     }
+
+    case STMT_COMPUTE_EXP: {
+        // TODO
+        return;
+    }
     }
 }
