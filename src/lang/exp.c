@@ -61,9 +61,13 @@ exp_destroy(exp_t **self_pointer) {
 
 void
 exp_list_print(const list_t *exp_list, file_t *file) {
-    (void) exp_list;
-    (void) file;
-    return;
+    exp_t *exp = list_first(exp_list);
+    while (exp) {
+        exp_print(exp, file);
+        if (!list_cursor_is_end(exp_list))
+            fprintf(file, " ");
+        exp = list_next(exp_list);
+    }
 }
 
 static void

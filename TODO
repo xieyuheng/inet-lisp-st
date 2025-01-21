@@ -1,4 +1,3 @@
-[lang] exp_list_print
 [lang] stmt_print -- for testing
 
 [lang] execute -- handle stmt_define_function -- call stmt_print for testing
