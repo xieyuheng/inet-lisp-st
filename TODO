@@ -1,4 +1,3 @@
-[lang] exp_ap -- take arg_list
 [lang] parse_ap
 
 [lang] node and function as value

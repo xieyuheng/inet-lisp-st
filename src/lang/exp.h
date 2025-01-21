@@ -16,7 +16,7 @@ struct exp_t {
 };
 
 exp_t *exp_var(char *name);
-exp_t *exp_ap(exp_t *target);
+exp_t *exp_ap(exp_t *target, list_t *arg_list);
 exp_t *exp_assign(list_t *name_list);
 
 list_t *exp_list_new(void);
