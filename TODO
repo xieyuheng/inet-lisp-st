@@ -1,4 +1,6 @@
-[net] is_node -- for value
+[net] is_node & as_node -- for value
+[net] is_wire & as_wire -- for value
+
 [vm] is_function -- for value
 
 [lang] fix apply_function
