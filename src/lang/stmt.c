@@ -62,3 +62,47 @@ stmt_destroy(stmt_t **self_pointer) {
         return;
     }
 }
+
+void
+stmt_print(const stmt_t *self, file_t *file) {
+    switch (self->kind) {
+    case STMT_DEFINE_FUNCTION: {
+        fprintf(file, "(define (");
+        fprintf(file, "%s", self->define_function.name);
+        if (list_is_empty(self->define_function.arg_name_list)) {
+            fprintf(file, ")");
+        } else {
+            fprintf(file, " ");
+            name_list_print(self->define_function.arg_name_list, file);
+            fprintf(file, ")");
+        }
+
+        if (list_is_empty(self->define_function.exp_list)) {
+            fprintf(file, ")");
+        } else {
+            fprintf(file, " ");
+            exp_list_print(self->define_function.exp_list, file);
+            fprintf(file, ")");
+        }
+
+        return;
+    }
+
+    case STMT_DEFINE_NODE: {
+        fprintf(file, "(define-node %s ", self->define_node.name);
+        name_list_print(self->define_node.port_name_list, file);
+        fprintf(file, ")");
+        return;
+    }
+
+    case STMT_DEFINE_RULE: {
+        fprintf(file, "(define-rule TODO)");
+        return;
+    }
+
+    case STMT_COMPUTE_EXP: {
+        exp_print(self->compute_exp.exp, file);
+        return;
+    }
+    }
+}

@@ -23,3 +23,5 @@ stmt_t *stmt_define_node(char *name, list_t *port_name_list);
 stmt_t *stmt_compute_exp(exp_t *exp);
 
 void stmt_destroy(stmt_t **self_pointer);
+
+void stmt_print(const stmt_t *self, file_t *file);

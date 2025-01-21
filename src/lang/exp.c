@@ -60,7 +60,7 @@ exp_destroy(exp_t **self_pointer) {
 }
 
 void
-exp_list_print(const list_t *exp_list, file_t *file) {
+exp_list_print(list_t *exp_list, file_t *file) {
     exp_t *exp = list_first(exp_list);
     while (exp) {
         exp_print(exp, file);
@@ -70,8 +70,8 @@ exp_list_print(const list_t *exp_list, file_t *file) {
     }
 }
 
-static void
-name_list_print(const list_t *name_list, file_t *file) {
+void
+name_list_print(list_t *name_list, file_t *file) {
     char *name = list_first(name_list);
     if (name) {
         if (list_cursor_is_end(name_list))
