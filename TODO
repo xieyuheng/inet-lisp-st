@@ -1,5 +1,3 @@
-port_index_t should not be int -- just use size_t
-
 [lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
 [lang] compile_exp_list

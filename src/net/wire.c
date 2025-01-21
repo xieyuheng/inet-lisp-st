@@ -55,14 +55,12 @@ wire_node_name(const wire_t *self) {
 void
 wire_free_from_node(wire_t *self) {
     self->node = NULL;
-    self->index = -1;
 }
 
 bool
 wire_is_free(const wire_t *self) {
     if (self->node) return false;
-
-    assert(self->index == -1);
+    
     return true;
 }
 

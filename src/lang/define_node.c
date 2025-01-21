@@ -6,7 +6,7 @@ define_node(mod_t *mod, const char *name, list_t *port_name_list) {
     node_def_t *node_def = node_def_new(name, arity);
     def_t *def = def_node(node_def);
 
-    port_index_t index = 0;
+    size_t index = 0;
 
     char *port_name = list_first(port_name_list);
     while (port_name) {

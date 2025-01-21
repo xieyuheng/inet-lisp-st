@@ -80,7 +80,7 @@ def_print(const def_t *def, file_t *file) {
 
     case DEF_NODE: {
         fprintf(file, "define-node %s ", def->node->name);
-        for (port_index_t i = 0; i < def->node->arity; i++) {
+        for (size_t i = 0; i < def->node->arity; i++) {
             port_def_t *port_def = def->node->port_defs[i];
             if (port_def->is_principal) {
                 fprintf(file, "%s! ", port_def->name);
