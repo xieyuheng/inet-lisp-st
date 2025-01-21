@@ -1,5 +1,7 @@
+[net] is_node -- for value
+[vm] is_function -- for value
+
 [lang] fix apply_function
-[lang] fix apply_node
 [lang] fix apply
 
 [lang] execute -- handle stmt_define_function -- call compile_function

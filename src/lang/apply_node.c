@@ -33,8 +33,7 @@ node_return_output_ports(vm_t *vm, node_t *node, port_index_t input_arity) {
 }
 
 void
-apply_node(vm_t *vm, const node_def_t *def, port_index_t input_arity) {
-    node_t *node = vm_add_node(vm, def);
+apply_node(vm_t *vm, node_t *node, port_index_t input_arity) {
     node_apply_input_ports(vm, node, input_arity);
     node_return_output_ports(vm, node, input_arity);
     return;
