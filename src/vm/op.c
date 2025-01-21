@@ -1,10 +1,9 @@
 #include "index.h"
 
 op_t *
-op_apply(const def_t *def, size_t arity) {
+op_apply(size_t arity) {
     op_t *self = new(op_t);
     self->kind = OP_APPLY;
-    self->apply.def = def;
     self->apply.arity = arity;
     return self;
 }
@@ -66,7 +65,7 @@ void
 op_print(const op_t *op, file_t *file) {
     switch (op->kind) {
     case OP_APPLY: {
-        fprintf(file, "APPLY %s", def_name(op->apply.def));
+        fprintf(file, "APPLY %lu", op->apply.arity);
         return;
     }
 

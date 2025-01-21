@@ -1,4 +1,6 @@
-[lang] simplify apply to take target from stack
+[lang] fix apply_function
+[lang] fix apply_node
+[lang] fix apply
 
 [lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
