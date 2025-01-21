@@ -1,8 +1,14 @@
 #include "index.h"
 
+object_spec_t node_object_spec = {
+    .name = "node",
+    .print_fn = (print_fn_t *) node_print,
+};
+
 node_t *
 node_new(const node_def_t *def, size_t id) {
     node_t *self = new(node_t);
+    self->spec = &node_object_spec;
     self->def = def;
     self->id = id;
     self->wires = allocate_pointers(def->arity);
