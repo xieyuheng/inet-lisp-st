@@ -13,8 +13,16 @@ parse_ap(sexp_t *sexp) {
 
 static exp_t *
 parse_assign(sexp_t *sexp) {
-    (void) sexp;
-    return NULL;
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
+    list_t *name_list = string_list_new();
+    sexp_t *name_sexp = list_next(sexp_list);
+    while (name_sexp) {
+        list_push(name_list, string_copy(sexp_string(name_sexp)));
+        name_sexp = list_next(sexp_list);
+    }
+
+    return exp_assign(name_list);
 }
 
 static exp_t *
