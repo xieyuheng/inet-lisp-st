@@ -7,10 +7,10 @@ apply(vm_t *vm, value_t *target, size_t arity) {
         return;
     }
 
-    // if (is_function(target)) {
-    //     apply_function(vm, as_function(target), arity);
-    //     return;
-    // }
+    if (is_function(target)) {
+        apply_function(vm, as_function(target), arity);
+        return;
+    }
 
     assert(false && "[apply] unknown target");
 }

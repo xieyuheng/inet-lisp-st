@@ -1,12 +1,9 @@
-[lang] fix apply_function
-[lang] fix apply
+port_index_t should not be int -- just use size_t
 
 [lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
 [lang] compile_exp_list
 [lang] compile_exp
-
-[lang] apply -- fix apply_function
 
 [lang] execute -- handle stmt_compute_exp -- call compile_function and run
 
@@ -14,6 +11,8 @@
 
 [lang] pattern_t
 [lang] stmt_define_rule -- need pattern
+
+[lang] apply_function -- handle arity
 
 # later
 
