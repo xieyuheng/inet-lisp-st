@@ -1,4 +1,3 @@
-[lang] execute -- handle stmt_define_function -- call stmt_print for testing
 [lang] execute -- handle stmt_compute_exp -- call stmt_print for testing
 
 [lang] node and function as value
