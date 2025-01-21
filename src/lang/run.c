@@ -70,8 +70,8 @@ run_until(vm_t *vm, size_t base_length) {
 static void
 step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
-    case OP_CALL: {
-        call(vm, op->call.def, op->call.arity);
+    case OP_APPLY: {
+        apply(vm, op->apply.def, op->apply.arity);
         return;
     }
 

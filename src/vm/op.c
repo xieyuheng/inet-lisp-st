@@ -1,11 +1,11 @@
 #include "index.h"
 
 op_t *
-op_call(const def_t *def, size_t arity) {
+op_apply(const def_t *def, size_t arity) {
     op_t *self = new(op_t);
-    self->kind = OP_CALL;
-    self->call.def = def;
-    self->call.arity = arity;
+    self->kind = OP_APPLY;
+    self->apply.def = def;
+    self->apply.arity = arity;
     return self;
 }
 
@@ -39,7 +39,7 @@ op_destroy(op_t **self_pointer) {
     if (*self_pointer) {
         op_t *self = *self_pointer;
         switch (self->kind) {
-        case OP_CALL: {
+        case OP_APPLY: {
             break;
         }
 
@@ -65,8 +65,8 @@ op_destroy(op_t **self_pointer) {
 void
 op_print(const op_t *op, file_t *file) {
     switch (op->kind) {
-    case OP_CALL: {
-        fprintf(file, "CALL %s", def_name(op->call.def));
+    case OP_APPLY: {
+        fprintf(file, "APPLY %s", def_name(op->apply.def));
         return;
     }
 

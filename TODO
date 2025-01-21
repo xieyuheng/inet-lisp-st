@@ -1,11 +1,11 @@
-[lang] simplify call to take target from stack
+[lang] simplify apply to take target from stack
 
 [lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
 [lang] compile_exp_list
 [lang] compile_exp
 
-[lang] call -- fix call_function
+[lang] apply -- fix apply_function
 
 [lang] execute -- handle stmt_compute_exp -- call compile_function and run
 
@@ -14,13 +14,11 @@
 [lang] pattern_t
 [lang] stmt_define_rule -- need pattern
 
-[vm] op_call -- has artiy
-
 # later
 
-[example] `examples/cellular-automata.lisp` -- 1997-interaction-combinators.pdf
-[example] `examples/lambda.lisp` -- use interaction combinators to implement lambda
-[example] `examples/turing.lisp` -- coding turing machine -- 2008-the-annotated-turing.djvu
+[example] examples/cellular-automata.lisp -- 1997-interaction-combinators.pdf
+[example] examples/lambda.lisp -- use interaction combinators to implement lambda
+[example] examples/turing.lisp -- coding turing machine -- 2008-the-annotated-turing.djvu
 
 # primitive value
 
