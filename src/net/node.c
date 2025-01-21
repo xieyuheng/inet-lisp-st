@@ -27,6 +27,19 @@ node_destroy(node_t **self_pointer) {
     }
 }
 
+bool
+is_node(value_t value) {
+    if (!is_xobject(value)) return false;
+    object_t *object = as_object(value);
+    return object->spec == &node_object_spec;
+}
+
+node_t *
+as_node(value_t value) {
+    assert(is_node(value));
+    return (node_t *) value;
+}
+
 void
 node_print(const node_t *self, file_t *file) {
     char *id_string = uint_to_subscript(self->id);
