@@ -7,13 +7,17 @@ parse_var(sexp_t *sexp) {
 
 static exp_t *
 parse_ap(sexp_t *sexp) {
-    (void) sexp;
-    return NULL;
-    // list_t *sexp_list = sexp_sexp_list(sexp);
-    // assert(!list_is_empty(sexp_list));
-    // exp_t *target = parse_exp(list_first(sexp_list));
-    // list_t *arg_list = exp_list_new();
-    // return exp_ap(target, arg_list);
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    assert(!list_is_empty(sexp_list));
+    exp_t *target = parse_exp(list_first(sexp_list));
+    list_t *arg_list = exp_list_new();
+    sexp_t *arg_sexp = list_next(sexp_list);
+    while (arg_sexp) {
+        list_push(arg_list, parse_exp(arg_sexp));
+        arg_sexp = list_next(sexp_list);
+    }
+
+    return exp_ap(target, arg_list);
 }
 
 static exp_t *
