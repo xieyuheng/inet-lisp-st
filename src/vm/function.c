@@ -8,6 +8,7 @@ object_spec_t function_object_spec = {
 struct function_t {
     object_spec_t *spec;
     size_t arity;
+    function_ctx_t *ctx;
     list_t *op_list;
     size_t length;
     op_t **ops;
@@ -18,6 +19,7 @@ function_new(size_t arity) {
     function_t *self = new(function_t);
     self->spec = &function_object_spec;
     self->arity = arity;
+    self->ctx = function_ctx_new();
     self->op_list = list_new_with((destroy_fn_t *) op_destroy);
     self->length = 0;
     self->ops = NULL;
@@ -30,6 +32,7 @@ function_destroy(function_t **self_pointer) {
     if (*self_pointer) {
         function_t *self = *self_pointer;
         list_destroy(&self->op_list);
+        function_ctx_destroy(&self->ctx);
         if (self->ops) free(self->ops);
         free(self);
         *self_pointer = NULL;
