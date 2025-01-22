@@ -30,8 +30,20 @@ compile_exp_list(vm_t *vm, function_t *function, list_t *exp_list) {
     }
 }
 
-void compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
-    (void) vm;
-    (void) function;
-    (void) exp;
+void
+compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
+    switch (exp->kind) {
+    case EXP_VAR: {
+        return;
+    }
+
+    case EXP_AP: {
+        return;
+    }
+
+    case EXP_BIND: {
+        compile_bind(vm, function, exp->bind.name_list);
+        return;
+    }
+    }
 }
