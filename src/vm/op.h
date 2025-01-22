@@ -11,7 +11,7 @@ typedef enum {
 struct op_t {
     op_kind_t kind;
     union {
-        struct { const def_t *def; } get;
+        struct { const def_t *def; } lookup;
         struct { size_t arity; } apply;
         struct { value_t value; } literal;
         struct { size_t index; } local_get;

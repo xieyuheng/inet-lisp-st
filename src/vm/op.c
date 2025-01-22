@@ -4,7 +4,7 @@ op_t *
 op_lookup(const def_t *def) {
     op_t *self = new(op_t);
     self->kind = OP_LOOKUP;
-    self->get.def = def;
+    self->lookup.def = def;
     return self;
 }
 
@@ -77,7 +77,7 @@ void
 op_print(const op_t *op, file_t *file) {
     switch (op->kind) {
     case OP_LOOKUP: {
-        fprintf(file, "GET %s", def_name(op->get.def));
+        fprintf(file, "GET %s", def_name(op->lookup.def));
         return;
     }
 
