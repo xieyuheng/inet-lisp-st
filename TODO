@@ -1,10 +1,3 @@
-[stack] stack_pop_many
-[stack] stack_push_many
-
-[lang] apply_function -- supplement wire if arity is short
-
-- use stack_pop_many and stack_push_many to save arguments by arity
-
 [lang] parse_define_rule
 [lang] pattern_t
 [lang] stmt_define_rule -- need pattern
@@ -22,6 +15,23 @@
 [design] the most important primitive value is function (closure)
 [design] write `list-map` as example that uses function
 [design] use explicit `copy` -- keep linear variable like simple
+
+# not sure
+
+[lang] compile_exp -- EXP_AP -- should not get `arity` from `list_length(exp->ap.arg_list)`
+
+- should compute `arity` from each exp
+
+  - `exp_arity` -- for arg output arity
+  - `exp_target_arity` -- for target input arity
+    - need to infer output arity of function
+
+[lang] apply_function -- supplement wire if arity is short
+
+- [stack] stack_pop_list
+- [stack] stack_push_list
+
+- use stack_pop_list and stack_push_list to save arguments by arity
 
 # debug
 
