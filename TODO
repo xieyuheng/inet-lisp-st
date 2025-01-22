@@ -1,4 +1,9 @@
+[stack] stack_pop_many
+[stack] stack_push_many
+
 [lang] apply_function -- supplement wire if arity is short
+
+- use stack_pop_many and stack_push_many to save arguments by arity
 
 [lang] parse_define_rule
 [lang] pattern_t

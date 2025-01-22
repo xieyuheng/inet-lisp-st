@@ -6,8 +6,8 @@ date: 2025-01-19
 vm opcodes:
 
 ```scheme
-(call-node node arity) ;; node/arity
-(call-function name)   ;; name
+(get def)
+(apply arity)
 (literal value)
 (local-get index)
 (local-set index)
@@ -35,3 +35,7 @@ f/2
 (local-set (index-of y))
 (local-set (index-of x))
 ```
+
+[2025-01-22] 想要这样编译的前提是，
+application expression 中每个 sub expression 都返回一个 value。
+但是后缀表达式的 `(=> x y)` 又要求 top-level expression 要可以返回多个 value。
