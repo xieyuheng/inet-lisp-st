@@ -4,11 +4,6 @@ void
 execute(vm_t *vm, stmt_t *stmt) {
     switch (stmt->kind) {
     case STMT_DEFINE_FUNCTION: {
-        {
-            stmt_print(stmt, stdout);
-            fprintf(stdout, "\n");
-        }
-
         size_t arity = list_length(stmt->define_function.arg_name_list);
         function_t *function = function_new(arity);
         compile_bind(vm, function, stmt->define_function.arg_name_list);
@@ -20,11 +15,6 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_DEFINE_NODE: {
-        {
-            stmt_print(stmt, stdout);
-            fprintf(stdout, "\n");
-        }
-
         define_node(vm->mod, stmt->define_node.name, stmt->define_node.port_name_list);
         return;
     }
@@ -40,11 +30,6 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_COMPUTE_EXP: {
-        {
-            stmt_print(stmt, stdout);
-            fprintf(stdout, "\n");
-        }
-
         size_t arity = 0;
         function_t *function = function_new(arity);
         compile_exp(vm, function, stmt->compute_exp.exp);
