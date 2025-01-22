@@ -1,18 +1,21 @@
+# constructing net
+
 [lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
 [lang] compile_exp_list
 [lang] compile_exp
-
 [lang] execute -- handle stmt_compute_exp -- call compile_function and run
+[lang] apply_function -- handle arity
+[lang] test constructing net
+
+# running net
 
 [lang] parse_define_rule
-
 [lang] pattern_t
 [lang] stmt_define_rule -- need pattern
+[lang] test running net
 
-[lang] apply_function -- handle arity
-
-# later
+# more examples
 
 [example] examples/cellular-automata.lisp -- 1997-interaction-combinators.pdf
 [example] examples/lambda.lisp -- use interaction combinators to implement lambda
