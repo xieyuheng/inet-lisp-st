@@ -70,7 +70,7 @@ run_until(vm_t *vm, size_t base_length) {
 static void
 step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
-    case OP_GET: {
+    case OP_LOOKUP: {
         // TODO
         return;
     }
