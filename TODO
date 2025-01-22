@@ -1,6 +1,5 @@
 # constructing net
 
-[lang] compile_exp -- EXP_VAR
 [lang] compile_exp -- EXP_AP
 
 [lang] execute -- handle STMT_COMPUTE_EXP -- call compile_function and run

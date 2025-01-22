@@ -40,12 +40,25 @@ maybe_compile_local_get(function_t *function, const char *name) {
     return true;
 }
 
+static void
+compile_lookup(vm_t *vm, function_t *function, const char *name) {
+    const def_t *def = mod_find_def(vm->mod, name);
+    if (def == NULL) {
+        fprintf(stderr, "[compile_get] undefined name: %s\n", name);
+        exit(1);
+    }
+
+    function_add_op(function, op_lookup(def));
+}
+
 void
 compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
     switch (exp->kind) {
     case EXP_VAR: {
-        if (maybe_compile_local_get(function, exp->var.name)) return;
+        if (maybe_compile_local_get(function, exp->var.name))
+            return;
 
+        compile_lookup(vm, function, exp->var.name);
         return;
     }
 
