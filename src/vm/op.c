@@ -1,6 +1,14 @@
 #include "index.h"
 
 op_t *
+op_get(const def_t *def) {
+    op_t *self = new(op_t);
+    self->kind = OP_GET;
+    self->get.def = def;
+    return self;
+}
+
+op_t *
 op_apply(size_t arity) {
     op_t *self = new(op_t);
     self->kind = OP_APPLY;
@@ -38,6 +46,10 @@ op_destroy(op_t **self_pointer) {
     if (*self_pointer) {
         op_t *self = *self_pointer;
         switch (self->kind) {
+        case OP_GET: {
+            break;
+        }
+
         case OP_APPLY: {
             break;
         }
@@ -64,6 +76,11 @@ op_destroy(op_t **self_pointer) {
 void
 op_print(const op_t *op, file_t *file) {
     switch (op->kind) {
+    case OP_GET: {
+        fprintf(file, "GET %s", def_name(op->get.def));
+        return;
+    }
+
     case OP_APPLY: {
         fprintf(file, "APPLY %lu", op->apply.arity);
         return;

@@ -70,9 +70,14 @@ run_until(vm_t *vm, size_t base_length) {
 static void
 step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
+    case OP_GET: {
+        // TODO
+        return;
+    }
+
     case OP_APPLY: {
-        value_t value = stack_pop(vm->value_stack);
-        apply(vm, value, op->apply.arity);
+        value_t target = stack_pop(vm->value_stack);
+        apply(vm, target, op->apply.arity);
         return;
     }
 

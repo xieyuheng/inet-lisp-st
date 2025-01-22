@@ -1,8 +1,5 @@
-[vm] [maybe] op.get -- the same as refactoring call to ref and apply
-
-- get a def:
-  - get a function_def will push the const function to stack
-  - get a node_def will push a new function to stack
+[lang] step_op -- GET a function_def will push the const function to stack
+[lang] step_op -- GET a node_def will push a new function to stack
 
 [lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
