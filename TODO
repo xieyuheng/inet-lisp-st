@@ -1,6 +1,6 @@
-[lang] parse_define_rule
-[lang] pattern_t
+[lang] pattern_t -- has a list of node patterns
 [lang] stmt_define_rule -- need pattern
+[lang] parse_define_rule
 [lang] test running net
 
 # more examples
