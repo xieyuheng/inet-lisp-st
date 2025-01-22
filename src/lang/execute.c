@@ -13,6 +13,8 @@ execute(vm_t *vm, stmt_t *stmt) {
         function_t *function = function_new(arity);
         compile_bind(vm, function, stmt->define_function.arg_name_list);
         compile_exp_list(vm, function, stmt->define_function.exp_list);
+        function_build(function);
+
         define_function(vm->mod, stmt->define_function.name, function);
         return;
     }
@@ -43,7 +45,17 @@ execute(vm_t *vm, stmt_t *stmt) {
             fprintf(stdout, "\n");
         }
 
-        // TODO
+        size_t arity = 0;
+        function_t *function = function_new(arity);
+        compile_exp(vm, function, stmt->compute_exp.exp);
+        function_build(function);
+
+        size_t base_length = stack_length(vm->return_stack);
+        frame_t *frame = frame_new(function);
+        stack_push(vm->return_stack, frame);
+        run_until(vm, base_length);
+
+        function_destroy(&function);
         return;
     }
     }

@@ -1,7 +1,6 @@
 # constructing net
 
-[lang] execute -- handle STMT_COMPUTE_EXP -- call compile_function and run
-[lang] apply_function -- handle arity
+[lang] apply_function -- supplement wire if arity is short
 [lang] test constructing net
 
 # running net
