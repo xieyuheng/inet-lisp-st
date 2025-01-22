@@ -9,7 +9,8 @@ lookup(vm_t *vm, const def_t *def) {
     }
 
     case DEF_NODE: {
-        (void) vm;
+        node_t *node = vm_add_node(vm, def->node);
+        stack_push(vm->value_stack, node);
         return;
     }
     }

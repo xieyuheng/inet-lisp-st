@@ -1,5 +1,3 @@
-[lang] lookup -- LOOKUP a node_def will push a new function to stack
-
 [lang] execute -- handle stmt_define_function -- call compile_function
 [lang] compile_function
 [lang] compile_exp_list
