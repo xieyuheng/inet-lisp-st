@@ -7,7 +7,6 @@ typedef enum {
     STMT_COMPUTE_EXP,
 } stmt_kind_t;
 
-
 struct stmt_t {
     stmt_kind_t kind;
     union {

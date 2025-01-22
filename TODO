@@ -1,10 +1,10 @@
 # constructing net
 
-[lang] execute -- handle stmt_define_function -- call compile_function
+[lang] execute -- handle STMT_DEFINE_FUNCTION -- call compile_function
 [lang] compile_function
 [lang] compile_exp_list
 [lang] compile_exp
-[lang] execute -- handle stmt_compute_exp -- call compile_function and run
+[lang] execute -- handle STMT_COMPUTE_EXP -- call compile_function and run
 [lang] apply_function -- handle arity
 [lang] test constructing net
 
