@@ -5,15 +5,6 @@ object_spec_t function_object_spec = {
     .print_fn = (print_fn_t *) function_print,
 };
 
-struct function_t {
-    object_spec_t *spec;
-    size_t arity;
-    function_ctx_t *ctx;
-    list_t *op_list;
-    size_t length;
-    op_t **ops;
-};
-
 function_t *
 function_new(size_t arity) {
     function_t *self = new(function_t);
@@ -49,11 +40,6 @@ function_t *
 as_function(value_t value) {
     assert(is_function(value));
     return (function_t *) value;
-}
-
-size_t
-function_length(const function_t *self) {
-    return self->length;
 }
 
 void
