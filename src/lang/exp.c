@@ -73,7 +73,7 @@ exp_list_print(list_t *exp_list, file_t *file) {
 void
 name_list_print(list_t *name_list, file_t *file) {
     char *name = list_first(name_list);
-    if (name) {
+    while (name) {
         if (list_cursor_is_end(name_list))
             fprintf(file, "%s", name);
         else

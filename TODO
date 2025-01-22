@@ -1,4 +1,3 @@
-[lang] stmt_print -- fix define-node
 [lang] execute -- remove stmt_print
 
 [lang] apply_function -- supplement wire if arity is short
