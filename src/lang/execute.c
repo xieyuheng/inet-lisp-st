@@ -11,7 +11,7 @@ execute(vm_t *vm, stmt_t *stmt) {
 
         size_t arity = list_length(stmt->define_function.arg_name_list);
         function_t *function = function_new(arity);
-        compile_arg_name_list(vm, function, stmt->define_function.arg_name_list);
+        compile_bind(vm, function, stmt->define_function.arg_name_list);
         compile_exp_list(vm, function, stmt->define_function.exp_list);
         define_function(vm->mod, stmt->define_function.name, function);
         return;
