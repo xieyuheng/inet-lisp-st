@@ -21,7 +21,7 @@ parse_ap(sexp_t *sexp) {
 }
 
 static exp_t *
-parse_assign(sexp_t *sexp) {
+parse_bind(sexp_t *sexp) {
     list_t *sexp_list = sexp_sexp_list(sexp);
     (void) list_first(sexp_list);
     list_t *name_list = string_list_new();
@@ -31,13 +31,13 @@ parse_assign(sexp_t *sexp) {
         name_sexp = list_next(sexp_list);
     }
 
-    return exp_assign(name_list);
+    return exp_bind(name_list);
 }
 
 exp_t *
 parse_exp(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "="))
-        return parse_assign(sexp);
+        return parse_bind(sexp);
     else if (is_atom_sexp(sexp))
         return parse_var(sexp);
     else if (!list_is_empty(sexp_sexp_list(sexp)))

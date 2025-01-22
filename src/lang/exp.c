@@ -18,10 +18,10 @@ exp_ap(exp_t *target, list_t *arg_list) {
 }
 
 exp_t *
-exp_assign(list_t *name_list) {
+exp_bind(list_t *name_list) {
     exp_t *self = new(exp_t);
-    self->kind = EXP_ASSIGN;
-    self->assign.name_list = name_list;
+    self->kind = EXP_BIND;
+    self->bind.name_list = name_list;
     return self;
 }
 
@@ -47,8 +47,8 @@ exp_destroy(exp_t **self_pointer) {
             break;
         }
 
-        case EXP_ASSIGN: {
-            list_destroy(&self->assign.name_list);
+        case EXP_BIND: {
+            list_destroy(&self->bind.name_list);
             break;
         }
         }
@@ -106,14 +106,14 @@ exp_print(const exp_t *self, file_t *file) {
         return;
     }
 
-    case EXP_ASSIGN: {
-        if (list_is_empty(self->assign.name_list)) {
+    case EXP_BIND: {
+        if (list_is_empty(self->bind.name_list)) {
             fprintf(file, "(=)");
             return;
         }
 
         fprintf(file, "(= ");
-        name_list_print(self->assign.name_list, file);
+        name_list_print(self->bind.name_list, file);
         fprintf(file, ")");
         return;
     }

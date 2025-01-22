@@ -1,5 +1,3 @@
-rename assign to bind -- assignment is global, bind is local
-
 [vm] [maybe] op.get -- the same as refactoring call to ref and apply
 
 - get a def:

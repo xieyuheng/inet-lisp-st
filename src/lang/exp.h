@@ -3,7 +3,7 @@
 typedef enum {
     EXP_VAR,
     EXP_AP,
-    EXP_ASSIGN,
+    EXP_BIND,
 } exp_kind_t;
 
 struct exp_t {
@@ -11,13 +11,13 @@ struct exp_t {
     union {
         struct { char *name; } var;
         struct { exp_t *target; list_t *arg_list; } ap;
-        struct { list_t *name_list; } assign;
+        struct { list_t *name_list; } bind;
     };
 };
 
 exp_t *exp_var(char *name);
 exp_t *exp_ap(exp_t *target, list_t *arg_list);
-exp_t *exp_assign(list_t *name_list);
+exp_t *exp_bind(list_t *name_list);
 
 list_t *exp_list_new(void);
 
