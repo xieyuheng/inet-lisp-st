@@ -12,5 +12,7 @@ apply(vm_t *vm, value_t *target, size_t arity) {
         return;
     }
 
-    assert(false && "[apply] unknown target");
+    fprintf(stderr, "[apply] unknown target: ");
+    value_print(target, stderr);
+    exit(1);
 }

@@ -10,7 +10,9 @@
 
 (define (two) (add1 (add1 (zero))))
 
-(define (inspect-run wire)
-  (wire-print-net (run (wire-print-net wire))))
+(add (two) (two))
 
-(inspect-run (add (two) (two)))
+;; (define (inspect-run wire)
+;;   (wire-print-net (run (wire-print-net wire))))
+
+;; (inspect-run (add (two) (two)))

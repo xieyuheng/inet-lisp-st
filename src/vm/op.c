@@ -77,7 +77,7 @@ void
 op_print(const op_t *op, file_t *file) {
     switch (op->kind) {
     case OP_LOOKUP: {
-        fprintf(file, "GET %s", def_name(op->lookup.def));
+        fprintf(file, "LOOKUP %s", def_name(op->lookup.def));
         return;
     }
 

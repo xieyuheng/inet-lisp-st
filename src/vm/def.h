@@ -8,8 +8,8 @@ typedef enum {
 struct def_t {
     def_kind_t kind;
     union {
-        function_def_t *function;
-        node_def_t *node;
+        function_def_t *function_def;
+        node_def_t *node_def;
     };
 };
 

@@ -55,13 +55,10 @@ mod_define_rule(
     const char *second_name,
     function_t *function
 ) {
-    const def_t *first_def = mod_find_def(self, first_name);
-    const def_t *second_def = mod_find_def(self, second_name);
+    const def_t *first = mod_find_def(self, first_name);
+    const def_t *second = mod_find_def(self, second_name);
 
-    const node_def_t *first_node_def = first_def->node;
-    const node_def_t *second_node_def = second_def->node;
-
-    rule_t *rule = rule_new(first_node_def, second_node_def, function);
+    rule_t *rule = rule_new(first->node_def, second->node_def, function);
     list_push(self->rule_list, rule);
 }
 

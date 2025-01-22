@@ -1,9 +1,7 @@
-# constructing net
+[lang] stmt_print -- fix define-node
+[lang] execute -- remove stmt_print
 
 [lang] apply_function -- supplement wire if arity is short
-[lang] test constructing net
-
-# running net
 
 [lang] parse_define_rule
 [lang] pattern_t
