@@ -1,9 +1,13 @@
 # constructing net
 
-[lang] execute -- handle STMT_DEFINE_FUNCTION -- call compile_function
-[lang] compile_function
+[lang] setup function_ctx
+
+[lang] execute -- handle STMT_DEFINE_FUNCTION
+
+[lang] compile_arg_name_list
 [lang] compile_exp_list
 [lang] compile_exp
+
 [lang] execute -- handle STMT_COMPUTE_EXP -- call compile_function and run
 [lang] apply_function -- handle arity
 [lang] test constructing net

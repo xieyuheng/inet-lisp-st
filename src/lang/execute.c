@@ -9,7 +9,22 @@ execute(vm_t *vm, stmt_t *stmt) {
             fprintf(stdout, "\n");
         }
 
-        // TODO
+        size_t arity = list_length(stmt->define_function.arg_name_list);
+        function_t *function = function_new(arity);
+        // compile_arg_name_list(
+        //     vm,
+        //     function,
+        //     function_ctx,
+        //     stmt->define_function.arg_name_list);
+        // compile_arg_name_list(
+        //     vm,
+        //     function,
+        //     function_ctx,
+        //     stmt->define_function.exp_list);
+        define_function(
+            vm->mod,
+            stmt->define_function.name,
+            function);
         return;
     }
 
