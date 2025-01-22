@@ -1,4 +1,3 @@
-[lang] step_op -- call lookup
 [lang] lookup -- LOOKUP a function_def will push the const function to stack
 [lang] lookup -- LOOKUP a node_def will push a new function to stack
 

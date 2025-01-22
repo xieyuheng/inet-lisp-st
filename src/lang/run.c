@@ -4,7 +4,7 @@ void
 step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
     case OP_LOOKUP: {
-        // lookup(vm, op->lookup.def);
+        lookup(vm, op->lookup.def);
         return;
     }
 
