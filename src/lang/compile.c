@@ -30,10 +30,22 @@ compile_exp_list(vm_t *vm, function_t *function, list_t *exp_list) {
     }
 }
 
+static bool
+maybe_compile_local_get(function_t *function, const char *name) {
+    function_ctx_t *ctx = function->ctx;
+    if (!hash_has(ctx->local_index_hash, name)) return false;
+
+    size_t index = (size_t) hash_get(ctx->local_index_hash, name);
+    function_add_op(function, op_local_get(index));
+    return true;
+}
+
 void
 compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
     switch (exp->kind) {
     case EXP_VAR: {
+        if (maybe_compile_local_get(function, exp->var.name)) return;
+
         return;
     }
 
