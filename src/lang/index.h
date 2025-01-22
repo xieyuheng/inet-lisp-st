@@ -11,5 +11,6 @@
 #include "stmt.h"
 #include "parse.h"
 #include "define_node.h"
+#include "function_ctx.h"
 #include "compile.h"
 #include "execute.h"

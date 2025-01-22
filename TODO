@@ -1,7 +1,5 @@
 # constructing net
 
-[lang] setup function_ctx
-
 [lang] execute -- handle STMT_DEFINE_FUNCTION
 
 [lang] compile_arg_name_list
