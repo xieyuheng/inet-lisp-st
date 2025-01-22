@@ -1,7 +1,5 @@
 # constructing net
 
-[lang] compile_exp -- EXP_AP
-
 [lang] execute -- handle STMT_COMPUTE_EXP -- call compile_function and run
 [lang] apply_function -- handle arity
 [lang] test constructing net

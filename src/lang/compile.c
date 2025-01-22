@@ -44,7 +44,7 @@ static void
 compile_lookup(vm_t *vm, function_t *function, const char *name) {
     const def_t *def = mod_find_def(vm->mod, name);
     if (def == NULL) {
-        fprintf(stderr, "[compile_get] undefined name: %s\n", name);
+        fprintf(stderr, "[compile_lookup] undefined name: %s\n", name);
         exit(1);
     }
 
@@ -63,6 +63,10 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
     }
 
     case EXP_AP: {
+        compile_exp_list(vm, function, exp->ap.arg_list);
+        compile_exp(vm, function, exp->ap.target);
+        size_t arity = list_length(exp->ap.arg_list);
+        function_add_op(function, op_apply(arity));
         return;
     }
 
