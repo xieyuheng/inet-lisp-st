@@ -1,4 +1,7 @@
 [lang] pattern_t -- has a list of node patterns
+
+- can we compile a pattern to a list of opcode designed to match sub graph
+
 [lang] stmt_define_rule -- need pattern
 [lang] parse_define_rule
 [lang] test running net
