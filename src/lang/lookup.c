@@ -9,8 +9,7 @@ lookup(vm_t *vm, const def_t *def) {
     }
 
     case DEF_NODE: {
-        node_t *node = vm_add_node(vm, def->node_ctor);
-        stack_push(vm->value_stack, node);
+        stack_push(vm->value_stack, def->node_ctor);
         return;
     }
     }

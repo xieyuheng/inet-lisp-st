@@ -1,5 +1,3 @@
-[net] remove node from value (for now)
-
 [net] setup node_pattern_t
 [net] rename pattern to net_pattern
 [net] net_pattern_t -- has node_pattern_list
