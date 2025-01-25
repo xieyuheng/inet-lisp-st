@@ -8,7 +8,6 @@
 #include "vm.h"
 #include "op.h"
 #include "function.h"
-#include "function_def.h"
 #include "function_ctx.h"
 #include "rule.h"
 #include "def.h"

@@ -1,5 +1,3 @@
-[vm] inline function_def
-
 [net] node_ctor_t as value -- remove node from value (for now)
 
 [net] setup node_pattern_t

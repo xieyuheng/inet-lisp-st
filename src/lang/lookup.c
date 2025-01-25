@@ -4,7 +4,7 @@ void
 lookup(vm_t *vm, const def_t *def) {
     switch (def->kind) {
     case DEF_FUNCTION: {
-        stack_push(vm->value_stack, def->function_def->function);
+        stack_push(vm->value_stack, def->function);
         return;
     }
 
