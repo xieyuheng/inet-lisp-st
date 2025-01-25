@@ -1,6 +1,9 @@
 #pragma once
 
+extern object_spec_t node_ctor_object_spec;
+
 struct node_ctor_t {
+    object_spec_t *spec;
     char *name;
     size_t arity;
     port_info_t **port_infos;

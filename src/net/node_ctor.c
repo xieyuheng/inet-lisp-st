@@ -1,8 +1,14 @@
 #include "index.h"
 
+object_spec_t node_ctor_object_spec = {
+    .name = "node-ctor",
+    // .print_fn = (print_fn_t *) node_ctor_print,
+};
+
 node_ctor_t *
 node_ctor_new(const char *name, size_t arity) {
     node_ctor_t *self = new(node_ctor_t);
+    self->spec = &node_ctor_object_spec;
     self->name = string_copy(name);
     self->arity = arity;
     self->port_infos = allocate_pointers(self->arity);

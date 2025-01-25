@@ -1,4 +1,5 @@
-[net] node_ctor_t as value -- remove node from value (for now)
+[net] node_ctor_print -- fix node_ctor_object_spec
+[net] remove node from value (for now)
 
 [net] setup node_pattern_t
 [net] rename pattern to net_pattern
