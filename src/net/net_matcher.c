@@ -65,8 +65,14 @@ matcher_next_principle_name(net_matcher_t *self) {
     return name;
 }
 
+static bool
+matcher_index_is_used(net_matcher_t *self, size_t index) {
+    return self->matched_nodes[index] != NULL;
+}
+
 static size_t
 matcher_next_index(net_matcher_t *self, const char *name) {
+    (void) matcher_index_is_used;
     (void) self;
     (void) name;
     return 0;
