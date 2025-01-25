@@ -6,12 +6,12 @@ object_spec_t node_object_spec = {
 };
 
 node_t *
-node_new(const node_ctor_t *def, size_t id) {
+node_new(const node_ctor_t *ctor, size_t id) {
     node_t *self = new(node_t);
     self->spec = &node_object_spec;
-    self->def = def;
+    self->ctor = ctor;
     self->id = id;
-    self->wires = allocate_pointers(def->arity);
+    self->wires = allocate_pointers(ctor->arity);
     return self;
 }
 
@@ -42,6 +42,6 @@ as_node(value_t value) {
 void
 node_print(const node_t *self, file_t *file) {
     char *id_string = uint_to_subscript(self->id);
-    fprintf(file, "(%s%s)", self->def->name, id_string);
+    fprintf(file, "(%s%s)", self->ctor->name, id_string);
     free(id_string);
 }

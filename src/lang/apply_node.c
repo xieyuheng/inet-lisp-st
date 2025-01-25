@@ -15,7 +15,7 @@ node_apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
 
 static void
 node_return_output_ports(vm_t *vm, node_t *node, size_t arity) {
-    size_t output_arity = node->def->arity - arity;
+    size_t output_arity = node->ctor->arity - arity;
     for (size_t c = 0; c < output_arity; c++) {
         wire_t *node_wire = wire_new();
         wire_t *free_wire = wire_new();
