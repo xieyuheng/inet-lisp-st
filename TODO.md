@@ -1,4 +1,3 @@
-[net] `node_pattern_t` -- has `node_ctor_t *ctor` and `port_info_array`
 [net] `node_pattern_new`
 [net] `node_pattern_destroy`
 
