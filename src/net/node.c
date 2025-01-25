@@ -6,7 +6,7 @@ object_spec_t node_object_spec = {
 };
 
 node_t *
-node_new(const node_def_t *def, size_t id) {
+node_new(const node_ctor_t *def, size_t id) {
     node_t *self = new(node_t);
     self->spec = &node_object_spec;
     self->def = def;

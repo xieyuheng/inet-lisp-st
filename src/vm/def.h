@@ -9,12 +9,12 @@ struct def_t {
     def_kind_t kind;
     union {
         function_def_t *function_def;
-        node_def_t *node_def;
+        node_ctor_t *node_ctor;
     };
 };
 
 def_t *def_function(function_def_t *function_def);
-def_t *def_node(node_def_t *node_def);
+def_t *def_node(node_ctor_t *node_ctor);
 
 void def_destroy(def_t **self_pointer);
 

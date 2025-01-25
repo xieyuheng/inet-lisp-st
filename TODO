@@ -1,5 +1,3 @@
-rename node_def to node_ctor
-
 [lang] node_ctor_t as value
 
 [lang] setup node_pattern_t
