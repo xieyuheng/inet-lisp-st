@@ -1,4 +1,3 @@
-[net] `net_pattern_new`
 [net] `net_pattern_destroy`
 
 [net] `match_net` or `match_node`
