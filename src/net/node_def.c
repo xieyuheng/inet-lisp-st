@@ -5,7 +5,7 @@ node_def_new(const char *name, size_t arity) {
     node_def_t *self = new(node_def_t);
     self->name = string_copy(name);
     self->arity = arity;
-    self->port_defs = allocate_pointers(self->arity);
+    self->port_infos = allocate_pointers(self->arity);
     return self;
 }
 
@@ -15,13 +15,13 @@ node_def_destroy(node_def_t **self_pointer) {
     if (*self_pointer) {
         node_def_t *self = *self_pointer;
         for (size_t i = 0; i < self->arity; i++) {
-            port_def_t *port_def = self->port_defs[i];
-            if (port_def) {
-                port_def_destroy(&port_def);
+            port_info_t *port_info = self->port_infos[i];
+            if (port_info) {
+                port_info_destroy(&port_info);
             }
         }
 
-        free(self->port_defs);
+        free(self->port_infos);
         free(self->name);
         free(self);
         *self_pointer = NULL;
@@ -34,8 +34,8 @@ node_def_find_port_index(
     const char *port_name
 ) {
     for (size_t i = 0; i < node_def->arity; i++) {
-        port_def_t *port_def = node_def->port_defs[i];
-        if (string_equal(port_def->name, port_name))
+        port_info_t *port_info = node_def->port_infos[i];
+        if (string_equal(port_info->name, port_name))
             return i;
     }
 

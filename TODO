@@ -1,7 +1,10 @@
-[lang] pattern_t -- has a list of node patterns
+rename node_def to node_ctor
 
-- can we compile a pattern to a list of opcode designed to match sub graph
+[lang] node_ctor_t as value
 
+[lang] setup node_pattern_t
+[lang] rename pattern to net_pattern
+[lang] net_pattern_t -- has node_pattern_list
 [lang] stmt_define_rule -- need pattern
 [lang] parse_define_rule
 [lang] test running net

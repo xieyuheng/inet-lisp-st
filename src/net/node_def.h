@@ -3,7 +3,7 @@
 struct node_def_t {
     char *name;
     size_t arity;
-    port_def_t **port_defs;
+    port_info_t **port_infos;
 };
 
 node_def_t *node_def_new(const char *name, size_t arity);
