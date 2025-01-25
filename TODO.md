@@ -1,4 +1,3 @@
-[net] `net_matcher_t` -- has `wire_hash`, `principle_wire_hash`
 [net] `net_matcher_new(net_pattern)`
 [net] `net_matcher_destroy`
 
