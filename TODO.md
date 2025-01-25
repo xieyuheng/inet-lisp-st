@@ -1,5 +1,3 @@
-[net] `net_pattern_destroy`
-
 [net] `match_net` or `match_node`
 
 [vm] `activity_t` -- has `net_pattern` and matched result

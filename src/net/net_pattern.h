@@ -5,3 +5,4 @@ struct net_pattern_t {
 };
 
 net_pattern_t *net_pattern_new(void);
+void net_pattern_destroy(net_pattern_t **self_pointer);
