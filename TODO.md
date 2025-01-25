@@ -1,8 +1,5 @@
 [net] `matcher_next_node_pattern`
-[net] `matcher_next_node`
-
 [vm] `activity_t` -- has `net_matcher`
-
 [lang] `stmt_define_rule` -- need `node_pattern_array`
 [lang] `parse_define_rule`
 [lang] test running net

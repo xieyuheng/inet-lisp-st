@@ -33,11 +33,19 @@ matcher_match_node(net_matcher_t *self, const node_pattern_t *node_pattern, cons
     for (size_t i = 0; i < node->ctor->arity; i++) {
         port_info_t *port_info = node_pattern->port_infos[i];
         wire_t *wire = node->wires[i];
-        if (!hash_set(self->wire_hash, port_info->name, wire))
-            return;
-
         if (port_info->is_principal) {
-            list_push(self->principle_name_list, string_copy(port_info->name));
+            if (hash_has(self->wire_hash, port_info->name)) {
+                wire_t *existing_wire = hash_get(self->wire_hash, port_info->name);
+                if (!wire->opposite) return;
+                if (!existing_wire->opposite) return;
+                if (wire->opposite != existing_wire->opposite) return;
+            } else {
+                list_push(self->principle_name_list, string_copy(port_info->name));
+                hash_set(self->wire_hash, port_info->name, wire);
+            }
+        } else {
+            if (!hash_set(self->wire_hash, port_info->name, wire))
+                return;
         }
     }
 
@@ -62,9 +70,12 @@ matcher_next_node_pattern(net_matcher_t *self, const char *name) {
 
 static const node_t *
 matcher_next_node(net_matcher_t *self, const char *name) {
-    (void) self;
-    (void) name;
-    return NULL;
+    wire_t *wire = hash_get(self->wire_hash, name);
+    if (!wire) return NULL;
+    if (!wire->opposite) return NULL;
+    if (!wire->opposite->node) return NULL;
+
+    return wire->opposite->node;
 }
 
 static bool
