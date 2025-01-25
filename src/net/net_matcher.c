@@ -7,6 +7,7 @@ net_matcher_new(const net_pattern_t *net_pattern) {
     self->wire_hash = hash_of_string_key();
     self->node_set = set_new();
     self->principle_name_list = string_list_new();
+    self->matched_principle_name_list = string_list_new();
     return self;
 }
 
@@ -18,6 +19,7 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
         hash_destroy(&self->wire_hash);
         set_destroy(&self->node_set);
         list_destroy(&self->principle_name_list);
+        list_destroy(&self->matched_principle_name_list);        
         free(self);
         *self_pointer = NULL;
     }
