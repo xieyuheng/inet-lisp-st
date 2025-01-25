@@ -1,10 +1,8 @@
-[net] setup `net_matcher`
-
 [net] `net_matcher_t` -- has `wire_hash`, `principle_wire_hash`
-[net] `net_matcher_new`
+[net] `net_matcher_new(net_pattern)`
 [net] `net_matcher_destroy`
 
-[net] `match_net(metcher, node, net_pattern)`
+[net] `match_net(metcher, node)`
 [net] `match_node(metcher, node, node_pattern)`
 
 [vm] `activity_t` -- has `net_matcher`

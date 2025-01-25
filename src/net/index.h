@@ -10,3 +10,4 @@
 #include "node_ctor.h"
 #include "node_pattern.h"
 #include "net_pattern.h"
+#include "net_matcher.h"
