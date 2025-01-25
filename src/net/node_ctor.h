@@ -12,4 +12,7 @@ struct node_ctor_t {
 node_ctor_t *node_ctor_new(const char *name, size_t arity);
 void node_ctor_destroy(node_ctor_t **self_pointer);
 
+bool is_node_ctor(value_t value);
+node_ctor_t *as_node_ctor(value_t value);
+
 size_t node_ctor_find_port_index(const node_ctor_t *node_ctor, const char *port_name);
