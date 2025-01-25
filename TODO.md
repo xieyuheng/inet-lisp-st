@@ -1,4 +1,3 @@
-[net] `matcher_match_node`
 [net] `matcher_next_node_pattern`
 [net] `matcher_next_node`
 
