@@ -3,7 +3,7 @@
 struct net_matcher_t {
     const net_pattern_t *net_pattern;
     hash_t *wire_hash;
-    set_t *node_set;
+    const node_t **matched_nodes;
     list_t *principle_name_list;
     list_t *matched_principle_name_list;
 };
