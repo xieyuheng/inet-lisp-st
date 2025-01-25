@@ -2,7 +2,7 @@
 
 object_spec_t node_ctor_object_spec = {
     .name = "node-ctor",
-    // .print_fn = (print_fn_t *) node_ctor_print,
+    .print_fn = (print_fn_t *) node_ctor_print,
 };
 
 node_ctor_t *
@@ -63,4 +63,9 @@ node_ctor_find_port_index(
            port_name);
 
     assert(false);
+}
+
+void
+node_ctor_print(const node_ctor_t *self, file_t *file) {
+    fprintf(file, "(%s)", self->name);
 }
