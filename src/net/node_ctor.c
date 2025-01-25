@@ -11,8 +11,7 @@ node_ctor_new(const char *name, size_t arity) {
     self->spec = &node_ctor_object_spec;
     self->name = string_copy(name);
     self->arity = arity;
-    self->port_info_array =
-        array_new_with(arity, (destroy_fn_t *) port_info_destroy);
+    self->port_info_array = port_info_array_new(arity);
     return self;
 }
 
