@@ -19,7 +19,7 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
         hash_destroy(&self->wire_hash);
         set_destroy(&self->node_set);
         list_destroy(&self->principle_name_list);
-        list_destroy(&self->matched_principle_name_list);        
+        list_destroy(&self->matched_principle_name_list);
         free(self);
         *self_pointer = NULL;
     }
@@ -34,8 +34,11 @@ matcher_match_node(net_matcher_t *self, const node_pattern_t *node_pattern, cons
 
 static const char *
 matcher_next_principle_name(net_matcher_t *self) {
-    (void) self;
-    return NULL;
+    char *name = list_pop(self->principle_name_list);
+    if (!name) return NULL;
+
+    list_push(self->matched_principle_name_list, name);
+    return name;
 }
 
 static const node_pattern_t *

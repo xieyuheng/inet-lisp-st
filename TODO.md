@@ -1,10 +1,8 @@
-[net] `matcher_next_principle_name`
+[net] `matcher_match_node`
 [net] `matcher_next_node_pattern`
 [net] `matcher_next_node`
 
 [net] `net_matcher_t` -- how to test success or fail?
-
-[net] `matcher_match_node`
 
 [net] `net_metcher_t* match_net(net_pattern, node)`
 
