@@ -9,3 +9,16 @@ net_matcher_new(const net_pattern_t *net_pattern) {
     self->principle_name_list = string_list_new();
     return self;
 }
+
+void
+net_matcher_destroy(net_matcher_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        net_matcher_t *self = *self_pointer;
+        hash_destroy(&self->wire_hash);
+        set_destroy(&self->node_set);
+        list_destroy(&self->principle_name_list);
+        free(self);
+        *self_pointer = NULL;
+    }
+}

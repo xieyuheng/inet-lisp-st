@@ -1,5 +1,3 @@
-[net] `net_matcher_destroy`
-
 [net] `match_net(metcher, node)`
 [net] `match_node(metcher, node, node_pattern)`
 
