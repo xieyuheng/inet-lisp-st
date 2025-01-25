@@ -7,7 +7,6 @@
 #include "run.h"
 #include "checks.h"
 #include "exp.h"
-#include "pattern.h"
 #include "stmt.h"
 #include "parse.h"
 #include "define_node.h"
