@@ -1,7 +1,6 @@
 #pragma once
 
 struct function_def_t {
-    char *name;
     function_t *function;
 };
 

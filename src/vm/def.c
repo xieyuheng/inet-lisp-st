@@ -43,7 +43,7 @@ const char *
 def_name(const def_t *def) {
     switch (def->kind) {
     case DEF_FUNCTION: {
-        return def->function_def->name;
+        return def->function_def->function->name;
     }
 
     case DEF_NODE: {
@@ -73,7 +73,7 @@ void
 def_print(const def_t *def, file_t *file) {
     switch (def->kind) {
     case DEF_FUNCTION: {
-        fprintf(file, "define %s ", def->function_def->name);
+        fprintf(file, "define %s ", def->function_def->function->name);
         function_print(def->function_def->function, file);
         return;
     }

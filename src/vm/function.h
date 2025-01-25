@@ -2,6 +2,7 @@
 
 struct function_t {
     object_spec_t *spec;
+    char *name;
     size_t arity;
     function_ctx_t *ctx;
     list_t *op_list;

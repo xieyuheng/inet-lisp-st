@@ -22,6 +22,7 @@ function_destroy(function_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         function_t *self = *self_pointer;
+        string_destroy(&self->name);
         function_ctx_destroy(&self->ctx);
         list_destroy(&self->op_list);
         if (self->ops) free(self->ops);
