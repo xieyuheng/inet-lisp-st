@@ -1,4 +1,3 @@
-ambr hash_new_of_string_key hash_of_string_key
 [net] `net_matcher_destroy`
 
 [net] `match_net(metcher, node)`
