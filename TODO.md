@@ -1,5 +1,3 @@
-[net] `node_pattern_destroy`
-
 [net] setup `net_pattern`
 [net] `net_pattern_t` -- has `node_pattern_list`
 [net] `net_pattern_new`

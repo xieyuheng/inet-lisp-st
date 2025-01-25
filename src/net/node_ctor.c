@@ -27,7 +27,6 @@ node_ctor_destroy(node_ctor_t **self_pointer) {
     }
 }
 
-
 bool
 is_node_ctor(value_t value) {
     if (!is_xobject(value)) return false;
