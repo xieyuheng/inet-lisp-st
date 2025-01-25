@@ -27,9 +27,21 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
 
 static void
 matcher_match_node(net_matcher_t *self, const node_pattern_t *node_pattern, const node_t *node) {
+    if (node_pattern->ctor != node->ctor) return;
+
+    for (size_t i = 0; i < node->ctor->arity; i++) {
+        // port_info_t *port_info = array_get(node_pattern->port_info_array, i);
+        // port_info_t *port_info = node_pattern->port_infos[i];
+        wire_t *wire = node->wires[i];
+        (void) wire;
+        // if (port_info->is_principal) {
+
+        // } else {
+
+        // }
+    }
+
     (void) self;
-    (void) node_pattern;
-    (void) node;
 }
 
 static const char *
@@ -63,6 +75,8 @@ matcher_start(net_matcher_t *self, const node_t *node) {
     while (name) {
         node_pattern = matcher_next_node_pattern(self, name);
         node = matcher_next_node(self, name);
-        matcher_match_node(self, node_pattern, node);
+        if (node_pattern && node) {
+            matcher_match_node(self, node_pattern, node);
+        }
     }
 }

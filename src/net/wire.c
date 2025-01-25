@@ -40,7 +40,7 @@ as_wire(value_t value) {
 const char *
 wire_name(const wire_t *self) {
     assert(self->node);
-    port_info_t *port_info = array_get(self->node->ctor->port_info_array, self->index);
+    port_info_t *port_info = self->node->ctor->port_infos[self->index];
     assert(port_info);
     return port_info->name;
 }
@@ -67,7 +67,7 @@ bool
 wire_is_principal(const wire_t *self) {
     if (!self->node) return false;
 
-    port_info_t *port_info = array_get(self->node->ctor->port_info_array, self->index);
+    port_info_t *port_info = self->node->ctor->port_infos[self->index];
     return port_info->is_principal;
 }
 

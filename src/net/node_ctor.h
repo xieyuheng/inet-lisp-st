@@ -6,7 +6,7 @@ struct node_ctor_t {
     object_spec_t *spec;
     char *name;
     size_t arity;
-    array_t *port_info_array;
+    port_info_t **port_infos;
 };
 
 node_ctor_t *node_ctor_new(const char *name, size_t arity);

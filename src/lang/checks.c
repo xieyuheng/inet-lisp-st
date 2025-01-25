@@ -69,7 +69,7 @@ check_port_name_defined(
     mod_t *mod = vm->mod;
     const def_t *found = mod_find_def(mod, node_name);
     for (size_t i = 0; i < found->node_ctor->arity; i++) {
-        port_info_t *port_info = array_get(found->node_ctor->port_info_array, i);
+        port_info_t *port_info = found->node_ctor->port_infos[i];
         if (string_equal(port_info->name, port_name)) return;
     }
 

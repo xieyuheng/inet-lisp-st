@@ -11,7 +11,7 @@ node_ctor_new(const char *name, size_t arity) {
     self->spec = &node_ctor_object_spec;
     self->name = string_copy(name);
     self->arity = arity;
-    self->port_info_array = port_info_array_new(arity);
+    self->port_infos = allocate_pointers(arity);
     return self;
 }
 
@@ -20,7 +20,13 @@ node_ctor_destroy(node_ctor_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         node_ctor_t *self = *self_pointer;
-        array_destroy(&self->port_info_array);
+        for (size_t i = 0; i < self->arity; i++) {
+            port_info_t *port_info = self->port_infos[i];
+            if (port_info) {
+                port_info_destroy(&port_info);
+            }
+        }
+
         free(self->name);
         free(self);
         *self_pointer = NULL;
@@ -45,7 +51,7 @@ node_ctor_find_port_index(
     const char *port_name
 ) {
     for (size_t i = 0; i < node_ctor->arity; i++) {
-        port_info_t *port_info = array_get(node_ctor->port_info_array, i);
+        port_info_t *port_info = node_ctor->port_infos[i];
         if (string_equal(port_info->name, port_name))
             return i;
     }
