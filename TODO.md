@@ -2,10 +2,6 @@
 [net] `matcher_next_node_pattern`
 [net] `matcher_next_node`
 
-[net] `matcher_is_success` -- by `set_length(node_set)`
-
-[net] `net_metcher_t* match_net(net_pattern, node)`
-
 [vm] `activity_t` -- has `net_matcher`
 
 [lang] `stmt_define_rule` -- need `node_pattern_array`
