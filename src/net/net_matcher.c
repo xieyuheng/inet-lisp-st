@@ -72,8 +72,8 @@ matcher_is_success(const net_matcher_t *self) {
     return set_length(self->node_set) == array_size(self->net_pattern->node_pattern_array);
 }
 
-void
-net_matcher_start(net_matcher_t *self, const node_t *node) {
+static void
+matcher_start(net_matcher_t *self, const node_t *node) {
     const node_pattern_t *node_pattern = net_pattern_first(self->net_pattern);
     matcher_match_node(self, node_pattern, node);
     const char *name = matcher_next_principle_name(self);
@@ -89,7 +89,7 @@ net_matcher_start(net_matcher_t *self, const node_t *node) {
 net_matcher_t *
 match_net(const net_pattern_t *net_pattern, const node_t *node) {
     net_matcher_t *self = net_matcher_new(net_pattern);
-    net_matcher_start(self, node);
+    matcher_start(self, node);
     if (matcher_is_success(self)) {
         return self;
     } else {
