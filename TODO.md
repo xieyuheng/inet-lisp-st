@@ -1,9 +1,14 @@
-[net] `node_pattern_t`
+[net] `node_pattern_t` -- has `node_ctor_t *ctor` and `port_info_array`
 [net] `node_pattern_new`
 [net] `node_pattern_destroy`
 
+[net] setup `net_pattern`
 [net] `net_pattern_t` -- has `node_pattern_list`
+[net] `net_pattern_new`
+[net] `net_pattern_destroy`
+
 [net] `match_net` or `match_node`
+
 [vm] `activity_t` -- has `net_pattern` and matched result
 
 [lang] `stmt_define_rule` -- need `net_pattern`
