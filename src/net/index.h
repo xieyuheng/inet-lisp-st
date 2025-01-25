@@ -8,3 +8,4 @@
 #include "wire_iter.h"
 #include "port_info.h"
 #include "node_ctor.h"
+#include "node_pattern.h"

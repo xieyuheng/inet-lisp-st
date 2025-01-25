@@ -1,9 +1,13 @@
-[net] setup node_pattern_t
-[net] rename pattern to net_pattern
-[net] net_pattern_t -- has node_pattern_list
+[net] `node_pattern_t`
+[net] `node_pattern_new`
+[net] `node_pattern_destroy`
 
-[lang] stmt_define_rule -- need pattern
-[lang] parse_define_rule
+[net] `net_pattern_t` -- has `node_pattern_list`
+[net] `match_net` or `match_node`
+[vm] `activity_t` -- has `net_pattern` and matched result
+
+[lang] `stmt_define_rule` -- need `net_pattern`
+[lang] `parse_define_rule`
 [lang] test running net
 
 # more examples
