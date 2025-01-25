@@ -1,5 +1,3 @@
-[net] `net_pattern_t` -- has `starting_index`
-
 [net] setup `net_matcher`
 
 [net] `net_matcher_t` -- has `wire_hash`, `principle_wire_hash`
