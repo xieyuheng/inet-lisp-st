@@ -1,8 +1,9 @@
-[lang] node_ctor_t as value
+[net] node_ctor_t as value -- remove node from value (for now)
 
-[lang] setup node_pattern_t
-[lang] rename pattern to net_pattern
-[lang] net_pattern_t -- has node_pattern_list
+[net] setup node_pattern_t
+[net] rename pattern to net_pattern
+[net] net_pattern_t -- has node_pattern_list
+
 [lang] stmt_define_rule -- need pattern
 [lang] parse_define_rule
 [lang] test running net
