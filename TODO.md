@@ -1,4 +1,4 @@
-[net] `matcher_next_index`
+[net] `node_pattern_new` assert principle port agree with `node_ctor`
 [vm] `activity_t` -- has `net_matcher`
 [lang] `stmt_define_rule` -- need `node_pattern_array`
 [lang] `parse_define_rule`

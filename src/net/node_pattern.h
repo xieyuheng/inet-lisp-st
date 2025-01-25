@@ -7,3 +7,5 @@ struct node_pattern_t {
 
 node_pattern_t *node_pattern_new(const node_ctor_t *ctor);
 void node_pattern_destroy(node_pattern_t **self_pointer);
+
+bool node_pattern_has_principle_name(node_pattern_t *self, const char *name);

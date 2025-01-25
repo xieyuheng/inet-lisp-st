@@ -72,10 +72,19 @@ matcher_index_is_used(net_matcher_t *self, size_t index) {
 
 static size_t
 matcher_next_index(net_matcher_t *self, const char *name) {
-    (void) matcher_index_is_used;
-    (void) self;
-    (void) name;
-    return 0;
+    size_t size = array_size(self->net_pattern->node_pattern_array);
+    for (size_t i = 0; i < size; i++) {
+        node_pattern_t *node_pattern =
+            array_get(self->net_pattern->node_pattern_array, i);
+        if (node_pattern_has_principle_name(node_pattern, name) &&
+            !matcher_index_is_used(self, i))
+        {
+            return i;
+        }
+    }
+
+    fprintf(stderr, "[matcher_next_index] can not find index for name: %s", name);
+    exit(1);
 }
 
 static const node_t *

@@ -24,3 +24,16 @@ node_pattern_destroy(node_pattern_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+bool
+node_pattern_has_principle_name(node_pattern_t *self, const char *name) {
+    for (size_t i = 0; i < self->ctor->arity; i++) {
+        if (self->port_infos[i]->is_principal &&
+            string_equal(self->port_infos[i]->name, name))
+        {
+            return true;
+        };
+    }
+
+    return false;
+}
