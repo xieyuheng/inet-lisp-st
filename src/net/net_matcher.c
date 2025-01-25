@@ -23,9 +23,41 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
     }
 }
 
-void
-matcher_start(net_matcher_t *self, const node_t *node) {
-    node_pattern_t *node_pattern = net_pattern_first(self->net_pattern);
+static void
+matcher_match_node(net_matcher_t *self, const node_pattern_t *node_pattern, const node_t *node) {
+    (void) self;
     (void) node_pattern;
     (void) node;
+}
+
+static const char *
+matcher_next_principle_name(net_matcher_t *self) {
+    (void) self;
+    return NULL;
+}
+
+static const node_pattern_t *
+matcher_next_node_pattern(net_matcher_t *self, const char *name) {
+    (void) self;
+    (void) name;
+    return NULL;
+}
+
+static const node_t *
+matcher_next_node(net_matcher_t *self, const char *name) {
+    (void) self;
+    (void) name;
+    return NULL;
+}
+
+void
+matcher_start(net_matcher_t *self, const node_t *node) {
+    const node_pattern_t *node_pattern = net_pattern_first(self->net_pattern);
+    matcher_match_node(self, node_pattern, node);
+    const char *name = matcher_next_principle_name(self);
+    while (name) {
+        node_pattern = matcher_next_node_pattern(self, name);
+        node = matcher_next_node(self, name);
+        matcher_match_node(self, node_pattern, node);
+    }
 }

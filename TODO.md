@@ -1,5 +1,12 @@
-[net] `matcher_start(self, node)`
-[net] `matcher_match_node(self, node_pattern, node)`
+[net] `net_matcher_t` -- has `matched_principle_name_list` -- to delete name only at the end
+
+[net] `matcher_next_principle_name`
+[net] `matcher_next_node_pattern`
+[net] `matcher_next_node`
+
+[net] `net_matcher_t` -- how to test success or fail?
+
+[net] `matcher_match_node`
 
 [net] `net_metcher_t* match_net(net_pattern, node)`
 
