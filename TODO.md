@@ -1,8 +1,17 @@
-[net] `match_net` or `match_node`
+[net] `net_pattern_t` -- has `starting_index`
 
-[vm] `activity_t` -- has `net_pattern` and matched result
+[net] setup `net_matcher`
 
-[lang] `stmt_define_rule` -- need `net_pattern`
+[net] `net_matcher_t` -- has `wire_hash`, `principle_wire_hash`
+[net] `net_matcher_new`
+[net] `net_matcher_destroy`
+
+[net] `match_net(metcher, node, net_pattern)`
+[net] `match_node(metcher, node, node_pattern)`
+
+[vm] `activity_t` -- has `net_matcher`
+
+[lang] `stmt_define_rule` -- need `node_pattern_array`
 [lang] `parse_define_rule`
 [lang] test running net
 

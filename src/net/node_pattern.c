@@ -18,9 +18,3 @@ node_pattern_destroy(node_pattern_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
-
-list_t *
-node_pattern_list_new(void) {
-    return list_new_with((destroy_fn_t*) node_pattern_destroy);
-}
-
