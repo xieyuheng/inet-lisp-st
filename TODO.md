@@ -1,5 +1,7 @@
-[net] `match_net(metcher, node)`
-[net] `match_node(metcher, node, node_pattern)`
+[net] `matcher_start(self, node)`
+[net] `matcher_match_node(self, node_pattern, node)`
+
+[net] `net_metcher_t* match_net(net_pattern, node)`
 
 [vm] `activity_t` -- has `net_matcher`
 

@@ -17,3 +17,8 @@ net_pattern_destroy(net_pattern_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+node_pattern_t *
+net_pattern_first(const net_pattern_t *self) {
+    return array_get(self->node_pattern_array, self->starting_index);
+}

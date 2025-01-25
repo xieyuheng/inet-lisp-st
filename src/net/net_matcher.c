@@ -22,3 +22,10 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+matcher_start(net_matcher_t *self, const node_t *node) {
+    node_pattern_t *node_pattern = net_pattern_first(self->net_pattern);
+    (void) node_pattern;
+    (void) node;
+}

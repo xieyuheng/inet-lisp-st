@@ -9,3 +9,5 @@ struct net_matcher_t {
 
 net_matcher_t *net_matcher_new(const net_pattern_t *net_pattern);
 void net_matcher_destroy(net_matcher_t **self_pointer);
+
+void matcher_start(net_matcher_t *self, const node_t *node);
