@@ -93,21 +93,24 @@ step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
     if (!activity) return;
 
-    node_t *first_node = activity->wire->node;
-    node_t *second_node = activity->wire->opposite->node;
+    (void) collect_free_wires_from_node;
+    // TODO    
 
-    if (first_node->ctor == activity->rule->second_node_ctor &&
-        second_node->ctor == activity->rule->first_node_ctor)
-    {
-        first_node = activity->wire->opposite->node;
-        second_node = activity->wire->node;
-    }
+    // node_t *first_node = activity->wire->node;
+    // node_t *second_node = activity->wire->opposite->node;
 
-    collect_free_wires_from_node(vm, first_node);
-    collect_free_wires_from_node(vm, second_node);
+    // if (first_node->ctor == activity->rule->second_node_ctor &&
+    //     second_node->ctor == activity->rule->first_node_ctor)
+    // {
+    //     first_node = activity->wire->opposite->node;
+    //     second_node = activity->wire->node;
+    // }
 
-    vm_delete_wire(vm, activity->wire);
-    vm_delete_wire(vm, activity->wire->opposite);
+    // collect_free_wires_from_node(vm, first_node);
+    // collect_free_wires_from_node(vm, second_node);
+
+    // vm_delete_wire(vm, activity->wire);
+    // vm_delete_wire(vm, activity->wire->opposite);
 
     size_t base_length = stack_length(vm->return_stack);
     frame_t *frame = frame_new(activity->rule->function);

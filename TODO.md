@@ -1,11 +1,11 @@
-[lang] `rule_t` -- has `net_pattern` and `function`
-
+[vm] `activity_t` -- has `net_matcher`
+[lang] fix `step_net` -- using `activity_t`
 [vm] fix `vm_maybe_add_active_wire` -- calling `mod_find_rule`
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 
-[vm] `activity_t` -- has `net_matcher`
+
 [lang] test `net_matcher`
 [lang] test running net
 

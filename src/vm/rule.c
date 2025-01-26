@@ -1,14 +1,9 @@
 #include "index.h"
 
 rule_t *
-rule_new(
-    const node_ctor_t *first_node_ctor,
-    const node_ctor_t *second_node_ctor,
-    function_t *function
-) {
+rule_new(net_pattern_t *net_pattern, function_t *function) {
     rule_t *self = new(rule_t);
-    self->first_node_ctor = first_node_ctor;
-    self->second_node_ctor = second_node_ctor;
+    self->net_pattern = net_pattern;
     self->function = function;
     return self;
 }
@@ -18,16 +13,9 @@ rule_destroy(rule_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         rule_t *self = *self_pointer;
+        net_pattern_destroy(&self->net_pattern);
         function_destroy(&self->function);
         free(self);
         *self_pointer = NULL;
     }
-}
-
-void
-rule_print(const rule_t *self, file_t *file) {
-    fprintf(file, "! (%s)-(%s) ",
-            self->first_node_ctor->name,
-            self->second_node_ctor->name);
-    function_print(self->function, file);
 }
