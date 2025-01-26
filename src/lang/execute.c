@@ -29,6 +29,16 @@ execute(vm_t *vm, stmt_t *stmt) {
         return;
     }
 
+    case STMT_DEFINE_RULE_STAR: {
+        {
+            stmt_print(stmt, stdout);
+            fprintf(stdout, "\n");
+        }
+
+        // TODO
+        return;
+    }
+
     case STMT_COMPUTE_EXP: {
         size_t arity = 0;
         function_t *function = function_new(arity);

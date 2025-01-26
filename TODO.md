@@ -1,11 +1,19 @@
-[lang] stmt_define_rule vs stmt_define_rule_star (has pattern_exp_list)
+[lang] `stmt_destroy` -- handle `STMT_DEFINE_RULE`
+[lang] `stmt_destroy` -- handle `STMT_DEFINE_RULE_STAR`
+[lang] `stmt_destroy` -- handle `STMT_COMPUTE_EXP`
 
-[lang] `parse_node_pattern`
-[lang] `parse_define_rule` -- tree to `node_pattern_list`
-[lang] `execute` -- handle `stmt_define_rule`
+[lang] `parse_define_rule_star`
+[lang] `parse_define_rule`
+
+[lang] `execute` -- handle `STMT_DEFINE_RULE`
+[lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
+
 [vm] `activity_t` -- has `net_matcher`
 [lang] test `net_matcher`
 [lang] test running net
+
+[lang] `stmt_print` -- handle `STMT_DEFINE_RULE`
+[lang] `stmt_print` -- handle `STMT_DEFINE_RULE_STAR`
 
 # more examples
 

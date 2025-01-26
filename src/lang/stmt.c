@@ -29,6 +29,15 @@ stmt_define_rule(exp_t *pattern_exp, list_t *exp_list) {
 }
 
 stmt_t *
+stmt_define_rule_star(list_t *pattern_exp_list, list_t *exp_list) {
+    stmt_t *self = new(stmt_t);
+    self->kind = STMT_DEFINE_RULE_STAR;
+    self->define_rule_star.pattern_exp_list = pattern_exp_list;
+    self->define_rule_star.exp_list = exp_list;
+    return self;
+}
+
+stmt_t *
 stmt_compute_exp(exp_t *exp) {
     stmt_t *self = new(stmt_t);
     self->kind = STMT_COMPUTE_EXP;
@@ -59,6 +68,11 @@ stmt_destroy(stmt_t **self_pointer) {
             // TODO
             break;
         }
+
+        case STMT_DEFINE_RULE_STAR: {
+            // TODO
+            break;
+        }        
 
         case STMT_COMPUTE_EXP: {
             // TODO
@@ -108,6 +122,11 @@ stmt_print(const stmt_t *self, file_t *file) {
         fprintf(file, "(define-rule TODO)");
         return;
     }
+
+    case STMT_DEFINE_RULE_STAR: {
+        fprintf(file, "(define-rule* TODO)");
+        return;
+    }    
 
     case STMT_COMPUTE_EXP: {
         exp_print(self->compute_exp.exp, file);
