@@ -1,5 +1,10 @@
-[lang] `execute` -- handle `STMT_DEFINE_RULE`
+[vm] `def` -- `def.node` has `net_pattern_list`
+[vm] `mod` -- remove `rule_list`
+
+to `rule_hash` -- what should be the key?
+
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
+[lang] `execute` -- handle `STMT_DEFINE_RULE`
 
 [vm] `activity_t` -- has `net_matcher`
 [lang] test `net_matcher`
@@ -40,10 +45,6 @@
 [debug] 尝试使用真实的物理学来实现 force
 [debug] `node_physics_simulate` -- move by `velocity` and clear `force` for every `node_model`
 [debug] remove `node_physics_fake_simulate`
-
-# vm
-
-[vm] mod -- change rule_list to rule_hash -- what should be the key?
 
 # module system
 
