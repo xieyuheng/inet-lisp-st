@@ -60,8 +60,25 @@ parse_define_rule(sexp_t *sexp) {
 
 static stmt_t *
 parse_define_rule_star(sexp_t *sexp) {
-    (void) sexp;
-    return NULL;
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
+
+    list_t *pattern_exp_list = exp_list_new();
+    list_t *pattern_exp_sexp_list = sexp_sexp_list(list_next(sexp_list));
+    sexp_t *pattern_exp_sexp = list_first(pattern_exp_sexp_list);
+    while (pattern_exp_sexp) {
+        list_push(pattern_exp_list, parse_exp(pattern_exp_sexp));
+        pattern_exp_sexp = list_next(pattern_exp_sexp_list);
+    }
+
+    list_t *exp_list = exp_list_new();
+    sexp_t *exp_sexp = list_next(sexp_list);
+    while (exp_sexp) {
+        list_push(exp_list, parse_exp(exp_sexp));
+        exp_sexp = list_next(sexp_list);
+    }
+
+    return stmt_define_rule_star(pattern_exp_list, exp_list);
 }
 
 static stmt_t *

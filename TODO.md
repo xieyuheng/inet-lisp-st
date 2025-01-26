@@ -1,4 +1,5 @@
-[lang] `parse_define_rule_star`
+[lang] `stmt_print` -- handle `STMT_DEFINE_RULE` -- test parser
+[lang] `stmt_print` -- handle `STMT_DEFINE_RULE_STAR` -- test parser
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
@@ -6,9 +7,6 @@
 [vm] `activity_t` -- has `net_matcher`
 [lang] test `net_matcher`
 [lang] test running net
-
-[lang] `stmt_print` -- handle `STMT_DEFINE_RULE`
-[lang] `stmt_print` -- handle `STMT_DEFINE_RULE_STAR`
 
 # more examples
 
