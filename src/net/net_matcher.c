@@ -27,8 +27,7 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
 
 static void
 matcher_match_node(net_matcher_t *self, size_t index, const node_t *node) {
-    const node_pattern_t *node_pattern =
-        list_get(self->net_pattern->node_pattern_list, index);
+    const node_pattern_t *node_pattern = net_pattern_get(self->net_pattern, index);
 
     if (node_pattern->ctor != node->ctor)
         return;
@@ -73,8 +72,7 @@ static size_t
 matcher_next_index(net_matcher_t *self, const char *name) {
     size_t length = net_pattern_length(self->net_pattern);
     for (size_t i = 0; i < length; i++) {
-        node_pattern_t *node_pattern =
-            list_get(self->net_pattern->node_pattern_list, i);
+        node_pattern_t *node_pattern = net_pattern_get(self->net_pattern, i);
         if (node_pattern_has_principle_name(node_pattern, name) &&
             !matcher_index_is_used(self, i))
         {
