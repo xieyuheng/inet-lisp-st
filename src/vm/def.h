@@ -9,7 +9,7 @@ struct def_t {
     def_kind_t kind;
     union {
         function_t *function;
-        struct { node_ctor_t *ctor; list_t *net_pattern_list; } node;
+        struct { node_ctor_t *ctor; list_t *rule_list; } node;
     };
 };
 

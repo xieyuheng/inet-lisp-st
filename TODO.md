@@ -1,6 +1,9 @@
 [vm] `mod` -- remove `rule_list`
 
-to `rule_hash` -- what should be the key?
+[vm] fix `mod_define_rule`
+[vm] fix `mod_find_rule`
+
+[lang] `rule_t` -- has `net_pattern` and `function`
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
