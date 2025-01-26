@@ -65,12 +65,14 @@ stmt_destroy(stmt_t **self_pointer) {
         }
 
         case STMT_DEFINE_RULE: {
-            // TODO
+            exp_destroy(&self->define_rule.pattern_exp);
+            list_destroy(&self->define_rule.exp_list);
             break;
         }
 
         case STMT_DEFINE_RULE_STAR: {
-            // TODO
+            list_destroy(&self->define_rule_star.pattern_exp_list);
+            list_destroy(&self->define_rule_star.exp_list);
             break;
         }
 

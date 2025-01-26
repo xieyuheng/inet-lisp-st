@@ -1,6 +1,3 @@
-[lang] `stmt_destroy` -- handle `STMT_DEFINE_RULE`
-[lang] `stmt_destroy` -- handle `STMT_DEFINE_RULE_STAR`
-
 [lang] `parse_define_rule_star`
 [lang] `parse_define_rule`
 
