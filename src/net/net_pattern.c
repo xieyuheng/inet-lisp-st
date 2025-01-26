@@ -17,3 +17,8 @@ net_pattern_destroy(net_pattern_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+size_t
+net_pattern_length(const net_pattern_t *self) {
+    return list_length(self->node_pattern_list);
+}

@@ -1,3 +1,8 @@
+[net] `net_pattern_starting_index`
+[net] `net_pattern_get`
+
+[net] `net_pattern` should be abstract
+
 [lang] `rule_t` -- has `net_pattern` and `function`
 
 [vm] fix `vm_maybe_add_active_wire` -- calling `mod_find_rule`
