@@ -83,14 +83,14 @@ vm_connect_top_wire_pair(vm_t *self) {
 
     wire_t *first_opposite = vm_wire_connect(self, second_wire, first_wire);
 
-    vm_maybe_add_active_wire(
+    vm_maybe_add_active(
         self,
         first_opposite,
         first_opposite->opposite);
 }
 
 void
-vm_maybe_add_active_wire(
+vm_maybe_add_active(
     vm_t *self,
     wire_t *first_wire,
     wire_t *second_wire
