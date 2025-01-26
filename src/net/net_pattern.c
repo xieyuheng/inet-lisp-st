@@ -22,3 +22,8 @@ size_t
 net_pattern_length(const net_pattern_t *self) {
     return list_length(self->node_pattern_list);
 }
+
+size_t
+net_pattern_starting_index(const net_pattern_t *self) {
+    return self->starting_index;
+}

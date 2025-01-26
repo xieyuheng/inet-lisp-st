@@ -108,7 +108,7 @@ matcher_is_success(const net_matcher_t *self) {
 
 static void
 matcher_start(net_matcher_t *self, const node_t *node) {
-    size_t index = self->net_pattern->starting_index;
+    size_t index = net_pattern_starting_index(self->net_pattern);
     matcher_match_node(self, index, node);
     const char *name = matcher_next_principle_name(self);
     while (name) {

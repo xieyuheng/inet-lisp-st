@@ -1,4 +1,3 @@
-[net] `net_pattern_starting_index`
 [net] `net_pattern_get`
 
 [net] `net_pattern` should be abstract
