@@ -82,6 +82,12 @@ exp_list_print_as_tail(list_t *exp_list, file_t *file) {
 }
 
 void
+exp_list_print_as_list(list_t *exp_list, file_t *file) {
+    fprintf(file, "(");
+    exp_list_print_as_tail(exp_list, file);
+}
+
+void
 name_list_print(list_t *name_list, file_t *file) {
     char *name = list_first(name_list);
     while (name) {
