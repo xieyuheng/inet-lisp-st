@@ -12,7 +12,7 @@ struct stmt_t {
     union {
         struct { char *name; list_t *arg_name_list; list_t *exp_list; } define_function;
         struct { char *name; list_t *port_name_list; } define_node;
-        // struct { } define_rule;
+        struct { list_t *node_pattern_list; list_t *exp_list; } define_rule;
         struct { exp_t *exp; } compute_exp;
     };
 };
