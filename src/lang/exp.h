@@ -25,4 +25,5 @@ void exp_destroy(exp_t **self_pointer);
 
 void name_list_print(list_t *name_list, file_t *file);
 void exp_list_print(list_t *exp_list, file_t *file);
+void exp_list_print_as_tail(list_t *exp_list, file_t *file);
 void exp_print(const exp_t *self, file_t *file);

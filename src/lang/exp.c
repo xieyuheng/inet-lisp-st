@@ -71,6 +71,17 @@ exp_list_print(list_t *exp_list, file_t *file) {
 }
 
 void
+exp_list_print_as_tail(list_t *exp_list, file_t *file) {
+    if (list_is_empty(exp_list)) {
+        fprintf(file, ")");
+    } else {
+        fprintf(file, " ");
+        exp_list_print(exp_list, file);
+        fprintf(file, ")");
+    }
+}
+
+void
 name_list_print(list_t *name_list, file_t *file) {
     char *name = list_first(name_list);
     while (name) {

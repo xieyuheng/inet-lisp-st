@@ -102,14 +102,7 @@ stmt_print(const stmt_t *self, file_t *file) {
             fprintf(file, ")");
         }
 
-        if (list_is_empty(self->define_function.exp_list)) {
-            fprintf(file, ")");
-        } else {
-            fprintf(file, " ");
-            exp_list_print(self->define_function.exp_list, file);
-            fprintf(file, ")");
-        }
-
+        exp_list_print_as_tail(self->define_function.exp_list, file);
         return;
     }
 
@@ -123,15 +116,7 @@ stmt_print(const stmt_t *self, file_t *file) {
     case STMT_DEFINE_RULE: {
         fprintf(file, "(define-rule ");
         exp_print(self->define_rule.pattern_exp, file);
-
-        if (list_is_empty(self->define_rule.exp_list)) {
-            fprintf(file, ")");
-        } else {
-            fprintf(file, " ");
-            exp_list_print(self->define_rule.exp_list, file);
-            fprintf(file, ")");
-        }
-
+        exp_list_print_as_tail(self->define_rule.exp_list, file);
         return;
     }
 

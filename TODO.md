@@ -1,4 +1,3 @@
-[lang] `stmt_print` -- extract `exp_list_print_as_tail`
 [lang] `stmt_print` -- handle `STMT_DEFINE_RULE_STAR` -- test parser
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
