@@ -6,7 +6,7 @@ net_matcher_new(const net_pattern_t *net_pattern) {
     self->net_pattern = net_pattern;
     self->wire_hash = hash_of_string_key();
     self->matched_nodes = allocate_pointers(
-        array_length(net_pattern->node_pattern_array));
+        list_length(net_pattern->node_pattern_list));
     self->principle_name_list = string_list_new();
     self->matched_principle_name_list = string_list_new();
     return self;
@@ -29,7 +29,7 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
 static void
 matcher_match_node(net_matcher_t *self, size_t index, const node_t *node) {
     const node_pattern_t *node_pattern =
-        array_get(self->net_pattern->node_pattern_array, index);
+        list_get(self->net_pattern->node_pattern_list, index);
 
     if (node_pattern->ctor != node->ctor)
         return;
@@ -72,10 +72,10 @@ matcher_index_is_used(net_matcher_t *self, size_t index) {
 
 static size_t
 matcher_next_index(net_matcher_t *self, const char *name) {
-    size_t size = array_size(self->net_pattern->node_pattern_array);
-    for (size_t i = 0; i < size; i++) {
+    size_t length = list_length(self->net_pattern->node_pattern_list);
+    for (size_t i = 0; i < length; i++) {
         node_pattern_t *node_pattern =
-            array_get(self->net_pattern->node_pattern_array, i);
+            list_get(self->net_pattern->node_pattern_list, i);
         if (node_pattern_has_principle_name(node_pattern, name) &&
             !matcher_index_is_used(self, i))
         {
@@ -99,8 +99,8 @@ matcher_next_node(net_matcher_t *self, const char *name) {
 
 static bool
 matcher_is_success(const net_matcher_t *self) {
-    size_t size = array_size(self->net_pattern->node_pattern_array);
-    for (size_t i = 0; i < size; i++) {
+    size_t length = list_length(self->net_pattern->node_pattern_list);
+    for (size_t i = 0; i < length; i++) {
         if (self->matched_nodes[i] == NULL) return false;
     }
 

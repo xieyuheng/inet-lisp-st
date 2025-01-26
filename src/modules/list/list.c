@@ -313,11 +313,11 @@ list_shift(list_t *self) {
 }
 
 void *
-list_get(list_t *self, size_t index) {
-    void *value = list_first(self);
-    while (value) {
-        if (index == 0) return value;
-        value = list_next(self);
+list_get(const list_t *self, size_t index) {
+    node_t *node = self->first;
+    while (node) {
+        if (index == 0) return node->value;
+        node = node->next;
         index--;
     }
 

@@ -1,10 +1,4 @@
-[net] `net_pattern_t` -- use `node_pattern_list` -- instead of `node_pattern_array`
-
 [lang] `parse_define_rule`
-
-[list] `list_to_array`
-[list] `list_from_array`
-
 [lang] parse tree
 [vm] `activity_t` -- has `net_matcher`
 [lang] test `net_matcher`
