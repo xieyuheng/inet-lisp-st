@@ -1,5 +1,3 @@
-[lang] fix `step_net` -- using `activity_t`
-
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 

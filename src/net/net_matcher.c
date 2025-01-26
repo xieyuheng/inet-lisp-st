@@ -26,7 +26,7 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
 }
 
 static void
-matcher_match_node(net_matcher_t *self, size_t index, const node_t *node) {
+matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
     const node_pattern_t *node_pattern = net_pattern_get(self->net_pattern, index);
 
     if (node_pattern->ctor != node->ctor)
@@ -84,7 +84,7 @@ matcher_next_index(net_matcher_t *self, const char *name) {
     exit(1);
 }
 
-static const node_t *
+static node_t *
 matcher_next_node(net_matcher_t *self, const char *name) {
     wire_t *wire = hash_get(self->wire_hash, name);
     if (!wire) return NULL;
@@ -105,7 +105,7 @@ matcher_is_success(const net_matcher_t *self) {
 }
 
 static void
-matcher_start(net_matcher_t *self, const node_t *node) {
+matcher_start(net_matcher_t *self, node_t *node) {
     size_t index = net_pattern_starting_index(self->net_pattern);
     matcher_match_node(self, index, node);
     const char *name = matcher_next_principle_name(self);
@@ -119,7 +119,7 @@ matcher_start(net_matcher_t *self, const node_t *node) {
 }
 
 net_matcher_t *
-match_net(const net_pattern_t *net_pattern, const node_t *node) {
+match_net(const net_pattern_t *net_pattern, node_t *node) {
     net_matcher_t *self = net_matcher_new(net_pattern);
     matcher_start(self, node);
     if (!matcher_is_success(self)) {

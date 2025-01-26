@@ -75,42 +75,34 @@ run_until(vm_t *vm, size_t base_length) {
     }
 }
 
-static void
-collect_free_wires_from_node(vm_t *vm, node_t *node) {
-    for (size_t i = 0; i < node->ctor->arity; i++) {
-        if (!wire_is_principal(node->wires[i])) {
-            wire_t *wire = node->wires[i];
-            wire_free_from_node(wire);
-            stack_push(vm->value_stack, wire);
-        }
-    }
-
-    vm_delete_node(vm, node);
-}
-
 void
 step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
-    if (!activity) return;
+    if (activity == NULL) return;
 
-    (void) collect_free_wires_from_node;
-    // TODO    
+    hash_t *wire_hash = activity->net_matcher->wire_hash;
+    wire_t *wire = hash_first(wire_hash);
+    while (wire) {
+        if (!wire_is_principal(wire)) {
+            wire_free_from_node(wire);
+            stack_push(vm->value_stack, wire);
+        }
 
-    // node_t *first_node = activity->wire->node;
-    // node_t *second_node = activity->wire->opposite->node;
+        wire = hash_next(wire_hash);
+    }
 
-    // if (first_node->ctor == activity->rule->second_node_ctor &&
-    //     second_node->ctor == activity->rule->first_node_ctor)
-    // {
-    //     first_node = activity->wire->opposite->node;
-    //     second_node = activity->wire->node;
-    // }
+    size_t length = net_pattern_length(activity->net_matcher->net_pattern);
+    for (size_t i = 0; i < length; i++) {
+        node_t *matched_node = activity->net_matcher->matched_nodes[i];
+        for (size_t k = 0; k < matched_node->ctor->arity; k++) {
+            wire_t *wire = matched_node->wires[k];
+            if (wire_is_principal(wire)) {
+                vm_delete_wire(vm, wire);
+            }
+        }
 
-    // collect_free_wires_from_node(vm, first_node);
-    // collect_free_wires_from_node(vm, second_node);
-
-    // vm_delete_wire(vm, activity->wire);
-    // vm_delete_wire(vm, activity->wire->opposite);
+        vm_delete_node(vm, matched_node);
+    }
 
     size_t base_length = stack_length(vm->return_stack);
     frame_t *frame = frame_new(activity->rule->function);
