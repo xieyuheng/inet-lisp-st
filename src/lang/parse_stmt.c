@@ -42,13 +42,24 @@ parse_define_function(sexp_t *sexp) {
 }
 
 static stmt_t *
-parse_define_rule_star(sexp_t *sexp) {
-    (void) sexp;
-    return NULL;
+parse_define_rule(sexp_t *sexp) {
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
+
+    exp_t *pattern_exp = parse_exp(list_next(sexp_list));
+
+    list_t *exp_list = exp_list_new();
+    sexp_t *exp_sexp = list_next(sexp_list);
+    while (exp_sexp) {
+        list_push(exp_list, parse_exp(exp_sexp));
+        exp_sexp = list_next(sexp_list);
+    }
+
+    return stmt_define_rule(pattern_exp, exp_list);
 }
 
 static stmt_t *
-parse_define_rule(sexp_t *sexp) {
+parse_define_rule_star(sexp_t *sexp) {
     (void) sexp;
     return NULL;
 }
@@ -62,10 +73,10 @@ stmt_t *
 parse_stmt(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "define-node"))
         return parse_define_node(sexp);
-    if (sexp_starts_with(sexp, "define-rule*"))
-        return parse_define_rule_star(sexp);
     if (sexp_starts_with(sexp, "define-rule"))
         return parse_define_rule(sexp);
+    if (sexp_starts_with(sexp, "define-rule*"))
+        return parse_define_rule_star(sexp);
     else if (sexp_starts_with(sexp, "define"))
         return parse_define_function(sexp);
     else if (is_list_sexp(sexp))

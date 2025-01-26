@@ -1,5 +1,4 @@
 [lang] `parse_define_rule_star`
-[lang] `parse_define_rule`
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
