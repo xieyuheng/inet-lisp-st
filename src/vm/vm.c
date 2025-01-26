@@ -98,10 +98,14 @@ vm_maybe_add_active_wire(
         assert(first_wire->opposite == second_wire);
         assert(second_wire->opposite == first_wire);
 
-        const rule_t *rule = mod_find_rule(self->mod, first_wire, second_wire);
-        if (!rule) return;
+        (void) self;
+        
+        // TODO
 
-        list_push(self->activity_list, activity_new(first_wire, rule));
+        // const rule_t *rule = mod_find_rule(self->mod, first_wire, second_wire);
+        // if (!rule) return;
+
+        // list_push(self->activity_list, activity_new(first_wire, rule));
     }
 }
 

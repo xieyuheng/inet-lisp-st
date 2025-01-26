@@ -24,18 +24,6 @@ rule_destroy(rule_t **self_pointer) {
     }
 }
 
-bool
-rule_match_wire_pair(
-    const rule_t *self,
-    const wire_t *first_wire,
-    const wire_t *second_wire
-) {
-    return (((self->first_node_ctor == first_wire->node->ctor) &&
-             (self->second_node_ctor == second_wire->node->ctor)) ||
-            ((self->first_node_ctor == second_wire->node->ctor) &&
-             (self->second_node_ctor == first_wire->node->ctor)));
-}
-
 void
 rule_print(const rule_t *self, file_t *file) {
     fprintf(file, "! (%s)-(%s) ",
