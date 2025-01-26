@@ -12,14 +12,14 @@ struct stmt_t {
     union {
         struct { char *name; list_t *arg_name_list; list_t *exp_list; } define_function;
         struct { char *name; list_t *port_name_list; } define_node;
-        struct { list_t *node_pattern_list; list_t *exp_list; } define_rule;
+        struct { exp_t *pattern_exp; list_t *exp_list; } define_rule;
         struct { exp_t *exp; } compute_exp;
     };
 };
 
 stmt_t *stmt_define_function(char *name, list_t *arg_name_list, list_t *exp_list);
 stmt_t *stmt_define_node(char *name, list_t *port_name_list);
-stmt_t *stmt_define_rule(list_t *node_pattern_list, list_t *exp_list);
+stmt_t *stmt_define_rule(exp_t *pattern_exp, list_t *exp_list);
 stmt_t *stmt_compute_exp(exp_t *exp);
 
 void stmt_destroy(stmt_t **self_pointer);

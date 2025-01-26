@@ -20,10 +20,10 @@ stmt_define_node(char *name, list_t *port_name_list) {
 }
 
 stmt_t *
-stmt_define_rule(list_t *node_pattern_list, list_t *exp_list) {
+stmt_define_rule(exp_t *pattern_exp, list_t *exp_list) {
     stmt_t *self = new(stmt_t);
     self->kind = STMT_DEFINE_RULE;
-    self->define_rule.node_pattern_list = node_pattern_list;
+    self->define_rule.pattern_exp = pattern_exp;
     self->define_rule.exp_list = exp_list;
     return self;
 }

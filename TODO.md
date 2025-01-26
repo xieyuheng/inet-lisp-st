@@ -1,3 +1,5 @@
+[lang] stmt_define_rule vs stmt_define_rule_star (has pattern_exp_list)
+
 [lang] `parse_node_pattern`
 [lang] `parse_define_rule` -- tree to `node_pattern_list`
 [lang] `execute` -- handle `stmt_define_rule`
