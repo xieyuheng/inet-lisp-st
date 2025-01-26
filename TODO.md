@@ -1,6 +1,5 @@
 [lang] `stmt_destroy` -- handle `STMT_DEFINE_RULE`
 [lang] `stmt_destroy` -- handle `STMT_DEFINE_RULE_STAR`
-[lang] `stmt_destroy` -- handle `STMT_COMPUTE_EXP`
 
 [lang] `parse_define_rule_star`
 [lang] `parse_define_rule`

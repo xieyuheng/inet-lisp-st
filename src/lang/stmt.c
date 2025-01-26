@@ -72,10 +72,10 @@ stmt_destroy(stmt_t **self_pointer) {
         case STMT_DEFINE_RULE_STAR: {
             // TODO
             break;
-        }        
+        }
 
         case STMT_COMPUTE_EXP: {
-            // TODO
+            exp_destroy(&self->compute_exp.exp);
             break;
         }
         }
@@ -126,7 +126,7 @@ stmt_print(const stmt_t *self, file_t *file) {
     case STMT_DEFINE_RULE_STAR: {
         fprintf(file, "(define-rule* TODO)");
         return;
-    }    
+    }
 
     case STMT_COMPUTE_EXP: {
         exp_print(self->compute_exp.exp, file);
