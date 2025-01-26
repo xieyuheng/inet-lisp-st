@@ -25,6 +25,11 @@ node_pattern_destroy(node_pattern_t **self_pointer) {
     }
 }
 
+list_t *
+node_pattern_list_new(void) {
+    return list_new_with((destroy_fn_t *) node_pattern_destroy);
+}
+
 bool
 node_pattern_set_port_info(node_pattern_t *self, size_t index, port_info_t *port_info) {
     if (port_info->is_principal != self->ctor->port_infos[index]->is_principal)

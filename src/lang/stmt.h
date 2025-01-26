@@ -19,6 +19,7 @@ struct stmt_t {
 
 stmt_t *stmt_define_function(char *name, list_t *arg_name_list, list_t *exp_list);
 stmt_t *stmt_define_node(char *name, list_t *port_name_list);
+stmt_t *stmt_define_rule(list_t *node_pattern_list, list_t *exp_list);
 stmt_t *stmt_compute_exp(exp_t *exp);
 
 void stmt_destroy(stmt_t **self_pointer);

@@ -1,5 +1,6 @@
-[lang] `parse_define_rule`
-[lang] parse tree
+[lang] `parse_node_pattern`
+[lang] `parse_define_rule` -- tree to `node_pattern_list`
+[lang] `execute` -- handle `stmt_define_rule`
 [vm] `activity_t` -- has `net_matcher`
 [lang] test `net_matcher`
 [lang] test running net
