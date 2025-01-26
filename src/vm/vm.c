@@ -83,26 +83,23 @@ vm_connect_top_wire_pair(vm_t *self) {
 
     wire_t *first_opposite = vm_wire_connect(self, second_wire, first_wire);
 
-    vm_maybe_add_active(self, first_opposite->node);
+    vm_maybe_add_activity(self, first_opposite->node);
 }
 
 void
-vm_maybe_add_active(vm_t *self, node_t *node) {
-    (void) self;
-    (void) node;
-    // if (wire_is_principal(first_wire) && wire_is_principal(second_wire)) {
-    //     assert(first_wire->opposite == second_wire);
-    //     assert(second_wire->opposite == first_wire);
+vm_maybe_add_activity(vm_t *self, node_t *node) {
+    const def_t *def = mod_find_def(self->mod, node->ctor->name);
+    if (def == NULL) return;
 
-    //     (void) self;
+    rule_t *rule = list_first(def->node.rule_list);
+    while (rule) {
+        net_matcher_t *net_matcher = match_net(rule->net_pattern, node);
+        if (net_matcher) {
+            //
+        }
 
-    //     // TODO
-
-    //     // const rule_t *rule = mod_find_rule(self->mod, first_wire, second_wire);
-    //     // if (!rule) return;
-
-    //     // list_push(self->activity_list, activity_new(first_wire, rule));
-    // }
+        rule = list_next(def->node.rule_list);
+    }
 }
 
 node_t *

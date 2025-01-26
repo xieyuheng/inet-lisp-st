@@ -1,4 +1,4 @@
-[vm] fix `vm_maybe_add_active` -- calling `mod_find_rule`
+[vm] fix `vm_maybe_add_activity` -- calling `mod_find_rule`
 [lang] fix `step_net` -- using `activity_t`
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
