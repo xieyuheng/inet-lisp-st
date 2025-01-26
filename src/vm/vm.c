@@ -83,31 +83,26 @@ vm_connect_top_wire_pair(vm_t *self) {
 
     wire_t *first_opposite = vm_wire_connect(self, second_wire, first_wire);
 
-    vm_maybe_add_active(
-        self,
-        first_opposite,
-        first_opposite->opposite);
+    vm_maybe_add_active(self, first_opposite->node);
 }
 
 void
-vm_maybe_add_active(
-    vm_t *self,
-    wire_t *first_wire,
-    wire_t *second_wire
-) {
-    if (wire_is_principal(first_wire) && wire_is_principal(second_wire)) {
-        assert(first_wire->opposite == second_wire);
-        assert(second_wire->opposite == first_wire);
+vm_maybe_add_active(vm_t *self, node_t *node) {
+    (void) self;
+    (void) node;
+    // if (wire_is_principal(first_wire) && wire_is_principal(second_wire)) {
+    //     assert(first_wire->opposite == second_wire);
+    //     assert(second_wire->opposite == first_wire);
 
-        (void) self;
-        
-        // TODO
+    //     (void) self;
 
-        // const rule_t *rule = mod_find_rule(self->mod, first_wire, second_wire);
-        // if (!rule) return;
+    //     // TODO
 
-        // list_push(self->activity_list, activity_new(first_wire, rule));
-    }
+    //     // const rule_t *rule = mod_find_rule(self->mod, first_wire, second_wire);
+    //     // if (!rule) return;
+
+    //     // list_push(self->activity_list, activity_new(first_wire, rule));
+    // }
 }
 
 node_t *

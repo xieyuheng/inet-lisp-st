@@ -1,4 +1,3 @@
-[vm] `vm_maybe_add_active` -- take one node instead of two wires
 [vm] fix `vm_maybe_add_active` -- calling `mod_find_rule`
 [lang] fix `step_net` -- using `activity_t`
 

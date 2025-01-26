@@ -8,8 +8,7 @@ node_apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
         wire->node = node;
         wire->index = i;
         node->wires[i] = wire;
-
-        vm_maybe_add_active(vm, wire, wire->opposite);
+        vm_maybe_add_active(vm, node);
     }
 }
 
