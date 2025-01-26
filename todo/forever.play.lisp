@@ -7,14 +7,14 @@
 (define-node E target!)
 
 (define-rule*
-    [(C x-car x-cdr value!)
-     (C y-car y-cdr value!)]
+    ((C x-car x-cdr value!)
+     (C y-car y-cdr value!))
   (connect x-car y-cdr)
   (connect x-cdr y-car))
 
 (define-rule*
-    [(D target! x-first x-second)
-     (D target! y-first y-second)]
+    ((D target! x-first x-second)
+     (D target! y-first y-second))
   (connect x-first y-first)
   (connect x-second y-second))
 
