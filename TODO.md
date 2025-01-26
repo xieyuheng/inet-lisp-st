@@ -1,13 +1,13 @@
-[vm] `activity_t` -- has `net_matcher`
-[lang] fix `step_net` -- using `activity_t`
 [vm] fix `vm_maybe_add_active_wire` -- calling `mod_find_rule`
+[lang] fix `step_net` -- using `activity_t`
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 
-
 [lang] test `net_matcher`
 [lang] test running net
+
+[vm] `vm_print` -- should call `activity_print`
 
 # more examples
 
