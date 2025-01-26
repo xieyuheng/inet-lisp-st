@@ -17,3 +17,8 @@ net_pattern_destroy(net_pattern_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+list_t *
+net_pattern_list_new(void) {
+    return list_new_with((destroy_fn_t *) net_pattern_destroy);
+}

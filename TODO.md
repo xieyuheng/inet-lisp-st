@@ -1,4 +1,3 @@
-[vm] `def` -- `def.node` has `net_pattern_list`
 [vm] `mod` -- remove `rule_list`
 
 to `rule_hash` -- what should be the key?

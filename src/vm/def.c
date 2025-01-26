@@ -13,6 +13,7 @@ def_node(node_ctor_t *ctor) {
     def_t *self = new(def_t);
     self->kind = DEF_NODE;
     self->node.ctor = ctor;
+    self->node.net_pattern_list = net_pattern_list_new();
     return self;
 }
 
