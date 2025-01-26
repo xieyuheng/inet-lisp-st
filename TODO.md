@@ -1,5 +1,3 @@
-[lang] `stmt_print` -- handle `STMT_DEFINE_RULE_STAR` -- test parser
-
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
 

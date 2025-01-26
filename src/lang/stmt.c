@@ -121,7 +121,9 @@ stmt_print(const stmt_t *self, file_t *file) {
     }
 
     case STMT_DEFINE_RULE_STAR: {
-        fprintf(file, "(define-rule* TODO)");
+        fprintf(file, "(define-rule* ");
+        exp_list_print_as_list(self->define_rule_star.pattern_exp_list, file);
+        exp_list_print_as_tail(self->define_rule_star.exp_list, file);
         return;
     }
 

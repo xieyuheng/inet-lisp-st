@@ -84,7 +84,8 @@ exp_list_print_as_tail(list_t *exp_list, file_t *file) {
 void
 exp_list_print_as_list(list_t *exp_list, file_t *file) {
     fprintf(file, "(");
-    exp_list_print_as_tail(exp_list, file);
+    exp_list_print(exp_list, file);
+    fprintf(file, ")");
 }
 
 void
