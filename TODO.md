@@ -1,4 +1,3 @@
-[lang] `build_node_pattern_list`
 [lang] `build_node_pattern`
 [net] `net_pattern_t` -- has `local_name_set` -- to have a stable order
 [lang] `function_ctx_form_net_pattern`
