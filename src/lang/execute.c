@@ -35,8 +35,10 @@ execute(vm_t *vm, stmt_t *stmt) {
             fprintf(stdout, "\n");
         }
 
-        // list_t *node_pattern_list =
-        //     compile_node_pattern_list(vm, stmt->define_rule_star.pattern_exp_list);
+        list_t *node_pattern_list =
+            build_node_pattern_list(vm, stmt->define_rule_star.pattern_exp_list);
+        (void) node_pattern_list;
+
         // stmt->define_rule_star.exp_list;
 
         // TODO
