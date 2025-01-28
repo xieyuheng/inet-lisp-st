@@ -1,20 +1,12 @@
-[lang] `compile_node_pattern_list`
-[lang] `compile_node_pattern`
-
+[lang] `build_node_pattern_list`
+[lang] `build_node_pattern`
 [net] `net_pattern_t` -- has `local_name_set` -- to have a stable order
-
 [lang] `function_ctx_form_net_pattern`
-
 [vm] `mod_define_rule` -- create `net_pattern_t` for each occurrence of node in `node_pattern_list`
-
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
-
 [lang] test `net_matcher`
-
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
-
 [lang] test running net
-
 [vm] `vm_print` -- should call `activity_print`
 
 # more examples
