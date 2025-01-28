@@ -3,6 +3,7 @@
 struct net_pattern_t {
     const list_t *node_pattern_list;
     size_t starting_index;
+    set_t *local_name_set;
 };
 
 net_pattern_t *
@@ -10,6 +11,7 @@ net_pattern_new(const list_t *node_pattern_list, size_t starting_index) {
     net_pattern_t *self = new(net_pattern_t);
     self->node_pattern_list = node_pattern_list;
     self->starting_index = starting_index;
+    self->local_name_set = set_new(); // TODO call string_set_new
     return self;
 }
 
@@ -18,6 +20,7 @@ net_pattern_destroy(net_pattern_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         net_pattern_t *self = *self_pointer;
+        set_destroy(&self->local_name_set);
         free(self);
         *self_pointer = NULL;
     }
