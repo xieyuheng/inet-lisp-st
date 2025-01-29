@@ -23,6 +23,8 @@ list_t *exp_list_new(void);
 
 void exp_destroy(exp_t **self_pointer);
 
+exp_t *exp_copy(const exp_t *self);
+
 void name_list_print(list_t *name_list, file_t *file);
 void exp_list_print(list_t *exp_list, file_t *file);
 void exp_list_print_as_tail(list_t *exp_list, file_t *file);

@@ -81,11 +81,27 @@ define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
     return;
 }
 
-static list_t *
-translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
+static void
+translate_pattern_subtree(vm_t *vm, exp_t *pattern_exp, char *last_name, list_t *pattern_exp_list) {
     (void) vm;
     (void) pattern_exp;
-    return list_new();
+    (void) last_name;
+    (void) pattern_exp_list;
+}
+
+static list_t *
+translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
+    list_t *pattern_exp_list = exp_list_new();
+    assert(pattern_exp->kind == EXP_AP);
+
+    // pattern_exp->ap.target;
+    // pattern_exp->ap.arg_list;
+
+    (void) translate_pattern_subtree;
+
+    (void) vm;
+    (void) pattern_exp;
+    return pattern_exp_list;
 }
 
 static void
@@ -124,12 +140,12 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_DEFINE_RULE: {
+        list_t *pattern_exp_list = translate_pattern_tree(vm, stmt->define_rule.pattern_exp);
         define_rule_star(
             vm,
-            build_node_pattern_list(
-                vm,
-                translate_pattern_tree(vm, stmt->define_rule.pattern_exp)),
+            build_node_pattern_list(vm, pattern_exp_list),
             stmt->define_rule.exp_list);
+        list_destroy(&pattern_exp_list);
         return;
     }
 

@@ -1,4 +1,10 @@
+[list] `string_list_copy`
+[list] `exp_list_copy`
+
+[lang] `exp_copy`
+
 [lang] `translate_pattern_tree`
+[lang] `translate_pattern_subtree`
 
 [lang] test `net_matcher` -- without running net
 [lang] test running net -- need primitive `connect` and `run`

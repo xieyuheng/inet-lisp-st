@@ -59,6 +59,27 @@ exp_destroy(exp_t **self_pointer) {
     }
 }
 
+exp_t *
+exp_copy(const exp_t *self) {
+    switch (self->kind) {
+    case EXP_VAR: {
+        return exp_var(string_copy(self->var.name));
+    }
+
+    case EXP_AP: {
+        // TODO
+        return NULL;
+    }
+
+    case EXP_BIND: {
+        // TODO
+        return NULL;
+    }
+    }
+
+    assert(false);
+}
+
 void
 exp_list_print(list_t *exp_list, file_t *file) {
     exp_t *exp = list_first(exp_list);
