@@ -40,4 +40,8 @@ primitive_t *primitive_from_3_fn(const char *name, primitive_3_fn_t *primitive_3
 primitive_t *primitive_from_4_fn(const char *name, primitive_4_fn_t *primitive_4_fn);
 
 void primitive_destroy(primitive_t **self_pointer);
+
+bool is_primitive(value_t value);
+primitive_t *as_primitive(value_t value);
+
 void primitive_print(primitive_t *self, file_t *file);

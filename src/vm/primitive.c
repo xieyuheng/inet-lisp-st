@@ -71,6 +71,18 @@ primitive_destroy(primitive_t **self_pointer) {
     }
 }
 
+bool
+is_primitive(value_t value) {
+    if (!is_xobject(value)) return false;
+    return as_object(value)->spec == &primitive_object_spec;
+}
+
+primitive_t *
+as_primitive(value_t value) {
+    assert(is_primitive(value));
+    return (primitive_t *) value;
+}
+
 void
 primitive_print(primitive_t *self, file_t *file) {
     fprintf(file, "#<%s>", self->name);
