@@ -82,17 +82,14 @@ step_net(vm_t *vm) {
 
     list_t *local_name_list =
         net_pattern_local_name_list(activity->net_matcher->net_pattern);
-    net_matcher_print(activity->net_matcher, stderr);
+
     char *name = list_first(local_name_list);
     while (name) {
-        printf("[step_net/while %s] 1\n", name);
         wire_t *wire = hash_get(activity->net_matcher->wire_hash, name);
-        printf("[step_net/while %s] 2\n", name);
         assert(wire);
         wire_free_from_node(wire);
-        printf("[step_net/while %s] 3\n", name);
         stack_push(vm->value_stack, wire);
-        printf("[step_net/while %s] 4\n", name);
+
         name = list_next(local_name_list);
     }
 
