@@ -12,7 +12,7 @@ void list_set_copy_fn(list_t *self, copy_fn_t *copy_fn);
 
 list_t *list_new_with(destroy_fn_t *destroy_fn);
 
-// Make a copy of the list; values are dup-ed if you set a copy_fn for
+// Make a copy of the list; values are copyed if you set a copy_fn for
 // the list, otherwise not. Copying a null reference returns a null
 // reference.
 // - `list_copy` should not copy callbacks,

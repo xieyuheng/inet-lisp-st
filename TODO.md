@@ -1,4 +1,3 @@
-[list] `string_list_copy`
 [list] `exp_list_copy`
 
 [lang] `exp_copy`
