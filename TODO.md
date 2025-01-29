@@ -1,4 +1,3 @@
-[lang] `vm_fresh_name`
 [lang] `translate_pattern_subtree`
 
 [lang] test `net_matcher` -- without running net

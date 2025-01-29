@@ -101,7 +101,9 @@ translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
         if (arg_exp->kind == EXP_VAR) {
             list_push(arg_list, exp_copy(arg_exp));
         } else {
-            char *name = vm_fresh_name(vm);
+            char *fresh_name = vm_fresh_name(vm);
+            char *name = string_append(fresh_name, "!");
+            string_destroy(&fresh_name);
             translate_pattern_sub_tree(vm, arg_exp, name, pattern_exp_list);
             list_push(arg_list, exp_var(string_copy(name)));
         }

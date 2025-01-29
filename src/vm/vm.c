@@ -11,7 +11,6 @@ vm_new(mod_t *mod) {
     self->wire_set = set_new();
     self->node_set = set_new();
     self->node_id_count = 0;
-    self->fresh_name_count = 0;    
     self->log_level = 0;
     return self;
 }
@@ -146,6 +145,10 @@ vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
 
 char *
 vm_fresh_name(vm_t* self) {
-    (void) self;
-    return string_copy("!");
+    size_t max_string_length = 256;
+    char *buffer = allocate(max_string_length);
+    sprintf(buffer, "%lu", self->fresh_name_count++);
+    char *string = string_copy(buffer);
+    free(buffer);
+    return string;
 }
