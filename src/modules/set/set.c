@@ -83,3 +83,15 @@ void *
 set_next(set_t *self) {
     return hash_next(self->value_hash);
 }
+
+list_t *
+set_to_list(set_t *self) {
+    list_t *list = list_new();
+    void *value = set_first(self);
+    while (value) {
+        list_push(list, value);
+        value = set_next(self);
+    }
+
+    return list;
+}

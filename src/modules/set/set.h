@@ -24,3 +24,5 @@ bool set_delete(set_t *self, void *value);
 
 void *set_first(set_t *self);
 void *set_next(set_t *self);
+
+list_t *set_to_list(set_t *self);
