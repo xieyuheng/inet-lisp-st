@@ -1,9 +1,7 @@
-[lang] `execute` -- handle `STMT_DEFINE_RULE_STAR` -- call `compile_bind`
-
-- get `name_list` by `list_to_reversed`
-
 [vm] `mod_define_rule` -- create `net_pattern_t` for each occurrence of node in `node_pattern_list`
-[lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
+
+[lang] `execute` -- handle `STMT_DEFINE_RULE_STAR` -- call `mod_define_rule`
+
 [lang] test `net_matcher`
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 [lang] test running net
