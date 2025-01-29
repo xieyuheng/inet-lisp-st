@@ -59,3 +59,8 @@ node_pattern_t *
 net_pattern_get(const net_pattern_t *self, size_t index) {
     return list_get(self->node_pattern_list, index);
 }
+
+list_t *
+net_pattern_local_name_list(const net_pattern_t *self) {
+    return self->local_name_list;
+}

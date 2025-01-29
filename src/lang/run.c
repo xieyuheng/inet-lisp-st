@@ -80,17 +80,14 @@ step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
     if (activity == NULL) return;
 
-    hash_t *wire_hash = activity->net_matcher->wire_hash;
-    // set_t *local_name_set = activity->net_matcher->net_pattern->local_name_set;
-    // (void) local_name_set;
-    wire_t *wire = hash_first(wire_hash);
-    while (wire) {
-        if (!wire_is_principal(wire)) {
-            wire_free_from_node(wire);
-            stack_push(vm->value_stack, wire);
-        }
-
-        wire = hash_next(wire_hash);
+    list_t *local_name_list =
+        net_pattern_local_name_list(activity->net_matcher->net_pattern);
+    char *name = list_first(local_name_list);
+    while (name) {
+        wire_t *wire = hash_get(activity->net_matcher->wire_hash, name);
+        wire_free_from_node(wire);
+        stack_push(vm->value_stack, wire);
+        name = list_next(local_name_list);
     }
 
     size_t length = net_pattern_length(activity->net_matcher->net_pattern);

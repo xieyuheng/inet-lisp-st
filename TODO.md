@@ -1,4 +1,3 @@
-[lang] `step_net` use `local_name_list`
 [lang] `function_ctx_form_net_pattern`
 [vm] `mod_define_rule` -- create `net_pattern_t` for each occurrence of node in `node_pattern_list`
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR`
