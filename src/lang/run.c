@@ -81,6 +81,8 @@ step_net(vm_t *vm) {
     if (activity == NULL) return;
 
     hash_t *wire_hash = activity->net_matcher->wire_hash;
+    // set_t *local_name_set = activity->net_matcher->net_pattern->local_name_set;
+    // (void) local_name_set;
     wire_t *wire = hash_first(wire_hash);
     while (wire) {
         if (!wire_is_principal(wire)) {

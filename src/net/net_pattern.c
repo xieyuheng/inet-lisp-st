@@ -12,7 +12,9 @@ init_local_name_set(set_t *local_name_set, list_t *node_pattern_list) {
     while (node_pattern) {
         for (size_t i = 0; i < node_pattern->ctor->arity; i++) {
             port_info_t *port_info = node_pattern->port_infos[i];
-            set_put(local_name_set, port_info->name);
+            if (!port_info->is_principal) {
+                set_put(local_name_set, port_info->name);
+            }
         }
 
         node_pattern = list_next(node_pattern_list);
