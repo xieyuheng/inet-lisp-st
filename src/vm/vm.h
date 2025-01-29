@@ -8,6 +8,7 @@ struct vm_t {
     stack_t *value_stack;
     stack_t *return_stack;
     size_t node_id_count;
+    size_t fresh_name_count;
     // wire and node should use managed memory,
     // because some nets have no root.
     // i simply record the pointers in vm for now.
@@ -33,3 +34,5 @@ wire_t *vm_add_wire(vm_t* self);
 void vm_delete_wire(vm_t* self, wire_t *wire);
 
 wire_t *vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire);
+
+char *vm_fresh_name(vm_t* self);

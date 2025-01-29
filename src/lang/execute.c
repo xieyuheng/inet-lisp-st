@@ -89,14 +89,6 @@ translate_pattern_sub_tree(vm_t *vm, exp_t *pattern_exp, char *last_name, list_t
     (void) pattern_exp_list;
 }
 
-static char *
-shared_name(vm_t *vm, const exp_t *exp, const exp_t *sub_exp) {
-    (void) vm;
-    (void) exp;
-    (void) sub_exp;
-    return string_copy("!");
-}
-
 static list_t *
 translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
     list_t *pattern_exp_list = exp_list_new();
@@ -109,7 +101,7 @@ translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
         if (arg_exp->kind == EXP_VAR) {
             list_push(arg_list, exp_copy(arg_exp));
         } else {
-            char *name = shared_name(vm, pattern_exp, arg_exp);
+            char *name = vm_fresh_name(vm);
             translate_pattern_sub_tree(vm, arg_exp, name, pattern_exp_list);
             list_push(arg_list, exp_var(string_copy(name)));
         }
