@@ -14,8 +14,10 @@ rule_destroy(rule_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         rule_t *self = *self_pointer;
-        net_pattern_destroy(&self->net_pattern);
-        function_destroy(&self->function);
+        // NOTE A rule dose not own `net_pattern` and `function`.
+        //   because they might be shared.
+        // net_pattern_destroy(&self->net_pattern);
+        // function_destroy(&self->function);
         free(self);
         *self_pointer = NULL;
     }

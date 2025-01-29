@@ -47,7 +47,15 @@ execute(vm_t *vm, stmt_t *stmt) {
         compile_exp_list(vm, function, stmt->define_rule_star.exp_list);
         function_build(function);
 
-        // TODO
+        node_pattern_t *node_pattern = list_first(node_pattern_list);
+        size_t index = 0;
+        while (node_pattern) {
+            rule_t *rule = rule_new(index, net_pattern, function);
+            mod_define_rule(vm->mod, node_pattern->ctor->name, rule);
+            node_pattern = list_next(node_pattern_list);
+            index++;
+        }
+
         return;
     }
 
