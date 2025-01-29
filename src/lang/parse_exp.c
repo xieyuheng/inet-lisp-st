@@ -36,7 +36,7 @@ parse_bind(sexp_t *sexp) {
 
 exp_t *
 parse_exp(sexp_t *sexp) {
-    if (sexp_starts_with(sexp, "="))
+    if (sexp_starts_with(sexp, "=>"))
         return parse_bind(sexp);
     else if (is_atom_sexp(sexp))
         return parse_var(sexp);

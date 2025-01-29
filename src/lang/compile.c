@@ -45,6 +45,8 @@ compile_lookup(vm_t *vm, function_t *function, const char *name) {
     const def_t *def = mod_find_def(vm->mod, name);
     if (def == NULL) {
         fprintf(stderr, "[compile_lookup] undefined name: %s\n", name);
+        fprintf(stderr, "[compile_lookup] function:\n");
+        function_print(function, stderr);
         exit(1);
     }
 

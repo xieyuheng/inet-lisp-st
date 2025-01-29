@@ -64,6 +64,7 @@ define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
     list_t *reversed_local_name_list = list_copy_reversed(local_name_list);
     size_t arity = list_length(reversed_local_name_list);
     function_t *function = function_new(arity);
+    printf("[define_rule_star]\n");
     compile_bind(vm, function, reversed_local_name_list);
     list_destroy(&reversed_local_name_list);
     compile_exp_list(vm, function, exp_list);
@@ -181,11 +182,10 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_DEFINE_RULE_STAR: {
+        list_t *pattern_exp_list = stmt->define_rule_star.pattern_exp_list;
         define_rule_star(
             vm,
-            build_node_pattern_list(
-                vm,
-                stmt->define_rule_star.pattern_exp_list),
+            build_node_pattern_list(vm, pattern_exp_list),
             stmt->define_rule_star.exp_list);
         return;
     }
