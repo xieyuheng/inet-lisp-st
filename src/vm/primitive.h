@@ -33,7 +33,7 @@ struct primitive_t {
     };
 };
 
-primitive_t *primitive_from_vm_fn(const char *name, primitive_vm_fn_t *primitive_vm_fn);
+primitive_t *primitive_from_vm_fn(const char *name, size_t arity, primitive_vm_fn_t *primitive_vm_fn);
 primitive_t *primitive_from_0_fn(const char *name, primitive_0_fn_t *primitive_0_fn);
 primitive_t *primitive_from_1_fn(const char *name, primitive_1_fn_t *primitive_1_fn);
 primitive_t *primitive_from_2_fn(const char *name, primitive_2_fn_t *primitive_2_fn);
