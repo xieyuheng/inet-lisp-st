@@ -67,13 +67,13 @@ exp_copy(const exp_t *self) {
     }
 
     case EXP_AP: {
-        // TODO
-        return NULL;
+        return exp_ap(
+            exp_copy(self->ap.target),
+            exp_list_copy(self->ap.arg_list));
     }
 
     case EXP_BIND: {
-        // TODO
-        return NULL;
+        return exp_bind(string_list_copy(self->bind.name_list));
     }
     }
 
