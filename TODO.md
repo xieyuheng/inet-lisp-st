@@ -1,6 +1,4 @@
-[lang] `execute` -- handle `STMT_DEFINE_RULE`
-
-- `build_node_pattern_list_from_tree`
+[lang] `translate_pattern_tree`
 
 [lang] test `net_matcher` -- without running net
 [lang] test running net -- need primitive `connect` and `run`
