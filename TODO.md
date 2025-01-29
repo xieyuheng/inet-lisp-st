@@ -1,4 +1,4 @@
-[lang] `translate_pattern_tree`
+[lang] `shared_name`
 [lang] `translate_pattern_subtree`
 
 [lang] test `net_matcher` -- without running net

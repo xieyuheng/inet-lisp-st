@@ -82,11 +82,19 @@ define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
 }
 
 static void
-translate_pattern_subtree(vm_t *vm, exp_t *pattern_exp, char *last_name, list_t *pattern_exp_list) {
+translate_pattern_sub_tree(vm_t *vm, exp_t *pattern_exp, char *last_name, list_t *pattern_exp_list) {
     (void) vm;
     (void) pattern_exp;
     (void) last_name;
     (void) pattern_exp_list;
+}
+
+static char *
+shared_name(vm_t *vm, const exp_t *exp, const exp_t *sub_exp) {
+    (void) vm;
+    (void) exp;
+    (void) sub_exp;
+    return string_copy("!");
 }
 
 static list_t *
@@ -94,13 +102,22 @@ translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
     list_t *pattern_exp_list = exp_list_new();
     assert(pattern_exp->kind == EXP_AP);
 
-    // pattern_exp->ap.target;
-    // pattern_exp->ap.arg_list;
+    exp_t *target = exp_copy(pattern_exp->ap.target);
+    list_t *arg_list = exp_list_new();
+    exp_t *arg_exp = list_first(pattern_exp->ap.arg_list);
+    while (arg_exp) {
+        if (arg_exp->kind == EXP_VAR) {
+            list_push(arg_list, exp_copy(arg_exp));
+        } else {
+            char *name = shared_name(vm, pattern_exp, arg_exp);
+            translate_pattern_sub_tree(vm, arg_exp, name, pattern_exp_list);
+            list_push(arg_list, exp_var(string_copy(name)));
+        }
 
-    (void) translate_pattern_subtree;
+        arg_exp = list_next(pattern_exp->ap.arg_list);
+    }
 
-    (void) vm;
-    (void) pattern_exp;
+    list_unshift(pattern_exp_list, exp_ap(target, arg_list));
     return pattern_exp_list;
 }
 
