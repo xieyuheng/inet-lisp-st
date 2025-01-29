@@ -1,4 +1,4 @@
-[bug] non deterministic!
+[bug] fix examples
 
 [vm] `primitive` has `input_arity` vs `output_arity`
 [net] `matcher_match_node` -- remove log or find a way to keep log during debug
