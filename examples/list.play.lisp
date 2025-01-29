@@ -8,7 +8,10 @@
 (define-rule (append (cons head tail) rest result)
   (cons head (append tail rest) result))
 
-(wire-debug
- (append
-  (cons (sole) (cons (sole) (cons (sole) (null))))
-  (cons (sole) (cons (sole) (cons (sole) (null))))))
+(define-node sole value!)
+
+(append
+ (cons (sole) (cons (sole) (cons (sole) (null))))
+ (cons (sole) (cons (sole) (cons (sole) (null)))))
+
+(wire-debug)

@@ -5,21 +5,13 @@
 (define-rule (add (zero) addend result)
   (connect addend result))
 
-;; (define-rule (add (add1 prev) addend result)
-;;   (add1 (add prev addend) result))
-
-(define-rule* ((add target! addend result)
-               (add1 prev target!))
+(define-rule (add (add1 prev) addend result)
   (add1 (add prev addend) result))
 
 (define (two) (add1 (add1 (zero))))
 
-;; (add (add1 (zero)) (zero))
-
-;; (define (inspect-run wire)
-;;   (wire-print-net (run (wire-print-net wire))))
-
 (add (two) (two))
+
 (wire-print-net)
 (run)
 (wire-print-net)
