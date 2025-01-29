@@ -58,6 +58,12 @@ set_add(set_t *self, void *value) {
     return hash_set(self->value_hash, value, value);
 }
 
+void
+set_put(set_t *self, void *value) {
+    hash_put(self->value_hash, value, value);
+    return;
+}
+
 bool
 set_has(set_t *self, void *value) {
     return hash_has(self->value_hash, value);
