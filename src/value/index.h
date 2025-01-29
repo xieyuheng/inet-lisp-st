@@ -8,5 +8,3 @@
 #include "xint.h"
 #include "xfloat.h"
 #include "xobject.h"
-
-#include "constant_table.h"
