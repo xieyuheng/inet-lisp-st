@@ -1,4 +1,10 @@
+[lang] move `define_node` to execute
+[lang] extract `define_rule_star`
+
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
+
+- `build_node_pattern_list_from_tree`
+
 [lang] test `net_matcher` -- without running net
 [lang] test running net -- need primitive `connect` and `run`
 
