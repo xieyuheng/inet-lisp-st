@@ -1,9 +1,3 @@
-[vm] `primitive_from_vm_fn`
-
-[vm] `primitive_new`
-[vm] `primitive_destroy`
-[vm] `primitive` as a xobject -- like function
-
 [lang] test running net -- need primitive `connect` and `run`
 
 [net] `matcher_match_node` find a way to keep the log

@@ -1,5 +1,7 @@
 #pragma once
 
+extern object_spec_t function_object_spec;
+
 struct function_t {
     object_spec_t *spec;
     char *name;
@@ -9,8 +11,6 @@ struct function_t {
     size_t length;
     op_t **ops;
 };
-
-extern object_spec_t function_object_spec;
 
 function_t *function_new(size_t arity);
 void function_destroy(function_t **self_pointer);
