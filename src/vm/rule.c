@@ -1,8 +1,9 @@
 #include "index.h"
 
 rule_t *
-rule_new(net_pattern_t *net_pattern, function_t *function) {
+rule_new(size_t starting_index, net_pattern_t *net_pattern, function_t *function) {
     rule_t *self = new(rule_t);
+    self->starting_index = starting_index;
     self->net_pattern = net_pattern;
     self->function = function;
     return self;

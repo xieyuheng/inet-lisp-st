@@ -11,4 +11,4 @@ struct net_matcher_t {
 net_matcher_t *net_matcher_new(const net_pattern_t *net_pattern);
 void net_matcher_destroy(net_matcher_t **self_pointer);
 
-net_matcher_t *match_net(const net_pattern_t *net_pattern, node_t *node);
+net_matcher_t *match_net(const net_pattern_t *net_pattern, size_t starting_index, node_t *node);

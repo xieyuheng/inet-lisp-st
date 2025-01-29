@@ -105,8 +105,8 @@ matcher_is_success(const net_matcher_t *self) {
 }
 
 static void
-matcher_start(net_matcher_t *self, node_t *node) {
-    size_t index = net_pattern_starting_index(self->net_pattern);
+matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
+    size_t index = starting_index;
     matcher_match_node(self, index, node);
     const char *name = matcher_next_principle_name(self);
     while (name) {
@@ -119,9 +119,9 @@ matcher_start(net_matcher_t *self, node_t *node) {
 }
 
 net_matcher_t *
-match_net(const net_pattern_t *net_pattern, node_t *node) {
+match_net(const net_pattern_t *net_pattern, size_t starting_index, node_t *node) {
     net_matcher_t *self = net_matcher_new(net_pattern);
-    matcher_start(self, node);
+    matcher_start(self, starting_index, node);
     if (!matcher_is_success(self)) {
         net_matcher_destroy(&self);
         return NULL;

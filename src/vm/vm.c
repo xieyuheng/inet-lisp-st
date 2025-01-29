@@ -93,7 +93,7 @@ vm_maybe_add_activity(vm_t *self, node_t *node) {
 
     rule_t *rule = list_first(def->node.rule_list);
     while (rule) {
-        net_matcher_t *net_matcher = match_net(rule->net_pattern, node);
+        net_matcher_t *net_matcher = match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
             list_push(self->activity_list, activity_new(rule, net_matcher));
             return;
