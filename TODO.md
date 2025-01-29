@@ -1,4 +1,3 @@
-[lang] `apply_primitive`
 [lang] test running net -- need primitive `connect` and `run`
 [net] `matcher_match_node` -- remove log or find a way to keep log during debug
 

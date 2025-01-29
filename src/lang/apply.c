@@ -12,6 +12,11 @@ apply(vm_t *vm, value_t *target, size_t arity) {
         return;
     }
 
+    if (is_primitive(target)) {
+        apply_primitive(vm, as_primitive(target), arity);
+        return;
+    }
+
     fprintf(stderr, "[apply] unknown target: ");
     value_print(target, stderr);
     exit(1);
