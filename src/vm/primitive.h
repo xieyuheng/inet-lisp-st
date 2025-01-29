@@ -21,6 +21,7 @@ extern object_spec_t primitive_object_spec;
 struct primitive_t {
     object_spec_t *spec;
     char *name;
+    size_t arity;
     primitive_fn_kind_t fn_kind;
     union {
         primitive_vm_fn_t *primitive_vm_fn;

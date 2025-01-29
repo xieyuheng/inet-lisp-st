@@ -20,7 +20,6 @@
 
 ;; (add (add1 (zero)) (zero))
 
-
 ;; (define (inspect-run wire)
 ;;   (wire-print-net (run (wire-print-net wire))))
 
