@@ -8,7 +8,6 @@ node_apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
         wire->node = node;
         wire->index = i;
         node->wires[i] = wire;
-        vm_maybe_add_activity(vm, node);
     }
 }
 
@@ -36,5 +35,6 @@ apply_node_ctor(vm_t *vm, node_ctor_t *node_ctor, size_t arity) {
     node_t *node = vm_add_node(vm, node_ctor);
     node_apply_input_ports(vm, node, arity);
     node_return_output_ports(vm, node, arity);
+    vm_maybe_add_activity(vm, node);
     return;
 }

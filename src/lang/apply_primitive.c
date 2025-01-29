@@ -56,5 +56,4 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
         return;
     }
     }
-
 }

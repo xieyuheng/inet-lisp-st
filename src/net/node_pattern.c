@@ -51,3 +51,19 @@ node_pattern_has_principle_name(node_pattern_t *self, const char *name) {
 
     return false;
 }
+
+void
+node_pattern_print(const node_pattern_t *self, file_t *file) {
+    fprintf(file, "(");
+    fprintf(file, "%s", self->ctor->name);
+    for (size_t i = 0; i < self->ctor->arity; i++) {
+        port_info_t *port_info = self->port_infos[i];
+        if (port_info->is_principal) {
+            fprintf(file, " %s!", port_info->name);
+        } else {
+            fprintf(file, " %s", port_info->name);
+        }
+    }
+
+    fprintf(file, ")");
+}

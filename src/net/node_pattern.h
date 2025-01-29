@@ -14,3 +14,5 @@ list_t *node_pattern_list_new(void);
 bool node_pattern_set_port_info(node_pattern_t *self, size_t index, port_info_t *port_info);
 
 bool node_pattern_has_principle_name(node_pattern_t *self, const char *name);
+
+void node_pattern_print(const node_pattern_t *self, file_t *file);

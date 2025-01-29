@@ -27,56 +27,36 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
 
 static void
 matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
-    {
-        printf("[matcher_match_node] index: %lu", index);
-        printf(", node: ");
-        node_print(node, stdout);
-        printf("\n");
-    }
+    // {
+    //     printf("[matcher_match_node] index: %lu", index);
+    //     printf(", node: ");
+    //     node_print(node, stdout);
+    //     printf("\n");
+    // }
 
     const node_pattern_t *node_pattern = net_pattern_get(self->net_pattern, index);
 
-    if (node_pattern->ctor != node->ctor)
-        return;
+    if (node_pattern->ctor != node->ctor) return;
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
         port_info_t *port_info = node_pattern->port_infos[i];
         wire_t *wire = node->wires[i];
+        if (wire == NULL) return;
+
         if (port_info->is_principal) {
-            printf("[matcher_match_node/loop %lu] principle: %s\n", i, port_info->name);
             if (hash_has(self->wire_hash, port_info->name)) {
                 wire_t *existing_wire = hash_get(self->wire_hash, port_info->name);
-                if (!existing_wire) {
-                    printf("[matcher_match_node/fail %lu] (!existing_wire)\n", i);
-                    return;
-                }
-
-                if (!wire->opposite) {
-                    printf("[matcher_match_node/fail %lu] (!wire->opposite)\n", i);
-                    return;
-                }
-
-                if (wire->opposite != existing_wire) {
-                    printf("[matcher_match_node/fail %lu] (wire->opposite != existing_wire)\n", i);
-                    printf("-- wire->opposite: ");
-                    wire_print(wire->opposite, stdout);
-                    printf("\n");
-                    printf("-- existing_wire: ");
-                    wire_print(existing_wire, stdout);
-                    printf("\n");
-                    return;
-                }
+                if (!existing_wire) return;
+                if (!wire->opposite) return;
+                if (wire->opposite != existing_wire) return;
             } else {
                 list_push(self->principle_name_list, string_copy(port_info->name));
                 assert(hash_set(self->wire_hash, string_copy(port_info->name), wire));
             }
         } else {
-            printf("[matcher_match_node/loop %lu] non principle: %s\n", i, port_info->name);
             if (!hash_set(self->wire_hash, string_copy(port_info->name), wire)) {
-                printf("[matcher_match_node/fail %lu] already bound\n", i);
                 return;
             }
-
         }
     }
 
@@ -135,33 +115,33 @@ matcher_is_success(const net_matcher_t *self) {
 
 static void
 matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
-    {
-        printf("[matcher_start] starting index: %lu\n", starting_index);
-        printf("[matcher_start] starting node: ");
-        node_print(node, stdout);
-        printf("\n");
-    }
+    // {
+    //     printf("[matcher_start] starting index: %lu\n", starting_index);
+    //     printf("[matcher_start] starting node: ");
+    //     node_print(node, stdout);
+    //     printf("\n");
+    // }
 
     size_t index = starting_index;
     matcher_match_node(self, index, node);
     const char *name = matcher_next_principle_name(self);
     while (name) {
-        {
-            printf("[matcher_start/while %s]\n", name);
-        }
+        // {
+        //     printf("[matcher_start/while %s]\n", name);
+        // }
         node = matcher_next_node(self, name);
         if (node == NULL) {
-            printf("[matcher_start/fail %s] next index: %lu\n", name, index);
+            // printf("[matcher_start/fail %s] next index: %lu\n", name, index);
             return;
         }
 
         index = matcher_next_index(self, name);
-        {
-            printf("[matcher_start/while %s] next index: %lu\n", name, index);
-            printf("[matcher_start/while %s] next node: ", name);
-            node_print(node, stdout);
-            printf("\n");
-        }
+        // {
+        //     printf("[matcher_start/while %s] next index: %lu\n", name, index);
+        //     printf("[matcher_start/while %s] next node: ", name);
+        //     node_print(node, stdout);
+        //     printf("\n");
+        // }
 
         matcher_match_node(self, index, node);
 
@@ -169,12 +149,20 @@ matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
     }
 }
 
-static void
-net_matcher_print(net_matcher_t *self, file_t *file) {
+void
+net_matcher_print(const net_matcher_t *self, file_t *file) {
     printf("<net_matcher>\n");
 
-    // self->net_pattern;
-    // self->wire_hash;
+    net_pattern_print(self->net_pattern, file);
+
+    printf("<wire_hash>\n");
+    wire_t *wire = hash_first(self->wire_hash);
+    while (wire) {
+        wire_print(wire, file);
+        printf("\n");
+        wire = hash_next(self->wire_hash);
+    }
+    printf("</wire_hash>\n");
 
     printf("<matched_nodes>\n");
     size_t length = net_pattern_length(self->net_pattern);
@@ -189,11 +177,11 @@ net_matcher_print(net_matcher_t *self, file_t *file) {
     }
     printf("</matched_nodes>\n");
 
-    printf("<principle_name_list>\n");
+    printf("<principle_name_list>");
     string_list_print(self->principle_name_list, ", ", file);
     printf("</principle_name_list>\n");
 
-    printf("<matched_principle_name_list>\n");
+    printf("<matched_principle_name_list>");
     string_list_print(self->matched_principle_name_list, ", ", file);
     printf("</matched_principle_name_list>\n");
 
@@ -205,15 +193,15 @@ match_net(const net_pattern_t *net_pattern, size_t starting_index, node_t *node)
     net_matcher_t *self = net_matcher_new(net_pattern);
     matcher_start(self, starting_index, node);
     if (!matcher_is_success(self)) {
-        {
-            printf("[match_net] starting index: %lu\n", starting_index);
-            printf("[match_net] node: ");
-            node_print(node, stdout);
-            printf("\n");
-            printf("[match_net] failed\n");
-            net_matcher_print(self, stdout);
-            printf("\n");
-        }
+        // {
+        //     printf("[match_net] starting index: %lu\n", starting_index);
+        //     printf("[match_net] node: ");
+        //     node_print(node, stdout);
+        //     printf("\n");
+        //     printf("[match_net] failed\n");
+        //     net_matcher_print(self, stdout);
+        //     printf("\n");
+        // }
 
         net_matcher_destroy(&self);
         return NULL;
@@ -228,5 +216,6 @@ match_net(const net_pattern_t *net_pattern, size_t starting_index, node_t *node)
         net_matcher_print(self, stdout);
         printf("\n");
     }
+
     return self;
 }
