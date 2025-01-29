@@ -19,6 +19,7 @@ list_t *list_new_with(destroy_fn_t *destroy_fn);
 //   specially not `destroy_fn`,
 //   to avoid double free.
 list_t *list_copy(list_t *self);
+list_t *list_copy_reversed(list_t *self);
 
 size_t list_length(const list_t *self);
 bool list_is_empty(const list_t *self);

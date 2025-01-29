@@ -95,6 +95,25 @@ list_copy(list_t *self) {
     return list;
 }
 
+list_t *
+list_copy_reversed(list_t *self) {
+    if (!self) return NULL;
+
+    list_t *list = list_new();
+    void *value = list_first(self);
+    while (value) {
+        if (self->copy_fn) {
+            list_unshift(list, self->copy_fn(value));
+        } else {
+            list_unshift(list, value);
+        }
+
+        value = list_next(self);
+    }
+
+    return list;
+}
+
 size_t
 list_length(const list_t *self) {
     return self->length;

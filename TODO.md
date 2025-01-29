@@ -1,5 +1,3 @@
-[list] `list_to_reversed`
-
 [lang] `execute` -- handle `STMT_DEFINE_RULE_STAR` -- call `compile_bind`
 
 - get `name_list` by `list_to_reversed`
