@@ -18,8 +18,8 @@ define_node(vm_t *vm, const char *name, list_t *port_name_list) {
     return;
 }
 
-static
-void define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
+static void
+define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
     net_pattern_t *net_pattern = net_pattern_new(node_pattern_list);
     list_t *local_name_list = net_pattern_local_name_list(net_pattern);
     list_t *reversed_local_name_list = list_copy_reversed(local_name_list);
@@ -39,6 +39,22 @@ void define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
         index++;
     }
 
+    return;
+}
+
+static void
+compute_exp(vm_t *vm, exp_t *exp) {
+    size_t arity = 0;
+    function_t *function = function_new(arity);
+    compile_exp(vm, function, exp);
+    function_build(function);
+
+    size_t base_length = stack_length(vm->return_stack);
+    frame_t *frame = frame_new(function);
+    stack_push(vm->return_stack, frame);
+    run_until(vm, base_length);
+
+    function_destroy(&function);
     return;
 }
 
@@ -80,17 +96,7 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_COMPUTE_EXP: {
-        size_t arity = 0;
-        function_t *function = function_new(arity);
-        compile_exp(vm, function, stmt->compute_exp.exp);
-        function_build(function);
-
-        size_t base_length = stack_length(vm->return_stack);
-        frame_t *frame = frame_new(function);
-        stack_push(vm->return_stack, frame);
-        run_until(vm, base_length);
-
-        function_destroy(&function);
+        compute_exp(vm, stmt->compute_exp.exp);
         return;
     }
     }

@@ -1,5 +1,3 @@
-[lang] extract `compute_exp`
-
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 
 - `build_node_pattern_list_from_tree`
