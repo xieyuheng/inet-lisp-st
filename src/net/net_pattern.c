@@ -1,17 +1,31 @@
 #include "index.h"
 
 struct net_pattern_t {
-    const list_t *node_pattern_list;
+    list_t *node_pattern_list;
     size_t starting_index;
     set_t *local_name_set;
 };
 
+static void
+init_local_name_set(set_t *local_name_set, list_t *node_pattern_list) {
+    node_pattern_t *node_pattern = list_first(node_pattern_list);
+    while (node_pattern) {
+        for (size_t i = 0; i < node_pattern->ctor->arity; i++) {
+            port_info_t *port_info = node_pattern->port_infos[i];
+            set_put(local_name_set, port_info->name);
+        }
+
+        node_pattern = list_next(node_pattern_list);
+    }
+}
+
 net_pattern_t *
-net_pattern_new(const list_t *node_pattern_list, size_t starting_index) {
+net_pattern_new(list_t *node_pattern_list, size_t starting_index) {
     net_pattern_t *self = new(net_pattern_t);
     self->node_pattern_list = node_pattern_list;
     self->starting_index = starting_index;
     self->local_name_set = string_set_new();
+    init_local_name_set(self->local_name_set, node_pattern_list);
     return self;
 }
 
