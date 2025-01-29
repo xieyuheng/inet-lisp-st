@@ -1,11 +1,4 @@
-[vm] `primitive_t`
-
 [vm] `primitive_from_vm_fn`
-
-```
-typedef void (primitive_vm_fn_t)(vm_t *vm);
-primitive_def_t *primitive_from_vm_fn(const char *name, primitive_vm_fn_t *primitive_vm_fn);
-```
 
 [vm] `primitive_new`
 [vm] `primitive_destroy`
