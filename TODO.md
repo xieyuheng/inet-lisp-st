@@ -1,5 +1,3 @@
-[list] `exp_list_copy`
-
 [lang] `exp_copy`
 
 [lang] `translate_pattern_tree`

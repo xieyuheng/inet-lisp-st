@@ -80,6 +80,11 @@ exp_copy(const exp_t *self) {
     assert(false);
 }
 
+list_t *exp_list_copy(list_t *exp_list) {
+    list_set_copy_fn(exp_list, (copy_fn_t *) exp_copy);
+    return list_copy(exp_list);
+}
+
 void
 exp_list_print(list_t *exp_list, file_t *file) {
     exp_t *exp = list_first(exp_list);
