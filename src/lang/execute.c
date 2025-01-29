@@ -1,7 +1,7 @@
 #include "index.h"
 
 static void
-define_node(mod_t *mod, const char *name, list_t *port_name_list) {
+define_node(vm_t *vm, const char *name, list_t *port_name_list) {
     size_t arity = list_length(port_name_list);
     node_ctor_t *node_ctor = node_ctor_new(name, arity);
     def_t *def = def_node(node_ctor);
@@ -14,7 +14,7 @@ define_node(mod_t *mod, const char *name, list_t *port_name_list) {
         index++;
     }
 
-    mod_define(mod, def);
+    mod_define(vm->mod, def);
     return;
 }
 
@@ -57,7 +57,7 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_DEFINE_NODE: {
-        define_node(vm->mod, stmt->define_node.name, stmt->define_node.port_name_list);
+        define_node(vm, stmt->define_node.name, stmt->define_node.port_name_list);
         return;
     }
 
