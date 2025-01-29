@@ -11,7 +11,7 @@ net_pattern_new(const list_t *node_pattern_list, size_t starting_index) {
     net_pattern_t *self = new(net_pattern_t);
     self->node_pattern_list = node_pattern_list;
     self->starting_index = starting_index;
-    self->local_name_set = set_new(); // TODO call string_set_new
+    self->local_name_set = string_set_new();
     return self;
 }
 

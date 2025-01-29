@@ -7,11 +7,15 @@ void set_set_destroy_fn(set_t *self, destroy_fn_t *destroy_fn);
 void set_set_equal_fn(set_t *self, equal_fn_t *equal_fn);
 
 set_t *set_new_with(destroy_fn_t *destroy_fn);
+set_t *string_set_new(void);
 
 size_t set_length(const set_t *self);
 
 // add successes if the value is not already exist.
 bool set_add(set_t *self, void *value);
+
+// put auto destroy if there is destroy_fn
+void set_put(set_t *self, void *value);
 
 bool set_has(set_t *self, void *value);
 

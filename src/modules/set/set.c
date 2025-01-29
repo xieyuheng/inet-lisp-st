@@ -40,6 +40,14 @@ set_new_with(destroy_fn_t *destroy_fn) {
     return self;
 }
 
+set_t *
+string_set_new(void) {
+    set_t *self = set_new();
+    set_set_destroy_fn(self, (destroy_fn_t *) string_destroy);
+    set_set_equal_fn(self, (equal_fn_t *) string_equal);
+    return self;
+}
+
 size_t
 set_length(const set_t *self) {
     return hash_length(self->value_hash);
