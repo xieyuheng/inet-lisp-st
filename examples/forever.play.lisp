@@ -41,4 +41,4 @@
   (connect car-op second))
 
 (forever)
-(run)
+(debug)
