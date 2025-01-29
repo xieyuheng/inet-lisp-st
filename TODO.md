@@ -1,7 +1,6 @@
-[lang] test `net_matcher`
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
-[lang] test running net
-[vm] `vm_print` -- should call `activity_print`
+[lang] test `net_matcher` -- without running net
+[lang] test running net -- need primitive `connect` and `run`
 
 # more examples
 
@@ -15,6 +14,10 @@
 [design] the most important primitive value is function (closure)
 [design] write `list-map` as example that uses function
 [design] use explicit `copy` -- keep linear variable like simple
+
+# later
+
+[vm] `vm_print` -- should call `activity_print`
 
 # not sure
 

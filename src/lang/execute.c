@@ -30,11 +30,6 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_DEFINE_RULE_STAR: {
-        {
-            stmt_print(stmt, stdout);
-            fprintf(stdout, "\n");
-        }
-
         list_t *node_pattern_list =
             build_node_pattern_list(vm, stmt->define_rule_star.pattern_exp_list);
         net_pattern_t *net_pattern = net_pattern_new(node_pattern_list);
