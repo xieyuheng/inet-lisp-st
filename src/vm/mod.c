@@ -32,6 +32,13 @@ mod_define(mod_t *self, def_t *def) {
 }
 
 void
+mod_define_rule(mod_t *self, const char *name, rule_t *rule) {
+    const def_t *def = mod_find_def(self, name);
+    assert(def->kind == DEF_NODE);
+    list_push(def->node.rule_list, rule);
+}
+
+void
 mod_print(const mod_t *self, file_t *file) {
     fprintf(file, "<mod def-count=\"%lu\">\n", hash_length(self->def_hash));
 
