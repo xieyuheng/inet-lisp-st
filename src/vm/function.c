@@ -10,7 +10,7 @@ function_new(size_t arity) {
     function_t *self = new(function_t);
     self->spec = &function_object_spec;
     self->arity = arity;
-    self->ctx = function_ctx_new();
+    self->local_index_hash = hash_of_string_key();
     self->op_list = list_new_with((destroy_fn_t *) op_destroy);
     self->length = 0;
     self->ops = NULL;
@@ -23,7 +23,7 @@ function_destroy(function_t **self_pointer) {
     if (*self_pointer) {
         function_t *self = *self_pointer;
         string_destroy(&self->name);
-        function_ctx_destroy(&self->ctx);
+        hash_destroy(&self->local_index_hash);
         list_destroy(&self->op_list);
         if (self->ops) free(self->ops);
         free(self);

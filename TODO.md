@@ -1,5 +1,4 @@
 [lang] test running net -- need primitive `connect` and `run`
-
 [net] `matcher_match_node` find a way to keep the log
 
 # more examples
