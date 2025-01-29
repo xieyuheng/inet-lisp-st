@@ -1,5 +1,4 @@
-[lang] move `define_node` to execute
-[lang] extract `define_rule_star`
+[lang] extract `compute_exp`
 
 [lang] `execute` -- handle `STMT_DEFINE_RULE`
 

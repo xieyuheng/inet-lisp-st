@@ -18,6 +18,30 @@ define_node(mod_t *mod, const char *name, list_t *port_name_list) {
     return;
 }
 
+static
+void define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
+    net_pattern_t *net_pattern = net_pattern_new(node_pattern_list);
+    list_t *local_name_list = net_pattern_local_name_list(net_pattern);
+    list_t *reversed_local_name_list = list_copy_reversed(local_name_list);
+    size_t arity = list_length(reversed_local_name_list);
+    function_t *function = function_new(arity);
+    compile_bind(vm, function, reversed_local_name_list);
+    list_destroy(&reversed_local_name_list);
+    compile_exp_list(vm, function, exp_list);
+    function_build(function);
+
+    node_pattern_t *node_pattern = list_first(node_pattern_list);
+    size_t index = 0;
+    while (node_pattern) {
+        rule_t *rule = rule_new(index, net_pattern, function);
+        mod_define_rule(vm->mod, node_pattern->ctor->name, rule);
+        node_pattern = list_next(node_pattern_list);
+        index++;
+    }
+
+    return;
+}
+
 void
 execute(vm_t *vm, stmt_t *stmt) {
     switch (stmt->kind) {
@@ -48,32 +72,10 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_DEFINE_RULE_STAR: {
-        {
-            stmt_print(stmt, stdout);
-            fprintf(stdout, "\n");
-        }
-
-        list_t *node_pattern_list =
-            build_node_pattern_list(vm, stmt->define_rule_star.pattern_exp_list);
-        net_pattern_t *net_pattern = net_pattern_new(node_pattern_list);
-        list_t *local_name_list = net_pattern_local_name_list(net_pattern);
-        list_t *reversed_local_name_list = list_copy_reversed(local_name_list);
-        size_t arity = list_length(reversed_local_name_list);
-        function_t *function = function_new(arity);
-        compile_bind(vm, function, reversed_local_name_list);
-        list_destroy(&reversed_local_name_list);
-        compile_exp_list(vm, function, stmt->define_rule_star.exp_list);
-        function_build(function);
-
-        node_pattern_t *node_pattern = list_first(node_pattern_list);
-        size_t index = 0;
-        while (node_pattern) {
-            rule_t *rule = rule_new(index, net_pattern, function);
-            mod_define_rule(vm->mod, node_pattern->ctor->name, rule);
-            node_pattern = list_next(node_pattern_list);
-            index++;
-        }
-
+        define_rule_star(
+            vm,
+            build_node_pattern_list(vm, stmt->define_rule_star.pattern_exp_list),
+            stmt->define_rule_star.exp_list);
         return;
     }
 
