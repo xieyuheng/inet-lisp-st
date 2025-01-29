@@ -14,7 +14,7 @@ size_t set_length(const set_t *self);
 // add successes if the value is not already exist.
 bool set_add(set_t *self, void *value);
 
-// put auto destroy if there is destroy_fn
+// put auto destroy old value if there is destroy_fn
 void set_put(set_t *self, void *value);
 
 bool set_has(set_t *self, void *value);
