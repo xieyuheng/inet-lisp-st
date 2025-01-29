@@ -1,6 +1,14 @@
 #include "index.h"
 
 def_t *
+def_primitive(primitive_t *primitive) {
+    def_t *self = new(def_t);
+    self->kind = DEF_PRIMITIVE;
+    self->primitive = primitive;
+    return self;
+}
+
+def_t *
 def_function(function_t *function) {
     def_t *self = new(def_t);
     self->kind = DEF_FUNCTION;
@@ -24,6 +32,11 @@ def_destroy(def_t **self_pointer) {
         def_t *self = *self_pointer;
 
         switch (self->kind) {
+        case DEF_PRIMITIVE: {
+            primitive_destroy(&self->primitive);
+            break;
+        }
+
         case DEF_FUNCTION: {
             function_destroy(&self->function);
             break;
@@ -44,6 +57,10 @@ def_destroy(def_t **self_pointer) {
 const char *
 def_name(const def_t *def) {
     switch (def->kind) {
+    case DEF_PRIMITIVE: {
+        return def->primitive->name;
+    }
+
     case DEF_FUNCTION: {
         return def->function->name;
     }
@@ -59,6 +76,10 @@ def_name(const def_t *def) {
 const char *
 def_kind_name(def_kind_t kind) {
     switch (kind) {
+    case DEF_PRIMITIVE: {
+        return "primitive";
+    }
+
     case DEF_FUNCTION: {
         return "function";
     }
@@ -74,6 +95,11 @@ def_kind_name(def_kind_t kind) {
 void
 def_print(const def_t *def, file_t *file) {
     switch (def->kind) {
+    case DEF_PRIMITIVE: {
+        fprintf(file, "define-primitive %s ", def->primitive->name);
+        return;
+    }
+
     case DEF_FUNCTION: {
         fprintf(file, "define %s ", def->function->name);
         function_print(def->function, file);

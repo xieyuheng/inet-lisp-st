@@ -1,6 +1,7 @@
 #pragma once
 
 typedef enum {
+    DEF_PRIMITIVE,
     DEF_FUNCTION,
     DEF_NODE,
 } def_kind_t;
@@ -8,11 +9,13 @@ typedef enum {
 struct def_t {
     def_kind_t kind;
     union {
+        primitive_t *primitive;
         function_t *function;
         struct { node_ctor_t *ctor; list_t *rule_list; } node;
     };
 };
 
+def_t *def_primitive(primitive_t *primitive);
 def_t *def_function(function_t *function);
 def_t *def_node(node_ctor_t *ctor);
 
