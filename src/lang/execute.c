@@ -64,7 +64,6 @@ define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
     list_t *reversed_local_name_list = list_copy_reversed(local_name_list);
     size_t arity = list_length(reversed_local_name_list);
     function_t *function = function_new(arity);
-    printf("[define_rule_star]\n");
     compile_bind(vm, function, reversed_local_name_list);
     list_destroy(&reversed_local_name_list);
     compile_exp_list(vm, function, exp_list);

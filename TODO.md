@@ -1,4 +1,3 @@
-[lang] test `net_matcher` -- without running net
 [lang] test running net -- need primitive `connect` and `run`
 
 # more examples
