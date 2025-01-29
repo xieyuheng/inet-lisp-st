@@ -8,6 +8,7 @@
 #include "vm.h"
 #include "op.h"
 #include "function.h"
+#include "primitive.h"
 #include "rule.h"
 #include "def.h"
 #include "define_function.h"
