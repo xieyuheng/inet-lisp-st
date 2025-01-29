@@ -1,6 +1,11 @@
+[primitives] `import_all_primitives`
+
+[primitives] `connect`
+[primitives] `run`
+
 [lang] test running net -- need primitive `connect` and `run`
 
-[net] `matcher_match_node` find a way to keep the log
+[net] `matcher_match_node` -- remove log or find a way to keep log during debug
 
 # more examples
 
