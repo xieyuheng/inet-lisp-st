@@ -1,5 +1,7 @@
 [lang] test running net -- need primitive `connect` and `run`
 
+[net] `matcher_match_node` find a way to keep the log
+
 # more examples
 
 [example] examples/cellular-automata.lisp -- 1997-interaction-combinators.pdf

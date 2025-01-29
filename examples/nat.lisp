@@ -14,9 +14,12 @@
 
 (define (two) (add1 (add1 (zero))))
 
-(add1 (add1 (zero)))
+;; (add1 (add1 (zero)))
 
 (add (two) (two))
+
+;; (add (add1 (zero)) (zero))
+
 
 ;; (define (inspect-run wire)
 ;;   (wire-print-net (run (wire-print-net wire))))
