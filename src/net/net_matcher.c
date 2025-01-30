@@ -208,15 +208,15 @@ match_net(const net_pattern_t *net_pattern, size_t starting_index, node_t *node)
         return NULL;
     }
 
-    {
-        printf("[match_net] starting index: %lu\n", starting_index);
-        printf("[match_net] node: ");
-        node_print(node, stdout);
-        printf("\n");
-        printf("[match_net] successed\n");
-        net_matcher_print(self, stdout);
-        printf("\n");
-    }
+    // {
+    //     printf("[match_net] starting index: %lu\n", starting_index);
+    //     printf("[match_net] node: ");
+    //     node_print(node, stdout);
+    //     printf("\n");
+    //     printf("[match_net] successed\n");
+    //     net_matcher_print(self, stdout);
+    //     printf("\n");
+    // }
 
     return self;
 }
