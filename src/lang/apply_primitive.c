@@ -3,7 +3,7 @@
 void
 apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
     // TODO supplement wire if arity is short
-    assert(primitive->arity == arity);
+    assert(primitive->input_arity == arity);
 
     switch (primitive->fn_kind) {
     case PRIMITIVE_VM_FN: {

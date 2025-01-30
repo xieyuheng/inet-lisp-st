@@ -1,8 +1,8 @@
 #include "index.h"
 
 void
-define_primitive_vm_fn(mod_t *mod, const char *name, size_t arity, primitive_vm_fn_t *primitive_vm_fn) {
-    mod_define(mod, def_primitive(primitive_from_vm_fn(name, arity, primitive_vm_fn)));
+define_primitive_vm_fn(mod_t *mod, const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn) {
+    mod_define(mod, def_primitive(primitive_from_vm_fn(name, input_arity, output_arity, primitive_vm_fn)));
 }
 
 void

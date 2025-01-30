@@ -1,4 +1,3 @@
-[vm] `primitive` has `input_arity` vs `output_arity`
 [lang] back to `(=)` syntax -- to be more strict about arity
 [vm] `vm_print` -- should call `activity_print`
 
