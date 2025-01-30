@@ -1,9 +1,10 @@
+[command] `run_command` -- remove log_level support
+
+[lang] write the arity checker like a type checker
+
+- choose good names in the problem domain
+
 [vm] `vm_print` -- should call `activity_print`
-
-[vm] maybe quit using `value_stack` -- use `frame_stack` instead
-
-- learn from about language runtime
-
 [value] `xvoid` -- so that every function can return one value
 [lang] check arity -- compute arity from exp
 
