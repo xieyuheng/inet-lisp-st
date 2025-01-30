@@ -1,4 +1,3 @@
-[lang] back to `(=)` syntax -- to be more strict about arity
 [vm] `vm_print` -- should call `activity_print`
 
 [lang] check arity -- compute arity from exp

@@ -1,7 +1,7 @@
 (define-node sole value!)
 
 (define (main)
-  (wire-pair) (=> first second)
+  (= first second (wire-pair))
   (connect first (sole))
   (print second)
   (newline))

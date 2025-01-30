@@ -18,10 +18,11 @@ exp_ap(exp_t *target, list_t *arg_list) {
 }
 
 exp_t *
-exp_bind(list_t *name_list) {
+exp_bind(list_t *name_list, exp_t *exp) {
     exp_t *self = new(exp_t);
     self->kind = EXP_BIND;
     self->bind.name_list = name_list;
+    self->bind.exp = exp;
     return self;
 }
 
@@ -49,6 +50,7 @@ exp_destroy(exp_t **self_pointer) {
 
         case EXP_BIND: {
             list_destroy(&self->bind.name_list);
+            exp_destroy(&self->bind.exp);
             break;
         }
         }
@@ -73,7 +75,9 @@ exp_copy(const exp_t *self) {
     }
 
     case EXP_BIND: {
-        return exp_bind(string_list_copy(self->bind.name_list));
+        return exp_bind(
+            string_list_copy(self->bind.name_list),
+            exp_copy(self->bind.exp));
     }
     }
 

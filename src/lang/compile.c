@@ -71,6 +71,7 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
     }
 
     case EXP_BIND: {
+        compile_exp(vm, function, exp->bind.exp);
         compile_bind(vm, function, exp->bind.name_list);
         return;
     }
