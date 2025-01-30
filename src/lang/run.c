@@ -78,31 +78,41 @@ run_until(vm_t *vm, size_t base_length) {
 void
 step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
-    if (activity == NULL) return;
+    if (activity == NULL)
+        return;
 
     list_t *local_name_list =
         net_pattern_local_name_list(activity->net_matcher->net_pattern);
-
     char *name = list_first(local_name_list);
     while (name) {
         wire_t *wire = hash_get(activity->net_matcher->wire_hash, name);
         assert(wire);
         wire_free_from_node(wire);
         stack_push(vm->value_stack, wire);
-
         name = list_next(local_name_list);
     }
+
+    // net_matcher_print(activity->net_matcher, stdout);
+    // printf("\n");
 
     size_t length = net_pattern_length(activity->net_matcher->net_pattern);
     for (size_t i = 0; i < length; i++) {
         node_t *matched_node = activity->net_matcher->matched_nodes[i];
+        assert(matched_node);
         for (size_t k = 0; k < matched_node->ctor->arity; k++) {
             wire_t *wire = matched_node->wires[k];
+            assert(wire);
             if (wire_is_principal(wire)) {
+                // printf("[step_net] deleting principle wire: ");
+                // wire_print(wire, stdout);
+                // printf("\n");
                 vm_delete_wire(vm, wire);
             }
         }
 
+        // printf("[step_net] deleting matched node: ");
+        // node_print(matched_node, stdout);
+        // printf("\n");
         vm_delete_node(vm, matched_node);
     }
 

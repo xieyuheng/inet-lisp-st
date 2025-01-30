@@ -5,6 +5,7 @@ vm_new(mod_t *mod) {
     vm_t *self = new(vm_t);
     self->mod = mod;
     self->activity_list = list_new_with((destroy_fn_t *) activity_destroy);
+    self->matched_node_set = set_new();
     // TODO We should use value_destroy to create value_stack.
     self->value_stack = stack_new();
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
@@ -21,6 +22,7 @@ vm_destroy(vm_t **self_pointer) {
     if (*self_pointer) {
         vm_t *self = *self_pointer;
         list_destroy(&self->activity_list);
+        set_destroy(&self->matched_node_set);
         stack_destroy(&self->value_stack);
         stack_destroy(&self->return_stack);
         set_destroy(&self->wire_set);
@@ -91,6 +93,9 @@ vm_connect_top_wire_pair(vm_t *self) {
 void
 vm_maybe_add_activity(vm_t *self, node_t *node) {
     assert(node);
+
+    if (set_has(self->matched_node_set, node)) return;
+
     const def_t *def = mod_find_def(self->mod, node->ctor->name);
     if (def == NULL) return;
 
@@ -104,6 +109,11 @@ vm_maybe_add_activity(vm_t *self, node_t *node) {
             // }
 
             list_push(self->activity_list, activity_new(rule, net_matcher));
+            size_t length = net_pattern_length(rule->net_pattern);
+            for (size_t i = 0; i < length; i++) {
+                node_t *matched_node = net_matcher->matched_nodes[i];
+                set_add(self->matched_node_set, matched_node);
+            }
             return;
         }
 
@@ -121,6 +131,7 @@ vm_add_node(vm_t* self, const node_ctor_t *ctor) {
 void
 vm_delete_node(vm_t* self, node_t *node) {
     set_delete(self->node_set, node);
+    set_delete(self->matched_node_set, node);
     node_destroy(&node);
 }
 

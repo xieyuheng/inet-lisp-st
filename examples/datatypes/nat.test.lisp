@@ -13,9 +13,6 @@
 (define (three) (add1 (two)))
 (define (four) (add1 (three)))
 
-(define (inspect-run wire)
-  (wire-print-net (run (wire-print-net wire))))
-
 (inspect-run
  (add (add (two) (two))
       (add (two) (two))))
@@ -63,10 +60,10 @@
 (define-rule (nat-max (add1 prev) second result)
   (nat-max-add1 prev second result))
 
-(define-rule (nat-max-add1 (zero) first result)
+(define-rule (nat-max-add1 first (zero) result)
   (add1 first result))
 
-(define-rule (nat-max-add1 (add1 prev) first result)
+(define-rule (nat-max-add1 first (add1 prev) result)
   (add1 (nat-max first prev) result))
 
 (inspect-run (nat-max (one) (two)))
