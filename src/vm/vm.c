@@ -83,11 +83,14 @@ vm_connect_top_wire_pair(vm_t *self) {
 
     wire_t *first_opposite = vm_wire_connect(self, second_wire, first_wire);
 
-    vm_maybe_add_activity(self, first_opposite->node);
+    if (first_opposite->node) {
+        vm_maybe_add_activity(self, first_opposite->node);
+    }
 }
 
 void
 vm_maybe_add_activity(vm_t *self, node_t *node) {
+    assert(node);
     const def_t *def = mod_find_def(self->mod, node->ctor->name);
     if (def == NULL) return;
 

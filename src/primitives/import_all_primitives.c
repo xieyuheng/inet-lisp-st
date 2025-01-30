@@ -52,7 +52,7 @@ import_all_primitives(mod_t *mod) {
     define_primitive_vm_fn(mod, "wire-print-net", 0, x_wire_print_net);
     define_primitive_vm_fn(mod, "wire-pair", 0, x_wire_pair);
     define_primitive_vm_fn(mod, "run", 0, x_run);
-    define_primitive_vm_fn(mod, "wire-debug", 0, x_wire_debug);
+    define_primitive_vm_fn(mod, "wire-debug", 1, x_wire_debug);
     define_primitive_vm_fn(mod, "debug", 0, x_debug);
 
     // console

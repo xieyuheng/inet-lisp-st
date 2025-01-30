@@ -13,7 +13,7 @@
 ;; (define-rule (diff-append (diff front back) rest result)
 ;;   (diff-open (diff front :value result) rest back))
 
-(define-rule (diff-open (diff front back) new-back old-back)
+(define-rule (diff-open new-back (diff front back) old-back)
   (connect back new-back)
   (connect front old-back))
 
@@ -33,16 +33,16 @@
 
 (define-node sole value!)
 
-(define (inspect-run wire)
-  (wire-print-net (run (wire-print-net wire))))
-
 (define (sole-diff-list)
   (wire-pair) (=> front front-op)
   (diff front) (=> back value)
   (cons (sole) (cons (sole) back) front-op)
   value)
 
-(inspect-run
- (diff-append
-  (sole-diff-list)
-  (sole-diff-list)))
+(diff-append
+ (sole-diff-list)
+ (sole-diff-list))
+
+(wire-print-net)
+(run)
+(wire-print-net)
