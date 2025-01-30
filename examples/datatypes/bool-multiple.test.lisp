@@ -15,12 +15,9 @@
 (define-rule (disj (f) (t) z) (t z))
 (define-rule (disj (f) (f) z) (f z))
 
-(disj
- (conj (conj (t) (t))
-       (conj (f) (t)))
- (disj (disj (t) (t))
-       (disj (f) (t))))
-
-(wire-print-net)
-(run)
-(wire-print-net)
+(inspect-run
+ (disj
+  (conj (conj (t) (t))
+        (conj (f) (t)))
+  (disj (disj (t) (t))
+        (disj (f) (t)))))

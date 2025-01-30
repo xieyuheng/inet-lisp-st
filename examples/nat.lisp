@@ -10,8 +10,5 @@
 
 (define (two) (add1 (add1 (zero))))
 
-(add (two) (two))
-
-(wire-print-net)
-(run)
-(wire-print-net)
+(inspect-run
+ (add (two) (two)))

@@ -39,10 +39,7 @@
   (cons (sole) (cons (sole) back) front-op)
   value)
 
-(diff-append
- (sole-diff-list)
- (sole-diff-list))
-
-(wire-print-net)
-(run)
-(wire-print-net)
+(inspect-run
+ (diff-append
+  (sole-diff-list)
+  (sole-diff-list)))

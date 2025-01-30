@@ -10,10 +10,7 @@
 
 (define-node sole value!)
 
-(append
- (cons (sole) (cons (sole) (cons (sole) (null))))
- (cons (sole) (cons (sole) (cons (sole) (null)))))
-
-(wire-print-net)
-(run)
-(wire-print-net)
+(inspect-run
+ (append
+  (cons (sole) (cons (sole) (cons (sole) (null))))
+  (cons (sole) (cons (sole) (cons (sole) (null))))))

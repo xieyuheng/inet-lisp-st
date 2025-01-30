@@ -30,6 +30,13 @@ x_run(vm_t *vm) {
 }
 
 void
+x_inspect_run(vm_t *vm) {
+    x_wire_print_net(vm);
+    x_run(vm);
+    x_wire_print_net(vm);
+}
+
+void
 x_wire_debug(vm_t *vm) {
     fprintf(stdout, "[wire-debug] start\n");
     wire_t *root = stack_top(vm->value_stack);
