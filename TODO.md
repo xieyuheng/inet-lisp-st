@@ -1,23 +1,10 @@
 [vm] `primitive` has `input_arity` vs `output_arity`
-
-# more examples
-
-[example] examples/cellular-automata.lisp -- 1997-interaction-combinators.pdf
-[example] examples/lambda.lisp -- use interaction combinators to implement lambda
-[example] examples/turing.lisp -- coding turing machine -- 2008-the-annotated-turing.djvu
-
-# primitive value
-
-[design] node ports can store any value -- not only wire, but also primitive values
-[design] the most important primitive value is function (closure)
-[design] write `list-map` as example that uses function
-[design] use explicit `copy` -- keep linear variable like simple
-
-# later
-
+[lang] back to `(=)` syntax -- to be more strict about arity
 [vm] `vm_print` -- should call `activity_print`
 
-# not sure
+[lang] check arity -- compute arity from exp
+
+# about arity
 
 [lang] compile_exp -- EXP_AP -- should not get `arity` from `list_length(exp->ap.arg_list)`
 
@@ -33,6 +20,19 @@
 - [stack] stack_push_list
 
 - use stack_pop_list and stack_push_list to save arguments by arity
+
+# more examples
+
+[example] examples/cellular-automata.lisp -- 1997-interaction-combinators.pdf
+[example] examples/lambda.lisp -- use interaction combinators to implement lambda
+[example] examples/turing.lisp -- coding turing machine -- 2008-the-annotated-turing.djvu
+
+# primitive value
+
+[design] node ports can store any value -- not only wire, but also primitive values
+[design] the most important primitive value is function (closure)
+[design] write `list-map` as example that uses function
+[design] use explicit `copy` -- keep linear variable like simple
 
 # debug
 

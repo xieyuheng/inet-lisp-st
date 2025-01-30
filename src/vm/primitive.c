@@ -8,7 +8,7 @@ object_spec_t primitive_object_spec = {
 static primitive_t *
 primitive_new(const char *name) {
     primitive_t *self = new(primitive_t);
-    self->spec = &primitive_object_spec;    
+    self->spec = &primitive_object_spec;
     self->name = string_copy(name);
     return self;
 }
