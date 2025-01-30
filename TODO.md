@@ -1,4 +1,5 @@
-remove `wire-debug`
+`debug_t` should not have root
+
 [vm] `primitive` has `input_arity` vs `output_arity`
 [net] `matcher_match_node` -- remove log or find a way to keep log during debug
 [bug] fix `forever.play`

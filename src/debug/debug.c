@@ -183,9 +183,11 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     }
 }
 
-static void
-debug_init(debug_t *self) {
+void
+debug_start(vm_t *vm) {
     srand(time(NULL));
+
+    debug_t *self = debug_new(vm);
 
     init_node_hash(self);
     init_node_physics(self);
@@ -196,21 +198,7 @@ debug_init(debug_t *self) {
     self->canvas->on_frame = (on_frame_fn_t *) on_frame;
     self->canvas->on_click = (on_click_fn_t *) on_click;
     self->canvas->hide_system_cursor = true;
-}
 
-void
-debug_start_with_root_wire(vm_t *vm, wire_t *root) {
-    debug_t *self = debug_new(vm);
-    self->root = root;
-    debug_init(self);
-    canvas_open(self->canvas);
-    debug_destroy(&self);
-}
-
-void
-debug_start(vm_t *vm) {
-    debug_t *self = debug_new(vm);
-    debug_init(self);
     canvas_open(self->canvas);
     debug_destroy(&self);
 }
