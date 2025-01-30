@@ -85,25 +85,43 @@ translate_pattern_sub_tree(
     exp_t *pattern_exp,
     const char *last_arg_name,
     list_t *pattern_exp_list
+);
+
+static list_t *
+translate_pattern_arg_list(
+    vm_t *vm,
+    list_t *arg_list,
+    list_t *pattern_exp_list
 ) {
-    assert(pattern_exp->kind == EXP_AP);
-    exp_t *target = exp_copy(pattern_exp->ap.target);
-    list_t *arg_list = exp_list_new();
-    exp_t *arg_exp = list_first(pattern_exp->ap.arg_list);
+    list_t *new_arg_list = exp_list_new();
+    exp_t *arg_exp = list_first(arg_list);
     while (arg_exp) {
         if (arg_exp->kind == EXP_VAR) {
-            list_push(arg_list, exp_copy(arg_exp));
+            list_push(new_arg_list, exp_copy(arg_exp));
         } else {
             char *fresh_name = vm_fresh_name(vm);
             char *name = string_append(fresh_name, "!");
             string_destroy(&fresh_name);
             translate_pattern_sub_tree(vm, arg_exp, name, pattern_exp_list);
-            list_push(arg_list, exp_var(name));
+            list_push(new_arg_list, exp_var(name));
         }
 
-        arg_exp = list_next(pattern_exp->ap.arg_list);
+        arg_exp = list_next(arg_list);
     }
 
+    return new_arg_list;
+}
+
+static void
+translate_pattern_sub_tree(
+    vm_t *vm,
+    exp_t *pattern_exp,
+    const char *last_arg_name,
+    list_t *pattern_exp_list
+) {
+    assert(pattern_exp->kind == EXP_AP);
+    exp_t *target = exp_copy(pattern_exp->ap.target);
+    list_t *arg_list = translate_pattern_arg_list(vm, pattern_exp->ap.arg_list, pattern_exp_list);
     list_push(arg_list, exp_var(string_copy(last_arg_name)));
     list_unshift(pattern_exp_list, exp_ap(target, arg_list));
 }
@@ -112,23 +130,8 @@ static list_t *
 translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
     assert(pattern_exp->kind == EXP_AP);
     exp_t *target = exp_copy(pattern_exp->ap.target);
-    list_t *arg_list = exp_list_new();
     list_t *pattern_exp_list = exp_list_new();
-    exp_t *arg_exp = list_first(pattern_exp->ap.arg_list);
-    while (arg_exp) {
-        if (arg_exp->kind == EXP_VAR) {
-            list_push(arg_list, exp_copy(arg_exp));
-        } else {
-            char *fresh_name = vm_fresh_name(vm);
-            char *name = string_append(fresh_name, "!");
-            string_destroy(&fresh_name);
-            translate_pattern_sub_tree(vm, arg_exp, name, pattern_exp_list);
-            list_push(arg_list, exp_var(name));
-        }
-
-        arg_exp = list_next(pattern_exp->ap.arg_list);
-    }
-
+    list_t *arg_list = translate_pattern_arg_list(vm, pattern_exp->ap.arg_list, pattern_exp_list);
     list_unshift(pattern_exp_list, exp_ap(target, arg_list));
     return pattern_exp_list;
 }
