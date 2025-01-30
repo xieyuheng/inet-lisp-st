@@ -22,5 +22,5 @@
        (disj (f) (t))))
 
 (wire-print-net)
-(debug)
+(run)
 (wire-print-net)

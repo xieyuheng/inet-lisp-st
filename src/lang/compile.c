@@ -11,7 +11,7 @@ compile_bind(vm_t *vm, function_t *function, list_t *name_list) {
             size_t old_index = (size_t) hash_get(function->local_index_hash, name);
             function_add_op(function, op_local_set(old_index));
         } else {
-            hash_set(function->local_index_hash, name, (void *) index);
+            assert(hash_set(function->local_index_hash, string_copy(name), (void *) index));
             function_add_op(function, op_local_set(index));
             index++;
         }

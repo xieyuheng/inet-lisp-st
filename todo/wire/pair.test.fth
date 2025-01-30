@@ -1,2 +1,0 @@
-wire-pair
-print-vm
