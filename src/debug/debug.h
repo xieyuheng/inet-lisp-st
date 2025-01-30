@@ -2,7 +2,6 @@
 
 struct debug_t {
     vm_t *vm;
-    wire_t *root;
 
     canvas_t *canvas;
     bool toggle_light_button_is_pressed;

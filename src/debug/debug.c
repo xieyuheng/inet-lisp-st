@@ -111,32 +111,13 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 
 hash_t *
 debug_new_node_hash(debug_t *self) {
-    if (!self->root) {
-        hash_t *node_hash = hash_new();
-        node_t *node = set_first(self->vm->node_set);
-        while (node) {
-            hash_set(node_hash, (void *) node->id, node);
-            node = set_next(self->vm->node_set);
-        }
-
-        return node_hash;
-    }
-
     hash_t *node_hash = hash_new();
-    wire_t *root = self->root;
-    if (!root ||
-        !root->opposite ||
-        !root->opposite->node)
-        return NULL;
-
-    node_iter_t *iter = node_iter_new(root->opposite->node);
-    node_t *node = node_iter_first(iter);
+    node_t *node = set_first(self->vm->node_set);
     while (node) {
         hash_set(node_hash, (void *) node->id, node);
-        node = node_iter_next(iter);
+        node = set_next(self->vm->node_set);
     }
 
-    node_iter_destroy(&iter);
     return node_hash;
 }
 
