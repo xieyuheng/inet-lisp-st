@@ -27,16 +27,11 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
 
 static void
 matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
-    // {
-    //     printf("[matcher_match_node] index: %lu", index);
-    //     printf(", node: ");
-    //     node_print(node, stdout);
-    //     printf("\n");
-    // }
+    const node_pattern_t *node_pattern =
+        net_pattern_get(self->net_pattern, index);
 
-    const node_pattern_t *node_pattern = net_pattern_get(self->net_pattern, index);
-
-    if (node_pattern->ctor != node->ctor) return;
+    if (node_pattern->ctor != node->ctor)
+        return;
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
         port_info_t *port_info = node_pattern->port_infos[i];
@@ -54,9 +49,8 @@ matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
                 assert(hash_set(self->wire_hash, string_copy(port_info->name), wire));
             }
         } else {
-            if (!hash_set(self->wire_hash, string_copy(port_info->name), wire)) {
+            if (!hash_set(self->wire_hash, string_copy(port_info->name), wire))
                 return;
-            }
         }
     }
 
@@ -115,34 +109,13 @@ matcher_is_success(const net_matcher_t *self) {
 
 static void
 matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
-    // {
-    //     printf("[matcher_start] starting index: %lu\n", starting_index);
-    //     printf("[matcher_start] starting node: ");
-    //     node_print(node, stdout);
-    //     printf("\n");
-    // }
-
     size_t index = starting_index;
     matcher_match_node(self, index, node);
     const char *name = matcher_next_principle_name(self);
     while (name) {
-        // {
-        //     printf("[matcher_start/while %s]\n", name);
-        // }
         node = matcher_next_node(self, name);
-        if (node == NULL) {
-            // printf("[matcher_start/fail %s] next index: %lu\n", name, index);
-            return;
-        }
-
+        if (node == NULL) return;
         index = matcher_next_index(self, name);
-        // {
-        //     printf("[matcher_start/while %s] next index: %lu\n", name, index);
-        //     printf("[matcher_start/while %s] next node: ", name);
-        //     node_print(node, stdout);
-        //     printf("\n");
-        // }
-
         matcher_match_node(self, index, node);
 
         name = matcher_next_principle_name(self);
