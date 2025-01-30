@@ -110,9 +110,6 @@ The whole program with test:
 
 (define (two) (add1 (add1 (zero))))
 
-(define (inspect-run wire)
-  (wire-print-net (run (wire-print-net wire))))
-
 (inspect-run (add (two) (two)))
 ```
 
@@ -163,9 +160,6 @@ The whole program with test:
   (cons head (append tail rest) result))
 
 (define-node sole value!)
-
-(define (inspect-run wire)
-  (wire-print-net (run (wire-print-net wire))))
 
 (inspect-run
   (append
