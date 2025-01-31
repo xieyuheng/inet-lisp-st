@@ -101,4 +101,4 @@
   (connect l (o^ (x (o^ (x (x^ (o r))))))))
 
 (main)
-;; (debug)
+(debug)
