@@ -1,14 +1,18 @@
-[command] `run_command` -- remove log_level support
+# output
+
+output sexp instead of xml
+
+[vm] `vm_print` -- should call `activity_print`
+
+# arity checker
 
 [lang] write the arity checker like a type checker
 
 - choose good names in the problem domain
 
-[vm] `vm_print` -- should call `activity_print`
 [value] `xvoid` -- so that every function can return one value
-[lang] check arity -- compute arity from exp
 
-# about arity
+[lang] check arity -- compute arity from exp
 
 [lang] compile_exp -- EXP_AP -- should not get `arity` from `list_length(exp->ap.arg_list)`
 

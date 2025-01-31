@@ -15,7 +15,6 @@ struct vm_t {
     // i simply record the pointers in vm for now.
     set_t *wire_set;
     set_t *node_set;
-    size_t log_level;
 };
 
 vm_t *vm_new(mod_t *mod);

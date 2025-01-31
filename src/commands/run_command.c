@@ -11,7 +11,7 @@ run_command(commander_t *runner) {
 }
 
 void
-run_file(const char *path, size_t log_level) {
+run_file(const char *path) {
     file_t *file = file_open_or_fail(path, "r");
     const char *code = file_read_string(file);
     fclose(file);
@@ -19,7 +19,6 @@ run_file(const char *path, size_t log_level) {
     mod_t *mod = mod_new(path, code);
     import_all_primitives(mod);
     vm_t *vm = vm_new(mod);
-    vm->log_level = log_level;
 
     list_t *sexp_list = sexp_parse_list(code) ;
     list_t *stmt_list = parse_stmt_list(sexp_list);
@@ -37,16 +36,7 @@ run_file(const char *path, size_t log_level) {
 
 int
 run(commander_t *commander) {
-    size_t log_level = false;
-
     char **paths = commander_rest_argv(commander);
-    while (*paths) {
-        char *path = *paths++;
-        if (string_equal(path, "--log-level=1")) {
-            log_level = 1;
-        }
-    }
-
     paths = commander_rest_argv(commander);
     while (*paths) {
         char *path = *paths++;
@@ -54,7 +44,7 @@ run(commander_t *commander) {
             continue;
 
         if (string_ends_with(path, ".lisp")) {
-            run_file(path, log_level);
+            run_file(path);
         } else  {
             fprintf(stderr, "[run] file name must ends with .lisp, given file name: %s\n", path);
             exit(1);

@@ -60,18 +60,18 @@ step(vm_t *vm) {
 
 void
 run_until(vm_t *vm, size_t base_length) {
-    if (vm->log_level > 0) {
-        vm_print(vm, stdout);
-        fprintf(stdout, "\n");
-    }
+    // {
+    //     vm_print(vm, stdout);
+    //     fprintf(stdout, "\n");
+    // }
 
     while (stack_length(vm->return_stack) > base_length) {
         step(vm);
 
-        if (vm->log_level > 0) {
-            vm_print(vm, stdout);
-            fprintf(stdout, "\n");
-        }
+        // {
+        //     vm_print(vm, stdout);
+        //     fprintf(stdout, "\n");
+        // }
     }
 }
 
