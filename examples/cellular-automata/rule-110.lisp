@@ -24,11 +24,11 @@
 (define-rule (o (x^ r) l) (ox^ (ox r) l))
 (define-rule (x (x^ r) l) (xx^ (xx r) l))
 
-;; | x x x | x x o | x o x | x o o | o x x | o x o | o o x | o o o |
-;; |   o   |   x   |   x   |   o   |   x   |   x   |   x   |   o   |
-
 ;; l-|pq>-<rs^|-r => l-<q'^|-|r'>-r
 ;; (define-rule (pq (rs^ r) l) (q'^ (r' r) l))
+
+;; | x x x | x x o | x o x | x o o | o x x | o x o | o o x | o o o |
+;; |   o   |   x   |   x   |   o   |   x   |   x   |   x   |   o   |
 
 ;; x x x x
 ;;   o o
