@@ -94,7 +94,7 @@
 ;;   o o
 (define-rule (oo (oo^ r) l) (o^ (o r) l))
 
-;; o x o x x o (circular)
+;; o x o x x o (in a circle)
 
 (define (main)
   (= l r (wire-pair))
