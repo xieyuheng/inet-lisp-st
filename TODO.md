@@ -1,7 +1,8 @@
 # more examples
 
-[example] examples/lambda.lisp -- use interaction combinators to implement lambda
+[example] finite-automata
 [example] examples/turing.lisp -- coding turing machine -- 2008-the-annotated-turing.djvu
+[example] examples/lambda.lisp -- use interaction combinators to implement lambda
 
 # primitive value
 
@@ -19,7 +20,6 @@
 learn linux thread
 shared memory parallel execution of inet
 projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
-
 
 # output
 

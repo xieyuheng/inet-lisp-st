@@ -27,9 +27,10 @@ to interaction combinators will be explored only later.
 Statements:
 
 ```xml
-(define-node <name> <ports>)
-(define-rule <pattern> <exps>)
-(define (<name> <arg-names>) <exps>)
+(define-node <name> <port-name> ...)
+(define-rule <pattern-exp> <exp> ...)
+(define-rule* (<pattern-exp> ...) <exp> ...)
+(define (<name> <arg-name> ...) <exp> ...)
 ```
 
 ## Examples
