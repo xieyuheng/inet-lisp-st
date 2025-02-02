@@ -1,19 +1,19 @@
 (define-type list-t
-  [element-t type-t]
-  [value! type-t])
+  (element-t type-t)
+  (value! type-t))
 
 (define-node null
-  [value! (list-t :A)])
+  (value! (list-t :A)))
 
 (define-node cons
-  [head :A]
-  [tail (list-t :A)]
-  [value! (list-t :A)])
+  (head :A)
+  (tail (list-t :A))
+  (value! (list-t :A)))
 
 (define-node append
-  [target! (list-t :A)]
-  [rest (list-t :A)]
-  [result (list-t :A)])
+  (target! (list-t :A))
+  (rest (list-t :A))
+  (result (list-t :A)))
 
 ;; 假设 define-type 所定义的是一种特殊的 node，
 ;; type node 和自身反应会消除自身并且形成 unification，
