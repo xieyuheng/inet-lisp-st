@@ -35,7 +35,7 @@
   (C car-second cdr-second second))
 
 (define (forever)
-  (= car car-op (wire-pair))
+  (= car car-op (link))
   (= first second (D (C car (E))))
   (E first)
   (connect car-op second))

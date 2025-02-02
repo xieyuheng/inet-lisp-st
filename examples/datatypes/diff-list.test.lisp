@@ -34,7 +34,7 @@
 (define-node sole value!)
 
 (define (sole-diff-list)
-  (= front front-op (wire-pair))
+  (= front front-op (link))
   (= back value (diff front))
   (cons (sole) (cons (sole) back) front-op)
   value)
