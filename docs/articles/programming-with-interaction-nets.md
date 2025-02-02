@@ -635,7 +635,7 @@ the relationship between all nodes is symmetric.
 ;; test
 
 (define (sole-diff-list)
-  (let* ([front front-op (wire-pair)]
+  (let* ([front front-op (link)]
          [back value (diff front)])
     (cons (sole) (cons (sole) back) front-op)
     value))
