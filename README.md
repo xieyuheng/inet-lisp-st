@@ -28,8 +28,8 @@ Statements:
 
 ```xml
 (define-node <name> <port-name> ...)
-(define-rule <pattern-exp> <exp> ...)
-(define-rule* (<pattern-exp> ...) <exp> ...)
+(define-rule <pattern> <exp> ...)
+(define-rule* (<pattern> ...) <exp> ...)
 (define (<name> <arg-name> ...) <exp> ...)
 ```
 
