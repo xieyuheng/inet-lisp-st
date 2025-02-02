@@ -48,7 +48,7 @@ The rule between `(add1)` and `(add)` as ASCII art:
 ```
      value             value            value
        |                 |                |
-    (add)       =>                =>    (add1)
+     (add)      =>                =>    (add1)
      /   \                 \              |
 (add1)   addend           addend        (add)
    |                 |                  /   \
@@ -98,7 +98,7 @@ Example interaction:
 
 The whole program with test:
 
-```scheme
+```
 (define-node zero value!)
 (define-node add1 prev value!)
 (define-node add target! addend result)
