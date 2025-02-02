@@ -98,7 +98,7 @@ Example interaction:
 
 The whole program with test:
 
-```
+```scheme
 (define-node zero value!)
 (define-node add1 prev value!)
 (define-node add target! addend result)
@@ -179,18 +179,18 @@ The whole program with test:
 <body>
 (cons₇)-value!-<>-!target-(append₁₅)
 (cons₁₄)-value!-<>-rest-(append₁₅)
-(cons₁₂)-value!-<>-tail-(cons₁₄)
-(sole₁₃)-value!-<>-head-(cons₁₄)
-(cons₁₀)-value!-<>-tail-(cons₁₂)
-(sole₁₁)-value!-<>-head-(cons₁₂)
-(null₈)-value!-<>-tail-(cons₁₀)
-(sole₉)-value!-<>-head-(cons₁₀)
-(cons₅)-value!-<>-tail-(cons₇)
-(sole₆)-value!-<>-head-(cons₇)
-(cons₃)-value!-<>-tail-(cons₅)
-(sole₄)-value!-<>-head-(cons₅)
-(null₁)-value!-<>-tail-(cons₃)
-(sole₂)-value!-<>-head-(cons₃)
+(sole₈)-value!-<>-head-(cons₁₄)
+(cons₁₃)-value!-<>-tail-(cons₁₄)
+(sole₉)-value!-<>-head-(cons₁₃)
+(cons₁₂)-value!-<>-tail-(cons₁₃)
+(sole₁₀)-value!-<>-head-(cons₁₂)
+(null₁₁)-value!-<>-tail-(cons₁₂)
+(sole₁)-value!-<>-head-(cons₇)
+(cons₆)-value!-<>-tail-(cons₇)
+(sole₂)-value!-<>-head-(cons₆)
+(cons₅)-value!-<>-tail-(cons₆)
+(sole₃)-value!-<>-head-(cons₅)
+(null₄)-value!-<>-tail-(cons₅)
 </body>
 </net>
 
@@ -199,18 +199,18 @@ The whole program with test:
 (cons₁₇)-value!-<>-
 </root>
 <body>
+(sole₁)-value!-<>-head-(cons₁₇)
 (cons₁₉)-value!-<>-tail-(cons₁₇)
-(sole₆)-value!-<>-head-(cons₁₇)
+(sole₂)-value!-<>-head-(cons₁₉)
 (cons₂₁)-value!-<>-tail-(cons₁₉)
-(sole₄)-value!-<>-head-(cons₁₉)
+(sole₃)-value!-<>-head-(cons₂₁)
 (cons₁₄)-value!-<>-tail-(cons₂₁)
-(sole₂)-value!-<>-head-(cons₂₁)
-(cons₁₂)-value!-<>-tail-(cons₁₄)
-(sole₁₃)-value!-<>-head-(cons₁₄)
-(cons₁₀)-value!-<>-tail-(cons₁₂)
-(sole₁₁)-value!-<>-head-(cons₁₂)
-(null₈)-value!-<>-tail-(cons₁₀)
-(sole₉)-value!-<>-head-(cons₁₀)
+(sole₈)-value!-<>-head-(cons₁₄)
+(cons₁₃)-value!-<>-tail-(cons₁₄)
+(sole₉)-value!-<>-head-(cons₁₃)
+(cons₁₂)-value!-<>-tail-(cons₁₃)
+(sole₁₀)-value!-<>-head-(cons₁₂)
+(null₁₁)-value!-<>-tail-(cons₁₂)
 </body>
 </net>
 ```
