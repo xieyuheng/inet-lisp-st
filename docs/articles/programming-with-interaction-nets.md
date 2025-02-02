@@ -539,7 +539,7 @@ there will be no complicated syntax preventing us from doing so.
   (connect second (zero)))
 
 (define-rule (nat-dup (add1 prev) first second)
-  (let ([prev-first prev-second (nat-dup prev)])
+  (let ((prev-first prev-second (nat-dup prev)))
     (connect first (add1 prev-first))
     (connect second (add1 prev-second))))
 
@@ -550,7 +550,7 @@ there will be no complicated syntax preventing us from doing so.
   (zero result))
 
 (define-rule (mul (add1 prev) mulend result)
-  (let ([mulend-first mulend-second (nat-dup mulend)])
+  (let ((mulend-first mulend-second (nat-dup mulend)))
     (add (mul mulend-second prev)
          mulend-first
          result)))
@@ -624,7 +624,7 @@ the relationship between all nodes is symmetric.
 (define-node diff-open new-back target! old-back)
 
 (define-rule (diff-append (diff front back) rest result)
-  (let ([new-back value (diff front)])
+  (let ((new-back value (diff front)))
     (connect value result)
     (diff-open new-back rest back)))
 
@@ -635,8 +635,8 @@ the relationship between all nodes is symmetric.
 ;; test
 
 (define (sole-diff-list)
-  (let* ([front front-op (link)]
-         [back value (diff front)])
+  (let* ((front front-op (link))
+         (back value (diff front)))
     (cons (sole) (cons (sole) back) front-op)
     value))
 
