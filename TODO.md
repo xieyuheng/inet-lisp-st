@@ -1,8 +1,6 @@
-# more examples
+# module system
 
-[example] finite-automata
-[example] examples/turing.lisp -- coding turing machine -- 2008-the-annotated-turing.djvu
-[example] examples/lambda.lisp -- use interaction combinators to implement lambda
+支持简单的 import name，同时支持修改 name 以避免冲突
 
 # primitive value
 
@@ -10,10 +8,6 @@
 [design] the most important primitive value is function (closure)
 [design] write `list-map` as example that uses function
 [design] use explicit `copy` -- keep linear variable like simple
-
-# module system
-
-支持简单的 import name，同时支持修改 name 以避免冲突
 
 # parallelism
 
