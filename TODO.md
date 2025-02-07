@@ -1,6 +1,6 @@
 # module system
 
-支持简单的 import name，同时支持修改 name 以避免冲突
+[lang] `stmt_import` -- has `name_list` and `path`
 
 # primitive value
 

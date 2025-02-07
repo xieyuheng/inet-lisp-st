@@ -58,10 +58,9 @@ sexp_destroy(sexp_t **self_pointer) {
     }
 }
 
-static sexp_t *parse_sexp(list_t *token_list);
 static list_t *parse_list(list_t *token_list);
 
-sexp_t *
+static sexp_t *
 parse_sexp(list_t *token_list) {
     token_t *token = list_shift(token_list);
     if (string_equal(token->string, "(")) {
@@ -73,7 +72,7 @@ parse_sexp(list_t *token_list) {
     }
 }
 
-list_t *
+static list_t *
 parse_list(list_t *token_list) {
     list_t *sexp_list = list_new_with((destroy_fn_t *) sexp_destroy);
     while (!list_is_empty(token_list)) {
