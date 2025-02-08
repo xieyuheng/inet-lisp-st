@@ -1,6 +1,12 @@
+[path] setup `path` module
+[path] `path_t` -- has a stack
+- learn from other language's path API
+
 # module system
 
-[lang] `stmt_import` -- has `name_list` and `path`
+[lang] `STMT_IMPORT` -- has `name_list` and `path`
+[lang] `parse_stmt` -- `parse_import`
+[lang] `execute` -- handle `STMT_IMPORT`
 
 # primitive value
 
