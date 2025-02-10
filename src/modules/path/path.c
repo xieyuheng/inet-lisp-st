@@ -7,7 +7,7 @@ struct path_t {
 path_t *
 path_new(void) {
     path_t *self = new(path_t);
-    self->segment_stack = stack_new(); // TODO string_stack_new();
+    self->segment_stack = string_stack_new();
     return self;
 }
 
