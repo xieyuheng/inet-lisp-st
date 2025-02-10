@@ -196,6 +196,8 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_IMPORT: {
+        stmt_print(stmt, stdout);
+        printf("\n");
         // TODO
         return;
     }

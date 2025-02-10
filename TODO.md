@@ -1,5 +1,8 @@
 # module system
 
+[lang] setup `load`
+[lang] extract `load_mod` from `run_command`
+[lang] `load` has `global_mod_hash`
 [mv] `mod_t` -- has `path`
 [vm] need `rule_copy_shallow`
 [lang] `execute` -- handle `STMT_IMPORT`
