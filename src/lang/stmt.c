@@ -148,7 +148,10 @@ stmt_print(const stmt_t *self, file_t *file) {
     }
 
     case STMT_IMPORT: {
-        // TODO
+        fprintf(file, "(import ");
+        name_list_print(self->import.name_list, file);
+        fprintf(file, " \"%s\"", path_string(self->import.path));
+        fprintf(file, ")");
         return;
     }
     }

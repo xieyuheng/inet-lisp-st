@@ -1,6 +1,5 @@
 # module system
 
-[lang] `stmt_print` -- handle `STMT_IMPORT`
 [lang] `parse_stmt` -- `parse_import`
 [mv] `mod_t` -- has `path`
 [vm] need `rule_copy_shallow`
