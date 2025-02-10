@@ -1,3 +1,5 @@
+[bug] fix the use of `vm_maybe_add_activity` in `apply_node_ctor`
+
 test with (import)
 
 # module system
