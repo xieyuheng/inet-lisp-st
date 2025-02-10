@@ -1,8 +1,10 @@
-[path] setup `path_test`
-
 [path] `path_t` -- has `segment_stack` -- a segment is just a string
 [path] `path_new`
 [path] `path_destroy`
+
+[path] `path_copy`
+[path] `path_equal`
+
 [path] `path_add` -- add string
 [path] `path_join` -- join path
 [path] `path_string`
