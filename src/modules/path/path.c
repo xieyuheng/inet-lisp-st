@@ -44,7 +44,10 @@ next_segment(const char *string) {
     }
 
     entry_t *entry = new(entry_t);
-    entry->string = string + index + 1;
+    entry->string = string + index;
+    if (string_length(entry->string) > 0)
+        entry->string++;
+
     entry->segment = string_slice(string, 0, index);
     return entry;
 }
@@ -60,16 +63,19 @@ path_update_string(path_t *self) {
     }
 
     string_destroy(&self->string);
-    self->string = malloc(size);
+    self->string = allocate(size);
     char *string = self->string;
     for (size_t i = 0; i < length; i++) {
         char *segment = stack_get(self->segment_stack, i);
         strcat(string, segment);
         string += string_length(segment);
-        string[0] = '/';
+        if (i == length - 1) {
+            string[0] = '\0';
+        } else {
+            string[0] = '/';
+            string++;
+        }
     }
-
-    string[0] = '\0';
 }
 
 void

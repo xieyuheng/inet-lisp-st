@@ -1,11 +1,17 @@
-[path] test `path_new` and `path_add`
+ambr path_add path_join
+[path] `first_segment` -- for `absolute` path
+[path] extract `path_add_segment`
+[path] test `path_add` -- call `first_segment`
+
+[path] `path_add_segment` -- handle `.`
+[path] `path_add_segment` -- handle `..`
 
 [path] `path_is_relative` & `path_is_absolute`
 
 [path] `path_copy`
 [path] `path_equal`
 
-[path] `path_join` -- join path
+[path] `path_compose` -- compose path
 
 # module system
 
