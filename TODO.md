@@ -1,9 +1,5 @@
-[path] `first_segment` -- for `absolute` path
-[path] extract `path_join_segment`
-[path] test `path_join` -- call `first_segment`
-
-[path] `path_join_segment` -- handle `.` and ``
-[path] `path_join_segment` -- handle `..`
+[path] `path_execute` -- handle `.` and ``
+[path] `path_execute` -- handle `..`
 
 [path] `path_copy`
 [path] `path_equal`

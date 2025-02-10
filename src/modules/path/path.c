@@ -91,12 +91,17 @@ path_update_string(path_t *self) {
     }
 }
 
+static void
+path_execute(path_t *self, char *segment) {
+    stack_push(self->segment_stack, segment);
+}
+
 void
 path_join(path_t *self, const char *string) {
     entry_t *entry = next_segment(string);
     while (entry) {
+        path_execute(self, entry->segment);
         string = entry->string;
-        stack_push(self->segment_stack, entry->segment);
         free(entry);
         entry = next_segment(string);
     }
