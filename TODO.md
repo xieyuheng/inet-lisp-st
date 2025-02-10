@@ -1,11 +1,13 @@
-[path] `path_t` -- has `segment_stack` -- a segment is just a string
-[path] `path_new`
+[path] `path_add` -- add string to `segment_stack`
+[path] `path_new` -- call `path_add`
+
+[path] `path_parse` -- used by `path_add`
+
 [path] `path_destroy`
 
 [path] `path_copy`
 [path] `path_equal`
 
-[path] `path_add` -- add string
 [path] `path_join` -- join path
 [path] `path_string`
 
@@ -14,6 +16,8 @@
 [lang] `STMT_IMPORT` -- has `name_list` and `path`
 [lang] `parse_stmt` -- `parse_import`
 [lang] `execute` -- handle `STMT_IMPORT`
+
+[mv] `mod_t` -- has `path`
 
 # primitive value
 
