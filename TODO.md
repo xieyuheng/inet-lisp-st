@@ -1,7 +1,6 @@
 # module system
 
-[mv] `mod_t` -- has `path`
-[lang] `load` has `global_mod_hash`
+[lang] `load` -- has `global_mod_hash`
 [vm] need `rule_copy_shallow`
 [lang] `execute` -- handle `STMT_IMPORT`
 

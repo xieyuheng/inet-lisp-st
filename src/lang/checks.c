@@ -13,7 +13,7 @@ check_name_not_defined(
         fprintf(stderr, "[compiler-error] already defined to: ");
         def_print(found, stderr);
         fprintf(stderr, "\n");
-        fprintf(stderr, "[src] %s\n", mod->src);
+        fprintf(stderr, "[path] %s\n", path_string(mod->path));
         code_print_context(stderr, mod->code, token->start, token->end);
         exit(1);
     }
@@ -29,7 +29,7 @@ check_name_defined(
     const def_t *found = mod_find_def(mod, name);
     if (!found) {
         fprintf(stderr, "[compiler-error] undefined name: %s\n", name);
-        fprintf(stderr, "[src] %s\n", mod->src);
+        fprintf(stderr, "[path] %s\n", path_string(mod->path));
         code_print_context(stderr, mod->code, token->start, token->end);
         exit(1);
     }
@@ -45,14 +45,14 @@ check_node_name_defined(
     const def_t *found = mod_find_def(mod, name);
     if (!found) {
         fprintf(stderr, "[compiler-error] undefined node name: %s\n", name);
-        fprintf(stderr, "[src] %s\n", mod->src);
+        fprintf(stderr, "[path] %s\n", path_string(mod->path));
         code_print_context(stderr, mod->code, token->start, token->end);
         exit(1);
     }
 
     if (found->kind != DEF_NODE) {
         fprintf(stderr, "[compiler-error] expect name defined as node instead of: %s\n", def_kind_name(found->kind));
-        fprintf(stderr, "[src] %s\n", mod->src);
+        fprintf(stderr, "[path] %s\n", path_string(mod->path));
         code_print_context(stderr, mod->code, token->start, token->end);
         exit(1);
     }
@@ -75,7 +75,7 @@ check_port_name_defined(
 
     fprintf(stderr, "[compiler-error] undefined port name: %s\n", port_name);
     fprintf(stderr, "[compiler-error] for node name: %s\n", node_name);
-    fprintf(stderr, "[src] %s\n", mod->src);
+    fprintf(stderr, "[path] %s\n", path_string(mod->path));
     code_print_context(stderr, mod->code, token->start, token->end);
     exit(1);
 }

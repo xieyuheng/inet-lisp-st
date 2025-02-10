@@ -12,18 +12,18 @@ run_command(commander_t *runner) {
 
 int
 run(commander_t *commander) {
-    char **paths = commander_rest_argv(commander);
-    paths = commander_rest_argv(commander);
-    while (*paths) {
-        char *path = *paths++;
-        if (string_starts_with(path, "--"))
-            continue;
-
-        if (string_ends_with(path, ".lisp")) {
+    char **argv = commander_rest_argv(commander);
+    argv = commander_rest_argv(commander);
+    while (*argv) {
+        char *src = *argv++;
+        if (string_ends_with(src, ".lisp")) {
+            char *cwd = getcwd(NULL, 0);
+            path_t *path = path_new(cwd);
+            path_join(path, src);
             mod_t *mod = load_mod(path);
             mod_destroy(&mod);
         } else  {
-            fprintf(stderr, "[run] file name must ends with .lisp, given file name: %s\n", path);
+            fprintf(stderr, "[run] file name must ends with .lisp, given file name: %s\n", src);
             exit(1);
         }
     }

@@ -4,12 +4,12 @@
 // like the dictionary of forth.
 
 struct mod_t {
-    const char *src;
-    const char *code;
+    path_t *path;
+    char *code;
     hash_t *def_hash;
 };
 
-mod_t *mod_new(const char *src, const char *code);
+mod_t *mod_new(path_t *path, char *code);
 void mod_destroy(mod_t **self_pointer);
 
 const def_t *mod_find_def(const mod_t *self, const char *name);

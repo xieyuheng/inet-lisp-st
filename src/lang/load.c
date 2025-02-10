@@ -1,9 +1,9 @@
 #include "index.h"
 
 mod_t *
-load_mod(const char *path) {
-    file_t *file = file_open_or_fail(path, "r");
-    const char *code = file_read_string(file);
+load_mod(path_t *path) {
+    file_t *file = file_open_or_fail(path_string(path), "r");
+    char *code = file_read_string(file);
     fclose(file);
 
     mod_t *mod = mod_new(path, code);
