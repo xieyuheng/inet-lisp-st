@@ -1,7 +1,8 @@
+test with (import)
+
 # module system
 
-[vm] need `rule_copy_shallow`
-[lang] `execute` -- handle `STMT_IMPORT`
+[vm] need `rule_copy_shallow` -- to not edit `rule_list` of `imported_mod`
 
 # primitive value
 

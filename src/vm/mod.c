@@ -23,7 +23,7 @@ mod_destroy(mod_t **self_pointer) {
     }
 }
 
-const def_t *
+def_t *
 mod_find_def(const mod_t *self, const char *name) {
     return hash_get(self->def_hash, name);
 }

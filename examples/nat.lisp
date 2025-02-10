@@ -7,8 +7,3 @@
 
 (define-rule (add (add1 prev) addend result)
   (add1 (add prev addend) result))
-
-(define (two) (add1 (add1 (zero))))
-
-(inspect-run
- (add (two) (two)))

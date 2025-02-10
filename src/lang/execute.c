@@ -196,9 +196,23 @@ execute(vm_t *vm, stmt_t *stmt) {
     }
 
     case STMT_IMPORT: {
-        stmt_print(stmt, stdout);
-        printf("\n");
-        // TODO
+        path_t *path = path_copy(vm->mod->path);
+        path_join(path, "..");
+        path_join(path, path_string(stmt->import.path));
+        mod_t *imported_mod = load_mod(path);
+        char *name = list_first(stmt->import.name_list);
+        while (name) {
+            def_t *def = mod_find_def(imported_mod, name);
+            if (!def) {
+                fprintf(stderr, "[execute / import] unknown name: %s", name);
+                stmt_print(stmt, stderr);
+                exit(1);
+            }
+
+            mod_define(vm->mod, def);
+            name = list_next(stmt->import.name_list);
+        }
+
         return;
     }
     }
