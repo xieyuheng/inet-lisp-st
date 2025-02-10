@@ -1,5 +1,3 @@
-[path] `path_string`
-
 [path] test `path_new` and `path_add`
 
 [path] `path_is_relative` & `path_is_absolute`

@@ -2,6 +2,7 @@
 
 struct path_t {
     stack_t *segment_stack;
+    char *string;
 };
 
 path_t *
@@ -18,6 +19,7 @@ path_destroy(path_t **self_pointer) {
     if (*self_pointer) {
         path_t *self = *self_pointer;
         stack_destroy(&self->segment_stack);
+        string_destroy(&self->string);
         free(self);
         *self_pointer = NULL;
     }
@@ -47,6 +49,29 @@ next_segment(const char *string) {
     return entry;
 }
 
+static void
+path_update_string(path_t *self) {
+    size_t length = stack_length(self->segment_stack);
+    size_t size = 0;
+    for (size_t i = 0; i < length; i++) {
+        char *segment = stack_get(self->segment_stack, i);
+        size += string_length(segment);
+        size += 1;
+    }
+
+    string_destroy(&self->string);
+    self->string = malloc(size);
+    char *string = self->string;
+    for (size_t i = 0; i < length; i++) {
+        char *segment = stack_get(self->segment_stack, i);
+        strcat(string, segment);
+        string += string_length(segment);
+        string[0] = '/';
+    }
+
+    string[0] = '\0';
+}
+
 void
 path_add(path_t *self, const char *string) {
     entry_t *entry = next_segment(string);
@@ -56,4 +81,15 @@ path_add(path_t *self, const char *string) {
         free(entry);
         entry = next_segment(string);
     }
+
+    path_update_string(self);
+}
+
+const char *
+path_string(path_t *self) {
+    if (self->string)
+        return self->string;
+
+    path_update_string(self);
+    return self->string;
 }
