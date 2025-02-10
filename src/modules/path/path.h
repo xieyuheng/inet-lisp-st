@@ -6,5 +6,7 @@ void path_destroy(path_t **self_pointer);
 bool path_is_relative(const path_t *self);
 bool path_is_absolute(const path_t *self);
 
+path_t *path_copy(const path_t *self);
+
 void path_join(path_t *self, const char *string);
 const char *path_string(path_t *self);

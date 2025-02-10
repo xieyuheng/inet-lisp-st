@@ -38,6 +38,11 @@ path_is_absolute(const path_t *self) {
     return self->is_absolute;
 }
 
+path_t *
+path_copy(const path_t *self) {
+    return path_new(path_string(self));
+}
+
 typedef struct {
     const char *string;
     char *segment;
