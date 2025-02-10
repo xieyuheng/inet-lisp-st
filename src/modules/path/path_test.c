@@ -35,5 +35,37 @@ path_test(void) {
         path_destroy(&path);
     }
 
+    {
+        path_t *path = path_new("a/b/c");
+        assert(string_equal(path_string(path), "a/b/c"));
+        path_join(path, "d/e/f");
+        assert(string_equal(path_string(path), "a/b/c/d/e/f"));
+        path_destroy(&path);
+    }
+
+    {
+        path_t *path = path_new("a/b/c");
+        assert(string_equal(path_string(path), "a/b/c"));
+        path_join(path, "/d/e/f");
+        assert(string_equal(path_string(path), "a/b/c/d/e/f"));
+        path_destroy(&path);
+    }
+
+    {
+        path_t *path = path_new("/a/b/c");
+        assert(string_equal(path_string(path), "/a/b/c"));
+        path_join(path, "/d/e/f");
+        assert(string_equal(path_string(path), "/a/b/c/d/e/f"));
+        path_destroy(&path);
+    }
+
+    {
+        path_t *path = path_new("/a/b/c");
+        assert(string_equal(path_string(path), "/a/b/c"));
+        path_join(path, "../../d/e/f");
+        assert(string_equal(path_string(path), "/a/d/e/f"));
+        path_destroy(&path);
+    }
+
     printf("</path_test>\n");
 }
