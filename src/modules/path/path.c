@@ -10,9 +10,9 @@ path_t *
 path_new(const char *string) {
     path_t *self = new(path_t);
     self->segment_stack = string_stack_new();
-    path_join(self, string);
     if (string_starts_with(string, "/"))
         self->is_absolute = true;
+    path_join(self, string);
     return self;
 }
 
@@ -76,8 +76,16 @@ path_update_string(path_t *self) {
     }
 
     string_destroy(&self->string);
-    self->string = allocate(size);
-    char *string = self->string;
+    char *string = NULL;
+    if (path_is_absolute(self)) {
+        self->string = allocate(size + 1);
+        self->string[0] = '/';
+        string = self->string + 1;
+    } else {
+        self->string = allocate(size);
+        string = self->string;
+    }
+
     for (size_t i = 0; i < length; i++) {
         char *segment = stack_get(self->segment_stack, i);
         strcat(string, segment);

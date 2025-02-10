@@ -28,11 +28,12 @@ path_test(void) {
         path_destroy(&path);
     }
 
-    // {
-    //     path_t *path = path_new("/aa/bb/cc");
-    //     assert(string_equal(path_string(path), "/aa/bb/cc"));
-    //     path_destroy(&path);
-    // }
+    {
+        path_t *path = path_new("/aa/bb/cc");
+        assert(path_is_absolute(path));
+        assert(string_equal(path_string(path), "/aa/bb/cc"));
+        path_destroy(&path);
+    }
 
     printf("</path_test>\n");
 }
