@@ -1,6 +1,5 @@
 # module system
 
-[lang] `stmt_destroy` -- handle `STMT_IMPORT`
 [lang] `stmt_print` -- handle `STMT_IMPORT`
 [lang] `parse_stmt` -- `parse_import`
 [mv] `mod_t` -- has `path`

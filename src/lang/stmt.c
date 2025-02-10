@@ -91,7 +91,8 @@ stmt_destroy(stmt_t **self_pointer) {
         }
 
         case STMT_IMPORT: {
-            // TODO
+            list_destroy(&self->import.name_list);
+            path_destroy(&self->import.path);
             break;
         }
         }
