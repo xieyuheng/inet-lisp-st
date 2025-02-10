@@ -43,6 +43,11 @@ path_copy(path_t *self) {
     return path_new(path_string(self));
 }
 
+bool
+path_equal(path_t *x, path_t *y) {
+    return string_equal(path_string(x), path_string(y));
+}
+
 typedef struct {
     const char *string;
     char *segment;

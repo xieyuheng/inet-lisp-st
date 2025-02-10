@@ -1,4 +1,4 @@
-[path] `path_equal`
+[path] test `path_equal` -- test normalization
 
 # module system
 
