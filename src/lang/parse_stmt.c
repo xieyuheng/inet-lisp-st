@@ -94,9 +94,9 @@ parse_import(sexp_t *sexp) {
     sexp_t *name_sexp = list_next(sexp_list);
     path_t *path = NULL;
     while (name_sexp) {
-        // if (list_cursor_is_end(sexp_list))
-        //     path = path_new(sexp_token(name_sexp)->string);
-        // else
+        if (list_cursor_is_end(sexp_list))
+            path = path_new(sexp_token(name_sexp)->string);
+        else
             list_push(name_list, string_copy(sexp_string(name_sexp)));
 
         name_sexp = list_next(sexp_list);

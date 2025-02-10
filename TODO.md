@@ -1,9 +1,5 @@
 # module system
 
-[sexp] `sexp_token`
-
-- [lang] fix `parse_import`
-
 [mv] `mod_t` -- has `path`
 [vm] need `rule_copy_shallow`
 [lang] `execute` -- handle `STMT_IMPORT`

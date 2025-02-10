@@ -185,6 +185,12 @@ as_list_sexp(sexp_t *self) {
     return (list_sexp_t *) self;
 }
 
+const token_t *
+sexp_token(sexp_t *self) {
+    atom_sexp_t *atom_sexp = as_atom_sexp(self);
+    return atom_sexp->token;
+}
+
 const char *
 sexp_string(sexp_t *self) {
     atom_sexp_t *atom_sexp = as_atom_sexp(self);
