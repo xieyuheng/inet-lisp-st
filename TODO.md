@@ -1,6 +1,3 @@
-[path] `path_execute` -- handle `.` and ``
-[path] `path_execute` -- handle `..`
-
 [path] `path_copy`
 [path] `path_equal`
 

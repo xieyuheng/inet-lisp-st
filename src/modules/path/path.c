@@ -93,7 +93,18 @@ path_update_string(path_t *self) {
 
 static void
 path_execute(path_t *self, char *segment) {
-    stack_push(self->segment_stack, segment);
+    if (string_is_empty(segment))
+        return;
+    else if (string_equal(segment, "."))
+        return;
+    else if (string_equal(segment, "..")) {
+        string_destroy(&segment);
+        segment = stack_pop(self->segment_stack);
+        string_destroy(&segment);
+        return;
+    }
+    else
+        stack_push(self->segment_stack, segment);
 }
 
 void
