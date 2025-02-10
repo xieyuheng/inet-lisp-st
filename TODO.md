@@ -1,7 +1,5 @@
-[path] `path_add` -- add string to `segment_stack`
+[path] `path_add` -- call `first_segment` & `next_segment`
 [path] `path_new` -- call `path_add`
-
-[path] `path_parse` -- used by `path_add`
 
 [path] `path_copy`
 [path] `path_equal`
