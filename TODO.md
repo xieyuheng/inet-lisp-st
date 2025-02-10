@@ -1,6 +1,9 @@
 # module system
 
-[lang] `STMT_IMPORT` -- has `name_list` and `path`
+[lang] `stmt_destroy` -- handle `STMT_IMPORT`
+[lang] `stmt_print` -- handle `STMT_IMPORT`
+[lang] `execute` -- handle `STMT_IMPORT`
+
 [lang] `parse_stmt` -- `parse_import`
 [lang] `execute` -- handle `STMT_IMPORT`
 

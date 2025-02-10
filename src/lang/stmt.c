@@ -80,6 +80,11 @@ stmt_destroy(stmt_t **self_pointer) {
             exp_destroy(&self->compute_exp.exp);
             break;
         }
+
+        case STMT_IMPORT: {
+            // TODO
+            break;
+        }
         }
 
         free(self);
@@ -129,6 +134,11 @@ stmt_print(const stmt_t *self, file_t *file) {
 
     case STMT_COMPUTE_EXP: {
         exp_print(self->compute_exp.exp, file);
+        return;
+    }
+
+    case STMT_IMPORT: {
+        // TODO
         return;
     }
     }

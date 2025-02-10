@@ -6,6 +6,7 @@ typedef enum {
     STMT_DEFINE_RULE,
     STMT_DEFINE_RULE_STAR,
     STMT_COMPUTE_EXP,
+    STMT_IMPORT,
 } stmt_kind_t;
 
 struct stmt_t {
@@ -16,6 +17,7 @@ struct stmt_t {
         struct { exp_t *pattern_exp; list_t *exp_list; } define_rule;
         struct { list_t *pattern_exp_list; list_t *exp_list; } define_rule_star;
         struct { exp_t *exp; } compute_exp;
+        struct { list_t *name_list; path_t *path; } import;
     };
 };
 

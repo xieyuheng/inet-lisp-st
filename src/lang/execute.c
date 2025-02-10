@@ -194,5 +194,10 @@ execute(vm_t *vm, stmt_t *stmt) {
         compute_exp(vm, stmt->compute_exp.exp);
         return;
     }
+
+    case STMT_IMPORT: {
+        // TODO
+        return;
+    }
     }
 }
