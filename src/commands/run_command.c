@@ -20,8 +20,7 @@ run(commander_t *commander) {
             char *cwd = getcwd(NULL, 0);
             path_t *path = path_new(cwd);
             path_join(path, src);
-            mod_t *mod = load_mod(path);
-            mod_destroy(&mod);
+            load_mod(path);
         } else  {
             fprintf(stderr, "[run] file name must ends with .lisp, given file name: %s\n", src);
             exit(1);
