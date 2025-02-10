@@ -11,3 +11,4 @@
 #include "parse.h"
 #include "compile.h"
 #include "execute.h"
+#include "load.h"
