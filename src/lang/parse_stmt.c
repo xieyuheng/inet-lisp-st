@@ -86,6 +86,26 @@ parse_compute_exp(sexp_t *sexp) {
     return stmt_compute_exp(parse_exp(sexp));
 }
 
+static stmt_t *
+parse_import(sexp_t *sexp) {
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
+    list_t *name_list = string_list_new();
+    sexp_t *name_sexp = list_next(sexp_list);
+    path_t *path = NULL;
+    while (name_sexp) {
+        // if (list_cursor_is_end(sexp_list))
+        //     path = path_new(sexp_token(name_sexp)->string);
+        // else
+            list_push(name_list, string_copy(sexp_string(name_sexp)));
+
+        name_sexp = list_next(sexp_list);
+    }
+
+
+    return stmt_import(name_list, path);
+}
+
 stmt_t *
 parse_stmt(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "define-node"))
@@ -96,6 +116,8 @@ parse_stmt(sexp_t *sexp) {
         return parse_define_rule_star(sexp);
     else if (sexp_starts_with(sexp, "define"))
         return parse_define_function(sexp);
+    else if (sexp_starts_with(sexp, "import"))
+        return parse_import(sexp);
     else if (is_list_sexp(sexp))
         return parse_compute_exp(sexp);
     else
