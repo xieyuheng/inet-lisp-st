@@ -9,7 +9,7 @@ path_t *
 path_new(const char *string) {
     path_t *self = new(path_t);
     self->segment_stack = string_stack_new();
-    path_add(self, string);
+    path_join(self, string);
     return self;
 }
 
@@ -79,7 +79,7 @@ path_update_string(path_t *self) {
 }
 
 void
-path_add(path_t *self, const char *string) {
+path_join(path_t *self, const char *string) {
     entry_t *entry = next_segment(string);
     while (entry) {
         string = entry->string;
