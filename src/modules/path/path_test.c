@@ -67,5 +67,45 @@ path_test(void) {
         path_destroy(&path);
     }
 
+    {
+        path_t *x = path_new("/a/b/c");
+        path_t *y = path_new("/a/b/c/d/../d/../");
+        assert(path_equal(x, y));
+        path_destroy(&x);
+        path_destroy(&y);
+    }
+
+    {
+        path_t *x = path_new("../a/..");
+        path_t *y = path_new("..");
+        assert(path_equal(x, y));
+        path_destroy(&x);
+        path_destroy(&y);
+    }
+
+    {
+        path_t *x = path_new("../a/../../b/..");
+        path_t *y = path_new("../..");
+        assert(path_equal(x, y));
+        path_destroy(&x);
+        path_destroy(&y);
+    }
+
+    {
+        path_t *x = path_new("/a/b/c");
+        path_t *y = path_new("////a/////b/////c/////");
+        assert(path_equal(x, y));
+        path_destroy(&x);
+        path_destroy(&y);
+    }
+
+    {
+        path_t *x = path_new("/a/b/c");
+        path_t *y = path_new("/./././a/./././////b/././././c/././");
+        assert(path_equal(x, y));
+        path_destroy(&x);
+        path_destroy(&y);
+    }
+
     printf("</path_test>\n");
 }

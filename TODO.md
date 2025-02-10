@@ -1,5 +1,3 @@
-[path] test `path_equal` -- test normalization
-
 # module system
 
 [lang] `STMT_IMPORT` -- has `name_list` and `path`

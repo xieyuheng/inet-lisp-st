@@ -111,18 +111,23 @@ path_update_string(path_t *self) {
 
 static void
 path_execute(path_t *self, char *segment) {
-    if (string_is_empty(segment))
-        return;
-    else if (string_equal(segment, "."))
-        return;
-    else if (string_equal(segment, "..")) {
+    if (string_is_empty(segment)) {
         string_destroy(&segment);
-        segment = stack_pop(self->segment_stack);
+    } else if (string_equal(segment, ".")) {
         string_destroy(&segment);
-        return;
-    }
-    else
+    } else if (string_equal(segment, "..")) {
+        if (stack_is_empty(self->segment_stack) ||
+            string_equal(stack_top(self->segment_stack), ".."))
+        {
+            stack_push(self->segment_stack, segment);
+        } else {
+            string_destroy(&segment);
+            segment = stack_pop(self->segment_stack);
+            string_destroy(&segment);
+        }
+    } else {
         stack_push(self->segment_stack, segment);
+    }
 }
 
 void
