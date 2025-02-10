@@ -26,6 +26,7 @@ stmt_t *stmt_define_node(char *name, list_t *port_name_list);
 stmt_t *stmt_define_rule(exp_t *pattern_exp, list_t *exp_list);
 stmt_t *stmt_define_rule_star(list_t *pattern_exp_list, list_t *exp_list);
 stmt_t *stmt_compute_exp(exp_t *exp);
+stmt_t *stmt_import(list_t *name_list, path_t *path);
 
 void stmt_destroy(stmt_t **self_pointer);
 

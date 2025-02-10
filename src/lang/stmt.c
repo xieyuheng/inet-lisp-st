@@ -45,6 +45,15 @@ stmt_compute_exp(exp_t *exp) {
     return self;
 }
 
+stmt_t *
+stmt_import(list_t *name_list, path_t *path) {
+    stmt_t *self = new(stmt_t);
+    self->kind = STMT_IMPORT;
+    self->import.name_list = name_list;
+    self->import.path = path;
+    return self;
+}
+
 void
 stmt_destroy(stmt_t **self_pointer) {
     assert(self_pointer);

@@ -2,12 +2,14 @@
 
 [lang] `stmt_destroy` -- handle `STMT_IMPORT`
 [lang] `stmt_print` -- handle `STMT_IMPORT`
-[lang] `execute` -- handle `STMT_IMPORT`
 
 [lang] `parse_stmt` -- `parse_import`
-[lang] `execute` -- handle `STMT_IMPORT`
 
 [mv] `mod_t` -- has `path`
+
+[lang] `execute` -- handle `STMT_IMPORT`
+
+[vm] [maybe] `rule_copy_shallow`
 
 # primitive value
 
