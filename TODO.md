@@ -1,5 +1,3 @@
-[path] `path_new` -- call `path_add`
-
 [path] `first_segment` & `next_segment`
 
 [path] `path_string`

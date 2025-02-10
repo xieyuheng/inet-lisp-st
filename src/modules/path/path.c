@@ -5,9 +5,10 @@ struct path_t {
 };
 
 path_t *
-path_new(void) {
+path_new(const char *string) {
     path_t *self = new(path_t);
     self->segment_stack = string_stack_new();
+    path_add(self, string);
     return self;
 }
 
