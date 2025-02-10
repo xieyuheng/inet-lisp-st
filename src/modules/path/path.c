@@ -33,8 +33,18 @@ next_segment(const char *string) {
     if (string_is_empty(string))
         return NULL;
 
-    // TODO
-    return NULL;
+    int index = string_find_index(string, '/');
+    if (index == -1) {
+        entry_t *entry = new(entry_t);
+        entry->string = string + string_length(string);
+        entry->segment = string_copy(string);
+        return entry;
+    }
+
+    entry_t *entry = new(entry_t);
+    entry->string = string + index + 1;
+    entry->segment = string_slice(string, 0, index);
+    return entry;
 }
 
 void

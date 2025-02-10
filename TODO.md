@@ -1,4 +1,3 @@
-[path] `next_segment`
 [path] `path_string`
 
 [path] test `path_new` and `path_add`
