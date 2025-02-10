@@ -1,9 +1,12 @@
+[stack] `string_stack_new`
+
+[path] `path_new` -- call `string_stack_new`
+[path] `path_destroy`
+
 [path] `path_add` -- add string to `segment_stack`
 [path] `path_new` -- call `path_add`
 
 [path] `path_parse` -- used by `path_add`
-
-[path] `path_destroy`
 
 [path] `path_copy`
 [path] `path_equal`
