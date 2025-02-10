@@ -1,6 +1,11 @@
-[path] setup `path` module
-[path] `path_t` -- has a stack
-- learn from other language's path API
+[path] setup `path_test`
+
+[path] `path_t` -- has `segment_stack` -- a segment is just a string
+[path] `path_new`
+[path] `path_destroy`
+[path] `path_add` -- add string
+[path] `path_join` -- join path
+[path] `path_string`
 
 # module system
 
