@@ -3,6 +3,7 @@
 struct path_t {
     stack_t *segment_stack;
     char *string;
+    bool is_absolute;
 };
 
 path_t *
@@ -10,6 +11,8 @@ path_new(const char *string) {
     path_t *self = new(path_t);
     self->segment_stack = string_stack_new();
     path_join(self, string);
+    if (string_starts_with(string, "/"))
+        self->is_absolute = true;
     return self;
 }
 

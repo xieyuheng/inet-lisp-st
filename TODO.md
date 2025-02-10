@@ -1,16 +1,14 @@
+[path] `path_is_relative` & `path_is_absolute`
+
 [path] `first_segment` -- for `absolute` path
 [path] extract `path_join_segment`
 [path] test `path_join` -- call `first_segment`
 
-[path] `path_join_segment` -- handle `.`
+[path] `path_join_segment` -- handle `.` and ``
 [path] `path_join_segment` -- handle `..`
-
-[path] `path_is_relative` & `path_is_absolute`
 
 [path] `path_copy`
 [path] `path_equal`
-
-[path] `path_compose` -- compose path
 
 # module system
 
