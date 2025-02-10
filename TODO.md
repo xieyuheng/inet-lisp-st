@@ -1,11 +1,17 @@
-[path] `path_add` -- call `first_segment` & `next_segment`
 [path] `path_new` -- call `path_add`
+
+[path] `first_segment` & `next_segment`
+
+[path] `path_string`
+
+[path] test `path_new` and `path_add`
+
+[path] `path_is_relative` & `path_is_absolute`
 
 [path] `path_copy`
 [path] `path_equal`
 
 [path] `path_join` -- join path
-[path] `path_string`
 
 # module system
 

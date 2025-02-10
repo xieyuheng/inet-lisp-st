@@ -21,3 +21,31 @@ path_destroy(path_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+typedef struct {
+    const char *string;
+    char *segment;
+}  entry_t;
+
+static entry_t *
+first_segment(const char *string) {
+    (void) string;
+    return NULL;
+}
+
+static entry_t *
+next_segment(const char *string) {
+    (void) string;
+    return NULL;
+}
+
+void
+path_add(path_t *self, const char *string) {
+    entry_t *entry = first_segment(string);
+    while (entry) {
+        string = entry->string;
+        stack_push(self->segment_stack, entry->segment);
+        free(entry);
+        entry = next_segment(string);
+    }
+}
