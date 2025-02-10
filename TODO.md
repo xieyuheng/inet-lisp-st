@@ -1,4 +1,3 @@
-[path] `path_copy`
 [path] `path_equal`
 
 # module system
