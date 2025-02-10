@@ -1,4 +1,7 @@
-[bug] fix the use of `vm_maybe_add_activity` in `apply_node_ctor`
+[bug] fix the use of `vm_maybe_add_activity`
+
+- in `apply_node_ctor` & `vm_connect_top_wire_pair`
+- inline `vm_connect_top_wire_pair`
 
 test with (import)
 
