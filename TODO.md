@@ -1,5 +1,3 @@
-[path] `path_is_relative` & `path_is_absolute`
-
 [path] `first_segment` -- for `absolute` path
 [path] extract `path_join_segment`
 [path] test `path_join` -- call `first_segment`

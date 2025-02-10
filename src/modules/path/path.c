@@ -28,6 +28,16 @@ path_destroy(path_t **self_pointer) {
     }
 }
 
+bool
+path_is_relative(const path_t *self) {
+    return !self->is_absolute;
+}
+
+bool
+path_is_absolute(const path_t *self) {
+    return self->is_absolute;
+}
+
 typedef struct {
     const char *string;
     char *segment;
