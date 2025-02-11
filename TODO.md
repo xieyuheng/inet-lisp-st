@@ -1,4 +1,5 @@
-test with (import)
+[net] `node_ctor_t` has `rule_list` -- to fix module system
+[examples] test with `(import)`
 
 # module system
 

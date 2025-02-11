@@ -32,11 +32,6 @@ activate_node(vm_t *vm, node_t *node) {
     while (rule) {
         net_matcher_t *net_matcher = match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
-            // {
-            //     function_print(rule->function, stdout);
-            //     printf("\n");
-            // }
-
             list_push(vm->activity_list, activity_new(rule, net_matcher));
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++) {
