@@ -83,6 +83,8 @@ init_canvas_font(canvas_t *canvas) {
     canvas->font = font_from_hex_string(blob_string(blob));
 }
 
+extern void step_net(vm_t *vm);
+
 static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     (void) passed;
