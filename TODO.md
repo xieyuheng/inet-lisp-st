@@ -1,6 +1,8 @@
 # module system
 
+[question] how to handle defining rule for import nodes
 [vm] need `rule_copy_shallow` -- to not edit `rule_list` of `imported_mod`
+[tests] undefined-node.error
 
 # primitive value
 
