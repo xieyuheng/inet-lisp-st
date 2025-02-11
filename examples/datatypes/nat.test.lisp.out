@@ -52,41 +52,36 @@
 
 <net>
 <root>
-(add₄₁)-result-<>-
+(add1₇₆)-value!-<>-
 </root>
 <body>
-(mul₄₀)-result-<>-!target-(add₄₁)
-(add1₄₃)-value!-<>-addend-(add₄₁)
+(add1₇₈)-value!-<>-prev-(add1₇₆)
+(add1₄₃)-value!-<>-prev-(add1₇₈)
 (add1₄₆)-value!-<>-prev-(add1₄₃)
-(zero₄₈)-value!-<>-prev-(add1₄₆)
-(add1₄₄)-value!-<>-!target-(mul₄₀)
-(add1₃₃)-value!-<>-mulend-(mul₄₀)
-(zero₃₂)-value!-<>-prev-(add1₃₃)
-(add1₄₇)-value!-<>-prev-(add1₄₄)
-(zero₄₉)-value!-<>-prev-(add1₄₇)
+(zero₅₁)-value!-<>-prev-(add1₄₆)
 </body>
 </net>
 
 <net>
 <root>
-(nat-max₅₅)-result-<>-
+(nat-max₈₄)-result-<>-
 </root>
 <body>
-(add1₅₁)-value!-<>-!first-(nat-max₅₅)
-(add1₅₄)-value!-<>-second-(nat-max₅₅)
-(add1₅₃)-value!-<>-prev-(add1₅₄)
-(zero₅₂)-value!-<>-prev-(add1₅₃)
-(zero₅₀)-value!-<>-prev-(add1₅₁)
+(add1₈₀)-value!-<>-!first-(nat-max₈₄)
+(add1₈₃)-value!-<>-second-(nat-max₈₄)
+(add1₈₂)-value!-<>-prev-(add1₈₃)
+(zero₈₁)-value!-<>-prev-(add1₈₂)
+(zero₇₉)-value!-<>-prev-(add1₈₀)
 </body>
 </net>
 
 <net>
 <root>
-(add1₅₈)-value!-<>-
+(add1₈₇)-value!-<>-
 </root>
 <body>
-(add1₅₃)-value!-<>-prev-(add1₅₈)
-(zero₅₂)-value!-<>-prev-(add1₅₃)
+(add1₈₂)-value!-<>-prev-(add1₈₇)
+(zero₈₁)-value!-<>-prev-(add1₈₂)
 </body>
 </net>
 

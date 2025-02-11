@@ -36,5 +36,9 @@ apply_node_ctor(vm_t *vm, node_ctor_t *node_ctor, size_t arity) {
     node_apply_input_ports(vm, node, arity);
     node_return_output_ports(vm, node, arity);
     activity_by_node(vm, node);
+    // for (size_t i = 0; i < node->ctor->arity; i++) {
+    //     wire_t *wire = node->wires[i];
+    // }
+
     return;
 }

@@ -5,13 +5,13 @@ x_connect(vm_t *vm) {
     wire_t *second_wire = stack_pop(vm->value_stack);
     wire_t *first_wire = stack_pop(vm->value_stack);
 
-    vm_wire_connect(vm, second_wire, first_wire);
+    wire_t *wire = vm_wire_connect(vm, second_wire, first_wire);
 
-    if (first_wire->node)
-        activity_by_node(vm, first_wire->node);
+    if (wire->node)
+        activity_by_node(vm, wire->node);
 
-    if (second_wire->node)
-        activity_by_node(vm, second_wire->node);
+    if (wire->opposite->node)
+        activity_by_node(vm, wire->opposite->node);
 }
 
 void
