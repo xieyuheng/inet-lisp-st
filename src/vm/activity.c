@@ -20,7 +20,7 @@ activity_destroy(activity_t **self_pointer) {
 }
 
 void
-activity_by_node(vm_t *vm, node_t *node) {
+activate_node(vm_t *vm, node_t *node) {
     assert(node);
 
     if (set_has(vm->matched_node_set, node)) return;

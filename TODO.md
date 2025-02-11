@@ -1,4 +1,3 @@
-ambr activity_by_node activate_node
 test with (import)
 
 # module system

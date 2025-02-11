@@ -36,7 +36,7 @@ apply_node_ctor(vm_t *vm, node_ctor_t *node_ctor, size_t arity) {
     node_apply_input_ports(vm, node, arity);
     node_return_output_ports(vm, node, arity);
 
-    activity_by_node(vm, node);
+    activate_node(vm, node);
 
     // NOTE for imported node ctor,
     // if is not enough to activate the new node only,
@@ -51,7 +51,7 @@ apply_node_ctor(vm_t *vm, node_ctor_t *node_ctor, size_t arity) {
         assert(wire);
         assert(wire->opposite);
         if (wire->opposite->node)
-            activity_by_node(vm, wire->opposite->node);
+            activate_node(vm, wire->opposite->node);
     }
 
     return;

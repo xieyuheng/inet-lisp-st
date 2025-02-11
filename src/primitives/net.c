@@ -8,10 +8,10 @@ x_connect(vm_t *vm) {
     wire_t *wire = vm_wire_connect(vm, second_wire, first_wire);
 
     if (wire->node)
-        activity_by_node(vm, wire->node);
+        activate_node(vm, wire->node);
 
     if (wire->opposite->node)
-        activity_by_node(vm, wire->opposite->node);
+        activate_node(vm, wire->opposite->node);
 }
 
 void

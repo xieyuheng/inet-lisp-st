@@ -24,7 +24,7 @@ void vm_print_return_stack(const vm_t *self, file_t *file);
 void vm_print_value_stack(const vm_t *self, file_t *file);
 void vm_print(const vm_t *self, file_t *file);
 
-void activity_by_node(vm_t *self, node_t *node);
+void activate_node(vm_t *self, node_t *node);
 
 node_t *vm_add_node(vm_t* self, const node_ctor_t *ctor);
 void vm_delete_node(vm_t* self, node_t *node);
