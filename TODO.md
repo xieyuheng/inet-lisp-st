@@ -1,4 +1,5 @@
-[net] `node_ctor_t` has `rule_list` -- to fix module system
+[net] fix module system
+[vm] flatten `def.node.ctor` to `def.node_ctor`
 [examples] test with `(import)`
 
 # module system

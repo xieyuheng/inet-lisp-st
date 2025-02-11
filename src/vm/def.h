@@ -11,7 +11,7 @@ struct def_t {
     union {
         primitive_t *primitive;
         function_t *function;
-        struct { node_ctor_t *ctor; list_t *rule_list; } node;
+        struct { node_ctor_t *ctor; } node;
     };
 };
 

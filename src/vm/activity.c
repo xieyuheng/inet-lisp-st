@@ -28,7 +28,7 @@ activate_node(vm_t *vm, node_t *node) {
     const def_t *def = mod_find_def(vm->mod, node->ctor->name);
     if (def == NULL) return;
 
-    rule_t *rule = list_first(def->node.rule_list);
+    rule_t *rule = list_first(def->node.ctor->rule_list);
     while (rule) {
         net_matcher_t *net_matcher = match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
@@ -41,6 +41,6 @@ activate_node(vm_t *vm, node_t *node) {
             return;
         }
 
-        rule = list_next(def->node.rule_list);
+        rule = list_next(def->node.ctor->rule_list);
     }
 }

@@ -37,7 +37,7 @@ void
 mod_define_rule(mod_t *self, const char *name, rule_t *rule) {
     const def_t *def = mod_find_def(self, name);
     assert(def->kind == DEF_NODE);
-    list_push(def->node.rule_list, rule);
+    list_push(def->node.ctor->rule_list, rule);
 }
 
 void

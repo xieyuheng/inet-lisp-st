@@ -12,6 +12,7 @@ node_ctor_new(const char *name, size_t arity) {
     self->name = string_copy(name);
     self->arity = arity;
     self->port_infos = allocate_pointers(arity);
+    self->rule_list = list_new_with((destroy_fn_t *) rule_destroy);
     return self;
 }
 
@@ -27,6 +28,7 @@ node_ctor_destroy(node_ctor_t **self_pointer) {
             }
         }
 
+        list_destroy(&self->rule_list);
         free(self->name);
         free(self);
         *self_pointer = NULL;

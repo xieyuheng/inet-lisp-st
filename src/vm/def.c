@@ -21,7 +21,6 @@ def_node(node_ctor_t *ctor) {
     def_t *self = new(def_t);
     self->kind = DEF_NODE;
     self->node.ctor = ctor;
-    self->node.rule_list = list_new_with((destroy_fn_t *) rule_destroy);
     return self;
 }
 
@@ -44,7 +43,6 @@ def_destroy(def_t **self_pointer) {
 
         case DEF_NODE: {
             node_ctor_destroy(&self->node.ctor);
-            list_destroy(&self->node.rule_list);
             break;
         }
         }
