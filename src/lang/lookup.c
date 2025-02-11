@@ -14,7 +14,7 @@ lookup(vm_t *vm, const def_t *def) {
     }
 
     case DEF_NODE: {
-        stack_push(vm->value_stack, def->node.ctor);
+        stack_push(vm->value_stack, def->node_ctor);
         return;
     }
     }

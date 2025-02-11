@@ -1,4 +1,3 @@
-[vm] flatten `def.node.ctor` to `def.node_ctor`
 [examples] test with `(import)`
 
 # module system

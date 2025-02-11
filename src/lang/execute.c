@@ -9,7 +9,7 @@ define_node(vm_t *vm, const char *name, list_t *port_name_list) {
     size_t index = 0;
     char *port_name = list_first(port_name_list);
     while (port_name) {
-        def->node.ctor->port_infos[index] = port_info_from_name(string_copy(port_name));
+        def->node_ctor->port_infos[index] = port_info_from_name(string_copy(port_name));
         port_name = list_next(port_name_list);
         index++;
     }
@@ -28,7 +28,7 @@ build_node_pattern(vm_t *vm, exp_t *pattern_exp) {
     const def_t *def = mod_find_def(vm->mod, target->var.name);
 
     assert(def->kind == DEF_NODE);
-    node_pattern_t *node_pattern = node_pattern_new(def->node.ctor);
+    node_pattern_t *node_pattern = node_pattern_new(def->node_ctor);
 
     exp_t *arg_exp = list_first(arg_list);
     size_t index = 0;
