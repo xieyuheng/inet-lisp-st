@@ -1,4 +1,3 @@
-[examples] `datatypes/` -- `bool.lisp`
 [examples] `datatypes/` -- `bool-single-principle-port.lisp`
 
 # module system
