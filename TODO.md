@@ -1,4 +1,4 @@
-[bug] fix the use of `vm_maybe_add_activity`
+[bug] fix the use of `activity_by_node`
 
 - in `apply_node_ctor` & `x_connect`
 

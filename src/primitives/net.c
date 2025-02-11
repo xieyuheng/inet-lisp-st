@@ -8,7 +8,7 @@ x_connect(vm_t *vm) {
     wire_t *first_opposite = vm_wire_connect(vm, second_wire, first_wire);
 
     if (first_opposite->node) {
-        vm_maybe_add_activity(vm, first_opposite->node);
+        activity_by_node(vm, first_opposite->node);
     }
 }
 

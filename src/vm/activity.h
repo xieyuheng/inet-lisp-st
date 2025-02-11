@@ -7,3 +7,5 @@ struct activity_t {
 
 activity_t *activity_new(const rule_t *rule, net_matcher_t *net_matcher);
 void activity_destroy(activity_t **self_pointer);
+
+void activity_by_node(vm_t *self, node_t *node);
