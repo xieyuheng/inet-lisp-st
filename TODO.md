@@ -1,4 +1,3 @@
-[bug] fix the use of `activity_by_node` in `x_connect`
 [bug] fix the use of `activity_by_node` in `apply_node_ctor`
 
 test with (import)
