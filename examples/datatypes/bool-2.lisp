@@ -23,10 +23,3 @@
 
 (define-rule (disj-f (t) z) (t z))
 (define-rule (disj-f (f) z) (f z))
-
-(inspect-run
- (disj
-  (conj (conj (t) (t))
-        (conj (f) (t)))
-  (disj (disj (t) (t))
-        (disj (f) (t)))))

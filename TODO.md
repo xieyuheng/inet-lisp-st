@@ -1,5 +1,3 @@
-[examples] `datatypes/` -- `bool-single-principle-port.lisp`
-
 # module system
 
 [vm] need `rule_copy_shallow` -- to not edit `rule_list` of `imported_mod`
