@@ -1,5 +1,4 @@
-[bug] fix the use of `activity_by_node` in `apply_node_ctor`
-
+ambr activity_by_node activate_node
 test with (import)
 
 # module system
