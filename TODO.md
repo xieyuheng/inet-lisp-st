@@ -1,4 +1,6 @@
-[examples] test with `(import)`
+rename bool.lisp to bool-single-principle-port.lisp
+[examples] `datatypes/` -- `bool.lisp`
+[examples] `datatypes/` -- `bool-single-principle-port.lisp`
 
 # module system
 
