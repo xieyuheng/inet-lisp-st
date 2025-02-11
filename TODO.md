@@ -1,3 +1,5 @@
+[lang] extract `delete_match_nodes`
+
 test with (import)
 
 # module system

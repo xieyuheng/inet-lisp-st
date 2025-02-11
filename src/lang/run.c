@@ -75,25 +75,33 @@ run_until(vm_t *vm, size_t base_length) {
     }
 }
 
+static void
+return_local_wires(vm_t *vm, net_matcher_t *net_matcher) {
+    list_t *local_name_list =
+        net_pattern_local_name_list(net_matcher->net_pattern);
+    char *name = list_first(local_name_list);
+    while (name) {
+        wire_t *wire = hash_get(net_matcher->wire_hash, name);
+        assert(wire);
+        wire_free_from_node(wire);
+        stack_push(vm->value_stack, wire);
+        name = list_next(local_name_list);
+    }
+}
+
 void
 step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
     if (activity == NULL)
         return;
 
-    list_t *local_name_list =
-        net_pattern_local_name_list(activity->net_matcher->net_pattern);
-    char *name = list_first(local_name_list);
-    while (name) {
-        wire_t *wire = hash_get(activity->net_matcher->wire_hash, name);
-        assert(wire);
-        wire_free_from_node(wire);
-        stack_push(vm->value_stack, wire);
-        name = list_next(local_name_list);
-    }
+    return_local_wires(vm, activity->net_matcher);
 
-    // net_matcher_print(activity->net_matcher, stdout);
-    // printf("\n");
+    // {
+    //     printf("[step_net] net matcher:\n");
+    //     net_matcher_print(activity->net_matcher, stdout);
+    //     printf("\n");
+    // }
 
     size_t length = net_pattern_length(activity->net_matcher->net_pattern);
     for (size_t i = 0; i < length; i++) {
@@ -103,16 +111,20 @@ step_net(vm_t *vm) {
             wire_t *wire = matched_node->wires[k];
             assert(wire);
             if (wire_is_principal(wire)) {
-                // printf("[step_net] deleting principle wire: ");
-                // wire_print(wire, stdout);
-                // printf("\n");
+                // {
+                //     printf("[step_net] deleting principle wire: ");
+                //     wire_print(wire, stdout);
+                //     printf("\n");
+                // }
                 vm_delete_wire(vm, wire);
             }
         }
 
-        // printf("[step_net] deleting matched node: ");
-        // node_print(matched_node, stdout);
-        // printf("\n");
+        // {
+        //     printf("[step_net] deleting matched node: ");
+        //     node_print(matched_node, stdout);
+        //     printf("\n");
+        // }
         vm_delete_node(vm, matched_node);
     }
 
