@@ -78,18 +78,6 @@ vm_print_value_stack(const vm_t *self, file_t *file) {
 }
 
 void
-vm_connect_top_wire_pair(vm_t *self) {
-    wire_t *second_wire = stack_pop(self->value_stack);
-    wire_t *first_wire = stack_pop(self->value_stack);
-
-    wire_t *first_opposite = vm_wire_connect(self, second_wire, first_wire);
-
-    if (first_opposite->node) {
-        vm_maybe_add_activity(self, first_opposite->node);
-    }
-}
-
-void
 vm_maybe_add_activity(vm_t *self, node_t *node) {
     assert(node);
 

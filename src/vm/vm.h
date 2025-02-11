@@ -24,7 +24,6 @@ void vm_print_return_stack(const vm_t *self, file_t *file);
 void vm_print_value_stack(const vm_t *self, file_t *file);
 void vm_print(const vm_t *self, file_t *file);
 
-void vm_connect_top_wire_pair(vm_t *self);
 void vm_maybe_add_activity(vm_t *self, node_t *node);
 
 node_t *vm_add_node(vm_t* self, const node_ctor_t *ctor);

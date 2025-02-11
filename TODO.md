@@ -1,7 +1,6 @@
 [bug] fix the use of `vm_maybe_add_activity`
 
-- in `apply_node_ctor` & `vm_connect_top_wire_pair`
-- inline `vm_connect_top_wire_pair`
+- in `apply_node_ctor` & `x_connect`
 
 test with (import)
 

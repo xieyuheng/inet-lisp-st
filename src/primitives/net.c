@@ -2,7 +2,14 @@
 
 void
 x_connect(vm_t *vm) {
-    vm_connect_top_wire_pair(vm);
+    wire_t *second_wire = stack_pop(vm->value_stack);
+    wire_t *first_wire = stack_pop(vm->value_stack);
+
+    wire_t *first_opposite = vm_wire_connect(vm, second_wire, first_wire);
+
+    if (first_opposite->node) {
+        vm_maybe_add_activity(vm, first_opposite->node);
+    }
 }
 
 void
