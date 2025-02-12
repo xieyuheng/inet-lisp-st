@@ -60,20 +60,20 @@ net_pattern_local_name_list(const net_pattern_t *self) {
 
 void
 net_pattern_print(const net_pattern_t *self, file_t *file) {
-    fprintf(file, "<net_pattern>\n");
+    fprintf(file, "<net-pattern>\n");
 
-    fprintf(file, "<node_pattern_list>\n");
+    fprintf(file, "<node-pattern-list>\n");
     node_pattern_t *node_pattern = list_first(self->node_pattern_list);
     while (node_pattern) {
         node_pattern_print(node_pattern, file);
         printf("\n");
         node_pattern = list_next(self->node_pattern_list);
     }
-    fprintf(file, "</node_pattern_list>\n");
+    fprintf(file, "</node-pattern-list>\n");
 
-    fprintf(file, "<local_name_list>");
+    fprintf(file, "<local-name-list>");
     string_list_print(self->local_name_list, ", ", file);
-    fprintf(file, "</local_name_list>\n");
+    fprintf(file, "</local-name-list>\n");
 
-    fprintf(file, "</net_pattern>\n");
+    fprintf(file, "</net-pattern>\n");
 }

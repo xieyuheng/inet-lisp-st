@@ -124,11 +124,11 @@ matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
 
 void
 net_matcher_print(const net_matcher_t *self, file_t *file) {
-    printf("<net_matcher>\n");
+    printf("<net-matcher>\n");
 
     net_pattern_print(self->net_pattern, file);
 
-    printf("<wire_hash>\n");
+    printf("<wire-hash>\n");
     wire_t *wire = hash_first(self->wire_hash);
     while (wire) {
         printf("%s: ", (char *) hash_cursor(self->wire_hash));
@@ -136,9 +136,9 @@ net_matcher_print(const net_matcher_t *self, file_t *file) {
         printf("\n");
         wire = hash_next(self->wire_hash);
     }
-    printf("</wire_hash>\n");
+    printf("</wire-hash>\n");
 
-    printf("<matched_nodes>\n");
+    printf("<matched-nodes>\n");
     size_t length = net_pattern_length(self->net_pattern);
     for (size_t i = 0; i < length; i++) {
         if (self->matched_nodes[i] == NULL) {
@@ -149,17 +149,17 @@ net_matcher_print(const net_matcher_t *self, file_t *file) {
             printf("\n");
         }
     }
-    printf("</matched_nodes>\n");
+    printf("</matched-nodes>\n");
 
-    printf("<principle_name_list>");
+    printf("<principle-name-list>");
     string_list_print(self->principle_name_list, ", ", file);
-    printf("</principle_name_list>\n");
+    printf("</principle-name-list>\n");
 
-    printf("<matched_principle_name_list>");
+    printf("<matched-principle-name-list>");
     string_list_print(self->matched_principle_name_list, ", ", file);
-    printf("</matched_principle_name_list>\n");
+    printf("</matched-principle-name-list>\n");
 
-    printf("</net_matcher>\n");
+    printf("</net-matcher>\n");
 }
 
 net_matcher_t *
