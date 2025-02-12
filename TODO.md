@@ -1,4 +1,3 @@
-[vm] `activity_print`
 [vm] `rule_print`
 
 # primitive

@@ -44,8 +44,7 @@ activate_node(vm_t *vm, node_t *node) {
 void
 activity_print(activity_t *self, file_t *file) {
     fprintf(file, "<activity>\n");
-
-    (void) self;
-
+    rule_print(self->rule, file);
+    net_matcher_print(self->net_matcher, file);
     fprintf(file, "</activity>\n");
 }
