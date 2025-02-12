@@ -27,17 +27,25 @@ activate_node(vm_t *vm, node_t *node) {
 
     rule_t *rule = list_first(node->ctor->rule_list);
     while (rule) {
-        net_matcher_t *net_matcher = match_net(rule->net_pattern, rule->starting_index, node);
+        net_matcher_t *net_matcher =
+            match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
             list_push(vm->activity_list, activity_new(rule, net_matcher));
             size_t length = net_pattern_length(rule->net_pattern);
-            for (size_t i = 0; i < length; i++) {
-                node_t *matched_node = net_matcher->matched_nodes[i];
-                set_add(vm->matched_node_set, matched_node);
-            }
+            for (size_t i = 0; i < length; i++)
+                set_add(vm->matched_node_set, net_matcher->matched_nodes[i]);
             return;
         }
 
         rule = list_next(node->ctor->rule_list);
     }
+}
+
+void
+activity_print(activity_t *self, file_t *file) {
+    fprintf(file, "<activity>\n");
+
+    (void) self;
+
+    fprintf(file, "</activity>\n");
 }

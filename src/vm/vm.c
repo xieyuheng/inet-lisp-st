@@ -39,9 +39,7 @@ vm_print(const vm_t *self, file_t *file) {
     fprintf(file, "<active-wire-list length=\"%lu\">\n", activity_list_length);
     activity_t *activity = list_first(self->activity_list);
     while (activity) {
-        // wire_print(activity->wire, file);
-        fprintf(file, "TODO ");
-        fprintf(file, "\n");
+        activity_print(activity, file);
         activity = list_next(self->activity_list);
     }
     fprintf(file, "</active-wire-list>\n");

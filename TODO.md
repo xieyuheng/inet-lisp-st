@@ -1,6 +1,5 @@
 [vm] `rule_print`
 [vm] `activity_print`
-[vm] `vm_print` -- should call `activity_print`
 
 # primitive
 
