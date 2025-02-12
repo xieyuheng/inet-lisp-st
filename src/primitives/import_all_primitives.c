@@ -2,10 +2,6 @@
 
 void
 import_all_primitives(mod_t *mod) {
-    // // null
-
-    // define_constant(mod, "null", xnull);
-
     // // bool
 
     // define_constant(mod, "false", xfalse);
@@ -16,13 +12,7 @@ import_all_primitives(mod_t *mod) {
 
     // // value
 
-    // define_primitive_2_fn(mod, "eq", x_eq);
-    // define_primitive_vm_fn(mod, "dup", x_dup);
-    // define_primitive_vm_fn(mod, "swap", x_swap);
-    // define_primitive_vm_fn(mod, "drop", x_drop);
-    // define_primitive_vm_fn(mod, "rot", x_rot);
-    // define_primitive_vm_fn(mod, "over", x_over);
-    // define_primitive_vm_fn(mod, "tuck", x_tuck);
+    // define_primitive_2_fn(mod, "eq?", x_eq);
 
     // // testing
 
@@ -30,11 +20,11 @@ import_all_primitives(mod_t *mod) {
 
     // // int
 
-    // define_primitive_2_fn(mod, "add", xint_add);
-    // define_primitive_2_fn(mod, "sub", xint_sub);
-    // define_primitive_2_fn(mod, "mul", xint_mul);
-    // define_primitive_2_fn(mod, "div", xint_div);
-    // define_primitive_2_fn(mod, "mod", xint_mod);
+    // define_primitive_2_fn(mod, "iadd", xint_add);
+    // define_primitive_2_fn(mod, "isub", xint_sub);
+    // define_primitive_2_fn(mod, "imul", xint_mul);
+    // define_primitive_2_fn(mod, "idiv", xint_div);
+    // define_primitive_2_fn(mod, "imod", xint_mod);
     // define_primitive_1_fn(mod, "int-to-float", xint_to_xfloat);
 
     // // float

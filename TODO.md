@@ -1,10 +1,12 @@
+[primitive] support `xint`
+[primitive] support `xfloat`
+[primitive] support `xbool`
+[primitive] `eq?`
+[primitive] `assert`
+
 # primitive
 
 [primitive] `node_t` -- ports can store any value -- not only wire, but also primitive values
-
-[primitive] support `xint`
-[primitive] support `xfloat`
-
 [primitive] `apply` -- create node when args has wire
 
 [primitive] write `list-map` as example that uses function
