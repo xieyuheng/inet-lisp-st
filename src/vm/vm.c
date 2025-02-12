@@ -36,13 +36,13 @@ vm_print(const vm_t *self, file_t *file) {
     fprintf(file, "<vm>\n");
 
     size_t activity_list_length = list_length(self->activity_list);
-    fprintf(file, "<active-wire-list length=\"%lu\">\n", activity_list_length);
+    fprintf(file, "<activity-list length=\"%lu\">\n", activity_list_length);
     activity_t *activity = list_first(self->activity_list);
     while (activity) {
         activity_print(activity, file);
         activity = list_next(self->activity_list);
     }
-    fprintf(file, "</active-wire-list>\n");
+    fprintf(file, "</activity-list>\n");
 
     vm_print_return_stack(self, file);
     vm_print_value_stack(self, file);
