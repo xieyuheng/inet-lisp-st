@@ -1,15 +1,21 @@
-# module system
+[vm] `rule_print`
+[vm] `activity_print`
+[vm] `vm_print` -- should call `activity_print`
 
-[question] how to handle defining rule for import nodes
-[vm] need `rule_copy_shallow` -- to not edit `rule_list` of `imported_mod`
-[tests] undefined-node.error
+# primitive
 
-# primitive value
+[primitive] `node_t` -- ports can store any value -- not only wire, but also primitive values
 
-[design] node ports can store any value -- not only wire, but also primitive values
-[design] the most important primitive value is function (closure)
-[design] write `list-map` as example that uses function
-[design] use explicit `copy` -- keep linear variable like simple
+[primitive] support `xint`
+[primitive] support `xfloat`
+
+[primitive] `apply` -- create node when args has wire
+
+[primitive] write `list-map` as example that uses function
+
+- the most important primitive value is `function_t`
+
+[primitive] use explicit `copy` -- keep linear variable like simple
 
 # parallelism
 
@@ -17,9 +23,10 @@ learn linux thread
 shared memory parallel execution of inet
 projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
 
-# output
+# module system
 
-[vm] `vm_print` -- should call `activity_print`
+[question] how to handle defining rule for import nodes
+[tests] undefined-node.error
 
 # arity checker
 
