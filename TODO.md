@@ -1,8 +1,10 @@
-[primitive] support `xint`
-[primitive] support `xfloat`
-[primitive] support `xbool`
-[primitive] `eq?`
-[primitive] `assert`
+rename primitives/ to prelude/
+
+[prelude] support `xint`
+[prelude] support `xfloat`
+[prelude] support `xbool`
+[prelude] `eq?`
+[prelude] `assert`
 
 # primitive
 

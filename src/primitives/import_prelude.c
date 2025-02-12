@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-import_all_primitives(mod_t *mod) {
+import_prelude(mod_t *mod) {
     // // bool
 
     // define_constant(mod, "false", xfalse);

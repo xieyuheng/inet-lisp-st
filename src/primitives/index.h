@@ -8,4 +8,4 @@
 #include "console.h"
 // #include "constant.h"
 // #include "function.h"
-#include "import_all_primitives.h"
+#include "import_prelude.h"

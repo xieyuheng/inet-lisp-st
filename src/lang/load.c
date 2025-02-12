@@ -2,7 +2,7 @@
 
 hash_t *global_mod_hash = NULL;
 
-extern void import_all_primitives(mod_t *mod);
+extern void import_prelude(mod_t *mod);
 
 mod_t *
 load_mod(path_t *path) {
@@ -21,7 +21,7 @@ load_mod(path_t *path) {
     fclose(file);
 
     mod_t *mod = mod_new(path, code);
-    import_all_primitives(mod);
+    import_prelude(mod);
     vm_t *vm = vm_new(mod);
 
     list_t *sexp_list = sexp_parse_list(code) ;
