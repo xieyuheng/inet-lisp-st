@@ -1,5 +1,3 @@
-[vm] `frame_print` -- print `local_array`
-
 # primitive
 
 [primitive] `node_t` -- ports can store any value -- not only wire, but also primitive values
