@@ -1,5 +1,3 @@
-rename primitives/ to prelude/
-
 [prelude] support `xint`
 [prelude] support `xfloat`
 [prelude] support `xbool`
