@@ -1,5 +1,5 @@
-[vm] `rule_print`
 [vm] `activity_print`
+[vm] `rule_print`
 
 # primitive
 

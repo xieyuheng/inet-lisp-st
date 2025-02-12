@@ -22,3 +22,10 @@ rule_destroy(rule_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+rule_print(rule_t *self, file_t *file) {
+    fprintf(file, "<rule>\n");
+    (void) self;
+    fprintf(file, "</rule>\n");
+}
