@@ -131,7 +131,8 @@ net_matcher_print(const net_matcher_t *self, file_t *file) {
     printf("<wire-hash>\n");
     wire_t *wire = hash_first(self->wire_hash);
     while (wire) {
-        printf("%s: ", (char *) hash_cursor(self->wire_hash));
+        printf("%s:\n", (char *) hash_cursor(self->wire_hash));
+        printf("  ");
         wire_print(wire, file);
         printf("\n");
         wire = hash_next(self->wire_hash);

@@ -1,4 +1,3 @@
-[vm] improve print of `<wire-hash>`
 [vm] `frame_print` -- print `local_array`
 
 # primitive
