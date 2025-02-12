@@ -68,16 +68,19 @@ function_get_op(const function_t *self, size_t index) {
 
 void
 function_print(const function_t *self, file_t *file) {
+    fprintf(file, "<function>\n");
     op_t *op = list_first(self->op_list);
     while (op) {
         op_print(op, file);
         fprintf(file, "\n");
         op = list_next(self->op_list);
     }
+    fprintf(file, "</function>\n");
 }
 
 void
 function_print_with_cursor(const function_t *self, file_t *file, size_t cursor) {
+    fprintf(file, "<function>\n");
     for (size_t i = 0; i < self->length; i++) {
         if (i == cursor) {
             op_print(self->ops[i], file);
@@ -88,4 +91,5 @@ function_print_with_cursor(const function_t *self, file_t *file, size_t cursor) 
             fprintf(file, "\n");
         }
     }
+    fprintf(file, "</function>\n");
 }

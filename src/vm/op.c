@@ -77,28 +77,29 @@ void
 op_print(const op_t *op, file_t *file) {
     switch (op->kind) {
     case OP_LOOKUP: {
-        fprintf(file, "LOOKUP %s", def_name(op->lookup.def));
+        fprintf(file, "(lookup %s)", def_name(op->lookup.def));
         return;
     }
 
     case OP_APPLY: {
-        fprintf(file, "APPLY %lu", op->apply.arity);
+        fprintf(file, "(apply %lu)", op->apply.arity);
         return;
     }
 
     case OP_LITERAL: {
-        fprintf(file, "LITERAL ");
+        fprintf(file, "(literal ");
         value_print(op->literal.value, file);
+        fprintf(file, ")");
         return;
     }
 
     case OP_LOCAL_GET: {
-        fprintf(file, "LOCAL-GET %ld", op->local_get.index);
+        fprintf(file, "(local-get %ld)", op->local_get.index);
         return;
     }
 
     case OP_LOCAL_SET: {
-        fprintf(file, "LOCAL-SET %ld", op->local_set.index);
+        fprintf(file, "(local-set %ld)", op->local_set.index);
         return;
     }
     }
