@@ -1,6 +1,12 @@
-[prelude] `xint?` & `xfloat?`
+[prelude] `int?` & `float?`
+
+- `x_int_p` & `x_float_p`
 
 [lang] support `(define <name> <exp>)`
+
+- fix square.lisp test
+
+[tests] undefined-node.error.lisp
 
 # primitive
 
@@ -13,6 +19,10 @@
 
 [primitive] use explicit `copy` -- keep linear variable like simple
 
+# testing
+
+[testing] `(assert)` report position
+
 # parallelism
 
 learn linux thread
@@ -22,7 +32,6 @@ projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
 # module system
 
 [question] how to handle defining rule for import nodes
-[tests] undefined-node.error
 
 # arity checker
 
