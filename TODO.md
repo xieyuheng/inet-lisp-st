@@ -1,4 +1,3 @@
-[prelude] `xbool` -- `true` and `false` as constant
 [prelude] `xint?` & `xfloat?`
 [prelude] `eq?`
 [prelude] `assert`

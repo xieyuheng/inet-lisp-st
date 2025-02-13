@@ -13,7 +13,7 @@ define_node(vm_t *vm, const char *name, list_t *port_name_list) {
         index++;
     }
 
-    mod_define(vm->mod, name, node_ctor);
+    define(vm->mod, name, node_ctor);
     return;
 }
 
@@ -69,7 +69,7 @@ define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
     size_t index = 0;
     while (node_pattern) {
         rule_t *rule = rule_new(index, net_pattern, function);
-        mod_define_rule(vm->mod, node_pattern->ctor->name, rule);
+        define_rule(vm->mod, node_pattern->ctor->name, rule);
         node_pattern = list_next(node_pattern_list);
         index++;
     }
@@ -207,7 +207,7 @@ execute(vm_t *vm, stmt_t *stmt) {
                 exit(1);
             }
 
-            mod_define(vm->mod, name, value);
+            define(vm->mod, name, value);
             name = list_next(stmt->import.name_list);
         }
 

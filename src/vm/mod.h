@@ -13,7 +13,4 @@ mod_t *mod_new(path_t *path, char *code);
 void mod_destroy(mod_t **self_pointer);
 
 value_t mod_find(const mod_t *self, const char *name);
-void mod_define(mod_t *self, const char *name, value_t value);
-void mod_define_rule(mod_t *self, const char *name, rule_t *rule);
-
 void mod_print(const mod_t *self, file_t *file);
