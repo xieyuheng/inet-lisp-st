@@ -71,12 +71,10 @@ exp_destroy(exp_t **self_pointer) {
         }
 
         case EXP_INT: {
-            // TODO
-            break;
+             break;
         }
 
         case EXP_FLOAT: {
-            // TODO
             break;
         }
         }

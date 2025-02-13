@@ -1,4 +1,3 @@
-[lang] `exp_destroy` -- `EXP_INT` & `EXP_FLOAT`
 [lang] `exp_copy` -- `EXP_INT` & `EXP_FLOAT`
 
 [prelude] parse `exp_integer`
