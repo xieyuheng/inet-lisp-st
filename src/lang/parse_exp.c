@@ -6,6 +6,16 @@ parse_var(sexp_t *sexp) {
 }
 
 static exp_t *
+parse_int(sexp_t *sexp) {
+    return exp_int(string_parse_xint(sexp_string(sexp)));
+}
+
+static exp_t *
+parse_float(sexp_t *sexp) {
+    return exp_float(string_parse_double(sexp_string(sexp)));
+}
+
+static exp_t *
 parse_ap(sexp_t *sexp) {
     list_t *sexp_list = sexp_sexp_list(sexp);
     assert(!list_is_empty(sexp_list));
@@ -41,12 +51,19 @@ parse_bind(sexp_t *sexp) {
 
 exp_t *
 parse_exp(sexp_t *sexp) {
-    if (sexp_starts_with(sexp, "="))
+    if (sexp_starts_with(sexp, "=")) {
         return parse_bind(sexp);
-    else if (is_atom_sexp(sexp))
-        return parse_var(sexp);
-    else if (!list_is_empty(sexp_sexp_list(sexp)))
+    } else if (is_atom_sexp(sexp)) {
+        const token_t *token = sexp_token(sexp);
+        if (token->kind == INT_TOKEN)
+            return parse_int(sexp);
+        else if (token->kind == FLOAT_TOKEN)
+            return parse_float(sexp);
+        else
+            return parse_var(sexp);
+    } else if (!list_is_empty(sexp_sexp_list(sexp))) {
         return parse_ap(sexp);
-    else
+    } else {
         assert(false && "[parse_exp] can not handle empty list sexp");
+    }
 }
