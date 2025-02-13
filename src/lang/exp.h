@@ -4,6 +4,8 @@ typedef enum {
     EXP_VAR,
     EXP_AP,
     EXP_BIND,
+    EXP_INTEGER,
+    // EXP_FLOAT,
 } exp_kind_t;
 
 struct exp_t {
@@ -12,12 +14,14 @@ struct exp_t {
         struct { char *name; } var;
         struct { exp_t *target; list_t *arg_list; } ap;
         struct { list_t *name_list; exp_t *exp; } bind;
+        struct { int64_t *target; } integer;
     };
 };
 
 exp_t *exp_var(char *name);
 exp_t *exp_ap(exp_t *target, list_t *arg_list);
 exp_t *exp_bind(list_t *name_list, exp_t *exp);
+exp_t *exp_integer(int64_t *target);
 
 list_t *exp_list_new(void);
 

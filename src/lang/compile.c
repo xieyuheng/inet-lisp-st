@@ -75,5 +75,10 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
         compile_bind(vm, function, exp->bind.name_list);
         return;
     }
+
+    case EXP_INTEGER: {
+        // TODO
+        return;
+    }    
     }
 }
