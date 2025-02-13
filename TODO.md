@@ -1,3 +1,8 @@
+remove `def_kind_name`
+[vm] `mod_define` take name
+
+[maybe] [vm] `mod_t` -- has `value_hash` -- instead of `def_hash`
+
 [prelude] `xbool` -- `true` and `false` as constant
 
 [prelude] `xint?` & `xfloat?`
