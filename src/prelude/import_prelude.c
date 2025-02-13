@@ -20,6 +20,7 @@ import_prelude(mod_t *mod) {
 
     // int
 
+    define_primitive_1_fn(mod, "int?", xint_p);
     define_primitive_2_fn(mod, "iadd", xint_add);
     define_primitive_2_fn(mod, "isub", xint_sub);
     define_primitive_2_fn(mod, "imul", xint_mul);
@@ -29,6 +30,7 @@ import_prelude(mod_t *mod) {
 
     // float
 
+    define_primitive_1_fn(mod, "float?", xfloat_p);
     define_primitive_2_fn(mod, "fadd", xfloat_add);
     define_primitive_2_fn(mod, "fsub", xfloat_sub);
     define_primitive_2_fn(mod, "fmul", xfloat_mul);

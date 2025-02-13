@@ -1,3 +1,11 @@
+(assert (float? 0.1))
+(assert (float? 0.0))
+(assert (float? -0.1))
+
+(assert (not (float? 1)))
+(assert (not (float? 0)))
+(assert (not (float? -1)))
+
 (assert (eq? 0.1 0.1))
 (assert (not (eq? 0.1 0.2)))
 (assert (not (eq? 0.1 -0.1)))

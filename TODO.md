@@ -1,7 +1,3 @@
-[prelude] `int?` & `float?`
-
-- `x_int_p` & `x_float_p`
-
 [lang] support `(define <name> <exp>)`
 
 - fix square.lisp test

@@ -30,6 +30,11 @@ to_double(value_t value) {
 }
 
 value_t
+xfloat_p(value_t value) {
+    return xbool(is_xfloat(value));
+}
+
+value_t
 xfloat_add(value_t x, value_t y) {
     return xfloat(to_double(x) + to_double(y));
 }

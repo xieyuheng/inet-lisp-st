@@ -19,6 +19,11 @@ to_int64(value_t value) {
 }
 
 value_t
+xint_p(value_t value) {
+    return xbool(is_xint(value));
+}
+
+value_t
 xint_add(value_t x, value_t y) {
     return xint(to_int64(x) + to_int64(y));
 }
