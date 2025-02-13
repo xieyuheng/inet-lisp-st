@@ -14,9 +14,9 @@ import_prelude(mod_t *mod) {
 
     define_primitive_2_fn(mod, "eq?", x_eq);
 
-    // // testing
+    // testing
 
-    // define_primitive_vm_fn(mod, "ok", x_ok);
+    define_primitive_vm_fn(mod, "assert", 1, 0, x_assert);
 
     // int
 

@@ -1,5 +1,3 @@
-[prelude] `assert`
-
 [prelude] `xint?` & `xfloat?`
 
 [lang] support `(define <name> <exp>)`
