@@ -1,6 +1,4 @@
-[lang] `exp_copy` -- `EXP_INT` & `EXP_FLOAT`
-
-[prelude] parse `exp_integer`
+[prelude] parse `exp_int`
 [prelude] parse `exp_float`
 
 [lang] `execute` -- `EXP_INT` & `EXP_FLOAT`

@@ -27,7 +27,7 @@ exp_bind(list_t *name_list, exp_t *exp) {
 }
 
 exp_t *
-exp_integer(int64_t *target) {
+exp_int(int64_t *target) {
     exp_t *self = new(exp_t);
     self->kind = EXP_INT;
     self->i.target = target;
@@ -105,13 +105,11 @@ exp_copy(const exp_t *self) {
     }
 
     case EXP_INT: {
-        // TODO
-        return NULL;
+        return exp_int(self->i.target);
     }
 
     case EXP_FLOAT: {
-        // TODO
-        return NULL;
+        return exp_float(self->f.target);
     }
     }
 

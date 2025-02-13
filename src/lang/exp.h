@@ -22,7 +22,7 @@ struct exp_t {
 exp_t *exp_var(char *name);
 exp_t *exp_ap(exp_t *target, list_t *arg_list);
 exp_t *exp_bind(list_t *name_list, exp_t *exp);
-exp_t *exp_integer(int64_t *target);
+exp_t *exp_int(int64_t *target);
 exp_t *exp_float(double *target);
 
 list_t *exp_list_new(void);
