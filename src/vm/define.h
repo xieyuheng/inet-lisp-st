@@ -1,5 +1,7 @@
 #pragma once
 
+void define_function(mod_t *mod, const char *name, function_t *function);
+
 void define_primitive_vm_fn(mod_t *mod, const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn);
 void define_primitive_0_fn(mod_t *mod, const char *name, primitive_0_fn_t *primitive_0_fn);
 void define_primitive_1_fn(mod_t *mod, const char *name, primitive_1_fn_t *primitive_1_fn);

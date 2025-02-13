@@ -1,6 +1,11 @@
 #include "index.h"
 
 void
+define_function(mod_t *mod, const char *name, function_t *function) {
+    mod_define(mod, name, def_function(function));
+}
+
+void
 define_primitive_vm_fn(mod_t *mod, const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn) {
     mod_define(mod, name, def_primitive(primitive_from_vm_fn(name, input_arity, output_arity, primitive_vm_fn)));
 }
