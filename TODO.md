@@ -1,6 +1,6 @@
-[prelude] `xint?` & `xfloat?`
-[prelude] `eq?`
 [prelude] `assert`
+
+[prelude] `xint?` & `xfloat?`
 
 [lang] support `(define <name> <exp>)`
 

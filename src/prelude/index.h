@@ -2,7 +2,7 @@
 
 #include "deps.h"
 #include "types.h"
-// #include "value.h"
+#include "value.h"
 // #include "testing.h"
 #include "net.h"
 #include "console.h"

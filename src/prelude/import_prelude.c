@@ -10,9 +10,9 @@ import_prelude(mod_t *mod) {
     define_primitive_2_fn(mod, "and", xbool_and);
     define_primitive_2_fn(mod, "or", xbool_or);
 
-    // // value
+    // value
 
-    // define_primitive_2_fn(mod, "eq?", x_eq);
+    define_primitive_2_fn(mod, "eq?", x_eq);
 
     // // testing
 
