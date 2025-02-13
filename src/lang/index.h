@@ -3,7 +3,6 @@
 #include "deps.h"
 #include "types.h"
 #include "apply.h"
-#include "lookup.h"
 #include "run.h"
 #include "exp.h"
 #include "stmt.h"

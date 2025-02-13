@@ -1,6 +1,6 @@
 #pragma once
 
-void apply(vm_t *vm, value_t *target, size_t arity);
+void apply(vm_t *vm, value_t target, size_t arity);
 
 void apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity);
 void apply_function(vm_t *vm, function_t *function, size_t arity);

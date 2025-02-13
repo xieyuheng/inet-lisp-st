@@ -4,17 +4,16 @@ static void
 define_node(vm_t *vm, const char *name, list_t *port_name_list) {
     size_t arity = list_length(port_name_list);
     node_ctor_t *node_ctor = node_ctor_new(name, arity);
-    def_t *def = def_node(node_ctor);
-
+    
     size_t index = 0;
     char *port_name = list_first(port_name_list);
     while (port_name) {
-        def->node_ctor->port_infos[index] = port_info_from_name(string_copy(port_name));
+        node_ctor->port_infos[index] = port_info_from_name(string_copy(port_name));
         port_name = list_next(port_name_list);
         index++;
     }
 
-    mod_define(vm->mod, name, def);
+    mod_define(vm->mod, name, node_ctor);
     return;
 }
 
@@ -25,10 +24,9 @@ build_node_pattern(vm_t *vm, exp_t *pattern_exp) {
     list_t *arg_list = pattern_exp->ap.arg_list;
 
     assert(target->kind == EXP_VAR);
-    const def_t *def = mod_find_def(vm->mod, target->var.name);
-
-    assert(def->kind == DEF_NODE);
-    node_pattern_t *node_pattern = node_pattern_new(def->node_ctor);
+    value_t value = mod_find(vm->mod, target->var.name);
+    node_ctor_t *node_ctor = as_node_ctor(value);
+    node_pattern_t *node_pattern = node_pattern_new(node_ctor);
 
     exp_t *arg_exp = list_first(arg_list);
     size_t index = 0;
@@ -202,14 +200,14 @@ execute(vm_t *vm, stmt_t *stmt) {
         mod_t *imported_mod = load_mod(path);
         char *name = list_first(stmt->import.name_list);
         while (name) {
-            def_t *def = mod_find_def(imported_mod, name);
-            if (!def) {
+            value_t value = mod_find(imported_mod, name);
+            if (value == NULL) {
                 fprintf(stderr, "[execute / import] unknown name: %s", name);
                 stmt_print(stmt, stderr);
                 exit(1);
             }
 
-            mod_define(vm->mod, name, def);
+            mod_define(vm->mod, name, value);
             name = list_next(stmt->import.name_list);
         }
 

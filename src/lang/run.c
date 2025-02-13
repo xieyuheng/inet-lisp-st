@@ -3,11 +3,6 @@
 void
 step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
-    case OP_LOOKUP: {
-        lookup(vm, op->lookup.def);
-        return;
-    }
-
     case OP_APPLY: {
         value_t target = stack_pop(vm->value_stack);
         apply(vm, target, op->apply.arity);

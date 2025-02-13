@@ -10,5 +10,4 @@
 #include "function.h"
 #include "primitive.h"
 #include "rule.h"
-#include "def.h"
 #include "define.h"
