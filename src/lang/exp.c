@@ -27,7 +27,7 @@ exp_bind(list_t *name_list, exp_t *exp) {
 }
 
 exp_t *
-exp_int(int64_t *target) {
+exp_int(int64_t target) {
     exp_t *self = new(exp_t);
     self->kind = EXP_INT;
     self->i.target = target;
@@ -35,7 +35,7 @@ exp_int(int64_t *target) {
 }
 
 exp_t *
-exp_float(double *target) {
+exp_float(double target) {
     exp_t *self = new(exp_t);
     self->kind = EXP_FLOAT;
     self->f.target = target;

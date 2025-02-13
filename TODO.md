@@ -1,9 +1,6 @@
 [prelude] parse `exp_int`
 [prelude] parse `exp_float`
 
-[lang] `execute` -- `EXP_INT` & `EXP_FLOAT`
-[lang] `compile_exp` -- `EXP_INT` & `EXP_FLOAT`
-
 [prelude] `xbool` -- maybe need `(define-constant)`?
 
 [prelude] `xint?` & `xfloat?`

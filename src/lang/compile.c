@@ -77,13 +77,13 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
     }
 
     case EXP_INT: {
-        // TODO
+        function_add_op(function, op_literal(xint(exp->i.target)));
         return;
-    }    
+    }
 
     case EXP_FLOAT: {
-        // TODO
+        function_add_op(function, op_literal(xfloat(exp->f.target)));
         return;
-    }        
+    }
     }
 }
