@@ -160,7 +160,7 @@ execute(vm_t *vm, stmt_t *stmt) {
         compile_exp_list(vm, function, stmt->define_function.exp_list);
         function_build(function);
 
-        define_function(vm->mod, stmt->define_function.name, function);
+        define(vm->mod, stmt->define_function.name, function);
         return;
     }
 
