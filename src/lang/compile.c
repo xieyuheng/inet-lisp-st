@@ -76,9 +76,14 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
         return;
     }
 
-    case EXP_INTEGER: {
+    case EXP_INT: {
         // TODO
         return;
     }    
+
+    case EXP_FLOAT: {
+        // TODO
+        return;
+    }        
     }
 }

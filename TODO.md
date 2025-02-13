@@ -1,19 +1,11 @@
-[lang] `exp_float`
+[lang] `exp_destroy` -- `EXP_INT` & `EXP_FLOAT`
+[lang] `exp_copy` -- `EXP_INT` & `EXP_FLOAT`
 
 [prelude] parse `exp_integer`
 [prelude] parse `exp_float`
 
-[lang] `exp_copy` -- `EXP_INTEGER`
-[lang] `exp_copy` -- `EXP_FLOAT`
-
-[lang] `exp_destroy` -- `EXP_INTEGER`
-[lang] `exp_destroy` -- `EXP_FLOAT`
-
-[lang] `execute` -- `EXP_INTEGER`
-[lang] `execute` -- `EXP_FLOAT`
-
-[lang] `compile_exp` -- `EXP_INTEGER`
-[lang] `compile_exp` -- `EXP_FLOAT`
+[lang] `execute` -- `EXP_INT` & `EXP_FLOAT`
+[lang] `compile_exp` -- `EXP_INT` & `EXP_FLOAT`
 
 [prelude] `xbool` -- maybe need `(define-constant)`?
 

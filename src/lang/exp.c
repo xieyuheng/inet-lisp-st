@@ -29,8 +29,16 @@ exp_bind(list_t *name_list, exp_t *exp) {
 exp_t *
 exp_integer(int64_t *target) {
     exp_t *self = new(exp_t);
-    self->kind = EXP_INTEGER;
-    self->integer.target = target;
+    self->kind = EXP_INT;
+    self->i.target = target;
+    return self;
+}
+
+exp_t *
+exp_float(double *target) {
+    exp_t *self = new(exp_t);
+    self->kind = EXP_FLOAT;
+    self->f.target = target;
     return self;
 }
 
@@ -62,10 +70,15 @@ exp_destroy(exp_t **self_pointer) {
             break;
         }
 
-        case EXP_INTEGER: {
+        case EXP_INT: {
             // TODO
             break;
-        }        
+        }
+
+        case EXP_FLOAT: {
+            // TODO
+            break;
+        }
         }
 
         free(self);
@@ -93,7 +106,12 @@ exp_copy(const exp_t *self) {
             exp_copy(self->bind.exp));
     }
 
-    case EXP_INTEGER: {
+    case EXP_INT: {
+        // TODO
+        return NULL;
+    }
+
+    case EXP_FLOAT: {
         // TODO
         return NULL;
     }
@@ -184,7 +202,12 @@ exp_print(const exp_t *self, file_t *file) {
         return;
     }
 
-    case EXP_INTEGER: {
+    case EXP_INT: {
+        // TODO
+        return;
+    }
+
+    case EXP_FLOAT: {
         // TODO
         return;
     }
