@@ -6,13 +6,20 @@
 # primitive
 
 [primitive] `node_t` -- ports can store any value -- not only wire, but also primitive values
+
+[net] `node_ctor_t` -- has optional `primitive` --
+
 [primitive] `apply` -- create node when args has wire
+
+- `primitive_t` need a flag to denote generic on wires
+
+  - after `define_primitive`,
+    use something like `declare_primitive_node`,
+    to specify a `node_ctor_t`.
 
 [primitive] write `list-map` as example that uses function
 
 - the most important primitive value is `function_t`
-
-[primitive] use explicit `copy` -- keep linear variable like simple
 
 # testing
 
