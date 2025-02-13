@@ -22,6 +22,5 @@ def_t *def_node(node_ctor_t *node_ctor);
 void def_destroy(def_t **self_pointer);
 
 const char *def_name(const def_t *self);
-const char *def_kind_name(def_kind_t kind);
 
 void def_print(const def_t *self, file_t *file);

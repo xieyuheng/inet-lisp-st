@@ -71,25 +71,6 @@ def_name(const def_t *def) {
     assert(false);
 }
 
-const char *
-def_kind_name(def_kind_t kind) {
-    switch (kind) {
-    case DEF_PRIMITIVE: {
-        return "primitive";
-    }
-
-    case DEF_FUNCTION: {
-        return "function";
-    }
-
-    case DEF_NODE: {
-        return "node";
-    }
-    }
-
-    assert(false);
-}
-
 void
 def_print(const def_t *def, file_t *file) {
     switch (def->kind) {
