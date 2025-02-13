@@ -14,7 +14,7 @@ define_node(vm_t *vm, const char *name, list_t *port_name_list) {
         index++;
     }
 
-    mod_define(vm->mod, def);
+    mod_define(vm->mod, name, def);
     return;
 }
 
@@ -209,7 +209,7 @@ execute(vm_t *vm, stmt_t *stmt) {
                 exit(1);
             }
 
-            mod_define(vm->mod, def);
+            mod_define(vm->mod, name, def);
             name = list_next(stmt->import.name_list);
         }
 

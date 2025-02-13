@@ -1,11 +1,9 @@
-[vm] `mod_define` take name
-
-[maybe] [vm] `mod_t` -- has `value_hash` -- instead of `def_hash`
+[vm] `mod_t` -- has `value_hash` -- instead of `def_hash`
+[vm] remove `def`
+[vm] remove `op_lookup` -- just use `op_literal`
 
 [prelude] `xbool` -- `true` and `false` as constant
-
 [prelude] `xint?` & `xfloat?`
-
 [prelude] `eq?`
 [prelude] `assert`
 
