@@ -18,23 +18,23 @@ import_prelude(mod_t *mod) {
 
     // define_primitive_vm_fn(mod, "ok", x_ok);
 
-    // // int
+    // int
 
-    // define_primitive_2_fn(mod, "iadd", xint_add);
-    // define_primitive_2_fn(mod, "isub", xint_sub);
-    // define_primitive_2_fn(mod, "imul", xint_mul);
-    // define_primitive_2_fn(mod, "idiv", xint_div);
-    // define_primitive_2_fn(mod, "imod", xint_mod);
-    // define_primitive_1_fn(mod, "int-to-float", xint_to_xfloat);
+    define_primitive_2_fn(mod, "iadd", xint_add);
+    define_primitive_2_fn(mod, "isub", xint_sub);
+    define_primitive_2_fn(mod, "imul", xint_mul);
+    define_primitive_2_fn(mod, "idiv", xint_div);
+    define_primitive_2_fn(mod, "imod", xint_mod);
+    define_primitive_1_fn(mod, "int-to-float", xint_to_xfloat);
 
-    // // float
+    // float
 
-    // define_primitive_2_fn(mod, "fadd", xfloat_add);
-    // define_primitive_2_fn(mod, "fsub", xfloat_sub);
-    // define_primitive_2_fn(mod, "fmul", xfloat_mul);
-    // define_primitive_2_fn(mod, "fdiv", xfloat_div);
-    // define_primitive_2_fn(mod, "fmod", xfloat_mod);
-    // define_primitive_1_fn(mod, "float-to-int", xfloat_to_xint);
+    define_primitive_2_fn(mod, "fadd", xfloat_add);
+    define_primitive_2_fn(mod, "fsub", xfloat_sub);
+    define_primitive_2_fn(mod, "fmul", xfloat_mul);
+    define_primitive_2_fn(mod, "fdiv", xfloat_div);
+    define_primitive_2_fn(mod, "fmod", xfloat_mod);
+    define_primitive_1_fn(mod, "float-to-int", xfloat_to_xint);
 
     // net
 

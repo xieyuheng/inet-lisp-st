@@ -1,6 +1,9 @@
-[prelude] support `xint`
-[prelude] support `xfloat`
-[prelude] support `xbool`
+[prelude] parse `xint`
+[prelude] parse `xfloat`
+
+[prelude] support `xbool` -- maybe need `(define-constant)`?
+[prelude] `xint?` & `xfloat?`
+
 [prelude] `eq?`
 [prelude] `assert`
 
