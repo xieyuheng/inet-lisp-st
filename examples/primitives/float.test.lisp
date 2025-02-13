@@ -1,3 +1,3 @@
-(print 0.0) (newline)
-(print 0.1) (newline)
-(print -0.1) (newline)
+(println 0.0)
+(println 0.1)
+(println -0.1)

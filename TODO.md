@@ -1,4 +1,4 @@
-[prelude] `xbool` -- maybe need `(define-constant)`?
+[prelude] `xbool` -- `true` and `false` as constant
 
 [prelude] `xint?` & `xfloat?`
 

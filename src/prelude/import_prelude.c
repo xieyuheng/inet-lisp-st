@@ -49,4 +49,5 @@ import_prelude(mod_t *mod) {
 
     define_primitive_1_fn(mod, "print", x_print);
     define_primitive_0_fn(mod, "newline", x_newline);
+    define_primitive_1_fn(mod, "println", x_println);
 }

@@ -1,3 +1,3 @@
-(print 0) (newline)
-(print 1) (newline)
-(print -1) (newline)
+(println 0)
+(println 1)
+(println -1)
