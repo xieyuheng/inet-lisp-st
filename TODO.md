@@ -1,3 +1,5 @@
+test float a little bit
+
 [prelude] `xbool` -- maybe need `(define-constant)`?
 
 [prelude] `xint?` & `xfloat?`
