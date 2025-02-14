@@ -154,7 +154,9 @@ void
 execute(vm_t *vm, stmt_t *stmt) {
     switch (stmt->kind) {
     case STMT_DEFINE: {
-        // TODO
+        compute_exp(vm, stmt->define.exp);
+        value_t value = stack_pop(vm->value_stack);
+        define(vm->mod, stmt->define.name, value);
         return;
     }
 
