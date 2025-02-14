@@ -21,6 +21,9 @@ extern object_spec_t primitive_object_spec;
 struct primitive_t {
     object_spec_t *spec;
     char *name;
+    // has an optional `node_ctor` means
+    // this primitive is generic on wires.
+    node_ctor_t *node_ctor;
     size_t input_arity;
     size_t output_arity;
     primitive_fn_kind_t fn_kind;
