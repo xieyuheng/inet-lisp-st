@@ -8,7 +8,8 @@ define_node(vm_t *vm, const char *name, list_t *port_name_list) {
     size_t index = 0;
     char *port_name = list_first(port_name_list);
     while (port_name) {
-        node_ctor->port_infos[index] = port_info_from_name(string_copy(port_name));
+        node_ctor->port_infos[index] =
+            port_info_from_name(string_copy(port_name));
         port_name = list_next(port_name_list);
         index++;
     }

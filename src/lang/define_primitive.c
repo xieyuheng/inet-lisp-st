@@ -34,10 +34,19 @@ void
 define_primitive_node(mod_t *mod, const char *name, const char *port_names[]) {
     value_t value = mod_find(mod, name);
     if (!is_primitive(value)) {
-        fprintf(stderr, "[define_primitive_node] expect value of %s to be a primitive: \n", name);
+        fprintf(stderr, "[define_primitive_node] expect value of name: %s to be a primitive, instead of: \n", name);
         value_print(value, stderr);
         exit(1);
     }
 
-    (void) port_names;
+    primitive_t *primitive = as_primitive(value);
+    size_t arity = primitive->input_arity + primitive->output_arity;
+    node_ctor_t *node_ctor = node_ctor_new(name, arity);
+    for (size_t i = 0; i < arity; i++) {
+        node_ctor->port_infos[i] =
+            port_info_from_name(string_copy(port_names[i]));
+    }
+
+    primitive->node_ctor = node_ctor;
+    node_ctor->primitive = primitive;
 }

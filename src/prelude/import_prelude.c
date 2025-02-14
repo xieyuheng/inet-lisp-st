@@ -7,9 +7,11 @@ import_prelude(mod_t *mod) {
     define(mod, "false", xfalse);
     define(mod, "true", xtrue);
     define_primitive_1_fn(mod, "not", xbool_not);
-    // define_primitive_node(mod, "not", { "target!", "result" });
+    define_primitive_node(mod, "not", (const char*[]) { "x!", "y" });
     define_primitive_2_fn(mod, "and", xbool_and);
+    define_primitive_node(mod, "and", (const char*[]) { "x!", "y!", "z" });
     define_primitive_2_fn(mod, "or", xbool_or);
+    define_primitive_node(mod, "or", (const char*[]) { "x!", "y!", "z" });
 
     // value
 
