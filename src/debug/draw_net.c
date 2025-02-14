@@ -97,7 +97,10 @@ draw_net(debug_t *self, canvas_t *canvas) {
     node_t *node = hash_first(self->node_hash);
     while (node) {
         for (size_t i = 0; i < node->ctor->arity; i++) {
-            wire_t *wire = node->ports[i];
+            if (!is_wire(node->ports[i]))
+                continue;
+
+            wire_t *wire = as_wire(node->ports[i]);
             draw_wire(self, canvas, wire);
         }
 

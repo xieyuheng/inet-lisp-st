@@ -35,6 +35,7 @@ matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
         port_info_t *port_info = node_pattern->port_infos[i];
+        // TODO `node->ports[i]` can be any value.
         wire_t *wire = node->ports[i];
         if (wire == NULL) return;
 

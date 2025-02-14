@@ -1,7 +1,7 @@
 #include "index.h"
 
 static void
-node_apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
+apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
     for (size_t c = 0; c < arity; c++) {
         wire_t *wire = stack_pop(vm->value_stack);
         size_t i = arity - 1 - c;
@@ -12,7 +12,7 @@ node_apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
 }
 
 static void
-node_return_output_ports(vm_t *vm, node_t *node, size_t arity) {
+return_output_ports(vm_t *vm, node_t *node, size_t arity) {
     size_t output_arity = node->ctor->arity - arity;
     for (size_t c = 0; c < output_arity; c++) {
         wire_t *node_wire = wire_new();
@@ -33,8 +33,8 @@ node_return_output_ports(vm_t *vm, node_t *node, size_t arity) {
 void
 apply_node_ctor(vm_t *vm, node_ctor_t *node_ctor, size_t arity) {
     node_t *node = vm_add_node(vm, node_ctor);
-    node_apply_input_ports(vm, node, arity);
-    node_return_output_ports(vm, node, arity);
+    apply_input_ports(vm, node, arity);
+    return_output_ports(vm, node, arity);
 
     activate_node(vm, node);
 
