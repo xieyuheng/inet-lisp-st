@@ -2,8 +2,11 @@
 
 void
 x_connect(vm_t *vm) {
-    wire_t *second_wire = as_wire(stack_pop(vm->value_stack));
-    wire_t *first_wire = as_wire(stack_pop(vm->value_stack));
+    wire_t *second = stack_pop(vm->value_stack);
+    wire_t *first = stack_pop(vm->value_stack);
+
+    wire_t *second_wire = as_wire(second);
+    wire_t *first_wire = as_wire(first);
 
     wire_t *wire = vm_wire_connect(vm, second_wire, first_wire);
 
