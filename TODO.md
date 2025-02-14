@@ -1,8 +1,8 @@
 # primitive
 
-[net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
-
 [primitive] `apply` -- create node when args has wire
+[net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
+[primitive] `x_connect` -- can also connect primitive values
 
 # primitive test
 
