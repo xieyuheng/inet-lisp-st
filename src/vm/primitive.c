@@ -73,6 +73,7 @@ primitive_destroy(primitive_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         primitive_t *self = *self_pointer;
+        node_ctor_destroy(&self->node_ctor);
         string_destroy(&self->name);
         free(self);
         *self_pointer = NULL;
