@@ -25,6 +25,12 @@ void
 node_set(node_t *self, size_t index, value_t value) {
     assert(index < self->ctor->arity);
     self->ports[index] = value;
+
+    if (is_wire(value)) {
+        wire_t *wire = as_wire(value);
+        assert(wire->node == NULL);
+        wire->node = self;
+    }
 }
 
 value_t node_get(const node_t *self, size_t index) {

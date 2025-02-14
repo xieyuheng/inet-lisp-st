@@ -1,5 +1,3 @@
-[net] `node_set` -- handle wire specially
-
 # primitive
 
 [lang] `apply_input_ports` -- can also take value -- call `node_set`
