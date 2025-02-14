@@ -1,5 +1,3 @@
-[lang] extract `define_node`
-
 # primitive
 
 [vm] `define_primitive_node` -- to specify the optional `node_ctor` of `primitive_t`
