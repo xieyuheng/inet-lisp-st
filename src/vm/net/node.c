@@ -22,6 +22,17 @@ node_destroy(node_t **self_pointer) {
 }
 
 void
+node_set(node_t *self, size_t index, value_t value) {
+    assert(index < self->ctor->arity);
+    self->ports[index] = value;
+}
+
+value_t node_get(const node_t *self, size_t index) {
+    assert(index < self->ctor->arity);
+    return self->ports[index];
+}
+
+void
 node_print(const node_t *self, file_t *file) {
     char *id_string = uint_to_subscript(self->id);
     fprintf(file, "(%s%s)", self->ctor->name, id_string);
