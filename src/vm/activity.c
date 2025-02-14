@@ -42,6 +42,27 @@ activate_node(vm_t *vm, node_t *node) {
 }
 
 void
+activate_node_and_neighbor(vm_t *vm, node_t *node) {
+    activate_node(vm, node);
+
+    // NOTE for imported node ctor,
+    // if is not enough to activate the new node only,
+    // for example, i import `add`, but apply `add1`,
+    // we can not find the def of `add1` in the current mod,
+    // thus can not find the rules to activate it.
+    // we can fix this problem by
+    // also activate the neighboring nodes.
+
+    for (size_t i = 0; i < node->ctor->arity; i++) {
+        wire_t *wire = node->ports[i];
+        assert(wire);
+        assert(wire->opposite);
+        if (wire->opposite->node)
+            activate_node(vm, wire->opposite->node);
+    }
+}
+
+void
 activity_print(activity_t *self, file_t *file) {
     fprintf(file, "<activity>\n");
     rule_print(self->rule, file);
