@@ -27,9 +27,13 @@ import_prelude(mod_t *mod) {
     define_primitive_2_fn(mod, "iadd", xint_add);
     define_primitive_node(mod, "iadd", (const char*[]) { "x!", "y!", "z" });
     define_primitive_2_fn(mod, "isub", xint_sub);
+    define_primitive_node(mod, "isub", (const char*[]) { "x!", "y!", "z" });
     define_primitive_2_fn(mod, "imul", xint_mul);
+    define_primitive_node(mod, "imul", (const char*[]) { "x!", "y!", "z" });
     define_primitive_2_fn(mod, "idiv", xint_div);
+    define_primitive_node(mod, "idiv", (const char*[]) { "x!", "y!", "z" });
     define_primitive_2_fn(mod, "imod", xint_mod);
+    define_primitive_node(mod, "imod", (const char*[]) { "x!", "y!", "z" });
     define_primitive_1_fn(mod, "int-to-float", xint_to_xfloat);
 
     // float

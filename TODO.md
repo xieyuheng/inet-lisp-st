@@ -1,11 +1,12 @@
-fix primitive-node.test.lisp
-
-[docs] update syntax
-
 # primitive
 
-[net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 [primitive] `x_connect` -- can also connect primitive values
+[net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
+fix primitive-node.test.lisp
+
+# syntax
+
+[docs] update syntax -- should we use `(let)` or `(=)`
 
 # primitive test
 
