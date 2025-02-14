@@ -17,6 +17,12 @@ parse_define_node(sexp_t *sexp) {
 }
 
 static stmt_t *
+parse_define_value(sexp_t *sexp) {
+    (void) sexp;
+    return NULL;
+}
+
+static stmt_t *
 parse_define_function(sexp_t *sexp) {
     list_t *sexp_list = sexp_sexp_list(sexp);
     (void) list_first(sexp_list);
@@ -39,6 +45,16 @@ parse_define_function(sexp_t *sexp) {
     }
 
     return stmt_define_function(name, arg_name_list, exp_list);
+}
+
+static stmt_t *
+parse_define(sexp_t *sexp) {
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    sexp_t *second_sexp = list_get(sexp_list, 1);
+    if (is_atom_sexp(second_sexp))
+        return parse_define_value(sexp);
+    else
+        return parse_define_function(sexp);
 }
 
 static stmt_t *
@@ -115,7 +131,7 @@ parse_stmt(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "define-rule*"))
         return parse_define_rule_star(sexp);
     else if (sexp_starts_with(sexp, "define"))
-        return parse_define_function(sexp);
+        return parse_define(sexp);
     else if (sexp_starts_with(sexp, "import"))
         return parse_import(sexp);
     else if (is_list_sexp(sexp))
