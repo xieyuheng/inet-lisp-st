@@ -1,5 +1,7 @@
 #pragma once
 
+#include "net/types.h"
+
 typedef struct mod_t mod_t;
 typedef struct function_t function_t;
 typedef struct primitive_t primitive_t;

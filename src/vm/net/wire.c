@@ -59,7 +59,7 @@ wire_free_from_node(wire_t *self) {
 bool
 wire_is_free(const wire_t *self) {
     if (self->node) return false;
-    
+
     return true;
 }
 

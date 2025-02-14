@@ -1,12 +1,13 @@
 # primitive
 
-[net] `node_ctor_t` -- has optional `primitive`
 [vm] `primitive_t` -- has optional `node_ctor` to denote generic on wires
 [vm] `define_primitive_node` -- to specify the optional `node_ctor` of `primitive_t`
 
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 
 [primitive] `apply` -- create node when args has wire
+
+# primitive test
 
 [primitive] write `list-map` as example that uses function
 

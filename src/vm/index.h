@@ -11,3 +11,13 @@
 #include "primitive.h"
 #include "rule.h"
 #include "define.h"
+
+#include "net/node.h"
+#include "net/node_iter.h"
+#include "net/wire.h"
+#include "net/wire_iter.h"
+#include "net/port_info.h"
+#include "net/node_ctor.h"
+#include "net/node_pattern.h"
+#include "net/net_pattern.h"
+#include "net/net_matcher.h"
