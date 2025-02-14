@@ -18,8 +18,17 @@ parse_define_node(sexp_t *sexp) {
 
 static stmt_t *
 parse_define_value(sexp_t *sexp) {
-    (void) sexp;
-    return NULL;
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
+
+    sexp_t *name_sexp = list_next(sexp_list);
+    char *name = string_copy(sexp_string(name_sexp));
+
+    sexp_t *exp_sexp = list_next(sexp_list);
+    assert(list_next(sexp_list) == NULL);
+    exp_t *exp = parse_exp(exp_sexp);
+
+    return stmt_define(name, exp);
 }
 
 static stmt_t *
@@ -30,6 +39,7 @@ parse_define_function(sexp_t *sexp) {
     list_t *name_sexp_list = sexp_sexp_list(list_next(sexp_list));
     sexp_t *first_name_sexp = list_first(name_sexp_list);
     char *name = string_copy(sexp_string(first_name_sexp));
+
     list_t *arg_name_list = string_list_new();
     sexp_t *name_sexp = list_next(name_sexp_list);
     while (name_sexp) {

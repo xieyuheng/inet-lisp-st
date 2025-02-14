@@ -1,4 +1,3 @@
-[lang] `parse_define_value` -- handle `(define <name> <exp>)` -- fix square.lisp test
 [tests] undefined-node.error.lisp
 
 # primitive
