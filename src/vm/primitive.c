@@ -93,5 +93,5 @@ as_primitive(value_t value) {
 
 void
 primitive_print(primitive_t *self, file_t *file) {
-    fprintf(file, "#<%s>", self->name);
+    fprintf(file, "<primitive %s />", self->name);
 }

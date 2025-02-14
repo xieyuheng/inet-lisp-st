@@ -52,7 +52,7 @@ frame_print(const frame_t *self, file_t *file) {
         value_t value = array_get(self->local_array, i);
         if (value != NULL) {
             fprintf(file, "%lu: ", i);
-            fprintf(file, "#<local-pointer 0x%p>", value);
+            fprintf(file, "<local-pointer 0x%p />", value);
 
             // value_print(value, file);
 
