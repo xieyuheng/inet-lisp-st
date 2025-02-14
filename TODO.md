@@ -1,4 +1,3 @@
-[lang] `STMT_DEFINE`
 [lang] `execute` -- `STMT_DEFINE`
 [lang] support `(define <name> <exp>)` -- fix square.lisp test
 [tests] undefined-node.error.lisp

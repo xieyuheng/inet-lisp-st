@@ -1,6 +1,7 @@
 #pragma once
 
 typedef enum {
+    STMT_DEFINE,
     STMT_DEFINE_FUNCTION,
     STMT_DEFINE_NODE,
     STMT_DEFINE_RULE,
@@ -12,6 +13,7 @@ typedef enum {
 struct stmt_t {
     stmt_kind_t kind;
     union {
+        struct { char *name; exp_t *exp; } define;
         struct { char *name; list_t *arg_name_list; list_t *exp_list; } define_function;
         struct { char *name; list_t *port_name_list; } define_node;
         struct { exp_t *pattern_exp; list_t *exp_list; } define_rule;
@@ -21,6 +23,7 @@ struct stmt_t {
     };
 };
 
+stmt_t *stmt_define(char *name, exp_t *exp);
 stmt_t *stmt_define_function(char *name, list_t *arg_name_list, list_t *exp_list);
 stmt_t *stmt_define_node(char *name, list_t *port_name_list);
 stmt_t *stmt_define_rule(exp_t *pattern_exp, list_t *exp_list);

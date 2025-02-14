@@ -4,7 +4,7 @@ static void
 define_node(vm_t *vm, const char *name, list_t *port_name_list) {
     size_t arity = list_length(port_name_list);
     node_ctor_t *node_ctor = node_ctor_new(name, arity);
-    
+
     size_t index = 0;
     char *port_name = list_first(port_name_list);
     while (port_name) {
@@ -153,13 +153,17 @@ compute_exp(vm_t *vm, exp_t *exp) {
 void
 execute(vm_t *vm, stmt_t *stmt) {
     switch (stmt->kind) {
+    case STMT_DEFINE: {
+        // TODO
+        return;
+    }
+
     case STMT_DEFINE_FUNCTION: {
         size_t arity = list_length(stmt->define_function.arg_name_list);
         function_t *function = function_new(arity);
         compile_bind(vm, function, stmt->define_function.arg_name_list);
         compile_exp_list(vm, function, stmt->define_function.exp_list);
         function_build(function);
-
         define(vm->mod, stmt->define_function.name, function);
         return;
     }

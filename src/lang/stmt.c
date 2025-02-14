@@ -1,6 +1,15 @@
 #include "index.h"
 
 stmt_t *
+stmt_define(char *name, exp_t *exp) {
+    stmt_t *self = new(stmt_t);
+    self->kind = STMT_DEFINE;
+    self->define.name = name;
+    self->define.exp = exp;
+    return self;
+}
+
+stmt_t *
 stmt_define_function(char *name, list_t *arg_name_list, list_t *exp_list) {
     stmt_t *self = new(stmt_t);
     self->kind = STMT_DEFINE_FUNCTION;
@@ -60,6 +69,12 @@ stmt_destroy(stmt_t **self_pointer) {
     if (*self_pointer) {
         stmt_t *self = *self_pointer;
         switch (self->kind) {
+        case STMT_DEFINE: {
+            string_destroy(&self->define.name);
+            exp_destroy(&self->define.exp);
+            break;
+        }
+
         case STMT_DEFINE_FUNCTION: {
             string_destroy(&self->define_function.name);
             list_destroy(&self->define_function.arg_name_list);
@@ -106,6 +121,13 @@ stmt_destroy(stmt_t **self_pointer) {
 void
 stmt_print(const stmt_t *self, file_t *file) {
     switch (self->kind) {
+    case STMT_DEFINE: {
+        fprintf(file, "(define %s ", self->define_function.name);
+        exp_print(self->define.exp, file);
+        fprintf(file, ")");
+        return;
+    }
+
     case STMT_DEFINE_FUNCTION: {
         fprintf(file, "(define (");
         fprintf(file, "%s", self->define_function.name);
