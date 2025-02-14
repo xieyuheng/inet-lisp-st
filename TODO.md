@@ -1,3 +1,7 @@
+fix primitive-node.test.lisp
+
+[docs] update syntax
+
 # primitive
 
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`

@@ -25,6 +25,7 @@ import_prelude(mod_t *mod) {
 
     define_primitive_1_fn(mod, "int?", xint_p);
     define_primitive_2_fn(mod, "iadd", xint_add);
+    define_primitive_node(mod, "iadd", (const char*[]) { "x!", "y!", "z" });
     define_primitive_2_fn(mod, "isub", xint_sub);
     define_primitive_2_fn(mod, "imul", xint_mul);
     define_primitive_2_fn(mod, "idiv", xint_div);
