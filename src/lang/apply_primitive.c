@@ -2,9 +2,17 @@
 
 static bool
 is_directly_appliable(vm_t *vm, primitive_t *primitive, size_t arity) {
-    (void) vm;
-    (void) primitive;
-    (void) arity;
+    if (primitive->input_arity != arity) return false;
+
+    for (size_t i = 0; i < primitive->input_arity; i++) {
+        if (primitive->node_ctor == NULL ||
+            primitive->node_ctor->port_infos[i]->is_principal)
+        {
+            value_t value = stack_pick(vm->value_stack, i);
+            if (is_wire(value)) return false;
+        }
+    }
+
     return true;
 }
 
@@ -63,15 +71,11 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
     // TODO supplement wire if arity is short
     assert(primitive->input_arity == arity);
 
-    if (is_directly_appliable(vm, primitive, arity)) {
+    if (primitive->node_ctor == NULL ||
+        is_directly_appliable(vm, primitive, arity))
+    {
         apply_primitive_directly(vm, primitive);
         return;
-    }
-
-    if (primitive->node_ctor == NULL) {
-        fprintf(stderr, "[apply_primitive] can not apply directly: %s\n", primitive->name);
-        fprintf(stderr, "[apply_primitive] arity: %lu\n", arity);
-        exit(1);
     }
 
     node_t *node = vm_add_node(vm, primitive->node_ctor);
