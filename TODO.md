@@ -2,6 +2,8 @@
 
 [vm] `define_primitive_node` -- to specify the optional `node_ctor` of `primitive_t`
 
+- infer arity from `primitive_t`'s `input_arity` and `output_arity`
+
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 
 [primitive] `apply` -- create node when args has wire

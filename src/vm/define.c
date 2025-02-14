@@ -41,3 +41,15 @@ void
 define_primitive_4_fn(mod_t *mod, const char *name, primitive_4_fn_t *primitive_4_fn)  {
     define(mod, name, primitive_from_4_fn(name, primitive_4_fn));
 }
+
+void
+define_primitive_node(mod_t *mod, const char *name, const char *port_names[]) {
+    value_t value = mod_find(mod, name);
+    if (!is_primitive(value)) {
+        fprintf(stderr, "[define_primitive_node] expect value of %s to be a primitive: \n", name);
+        value_print(value, stderr);
+        exit(1);
+    }
+
+    (void) port_names;
+}

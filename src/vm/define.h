@@ -9,3 +9,5 @@ void define_primitive_1_fn(mod_t *mod, const char *name, primitive_1_fn_t *primi
 void define_primitive_2_fn(mod_t *mod, const char *name, primitive_2_fn_t *primitive_2_fn);
 void define_primitive_3_fn(mod_t *mod, const char *name, primitive_3_fn_t *primitive_3_fn);
 void define_primitive_4_fn(mod_t *mod, const char *name, primitive_4_fn_t *primitive_4_fn);
+
+void define_primitive_node(mod_t *mod, const char *name, const char *port_names[]);
