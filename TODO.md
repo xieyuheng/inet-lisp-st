@@ -12,6 +12,10 @@
 
 - the most important primitive value is `function_t`
 
+[primitive] should not use `define_primitive_0_fn` to define `newline` -- the arity is wrong.
+
+- [maybe] use `NULL` as `xvoid`
+
 # testing
 
 [testing] `(assert)` report position

@@ -13,5 +13,5 @@ value_t x_newline(void) {
 value_t x_println(value_t x) {
     x_print(x);
     x_newline();
-    return NULL;
+    return x;
 }
