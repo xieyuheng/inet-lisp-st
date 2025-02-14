@@ -13,16 +13,14 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
 
     case PRIMITIVE_0_FN: {
         value_t result = primitive->primitive_0_fn();
-        if (result != NULL)
-            stack_push(vm->value_stack, result);
+        stack_push(vm->value_stack, result);
         return;
     }
 
     case PRIMITIVE_1_FN: {
         value_t x = stack_pop(vm->value_stack);
         value_t result = primitive->primitive_1_fn(x);
-        if (result != NULL)
-            stack_push(vm->value_stack, result);
+        stack_push(vm->value_stack, result);
         return;
     }
 
@@ -30,8 +28,7 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
         value_t y = stack_pop(vm->value_stack);
         value_t x = stack_pop(vm->value_stack);
         value_t result = primitive->primitive_2_fn(x, y);
-        if (result != NULL)
-            stack_push(vm->value_stack, result);
+        stack_push(vm->value_stack, result);
         return;
     }
 
@@ -40,8 +37,7 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
         value_t y = stack_pop(vm->value_stack);
         value_t x = stack_pop(vm->value_stack);
         value_t result = primitive->primitive_3_fn(x, y, z);
-        if (result != NULL)
-            stack_push(vm->value_stack, result);
+        stack_push(vm->value_stack, result);
         return;
     }
 
@@ -51,8 +47,7 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
         value_t y = stack_pop(vm->value_stack);
         value_t x = stack_pop(vm->value_stack);
         value_t result = primitive->primitive_4_fn(x, y, z, w);
-        if (result != NULL)
-            stack_push(vm->value_stack, result);
+        stack_push(vm->value_stack, result);
         return;
     }
     }
