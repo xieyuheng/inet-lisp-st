@@ -54,8 +54,11 @@ activate_node_and_neighbor(vm_t *vm, node_t *node) {
     // also activate the neighboring nodes.
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
-        wire_t *wire = node->ports[i];
-        assert(wire);
+        value_t value = node->ports[i];
+        if (!is_wire(value))
+            continue;
+
+        wire_t *wire = as_wire(value);
         assert(wire->opposite);
         if (wire->opposite->node)
             activate_node(vm, wire->opposite->node);
