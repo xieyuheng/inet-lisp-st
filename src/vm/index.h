@@ -10,7 +10,6 @@
 #include "function.h"
 #include "primitive.h"
 #include "rule.h"
-#include "define.h"
 
 #include "net/node.h"
 #include "net/node_iter.h"

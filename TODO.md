@@ -1,3 +1,7 @@
+[lang] extract `define_primitive`
+[lang] extract `define_rule`
+[lang] extract `define_node`
+
 # primitive
 
 [vm] `define_primitive_node` -- to specify the optional `node_ctor` of `primitive_t`

@@ -1,6 +1,7 @@
 #pragma once
 
 void define(mod_t *self, const char *name, value_t value);
+
 void define_rule(mod_t *self, const char *name, rule_t *rule);
 
 void define_primitive_vm_fn(mod_t *mod, const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn);
