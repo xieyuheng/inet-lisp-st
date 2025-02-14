@@ -39,11 +39,11 @@ maybe_compile_local_get(function_t *function, const char *name) {
 }
 
 static void
-compile_lookup(vm_t *vm, function_t *function, const char *name) {
+compile_literal(vm_t *vm, function_t *function, const char *name) {
     value_t value = mod_find(vm->mod, name);
     if (value == NULL) {
-        fprintf(stderr, "[compile_lookup] undefined name: %s\n", name);
-        fprintf(stderr, "[compile_lookup] function:\n");
+        fprintf(stderr, "[compile_literal] undefined name: %s\n", name);
+        fprintf(stderr, "[compile_literal] function:\n");
         function_print(function, stderr);
         exit(1);
     }
@@ -58,7 +58,7 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
         if (maybe_compile_local_get(function, exp->var.name))
             return;
 
-        compile_lookup(vm, function, exp->var.name);
+        compile_literal(vm, function, exp->var.name);
         return;
     }
 
