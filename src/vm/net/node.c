@@ -30,6 +30,7 @@ node_set(node_t *self, size_t index, value_t value) {
         wire_t *wire = as_wire(value);
         assert(wire->node == NULL);
         wire->node = self;
+        wire->index = index;
     }
 }
 

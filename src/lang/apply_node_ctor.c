@@ -3,11 +3,9 @@
 static void
 apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
     for (size_t c = 0; c < arity; c++) {
-        wire_t *wire = stack_pop(vm->value_stack);
+        value_t value = stack_pop(vm->value_stack);
         size_t i = arity - 1 - c;
-        wire->node = node;
-        wire->index = i;
-        node->ports[i] = wire;
+        node_set(node, i, value);
     }
 }
 
