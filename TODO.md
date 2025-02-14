@@ -1,4 +1,3 @@
-[lang] extract `define_primitive`
 [lang] extract `define_rule`
 [lang] extract `define_node`
 
