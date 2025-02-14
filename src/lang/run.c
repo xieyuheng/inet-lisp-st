@@ -91,7 +91,7 @@ delete_match_nodes(vm_t *vm, net_matcher_t *net_matcher) {
         node_t *matched_node = net_matcher->matched_nodes[i];
         assert(matched_node);
         for (size_t k = 0; k < matched_node->ctor->arity; k++) {
-            wire_t *wire = matched_node->wires[k];
+            wire_t *wire = matched_node->ports[k];
             assert(wire);
             if (wire_is_principal(wire))
                 vm_delete_wire(vm, wire);

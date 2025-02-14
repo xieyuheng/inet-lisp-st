@@ -7,7 +7,7 @@ node_apply_input_ports(vm_t *vm, node_t *node, size_t arity) {
         size_t i = arity - 1 - c;
         wire->node = node;
         wire->index = i;
-        node->wires[i] = wire;
+        node->ports[i] = wire;
     }
 }
 
@@ -24,7 +24,7 @@ node_return_output_ports(vm_t *vm, node_t *node, size_t arity) {
         size_t i = arity + c;
         node_wire->node = node;
         node_wire->index = i;
-        node->wires[i] = node_wire;
+        node->ports[i] = node_wire;
 
         stack_push(vm->value_stack, free_wire);
     }
@@ -47,7 +47,7 @@ apply_node_ctor(vm_t *vm, node_ctor_t *node_ctor, size_t arity) {
     // also activate the neighboring nodes.
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
-        wire_t *wire = node->wires[i];
+        wire_t *wire = node->ports[i];
         assert(wire);
         assert(wire->opposite);
         if (wire->opposite->node)
