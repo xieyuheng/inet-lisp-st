@@ -1,5 +1,3 @@
-[tests] undefined-node.error.lisp
-
 # primitive
 
 [primitive] `node_t` -- ports can store any value -- not only wire, but also primitive values
@@ -21,6 +19,10 @@
 # testing
 
 [testing] `(assert)` report position
+
+# error report
+
+improve undefined-node.error.lisp
 
 # parallelism
 

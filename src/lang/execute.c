@@ -25,6 +25,11 @@ build_node_pattern(vm_t *vm, exp_t *pattern_exp) {
 
     assert(target->kind == EXP_VAR);
     value_t value = mod_find(vm->mod, target->var.name);
+    if (!value) {
+        fprintf(stderr, "[build_node_pattern] undefined node: %s\n", target->var.name);
+        exit(1);
+    }
+
     node_ctor_t *node_ctor = as_node_ctor(value);
     node_pattern_t *node_pattern = node_pattern_new(node_ctor);
 
