@@ -61,28 +61,6 @@ build_node_pattern_list(vm_t *vm, list_t *pattern_exp_list) {
 }
 
 static void
-define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list) {
-    net_pattern_t *net_pattern = net_pattern_new(node_pattern_list);
-    list_t *local_name_list = net_pattern_local_name_list(net_pattern);
-    size_t arity = list_length(local_name_list);
-    function_t *function = function_new(arity);
-    compile_bind(vm, function, local_name_list);
-    compile_exp_list(vm, function, exp_list);
-    function_build(function);
-
-    node_pattern_t *node_pattern = list_first(node_pattern_list);
-    size_t index = 0;
-    while (node_pattern) {
-        rule_t *rule = rule_new(index, net_pattern, function);
-        define_rule(vm->mod, node_pattern->ctor->name, rule);
-        node_pattern = list_next(node_pattern_list);
-        index++;
-    }
-
-    return;
-}
-
-static void
 translate_pattern_sub_tree(
     vm_t *vm,
     exp_t *pattern_exp,
