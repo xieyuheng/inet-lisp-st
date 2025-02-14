@@ -1,8 +1,6 @@
 # primitive
 
-[lang] `is_appliable` -- for `apply_primitive`
-[lang] `apply_primitive` -- create node when args has wire
-
+[lang] `is_directly_appliable` -- for `apply_primitive`
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 [primitive] `x_connect` -- can also connect primitive values
 

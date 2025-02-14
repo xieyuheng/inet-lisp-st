@@ -1,10 +1,15 @@
 #include "index.h"
 
-void
-apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
-    // TODO supplement wire if arity is short
-    assert(primitive->input_arity == arity);
+static bool
+is_directly_appliable(vm_t *vm, primitive_t *primitive, size_t arity) {
+    (void) vm;
+    (void) primitive;
+    (void) arity;
+    return true;
+}
 
+static void
+apply_primitive_directly(vm_t *vm, primitive_t *primitive) {
     switch (primitive->fn_kind) {
     case PRIMITIVE_VM_FN: {
         primitive->primitive_vm_fn(vm);
@@ -51,4 +56,26 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
         return;
     }
     }
+}
+
+void
+apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
+    // TODO supplement wire if arity is short
+    assert(primitive->input_arity == arity);
+
+    if (is_directly_appliable(vm, primitive, arity)) {
+        apply_primitive_directly(vm, primitive);
+        return;
+    }
+
+    if (primitive->node_ctor == NULL) {
+        fprintf(stderr, "[apply_primitive] can not apply directly: %s\n", primitive->name);
+        fprintf(stderr, "[apply_primitive] arity: %lu\n", arity);
+        exit(1);
+    }
+
+    node_t *node = vm_add_node(vm, primitive->node_ctor);
+    apply_node_input_ports(vm, node, arity);
+    apply_node_output_ports(vm, node, arity);
+    activate_node_and_neighbor(vm, node);
 }
