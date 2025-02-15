@@ -103,7 +103,7 @@ vm_delete_wire(vm_t* self, wire_t *wire) {
 }
 
 wire_t *
-vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
+vm_wire_connect_wire(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
     value_t first_opposite = first_wire->opposite;
     value_t second_opposite = second_wire->opposite;
 
@@ -146,11 +146,11 @@ vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
 
         return second_opposite_wire;
     } else {
-        fprintf(stderr, "[vm_wire_connect] can not connect wires with non-wire opposite\n");
-        fprintf(stderr, "[vm_wire_connect] first_opposite: ");
+        fprintf(stderr, "[vm_wire_connect_wire] can not connect wires with non-wire opposite\n");
+        fprintf(stderr, "[vm_wire_connect_wire] first_opposite: ");
         value_print(first_opposite, stderr);
         fprintf(stderr, "\n");
-        fprintf(stderr, "[vm_wire_connect] second_opposite: ");
+        fprintf(stderr, "[vm_wire_connect_wire] second_opposite: ");
         value_print(second_opposite, stderr);
         fprintf(stderr, "\n");
         exit(1);

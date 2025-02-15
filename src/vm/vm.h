@@ -30,6 +30,6 @@ void vm_delete_node(vm_t* self, node_t *node);
 wire_t *vm_add_wire(vm_t* self);
 void vm_delete_wire(vm_t* self, wire_t *wire);
 
-wire_t *vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire);
+wire_t *vm_wire_connect_wire(vm_t* self, wire_t *first_wire, wire_t *second_wire);
 
 char *vm_fresh_name(vm_t* self);
