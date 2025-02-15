@@ -26,7 +26,7 @@ to interaction combinators will be explored only later.
 
 Statements:
 
-```xml
+```
 (define-node <name> <port-name> ...)
 (define-rule <pattern> <exp> ...)
 (define-rule* (<pattern> ...) <exp> ...)
@@ -118,7 +118,7 @@ The whole program with test:
 <details>
 <summary>output</summary>
 
-```xml
+```
 <net>
 <root>
 (add₇)-result-<>-
@@ -172,7 +172,7 @@ The whole program with test:
 <details>
 <summary>output</summary>
 
-```xml
+```
 <net>
 <root>
 (append₁₅)-result-<>-
