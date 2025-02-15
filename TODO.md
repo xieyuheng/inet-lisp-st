@@ -1,6 +1,8 @@
-[lang] `exp_let_once`
+[lang] `exp_print` -- handle `EXP_INT` and `EXP_FLOAT`
 [lang] `parse_let_once`
-[lang] `compile_exp` -- `EXP_LET_ONCE`
+
+[lang] split `compile_name_list` to `compile_set_variables` and `compile_set_local_variables`
+[lang] `compile_exp` -- handle `EXP_LET_ONCE`
 
 [lang] `let-once` -- distinguish linear variables from non-linear variables.
 test `let-once.error.lisp`

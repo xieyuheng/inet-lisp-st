@@ -76,6 +76,13 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
         return;
     }
 
+    case EXP_LET_ONCE: {
+        compile_exp(vm, function, exp->let_once.exp);
+        compile_name_list(vm, function, exp->let_once.name_list);
+        // TODO
+        return;
+    }    
+
     case EXP_INT: {
         function_add_op(function, op_literal(xint(exp->i.target)));
         return;

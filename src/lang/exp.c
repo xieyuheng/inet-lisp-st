@@ -27,6 +27,15 @@ exp_let(list_t *name_list, exp_t *exp) {
 }
 
 exp_t *
+exp_let_once(list_t *name_list, exp_t *exp) {
+    exp_t *self = new(exp_t);
+    self->kind = EXP_LET_ONCE;
+    self->let_once.name_list = name_list;
+    self->let_once.exp = exp;
+    return self;
+}
+
+exp_t *
 exp_int(int64_t target) {
     exp_t *self = new(exp_t);
     self->kind = EXP_INT;
@@ -70,6 +79,12 @@ exp_destroy(exp_t **self_pointer) {
             break;
         }
 
+        case EXP_LET_ONCE: {
+            list_destroy(&self->let_once.name_list);
+            exp_destroy(&self->let_once.exp);
+            break;
+        }
+
         case EXP_INT: {
              break;
         }
@@ -102,6 +117,12 @@ exp_copy(const exp_t *self) {
         return exp_let(
             string_list_copy(self->let.name_list),
             exp_copy(self->let.exp));
+    }
+
+    case EXP_LET_ONCE: {
+        return exp_let_once(
+            string_list_copy(self->let_once.name_list),
+            exp_copy(self->let_once.exp));
     }
 
     case EXP_INT: {
@@ -194,6 +215,18 @@ exp_print(const exp_t *self, file_t *file) {
 
         fprintf(file, "(let ");
         name_list_print(self->let.name_list, file);
+        fprintf(file, ")");
+        return;
+    }
+
+    case EXP_LET_ONCE: {
+        if (list_is_empty(self->let_once.name_list)) {
+            fprintf(file, "(let-once)");
+            return;
+        }
+
+        fprintf(file, "(let-once ");
+        name_list_print(self->let_once.name_list, file);
         fprintf(file, ")");
         return;
     }
