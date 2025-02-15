@@ -1,6 +1,5 @@
 # primitive
 
-[prelude/net] `x_connect` -- can also connect wire to value
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 fix primitive-node.test.lisp
 

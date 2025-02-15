@@ -5,10 +5,22 @@ x_connect(vm_t *vm) {
     wire_t *second = stack_pop(vm->value_stack);
     wire_t *first = stack_pop(vm->value_stack);
 
-    wire_t *second_wire = as_wire(second);
-    wire_t *first_wire = as_wire(first);
-
-    wire_connect_wire(vm, second_wire, first_wire);
+    if (is_wire(first) && is_wire(second)) {
+        wire_connect_wire(vm, as_wire(second), as_wire(first));
+    } else if (is_wire(first)) {
+        wire_connect_value(vm, as_wire(first), second);
+    } else if (is_wire(second)) {
+        wire_connect_value(vm, as_wire(second), first);
+    } else {
+        fprintf(stderr, "[x_connect] can not connect value to value\n");
+        fprintf(stderr, "[x_connect] first: ");
+        value_print(first, stderr);
+        fprintf(stderr, "\n");
+        fprintf(stderr, "[x_connect] second: ");
+        value_print(second, stderr);
+        fprintf(stderr, "\n");
+        exit(1);
+    }
 }
 
 void
