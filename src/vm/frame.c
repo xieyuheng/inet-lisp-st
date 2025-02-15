@@ -74,7 +74,13 @@ frame_print(const frame_t *self, file_t *file) {
 
 value_t
 frame_get_variable(const frame_t *self, size_t index) {
-    return array_get(self->variable_array, index);
+    value_t value = array_get(self->variable_array, index);
+    if (!value) {
+        fprintf(stderr, "[frame_get_variable] undefined variable index: %lu\n", index);
+        exit(1);
+    }
+
+    return value;
 }
 
 void
@@ -84,7 +90,14 @@ frame_set_variable(frame_t *self, size_t index, value_t value) {
 
 value_t
 frame_get_linear_variable(const frame_t *self, size_t index) {
-    return array_get(self->linear_variable_array, index);
+    value_t value = array_get(self->linear_variable_array, index);
+    if (!value) {
+        fprintf(stderr, "[frame_get_linear_variable] undefined variable index: %lu\n", index);
+        exit(1);
+    }
+
+    array_set(self->linear_variable_array, index, NULL);
+    return value;
 }
 
 void

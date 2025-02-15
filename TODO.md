@@ -1,4 +1,3 @@
-[vm] `frame_get_linear_variable` -- be linear
 [vm] `frame_set_linear_variable` -- be linear
 
 [lang] `exp_let_once`
