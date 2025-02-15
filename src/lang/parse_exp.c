@@ -49,10 +49,31 @@ parse_let(sexp_t *sexp) {
     return exp_let(name_list, exp);
 }
 
+static exp_t *
+parse_let_once(sexp_t *sexp) {
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
+    list_t *name_list = string_list_new();
+    sexp_t *name_sexp = list_next(sexp_list);
+    exp_t *exp = NULL;
+    while (name_sexp) {
+        if (list_cursor_is_end(sexp_list))
+            exp = parse_exp(name_sexp);
+        else
+            list_push(name_list, string_copy(sexp_string(name_sexp)));
+
+        name_sexp = list_next(sexp_list);
+    }
+
+    return exp_let_once(name_list, exp);
+}
+
 exp_t *
 parse_exp(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "let")) {
         return parse_let(sexp);
+    } else if (sexp_starts_with(sexp, "let-once")) {
+        return parse_let_once(sexp);
     } else if (is_atom_sexp(sexp)) {
         const token_t *token = sexp_token(sexp);
         if (token->kind == INT_TOKEN)

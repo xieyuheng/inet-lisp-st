@@ -1,5 +1,3 @@
-[lang] `parse_let_once`
-
 [lang] split `compile_name_list` to `compile_set_variables` and `compile_set_local_variables`
 [lang] `compile_exp` -- handle `EXP_LET_ONCE`
 
