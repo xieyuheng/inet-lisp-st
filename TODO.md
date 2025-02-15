@@ -1,3 +1,8 @@
+ambr vm_fn fn
+ambr 0_fn fn_0
+
+define_primitive_node_<n>
+
 # primitive
 
 [primitive] `x_connect` -- can also connect primitive values
