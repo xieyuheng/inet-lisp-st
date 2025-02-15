@@ -1,6 +1,5 @@
 # syntax
 
-[docs] update syntax -- about `let`
 linear version of let should be called `let-once`
 
 # primitive
