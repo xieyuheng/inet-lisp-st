@@ -15,14 +15,14 @@ step_op(vm_t *vm, frame_t *frame, op_t *op) {
     }
 
     case OP_LOCAL_GET: {
-        value_t value = frame_local_get(frame, op->local_get.index);
+        value_t value = frame_get_variable(frame, op->local_get.index);
         stack_push(vm->value_stack, value);
         return;
     }
 
     case OP_LOCAL_SET: {
         value_t value = stack_pop(vm->value_stack);
-        frame_local_set(frame, op->local_set.index, value);
+        frame_set_variable(frame, op->local_set.index, value);
         return;
     }
     }

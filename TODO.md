@@ -1,3 +1,6 @@
+[lang] `frame` -- has `linear_variable_array`
+[lang] `exp_let_once`
+
 # linear variable
 
 `let-once` -- distinguish linear variables from non-linear variables.
