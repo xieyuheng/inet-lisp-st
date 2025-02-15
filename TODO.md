@@ -1,6 +1,5 @@
 # primitive
 
-`vm_wire_connect` -- fix the use of `opposite`
 `vm_wire_connect_value`
 
 [prelude/net] `x_connect` -- can also connect wire to value
