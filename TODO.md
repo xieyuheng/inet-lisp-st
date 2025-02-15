@@ -1,10 +1,8 @@
-ambr vm_fn fn
-ambr FN FN
-
-define_primitive_node_<n>
+[prelude] `float` -- use `define_primitive_node_<n>`
 
 # primitive
 
+[net] `wire_t` -- `opposite` should be `value_t` instead of `wire_t *`
 [primitive] `x_connect` -- can also connect primitive values
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 fix primitive-node.test.lisp

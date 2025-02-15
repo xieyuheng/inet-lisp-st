@@ -50,3 +50,33 @@ define_primitive_node(mod_t *mod, const char *name, const char *port_names[]) {
     primitive->node_ctor = node_ctor;
     node_ctor->primitive = primitive;
 }
+
+void
+define_primitive_node_0(mod_t *mod, const char *name, primitive_fn_0_t *primitive_fn_0, const char *port_names[]) {
+    define_primitive_fn_0(mod, name, primitive_fn_0);
+    define_primitive_node(mod, name, port_names);
+}
+
+void
+define_primitive_node_1(mod_t *mod, const char *name, primitive_fn_1_t *primitive_fn_1, const char *port_names[]) {
+    define_primitive_fn_1(mod, name, primitive_fn_1);
+    define_primitive_node(mod, name, port_names);
+}
+
+void
+define_primitive_node_2(mod_t *mod, const char *name, primitive_fn_2_t *primitive_fn_2, const char *port_names[]) {
+    define_primitive_fn_2(mod, name, primitive_fn_2);
+    define_primitive_node(mod, name, port_names);
+}
+
+void
+define_primitive_node_3(mod_t *mod, const char *name, primitive_fn_3_t *primitive_fn_3, const char *port_names[]) {
+    define_primitive_fn_3(mod, name, primitive_fn_3);
+    define_primitive_node(mod, name, port_names);
+}
+
+void
+define_primitive_node_4(mod_t *mod, const char *name, primitive_fn_4_t *primitive_fn_4, const char *port_names[]) {
+    define_primitive_fn_4(mod, name, primitive_fn_4);
+    define_primitive_node(mod, name, port_names);
+}

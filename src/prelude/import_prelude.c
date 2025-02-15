@@ -6,12 +6,9 @@ import_prelude(mod_t *mod) {
 
     define(mod, "false", xfalse);
     define(mod, "true", xtrue);
-    define_primitive_fn_1(mod, "not", xbool_not);
-    define_primitive_node(mod, "not", (const char*[]) { "x!", "y" });
-    define_primitive_fn_2(mod, "and", xbool_and);
-    define_primitive_node(mod, "and", (const char*[]) { "x!", "y!", "z" });
-    define_primitive_fn_2(mod, "or", xbool_or);
-    define_primitive_node(mod, "or", (const char*[]) { "x!", "y!", "z" });
+    define_primitive_node_1(mod, "not", xbool_not, (const char*[]) { "x!", "result" });
+    define_primitive_node_2(mod, "and", xbool_and, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "or", xbool_or, (const char*[]) { "x!", "y!", "result" });
 
     // value
 
@@ -23,18 +20,13 @@ import_prelude(mod_t *mod) {
 
     // int
 
-    define_primitive_fn_1(mod, "int?", xint_p);
-    define_primitive_fn_2(mod, "iadd", xint_add);
-    define_primitive_node(mod, "iadd", (const char*[]) { "x!", "y!", "z" });
-    define_primitive_fn_2(mod, "isub", xint_sub);
-    define_primitive_node(mod, "isub", (const char*[]) { "x!", "y!", "z" });
-    define_primitive_fn_2(mod, "imul", xint_mul);
-    define_primitive_node(mod, "imul", (const char*[]) { "x!", "y!", "z" });
-    define_primitive_fn_2(mod, "idiv", xint_div);
-    define_primitive_node(mod, "idiv", (const char*[]) { "x!", "y!", "z" });
-    define_primitive_fn_2(mod, "imod", xint_mod);
-    define_primitive_node(mod, "imod", (const char*[]) { "x!", "y!", "z" });
-    define_primitive_fn_1(mod, "int-to-float", xint_to_xfloat);
+    define_primitive_node_1(mod, "int?", xint_p, (const char*[]) { "x!", "result" });
+    define_primitive_node_2(mod, "iadd", xint_add, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "isub", xint_sub, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "imul", xint_mul, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "idiv", xint_div, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "imod", xint_mod, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_1(mod, "int-to-float", xint_to_xfloat, (const char*[]) { "i!", "f" });
 
     // float
 
