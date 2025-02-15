@@ -1,3 +1,5 @@
+[vm] `get_linear_variable` & `set_linear_variable`
+
 [lang] `exp_let_once`
 [lang] `parse_let_once`
 [lang] `compile_exp` -- `EXP_LET_ONCE`
