@@ -1,11 +1,10 @@
-[lang] `frame` -- has `linear_variable_array`
+[lang] `frame` -- `frame_get_linear_variable`
+[lang] `frame` -- `frame_set_linear_variable`
+
 [lang] `exp_let_once`
-
-# linear variable
-
-`let-once` -- distinguish linear variables from non-linear variables.
-
-- fix the use of `value_print` in `frame_print`
+[lang] `let-once` -- distinguish linear variables from non-linear variables.
+test `let-once.error.lisp`
+[lang] fix the use of `value_print` in `frame_print`
 
 # primitive
 

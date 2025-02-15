@@ -6,6 +6,7 @@ struct frame_t {
     size_t cursor;
     const function_t *function;
     array_t *variable_array;
+    array_t *linear_variable_array;
 };
 
 frame_t *
@@ -14,6 +15,7 @@ frame_new(const function_t *function) {
     self->cursor = 0;
     self->function = function;
     self->variable_array = array_new(VARIABLE_ARRAY_SIZE);
+    self->linear_variable_array = array_new(VARIABLE_ARRAY_SIZE);
     return self;
 }
 
@@ -24,6 +26,7 @@ frame_destroy(frame_t **self_pointer) {
         frame_t *self = *self_pointer;
         // does not own function
         array_destroy(&self->variable_array);
+        array_destroy(&self->linear_variable_array);
         free(self);
         *self_pointer = NULL;
     }
@@ -47,12 +50,12 @@ frame_print(const frame_t *self, file_t *file) {
     function_print_with_cursor(self->function, file, self->cursor);
 
     size_t size = array_size(self->variable_array);
-    fprintf(file, "<local-array>\n");
+    fprintf(file, "<variable-array>\n");
     for (size_t i = 0; i < size; i++) {
         value_t value = array_get(self->variable_array, i);
         if (value != NULL) {
             fprintf(file, "%lu: ", i);
-            fprintf(file, "<local-pointer 0x%p />", value);
+            fprintf(file, "<value-pointer 0x%p />", value);
 
             // value_print(value, file);
 
@@ -65,7 +68,7 @@ frame_print(const frame_t *self, file_t *file) {
             fprintf(file, "\n");
         }
     }
-    fprintf(file, "</local-array>\n");
+    fprintf(file, "</variable-array>\n");
     fprintf(file, "</frame>\n");
 }
 
