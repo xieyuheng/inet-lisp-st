@@ -24,52 +24,52 @@ primitive_from_vm_fn(const char *name, size_t input_arity, size_t output_arity, 
 }
 
 primitive_t *
-primitive_from_0_fn(const char *name, primitive_0_fn_t *primitive_0_fn) {
+primitive_from_fn_0(const char *name, primitive_fn_0_t *primitive_fn_0) {
     primitive_t *self = primitive_new(name);
     self->fn_kind = PRIMITIVE_0_FN;
     self->input_arity = 0;
     self->output_arity = 1;
-    self->primitive_0_fn = primitive_0_fn;
+    self->primitive_fn_0 = primitive_fn_0;
     return self;
 }
 
 primitive_t *
-primitive_from_1_fn(const char *name, primitive_1_fn_t *primitive_1_fn) {
+primitive_from_fn_1(const char *name, primitive_fn_1_t *primitive_fn_1) {
     primitive_t *self = primitive_new(name);
     self->fn_kind = PRIMITIVE_1_FN;
     self->input_arity = 1;
     self->output_arity = 1;
-    self->primitive_1_fn = primitive_1_fn;
+    self->primitive_fn_1 = primitive_fn_1;
     return self;
 }
 
 primitive_t *
-primitive_from_2_fn(const char *name, primitive_2_fn_t *primitive_2_fn) {
+primitive_from_fn_2(const char *name, primitive_fn_2_t *primitive_fn_2) {
     primitive_t *self = primitive_new(name);
     self->fn_kind = PRIMITIVE_2_FN;
     self->input_arity = 2;
     self->output_arity = 1;
-    self->primitive_2_fn = primitive_2_fn;
+    self->primitive_fn_2 = primitive_fn_2;
     return self;
 }
 
 primitive_t *
-primitive_from_3_fn(const char *name, primitive_3_fn_t *primitive_3_fn) {
+primitive_from_fn_3(const char *name, primitive_fn_3_t *primitive_fn_3) {
     primitive_t *self = primitive_new(name);
     self->fn_kind = PRIMITIVE_3_FN;
     self->input_arity = 3;
     self->output_arity = 1;
-    self->primitive_3_fn = primitive_3_fn;
+    self->primitive_fn_3 = primitive_fn_3;
     return self;
 }
 
 primitive_t *
-primitive_from_4_fn(const char *name, primitive_4_fn_t *primitive_4_fn) {
+primitive_from_fn_4(const char *name, primitive_fn_4_t *primitive_fn_4) {
     primitive_t *self = primitive_new(name);
     self->fn_kind = PRIMITIVE_4_FN;
     self->input_arity = 4;
     self->output_arity = 1;
-    self->primitive_4_fn = primitive_4_fn;
+    self->primitive_fn_4 = primitive_fn_4;
     return self;
 }
 

@@ -1,11 +1,11 @@
 #pragma once
 
 typedef void (primitive_vm_fn_t)(vm_t *vm);
-typedef value_t (primitive_0_fn_t)(void);
-typedef value_t (primitive_1_fn_t)(value_t x);
-typedef value_t (primitive_2_fn_t)(value_t x, value_t y);
-typedef value_t (primitive_3_fn_t)(value_t x, value_t y, value_t z);
-typedef value_t (primitive_4_fn_t)(value_t x, value_t y, value_t z, value_t w);
+typedef value_t (primitive_fn_0_t)(void);
+typedef value_t (primitive_fn_1_t)(value_t x);
+typedef value_t (primitive_fn_2_t)(value_t x, value_t y);
+typedef value_t (primitive_fn_3_t)(value_t x, value_t y, value_t z);
+typedef value_t (primitive_fn_4_t)(value_t x, value_t y, value_t z, value_t w);
 
 typedef enum {
     PRIMITIVE_VM_FN,
@@ -29,20 +29,20 @@ struct primitive_t {
     primitive_fn_kind_t fn_kind;
     union {
         primitive_vm_fn_t *primitive_vm_fn;
-        primitive_0_fn_t *primitive_0_fn;
-        primitive_1_fn_t *primitive_1_fn;
-        primitive_2_fn_t *primitive_2_fn;
-        primitive_3_fn_t *primitive_3_fn;
-        primitive_4_fn_t *primitive_4_fn;
+        primitive_fn_0_t *primitive_fn_0;
+        primitive_fn_1_t *primitive_fn_1;
+        primitive_fn_2_t *primitive_fn_2;
+        primitive_fn_3_t *primitive_fn_3;
+        primitive_fn_4_t *primitive_fn_4;
     };
 };
 
 primitive_t *primitive_from_vm_fn(const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn);
-primitive_t *primitive_from_0_fn(const char *name, primitive_0_fn_t *primitive_0_fn);
-primitive_t *primitive_from_1_fn(const char *name, primitive_1_fn_t *primitive_1_fn);
-primitive_t *primitive_from_2_fn(const char *name, primitive_2_fn_t *primitive_2_fn);
-primitive_t *primitive_from_3_fn(const char *name, primitive_3_fn_t *primitive_3_fn);
-primitive_t *primitive_from_4_fn(const char *name, primitive_4_fn_t *primitive_4_fn);
+primitive_t *primitive_from_fn_0(const char *name, primitive_fn_0_t *primitive_fn_0);
+primitive_t *primitive_from_fn_1(const char *name, primitive_fn_1_t *primitive_fn_1);
+primitive_t *primitive_from_fn_2(const char *name, primitive_fn_2_t *primitive_fn_2);
+primitive_t *primitive_from_fn_3(const char *name, primitive_fn_3_t *primitive_fn_3);
+primitive_t *primitive_from_fn_4(const char *name, primitive_fn_4_t *primitive_fn_4);
 
 void primitive_destroy(primitive_t **self_pointer);
 

@@ -1,3 +1,3 @@
 #pragma once
 
-primitive_2_fn_t x_eq;
+primitive_fn_2_t x_eq;
