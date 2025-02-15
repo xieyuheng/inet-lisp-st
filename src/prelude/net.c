@@ -8,7 +8,7 @@ x_connect(vm_t *vm) {
     wire_t *second_wire = as_wire(second);
     wire_t *first_wire = as_wire(first);
 
-    vm_wire_connect_wire(vm, second_wire, first_wire);
+    wire_connect_wire(vm, second_wire, first_wire);
 }
 
 void

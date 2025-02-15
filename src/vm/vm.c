@@ -102,61 +102,6 @@ vm_delete_wire(vm_t* self, wire_t *wire) {
     wire_destroy(&wire);
 }
 
-wire_t *
-vm_wire_connect_wire(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
-    value_t first_opposite = first_wire->opposite;
-    value_t second_opposite = second_wire->opposite;
-
-    if (is_wire(first_opposite) && is_wire(second_opposite)) {
-        wire_t *first_opposite_wire = as_wire(first_opposite);
-        wire_t *second_opposite_wire = as_wire(second_opposite);
-
-        first_opposite_wire->opposite = second_opposite_wire;
-        second_opposite_wire->opposite = first_opposite_wire;
-
-        vm_delete_wire(self, first_wire);
-        vm_delete_wire(self, second_wire);
-
-        if (first_opposite_wire->node)
-            activate_node(self, first_opposite_wire->node);
-        if (second_opposite_wire->node)
-            activate_node(self, second_opposite_wire->node);
-
-        return first_opposite_wire;
-    } else if (is_wire(first_opposite)) {
-        wire_t *first_opposite_wire = as_wire(first_opposite);
-        first_opposite_wire->opposite = second_opposite;
-
-        vm_delete_wire(self, first_wire);
-        vm_delete_wire(self, second_wire);
-
-        if (first_opposite_wire->node)
-            activate_node(self, first_opposite_wire->node);
-
-        return first_opposite_wire;
-    } else if (is_wire(second_opposite)) {
-        wire_t *second_opposite_wire = as_wire(second_opposite);
-        second_opposite_wire->opposite = first_opposite;
-
-        vm_delete_wire(self, first_wire);
-        vm_delete_wire(self, second_wire);
-
-        if (second_opposite_wire->node)
-            activate_node(self, second_opposite_wire->node);
-
-        return second_opposite_wire;
-    } else {
-        fprintf(stderr, "[vm_wire_connect_wire] can not connect wires with non-wire opposite\n");
-        fprintf(stderr, "[vm_wire_connect_wire] first_opposite: ");
-        value_print(first_opposite, stderr);
-        fprintf(stderr, "\n");
-        fprintf(stderr, "[vm_wire_connect_wire] second_opposite: ");
-        value_print(second_opposite, stderr);
-        fprintf(stderr, "\n");
-        exit(1);
-    }
-}
-
 char *
 vm_fresh_name(vm_t* self) {
     size_t max_string_length = 256;

@@ -71,6 +71,61 @@ wire_is_principal(const wire_t *self) {
     return port_info->is_principal;
 }
 
+wire_t *
+wire_connect_wire(vm_t* vm, wire_t *first_wire, wire_t *second_wire) {
+    value_t first_opposite = first_wire->opposite;
+    value_t second_opposite = second_wire->opposite;
+
+    if (is_wire(first_opposite) && is_wire(second_opposite)) {
+        wire_t *first_opposite_wire = as_wire(first_opposite);
+        wire_t *second_opposite_wire = as_wire(second_opposite);
+
+        first_opposite_wire->opposite = second_opposite_wire;
+        second_opposite_wire->opposite = first_opposite_wire;
+
+        vm_delete_wire(vm, first_wire);
+        vm_delete_wire(vm, second_wire);
+
+        if (first_opposite_wire->node)
+            activate_node(vm, first_opposite_wire->node);
+        if (second_opposite_wire->node)
+            activate_node(vm, second_opposite_wire->node);
+
+        return first_opposite_wire;
+    } else if (is_wire(first_opposite)) {
+        wire_t *first_opposite_wire = as_wire(first_opposite);
+        first_opposite_wire->opposite = second_opposite;
+
+        vm_delete_wire(vm, first_wire);
+        vm_delete_wire(vm, second_wire);
+
+        if (first_opposite_wire->node)
+            activate_node(vm, first_opposite_wire->node);
+
+        return first_opposite_wire;
+    } else if (is_wire(second_opposite)) {
+        wire_t *second_opposite_wire = as_wire(second_opposite);
+        second_opposite_wire->opposite = first_opposite;
+
+        vm_delete_wire(vm, first_wire);
+        vm_delete_wire(vm, second_wire);
+
+        if (second_opposite_wire->node)
+            activate_node(vm, second_opposite_wire->node);
+
+        return second_opposite_wire;
+    } else {
+        fprintf(stderr, "[wire_connect_wire] can not connect wires with non-wire opposite\n");
+        fprintf(stderr, "[wire_connect_wire] first_opposite: ");
+        value_print(first_opposite, stderr);
+        fprintf(stderr, "\n");
+        fprintf(stderr, "[wire_connect_wire] second_opposite: ");
+        value_print(second_opposite, stderr);
+        fprintf(stderr, "\n");
+        exit(1);
+    }
+}
+
 void
 wire_print_left(const wire_t *self, file_t *file) {
     if (!self->node) {
