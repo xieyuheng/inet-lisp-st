@@ -1,4 +1,7 @@
 [lang] `exp_let_once`
+[lang] `parse_let_once`
+[lang] `compile_exp` -- `EXP_LET_ONCE`
+
 [lang] `let-once` -- distinguish linear variables from non-linear variables.
 test `let-once.error.lisp`
 [lang] fix the use of `value_print` in `frame_print`

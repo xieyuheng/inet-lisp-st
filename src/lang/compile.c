@@ -9,10 +9,10 @@ compile_name_list(vm_t *vm, function_t *function, list_t *name_list) {
     while (name) {
         if (hash_has(function->local_index_hash, name)) {
             size_t old_index = (size_t) hash_get(function->local_index_hash, name);
-            function_add_op(function, op_local_set(old_index));
+            function_add_op(function, op_set_variable(old_index));
         } else {
             assert(hash_set(function->local_index_hash, string_copy(name), (void *) index));
-            function_add_op(function, op_local_set(index));
+            function_add_op(function, op_set_variable(index));
             index++;
         }
 
@@ -30,11 +30,11 @@ compile_exp_list(vm_t *vm, function_t *function, list_t *exp_list) {
 }
 
 static bool
-maybe_compile_local_get(function_t *function, const char *name) {
+maybe_compile_get_variable(function_t *function, const char *name) {
     if (!hash_has(function->local_index_hash, name)) return false;
 
     size_t index = (size_t) hash_get(function->local_index_hash, name);
-    function_add_op(function, op_local_get(index));
+    function_add_op(function, op_get_variable(index));
     return true;
 }
 
@@ -55,7 +55,7 @@ void
 compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
     switch (exp->kind) {
     case EXP_VAR: {
-        if (maybe_compile_local_get(function, exp->var.name))
+        if (maybe_compile_get_variable(function, exp->var.name))
             return;
 
         compile_literal(vm, function, exp->var.name);
