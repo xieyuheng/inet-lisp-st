@@ -1,6 +1,6 @@
 #pragma once
 
-typedef void (primitive_vm_fn_t)(vm_t *vm);
+typedef void (primitive_fn_t)(vm_t *vm);
 typedef value_t (primitive_fn_0_t)(void);
 typedef value_t (primitive_fn_1_t)(value_t x);
 typedef value_t (primitive_fn_2_t)(value_t x, value_t y);
@@ -8,7 +8,7 @@ typedef value_t (primitive_fn_3_t)(value_t x, value_t y, value_t z);
 typedef value_t (primitive_fn_4_t)(value_t x, value_t y, value_t z, value_t w);
 
 typedef enum {
-    PRIMITIVE_VM_FN,
+    PRIMITIVE_FN,
     PRIMITIVE_0_FN,
     PRIMITIVE_1_FN,
     PRIMITIVE_2_FN,
@@ -28,7 +28,7 @@ struct primitive_t {
     size_t output_arity;
     primitive_fn_kind_t fn_kind;
     union {
-        primitive_vm_fn_t *primitive_vm_fn;
+        primitive_fn_t *primitive_fn;
         primitive_fn_0_t *primitive_fn_0;
         primitive_fn_1_t *primitive_fn_1;
         primitive_fn_2_t *primitive_fn_2;
@@ -37,7 +37,7 @@ struct primitive_t {
     };
 };
 
-primitive_t *primitive_from_vm_fn(const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn);
+primitive_t *primitive_from_fn(const char *name, size_t input_arity, size_t output_arity, primitive_fn_t *primitive_fn);
 primitive_t *primitive_from_fn_0(const char *name, primitive_fn_0_t *primitive_fn_0);
 primitive_t *primitive_from_fn_1(const char *name, primitive_fn_1_t *primitive_fn_1);
 primitive_t *primitive_from_fn_2(const char *name, primitive_fn_2_t *primitive_fn_2);

@@ -19,7 +19,7 @@ import_prelude(mod_t *mod) {
 
     // testing
 
-    define_primitive_vm_fn(mod, "assert", 1, 0, x_assert);
+    define_primitive_fn(mod, "assert", 1, 0, x_assert);
 
     // int
 
@@ -48,12 +48,12 @@ import_prelude(mod_t *mod) {
 
     // net
 
-    define_primitive_vm_fn(mod, "connect", 2, 0, x_connect);
-    define_primitive_vm_fn(mod, "wire-print-net", 1, 1, x_wire_print_net);
-    define_primitive_vm_fn(mod, "link", 0, 2, x_link);
-    define_primitive_vm_fn(mod, "run", 0, 0, x_run);
-    define_primitive_vm_fn(mod, "inspect-run", 1, 1, x_inspect_run);
-    define_primitive_vm_fn(mod, "debug", 0, 0, x_debug);
+    define_primitive_fn(mod, "connect", 2, 0, x_connect);
+    define_primitive_fn(mod, "wire-print-net", 1, 1, x_wire_print_net);
+    define_primitive_fn(mod, "link", 0, 2, x_link);
+    define_primitive_fn(mod, "run", 0, 0, x_run);
+    define_primitive_fn(mod, "inspect-run", 1, 1, x_inspect_run);
+    define_primitive_fn(mod, "debug", 0, 0, x_debug);
 
     // console
 

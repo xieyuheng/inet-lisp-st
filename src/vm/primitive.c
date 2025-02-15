@@ -14,12 +14,12 @@ primitive_new(const char *name) {
 }
 
 primitive_t *
-primitive_from_vm_fn(const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn) {
+primitive_from_fn(const char *name, size_t input_arity, size_t output_arity, primitive_fn_t *primitive_fn) {
     primitive_t *self = primitive_new(name);
-    self->fn_kind = PRIMITIVE_VM_FN;
+    self->fn_kind = PRIMITIVE_FN;
     self->input_arity = input_arity;
     self->output_arity = output_arity;
-    self->primitive_vm_fn = primitive_vm_fn;
+    self->primitive_fn = primitive_fn;
     return self;
 }
 

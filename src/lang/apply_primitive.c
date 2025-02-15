@@ -19,8 +19,8 @@ is_directly_appliable(vm_t *vm, primitive_t *primitive, size_t arity) {
 static void
 apply_primitive_directly(vm_t *vm, primitive_t *primitive) {
     switch (primitive->fn_kind) {
-    case PRIMITIVE_VM_FN: {
-        primitive->primitive_vm_fn(vm);
+    case PRIMITIVE_FN: {
+        primitive->primitive_fn(vm);
         return;
     }
 

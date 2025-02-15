@@ -1,4 +1,5 @@
 ambr vm_fn fn
+ambr FN FN
 
 define_primitive_node_<n>
 

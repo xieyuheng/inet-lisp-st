@@ -7,7 +7,7 @@ void define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list);
 
 void define_node(vm_t *vm, const char *name, list_t *port_name_list);
 
-void define_primitive_vm_fn(mod_t *mod, const char *name, size_t input_arity, size_t output_arity, primitive_vm_fn_t *primitive_vm_fn);
+void define_primitive_fn(mod_t *mod, const char *name, size_t input_arity, size_t output_arity, primitive_fn_t *primitive_fn);
 void define_primitive_fn_0(mod_t *mod, const char *name, primitive_fn_0_t *primitive_fn_0);
 void define_primitive_fn_1(mod_t *mod, const char *name, primitive_fn_1_t *primitive_fn_1);
 void define_primitive_fn_2(mod_t *mod, const char *name, primitive_fn_2_t *primitive_fn_2);
