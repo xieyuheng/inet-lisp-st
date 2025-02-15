@@ -8,7 +8,7 @@ x_connect(vm_t *vm) {
     wire_t *second_wire = as_wire(second);
     wire_t *first_wire = as_wire(first);
 
-    wire_t *wire = vm_wire_connect(vm, second_wire, first_wire);
+    wire_t *wire = wire_connect(vm, second_wire, first_wire);
 
     if (wire->node)
         activate_node(vm, wire->node);

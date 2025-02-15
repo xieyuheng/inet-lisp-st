@@ -103,7 +103,7 @@ vm_delete_wire(vm_t* self, wire_t *wire) {
 }
 
 wire_t *
-vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
+wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
     wire_t *first_opposite = first_wire->opposite;
     wire_t *second_opposite = second_wire->opposite;
 
