@@ -1,11 +1,13 @@
+# syntax
+
+rename `=` to `let`
+[docs] update syntax -- should we use `(let)` or `(=)`
+linear version of let should be called `let-once`
+
 # primitive
 
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 `primitive-node.test.lisp` -- get the right result
-
-# syntax
-
-[docs] update syntax -- should we use `(let)` or `(=)`
 
 # primitive test
 
