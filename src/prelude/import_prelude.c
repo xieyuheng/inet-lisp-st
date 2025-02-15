@@ -30,13 +30,13 @@ import_prelude(mod_t *mod) {
 
     // float
 
-    define_primitive_fn_1(mod, "float?", xfloat_p);
-    define_primitive_fn_2(mod, "fadd", xfloat_add);
-    define_primitive_fn_2(mod, "fsub", xfloat_sub);
-    define_primitive_fn_2(mod, "fmul", xfloat_mul);
-    define_primitive_fn_2(mod, "fdiv", xfloat_div);
-    define_primitive_fn_2(mod, "fmod", xfloat_mod);
-    define_primitive_fn_1(mod, "float-to-int", xfloat_to_xint);
+    define_primitive_node_1(mod, "float?", xfloat_p, (const char*[]) { "x!", "result" });
+    define_primitive_node_2(mod, "fadd", xfloat_add, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "fsub", xfloat_sub, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "fmul", xfloat_mul, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "fdiv", xfloat_div, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_2(mod, "fmod", xfloat_mod, (const char*[]) { "x!", "y!", "result" });
+    define_primitive_node_1(mod, "float-to-int", xfloat_to_xint, (const char*[]) { "f!", "i" });
 
     // net
 

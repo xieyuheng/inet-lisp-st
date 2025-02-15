@@ -1,5 +1,3 @@
-[prelude] `float` -- use `define_primitive_node_<n>`
-
 # primitive
 
 [net] `wire_t` -- `opposite` should be `value_t` instead of `wire_t *`
