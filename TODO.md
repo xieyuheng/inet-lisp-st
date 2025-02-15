@@ -1,9 +1,16 @@
+[maybe] remove linear variable and and let-once for now
+
 [lang] split `compile_name_list` to `compile_set_variables` and `compile_set_local_variables`
 [lang] `compile_exp` -- handle `EXP_LET_ONCE`
 
 [lang] `let-once` -- distinguish linear variables from non-linear variables.
 test `let-once.error.lisp`
+
+# linear variable
+
 [lang] fix the use of `value_print` in `frame_print`
+
+- should we use linear variable or linear value?
 
 # primitive
 

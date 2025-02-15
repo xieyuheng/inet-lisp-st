@@ -24,8 +24,6 @@ to interaction combinators will be explored only later.
 
 ## Syntax
 
-Statements:
-
 ```
 (define-node <name> <port-name> ...)
 (define-rule <pattern> <exp> ...)
@@ -38,13 +36,28 @@ Statements:
 
 ### Natural Number
 
+Define three nodes `(zero)`, `(add1)` and `(add)`:
+
 ```
 (define-node zero value!)
 (define-node add1 prev value!)
 (define-node add target! addend result)
 ```
 
-The rule between `(add1)` and `(add)` as ASCII art:
+```
+value!   value!        value
+  |        |             |
+(zero)   (add1)        (add)
+           |           /   \
+          prev    target!  addend
+```
+
+The rule between `(add1)` and `(add)`:
+
+```
+(define-rule (add (add1 prev) addend result)
+  (add1 (add prev addend) result))
+```
 
 ```
      value             value            value
@@ -56,14 +69,12 @@ The rule between `(add1)` and `(add)` as ASCII art:
  prev              prev              prev   addend
 ```
 
-Define the rule between `(add1)` and `(add)`:
+The rule between `(zero)` and `(add)`:
 
 ```
-(define-rule (add (add1 prev) addend result)
-  (add1 (add prev addend) result))
+(define-rule (add (zero) addend result)
+  (connect addend result))
 ```
-
-The rule between `(zero)` and `(add)` as ASCII art:
 
 ```
      value          value         value
@@ -71,13 +82,6 @@ The rule between `(zero)` and `(add)` as ASCII art:
      (add)     =>             =>    |
      /   \              \            \
 (zero)   addend        addend       addend
-```
-
-Define the rule between `(zero)` and `(add)`:
-
-```
-(define-rule (add (zero) addend result)
-  (connect addend result))
 ```
 
 Example interaction:
