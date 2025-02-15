@@ -92,10 +92,10 @@ static node_t *
 matcher_next_node(net_matcher_t *self, const char *name) {
     wire_t *wire = hash_get(self->wire_hash, name);
     if (!wire) return NULL;
-    if (!wire->opposite) return NULL;
-    if (!wire->opposite->node) return NULL;
+    if (!is_wire(wire->opposite)) return NULL;
+    if (!as_wire(wire->opposite)->node) return NULL;
 
-    return wire->opposite->node;
+    return as_wire(wire->opposite)->node;
 }
 
 static bool

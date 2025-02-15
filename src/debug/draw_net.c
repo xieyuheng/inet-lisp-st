@@ -50,8 +50,8 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
 static void
 draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
     if (!wire->node ||
-        !wire->opposite ||
-        !wire->opposite->node)
+        !is_wire(wire->opposite) ||
+        !as_wire(wire->opposite)->node)
         return;
 
     uint32_t pixel = canvas->palette[FG_COLOR];
@@ -61,7 +61,7 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
     node_model_t *node_model1 =
         hash_get(self->node_model_hash, (void *) wire->node->id);
     node_model_t *node_model2 =
-        hash_get(self->node_model_hash, (void *) wire->opposite->node->id);
+        hash_get(self->node_model_hash, (void *) as_wire(wire->opposite)->node->id);
 
     if (node_model1 && node_model2) {
         canvas_draw_line(

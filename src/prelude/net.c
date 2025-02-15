@@ -13,8 +13,8 @@ x_connect(vm_t *vm) {
     if (wire->node)
         activate_node(vm, wire->node);
 
-    if (wire->opposite->node)
-        activate_node(vm, wire->opposite->node);
+    if (is_wire(wire->opposite) && as_wire(wire->opposite)->node)
+        activate_node(vm, as_wire(wire->opposite)->node);
 }
 
 void

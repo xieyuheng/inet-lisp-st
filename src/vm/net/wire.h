@@ -6,7 +6,7 @@ struct wire_t {
     object_spec_t *spec;
     node_t *node;
     size_t index;
-    wire_t *opposite;
+    value_t opposite;
 };
 
 wire_t *wire_new(void);
