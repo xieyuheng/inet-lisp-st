@@ -3,8 +3,8 @@
   (= y y-op (link))
   (= z (iadd x y))
   (println z)
-  ;; (connect x-op 1)
-  ;; (connect y-op 2)
+  (connect x-op 1)
+  (connect y-op 2)
   (run)
   (println z))
 
