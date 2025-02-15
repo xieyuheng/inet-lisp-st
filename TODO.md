@@ -1,8 +1,7 @@
 # primitive
 
-move `wire_connect` to `net/`
-`wire_connect_value`
-`wire_connect` -- call `activate_node`
+`vm_wire_connect` -- fix the use of `opposite`
+`vm_wire_connect_value`
 
 [prelude/net] `x_connect` -- can also connect wire to value
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
