@@ -1,4 +1,3 @@
-[lang] `exp_print` -- handle `EXP_INT` and `EXP_FLOAT`
 [lang] `parse_let_once`
 
 [lang] split `compile_name_list` to `compile_set_variables` and `compile_set_local_variables`

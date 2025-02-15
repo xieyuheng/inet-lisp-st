@@ -232,12 +232,12 @@ exp_print(const exp_t *self, file_t *file) {
     }
 
     case EXP_INT: {
-        // TODO
+        value_print(xint(self->i.target), file);
         return;
     }
 
     case EXP_FLOAT: {
-        // TODO
+        value_print(xfloat(self->f.target), file);
         return;
     }
     }
