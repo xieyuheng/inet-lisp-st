@@ -1,6 +1,5 @@
-[maybe] change `(let)` to `(var)` -- to respect scheme
-
-[vm] `get_linear_variable` & `set_linear_variable`
+[vm] `frame_get_linear_variable` -- be linear
+[vm] `frame_set_linear_variable` -- be linear
 
 [lang] `exp_let_once`
 [lang] `parse_let_once`

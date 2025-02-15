@@ -25,6 +25,18 @@ step_op(vm_t *vm, frame_t *frame, op_t *op) {
         frame_set_variable(frame, op->set_variable.index, value);
         return;
     }
+
+    case OP_GET_LINEAR_VARIABLE: {
+        value_t value = frame_get_linear_variable(frame, op->get_linear_variable.index);
+        stack_push(vm->value_stack, value);
+        return;
+    }
+
+    case OP_SET_LINEAR_VARIABLE: {
+        value_t value = stack_pop(vm->value_stack);
+        frame_set_linear_variable(frame, op->set_linear_variable.index, value);
+        return;
+    }
     }
 }
 

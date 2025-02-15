@@ -32,6 +32,22 @@ op_set_variable(size_t index) {
     return self;
 }
 
+op_t *
+op_get_linear_variable(size_t index) {
+    op_t *self = new(op_t);
+    self->kind = OP_GET_LINEAR_VARIABLE;
+    self->get_linear_variable.index = index;
+    return self;
+}
+
+op_t *
+op_set_linear_variable(size_t index) {
+    op_t *self = new(op_t);
+    self->kind = OP_SET_LINEAR_VARIABLE;
+    self->set_linear_variable.index = index;
+    return self;
+}
+
 void
 op_destroy(op_t **self_pointer) {
     assert(self_pointer);
@@ -51,6 +67,14 @@ op_destroy(op_t **self_pointer) {
         }
 
         case OP_SET_VARIABLE: {
+            break;
+        }
+
+        case OP_GET_LINEAR_VARIABLE: {
+            break;
+        }
+
+        case OP_SET_LINEAR_VARIABLE: {
             break;
         }
         }
@@ -77,12 +101,22 @@ op_print(const op_t *op, file_t *file) {
     }
 
     case OP_GET_VARIABLE: {
-        fprintf(file, "(local-get %ld)", op->get_variable.index);
+        fprintf(file, "(get-variable %ld)", op->get_variable.index);
         return;
     }
 
     case OP_SET_VARIABLE: {
-        fprintf(file, "(local-set %ld)", op->set_variable.index);
+        fprintf(file, "(set-variable %ld)", op->set_variable.index);
+        return;
+    }
+
+    case OP_GET_LINEAR_VARIABLE: {
+        fprintf(file, "(get-linear-variable %ld)", op->get_linear_variable.index);
+        return;
+    }
+
+    case OP_SET_LINEAR_VARIABLE: {
+        fprintf(file, "(set-linear-variable %ld)", op->set_linear_variable.index);
         return;
     }
     }
