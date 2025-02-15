@@ -126,6 +126,31 @@ wire_connect_wire(vm_t* vm, wire_t *first_wire, wire_t *second_wire) {
     }
 }
 
+wire_t *
+wire_connect_value(vm_t* vm, wire_t *wire, value_t value) {
+    if (is_wire(value))
+        return wire_connect_wire(vm, wire, value);
+
+     value_t opposite = wire->opposite;
+     if (is_wire(opposite)) {
+         wire_t *opposite_wire = as_wire(wire->opposite);
+         opposite_wire->opposite = value;
+
+         vm_delete_wire(vm, wire);
+
+         if (opposite_wire->node)
+             activate_node(vm, opposite_wire->node);
+
+         return opposite_wire;
+     } else {
+        fprintf(stderr, "[wire_connect_value] can not connect wire with non-wire opposite to value\n");
+        fprintf(stderr, "[wire_connect_value] opposite: ");
+        value_print(opposite, stderr);
+        fprintf(stderr, "\n");
+        exit(1);
+    }
+}
+
 void
 wire_print_left(const wire_t *self, file_t *file) {
     if (!self->node) {
