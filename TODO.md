@@ -1,5 +1,3 @@
-[vm] `frame_set_linear_variable` -- be linear
-
 [lang] `exp_let_once`
 [lang] `parse_let_once`
 [lang] `compile_exp` -- `EXP_LET_ONCE`

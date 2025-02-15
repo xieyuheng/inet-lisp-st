@@ -96,11 +96,23 @@ frame_get_linear_variable(const frame_t *self, size_t index) {
         exit(1);
     }
 
+    // NOTE be linear like this:
     array_set(self->linear_variable_array, index, NULL);
     return value;
 }
 
 void
 frame_set_linear_variable(frame_t *self, size_t index, value_t value) {
+
+    value_t found = array_get(self->linear_variable_array, index);
+    // NOTE be linear like this:
+    if (found) {
+        fprintf(stderr, "[frame_set_linear_variable] variable index is already used: %lu\n", index);
+        fprintf(stderr, "[frame_set_linear_variable] found value: ");
+        value_print(found, stderr);
+        fprintf(stderr, "\n");
+        exit(1);
+    }
+
     array_set(self->linear_variable_array, index, value);
 }
