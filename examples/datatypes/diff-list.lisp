@@ -5,7 +5,7 @@
 ;; plug the front of the `target` to the back of `rest`.
 
 (define-rule (diff-append (diff front back) rest result)
-  (= new-back value (diff front))
+  (let new-back value (diff front))
   (connect value result)
   (diff-open new-back rest back))
 

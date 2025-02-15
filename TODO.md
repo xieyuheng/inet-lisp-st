@@ -1,7 +1,6 @@
 # syntax
 
-rename `=` to `let`
-[docs] update syntax -- should we use `(let)` or `(=)`
+[docs] update syntax -- about `let`
 linear version of let should be called `let-once`
 
 # primitive
