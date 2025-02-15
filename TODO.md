@@ -1,6 +1,8 @@
-# syntax
+# linear variable
 
-linear version of let should be called `let-once`
+`let-once` -- distinguish linear variables from non-linear variables.
+
+- fix the use of `value_print` in `frame_print`
 
 # primitive
 
@@ -42,6 +44,8 @@ projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
 - choose good names in the problem domain
 
 [value] `xvoid` -- so that every function can return one value
+
+- maybe not, should use explicit output arity instead.
 
 [lang] check arity -- compute arity from exp
 

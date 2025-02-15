@@ -31,7 +31,7 @@ parse_ap(sexp_t *sexp) {
 }
 
 static exp_t *
-parse_bind(sexp_t *sexp) {
+parse_let(sexp_t *sexp) {
     list_t *sexp_list = sexp_sexp_list(sexp);
     (void) list_first(sexp_list);
     list_t *name_list = string_list_new();
@@ -46,13 +46,13 @@ parse_bind(sexp_t *sexp) {
         name_sexp = list_next(sexp_list);
     }
 
-    return exp_bind(name_list, exp);
+    return exp_let(name_list, exp);
 }
 
 exp_t *
 parse_exp(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "let")) {
-        return parse_bind(sexp);
+        return parse_let(sexp);
     } else if (is_atom_sexp(sexp)) {
         const token_t *token = sexp_token(sexp);
         if (token->kind == INT_TOKEN)

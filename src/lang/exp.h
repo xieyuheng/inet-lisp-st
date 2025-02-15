@@ -3,7 +3,7 @@
 typedef enum {
     EXP_VAR,
     EXP_AP,
-    EXP_BIND,
+    EXP_LET,
     EXP_INT,
     EXP_FLOAT,
 } exp_kind_t;
@@ -13,7 +13,7 @@ struct exp_t {
     union {
         struct { char *name; } var;
         struct { exp_t *target; list_t *arg_list; } ap;
-        struct { list_t *name_list; exp_t *exp; } bind;
+        struct { list_t *name_list; exp_t *exp; } let;
         struct { int64_t target; } i;
         struct { double target; } f;
     };
@@ -21,7 +21,7 @@ struct exp_t {
 
 exp_t *exp_var(char *name);
 exp_t *exp_ap(exp_t *target, list_t *arg_list);
-exp_t *exp_bind(list_t *name_list, exp_t *exp);
+exp_t *exp_let(list_t *name_list, exp_t *exp);
 exp_t *exp_int(int64_t target);
 exp_t *exp_float(double target);
 
