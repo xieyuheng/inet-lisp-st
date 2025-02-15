@@ -1,3 +1,5 @@
+[maybe] change `(let)` to `(var)` -- to respect scheme
+
 [vm] `get_linear_variable` & `set_linear_variable`
 
 [lang] `exp_let_once`
