@@ -81,3 +81,13 @@ void
 frame_set_variable(frame_t *self, size_t index, value_t value) {
     array_set(self->variable_array, index, value);
 }
+
+value_t
+frame_get_linear_variable(const frame_t *self, size_t index) {
+    return array_get(self->linear_variable_array, index);
+}
+
+void
+frame_set_linear_variable(frame_t *self, size_t index, value_t value) {
+    array_set(self->linear_variable_array, index, value);
+}

@@ -1,6 +1,3 @@
-[lang] `frame` -- `frame_get_linear_variable`
-[lang] `frame` -- `frame_set_linear_variable`
-
 [lang] `exp_let_once`
 [lang] `let-once` -- distinguish linear variables from non-linear variables.
 test `let-once.error.lisp`

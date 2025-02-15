@@ -9,3 +9,6 @@ void frame_print(const frame_t *self, file_t *file);
 
 value_t frame_get_variable(const frame_t *self, size_t index);
 void frame_set_variable(frame_t *self, size_t index, value_t value);
+
+value_t frame_get_linear_variable(const frame_t *self, size_t index);
+void frame_set_linear_variable(frame_t *self, size_t index, value_t value);
