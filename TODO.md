@@ -1,3 +1,5 @@
+research new formal language for graph -- like DOT -- for console output
+
 # parallelism
 
 [parallelism] learn linux thread

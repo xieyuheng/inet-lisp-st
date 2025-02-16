@@ -204,20 +204,20 @@ wire_print_net(wire_t *self, file_t *file) {
     fprintf(file, "<net>\n");
 
     wire_iter_t *iter = wire_iter_new(self);
-    wire_t *wire = wire_iter_first(iter);
+    value_t value = wire_iter_first(iter);
 
     fprintf(file, "<root>\n");
-    wire_print(wire, file);
+    value_print(value, file);
     fprintf(file, "\n");
     fprintf(file, "</root>\n");
 
-    wire = wire_iter_next(iter);
+    value = wire_iter_next(iter);
 
     fprintf(file, "<body>\n");
-    while (wire) {
-        wire_print(wire, file);
+    while (value) {
+        value_print(value, file);
         fprintf(file, "\n");
-        wire = wire_iter_next(iter);
+        value = wire_iter_next(iter);
     }
 
     wire_iter_destroy(&iter);

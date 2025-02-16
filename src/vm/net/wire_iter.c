@@ -29,7 +29,7 @@ wire_iter_destroy(wire_iter_t **self_pointer) {
     }
 }
 
-wire_t *
+value_t
 wire_iter_first(wire_iter_t *self) {
     list_push(self->occurred_wire_list, self->root);
 
@@ -40,21 +40,23 @@ wire_iter_first(wire_iter_t *self) {
         if (opposite_wire->node) {
             self->node = opposite_wire->node;
             self->index = 0;
-        }        
+        }
     }
 
     return self->root;
 }
 
-wire_t *
+value_t
 wire_iter_next(wire_iter_t *self) {
     if (!self->node) return NULL;
 
     while (self->index < self->node->ctor->arity) {
         size_t i = self->index++;
 
-        if (!is_wire(self->node->ports[i])) continue;
-        wire_t *wire = as_wire(self->node->ports[i]);
+        value_t value = self->node->ports[i];
+        if (!is_wire(value)) return value;
+
+        wire_t *wire = as_wire(value);
         if (list_has(self->occurred_wire_list, wire)) continue;
         list_push(self->occurred_wire_list, wire);
 
