@@ -191,13 +191,6 @@ wire_print(const wire_t *self, file_t *file) {
 }
 
 void
-wire_print_reverse(const wire_t *self, file_t *file) {
-    wire_print_left(self, file);
-    if (self->opposite)
-        wire_print_right(self->opposite, file);
-}
-
-void
 wire_print_net(wire_t *self, file_t *file) {
     fprintf(file, "<net>\n");
 

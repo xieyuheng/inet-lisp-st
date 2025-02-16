@@ -29,6 +29,5 @@ wire_t *wire_connect_value(vm_t* vm, wire_t *wire, value_t value);
 void wire_print_left(const wire_t *self, file_t *file);
 void wire_print_right(const wire_t *self, file_t *file);
 void wire_print(const wire_t *self, file_t *file);
-void wire_print_reverse(const wire_t *self, file_t *file);
 
 void wire_print_net(wire_t *self, file_t *file);
