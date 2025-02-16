@@ -1,10 +1,9 @@
-remove linear variable and and (let-once) -- all variables should be linear
-
-- simply require all variable to be linear and see what will happen
-
+remove linear variable  -- all variables should be linear
 ambr compile_name_list compile_set_variables
 
-[int] int-dup
+change let back to =
+
+[int] int-dup -- fix square
 [float] float-dup
 
 # linear variable
