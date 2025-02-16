@@ -6,7 +6,6 @@ struct frame_t {
     size_t cursor;
     const function_t *function;
     array_t *variable_array;
-    array_t *linear_variable_array;
 };
 
 frame_t *
@@ -15,7 +14,6 @@ frame_new(const function_t *function) {
     self->cursor = 0;
     self->function = function;
     self->variable_array = array_new(VARIABLE_ARRAY_SIZE);
-    self->linear_variable_array = array_new(VARIABLE_ARRAY_SIZE);
     return self;
 }
 
@@ -26,7 +24,6 @@ frame_destroy(frame_t **self_pointer) {
         frame_t *self = *self_pointer;
         // does not own function
         array_destroy(&self->variable_array);
-        array_destroy(&self->linear_variable_array);
         free(self);
         *self_pointer = NULL;
     }
@@ -88,31 +85,30 @@ frame_set_variable(frame_t *self, size_t index, value_t value) {
     array_set(self->variable_array, index, value);
 }
 
-value_t
-frame_get_linear_variable(const frame_t *self, size_t index) {
-    value_t value = array_get(self->linear_variable_array, index);
-    if (!value) {
-        fprintf(stderr, "[frame_get_linear_variable] undefined variable index: %lu\n", index);
-        exit(1);
-    }
+// value_t
+// frame_get_linear_variable(const frame_t *self, size_t index) {
+//     value_t value = array_get(self->linear_variable_array, index);
+//     if (!value) {
+//         fprintf(stderr, "[frame_get_linear_variable] undefined variable index: %lu\n", index);
+//         exit(1);
+//     }
 
-    // NOTE be linear like this:
-    array_set(self->linear_variable_array, index, NULL);
-    return value;
-}
+//     // NOTE be linear like this:
+//     array_set(self->linear_variable_array, index, NULL);
+//     return value;
+// }
 
-void
-frame_set_linear_variable(frame_t *self, size_t index, value_t value) {
+// void
+// frame_set_linear_variable(frame_t *self, size_t index, value_t value) {
+//     value_t found = array_get(self->linear_variable_array, index);
+//     // NOTE be linear like this:
+//     if (found) {
+//         fprintf(stderr, "[frame_set_linear_variable] variable index is already used: %lu\n", index);
+//         fprintf(stderr, "[frame_set_linear_variable] found value: ");
+//         value_print(found, stderr);
+//         fprintf(stderr, "\n");
+//         exit(1);
+//     }
 
-    value_t found = array_get(self->linear_variable_array, index);
-    // NOTE be linear like this:
-    if (found) {
-        fprintf(stderr, "[frame_set_linear_variable] variable index is already used: %lu\n", index);
-        fprintf(stderr, "[frame_set_linear_variable] found value: ");
-        value_print(found, stderr);
-        fprintf(stderr, "\n");
-        exit(1);
-    }
-
-    array_set(self->linear_variable_array, index, value);
-}
+//     array_set(self->linear_variable_array, index, value);
+// }
