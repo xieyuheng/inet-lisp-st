@@ -3,9 +3,11 @@
 struct activity_t {
     const rule_t *rule;
     net_matcher_t *net_matcher;
+    node_t *primitive_node;
 };
 
 activity_t *activity_from_rule(const rule_t *rule, net_matcher_t *net_matcher);
+activity_t *activity_from_primitive_node(node_t *primitive_node);
 void activity_destroy(activity_t **self_pointer);
 
 void activate_node(vm_t *vm, node_t *node);

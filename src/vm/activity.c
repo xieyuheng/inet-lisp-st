@@ -8,6 +8,13 @@ activity_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
     return self;
 }
 
+activity_t *
+activity_from_primitive_node(node_t *primitive_node) {
+    activity_t *self = new(activity_t);
+    self->primitive_node = primitive_node;
+    return self;
+}
+
 void
 activity_destroy(activity_t **self_pointer) {
     assert(self_pointer);
