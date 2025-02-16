@@ -1,4 +1,5 @@
-(define (square x) (imul x x))
+(define (square x)
+  (imul x x))
 
 (assert (eq? (square 1) 1))
 (assert (eq? (square 2) 4))

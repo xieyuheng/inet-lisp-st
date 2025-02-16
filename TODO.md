@@ -1,10 +1,9 @@
-[maybe] remove linear variable and and let-once for now
+remove linear variable and and (let-once) -- all variables should be linear
 
-[lang] split `compile_name_list` to `compile_set_variables` and `compile_set_local_variables`
-[lang] `compile_exp` -- handle `EXP_LET_ONCE`
+ambr compile_name_list compile_set_variables
 
-[lang] `let-once` -- distinguish linear variables from non-linear variables.
-test `let-once.error.lisp`
+[int] int-dup
+[float] float-dup
 
 # linear variable
 
