@@ -1,4 +1,4 @@
-(define (square x)
+(define (int-square x)
   (imul x x))
 
-(assert (eq? (square 2) 4))
+(assert (eq? (int-square 2) 4))
