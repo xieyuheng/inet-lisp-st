@@ -1,5 +1,7 @@
 remove linear variable and and (let-once) -- all variables should be linear
 
+- simply require all variable to be linear and see what will happen
+
 ambr compile_name_list compile_set_variables
 
 [int] int-dup
