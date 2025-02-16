@@ -1,5 +1,3 @@
-tests/linear-variable.error.lisp
-
 [int] int-dup -- fix square
 
 [float] float-dup
