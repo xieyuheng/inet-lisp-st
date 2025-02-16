@@ -206,7 +206,6 @@ connected through two principal ports.
 We design the statement to define node as follows:
 
 - The statement starts with `define-node`, follows the name of the node.
-- Use `->` to distinguish the input ports from the output ports.
 - Use `!` suffix to mark principal port.
 
 The aforementioned nodes are defined as follows:
