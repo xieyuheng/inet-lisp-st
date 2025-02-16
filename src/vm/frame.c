@@ -52,15 +52,12 @@ frame_print(const frame_t *self, file_t *file) {
         value_t value = array_get(self->variable_array, i);
         if (value != NULL) {
             fprintf(file, "%lu: ", i);
-            fprintf(file, "<value-pointer 0x%p />", value);
 
-            // value_print(value, file);
-
-            // TODO can not call `value_print` here,
-            // because a wire might be deleted
+            // NOTE since we are calling `value_print` here,
+            // we must use linear variable,
+            // otherwise a wire might be deleted
             // but still referenced in the `variable_array`.
-            // maybe we need to distinguish linear variables
-            // from non-linear variables.
+            value_print(value, file);
 
             fprintf(file, "\n");
         }

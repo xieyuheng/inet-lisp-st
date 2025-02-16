@@ -1,9 +1,3 @@
-# linear variable
-
-[lang] fix the use of `value_print` in `frame_print`
-
-- should we use linear variable or linear value?
-
 # primitive
 
 [net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
