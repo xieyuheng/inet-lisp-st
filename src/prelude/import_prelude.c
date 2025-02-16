@@ -52,6 +52,6 @@ import_prelude(mod_t *mod) {
     // console
 
     define_primitive_fn_1(mod, "print", x_print);
-    define_primitive_fn_0(mod, "newline", x_newline);
+    define_primitive_fn(mod, "newline", 0, 0, x_newline);
     define_primitive_fn_1(mod, "println", x_println);
 }

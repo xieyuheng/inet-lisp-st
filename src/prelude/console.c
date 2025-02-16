@@ -5,13 +5,13 @@ value_t x_print(value_t x) {
     return x;
 }
 
-value_t x_newline(void) {
+void x_newline(vm_t *vm) {
+    (void) vm;
     printf("\n");
-    return NULL;
 }
 
 value_t x_println(value_t x) {
     x_print(x);
-    x_newline();
+    printf("\n");
     return x;
 }
