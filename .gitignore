@@ -1,10 +1,10 @@
-# c
+# test
 tmp
 
+# c
 *.o
 
 # build
-
 bin
 lib
 
