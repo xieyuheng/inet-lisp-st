@@ -128,8 +128,9 @@ wire_connect_wire(vm_t* vm, wire_t *first_wire, wire_t *second_wire) {
 
 wire_t *
 wire_connect_value(vm_t* vm, wire_t *wire, value_t value) {
-    if (is_wire(value))
+    if (is_wire(value)) {
         return wire_connect_wire(vm, wire, value);
+    }
 
      value_t opposite = wire->opposite;
      if (is_wire(opposite)) {
@@ -185,8 +186,16 @@ wire_print_right(const wire_t *self, file_t *file) {
 
 void
 wire_print(const wire_t *self, file_t *file) {
-    if (self->opposite)
-        wire_print_left(self->opposite, file);
+    if (self->opposite) {
+        if (is_wire(self->opposite)) {
+            wire_print_left(self->opposite, file);
+        } else {
+            fprintf(file, "[");
+            value_print(self->opposite, file);
+            fprintf(file, "]");
+        }
+    }
+
     wire_print_right(self, file);
 }
 

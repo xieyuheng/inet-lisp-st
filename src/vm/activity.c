@@ -177,39 +177,12 @@ activity_react(vm_t *vm, activity_t *self) {
         apply_primitive(vm, primitive, primitive->input_arity);
 
         for (size_t i = 0; i < primitive->output_arity; i++) {
-            printf("start\n");
             size_t arity = primitive->input_arity + primitive->output_arity;
             size_t c = arity - 1 - i;
             value_t value = node->ports[c];
             wire_t *wire = as_wire(value);
-            wire_t *opposite_wire = as_wire(wire->opposite);
-            // printf("wire: ");
-            // wire_print(wire, stdout);
-            // printf("\n");
-
-            printf("opposite_wire: ");
-            wire_print(opposite_wire, stdout);
-            printf("\n");
-
-            // printf("wire->opposite: ");
-            // wire_print(wire->opposite, stdout);
-            wire_free_from_node(opposite_wire);
-
-            printf("opposite_wire: ");
-            wire_print(opposite_wire, stdout);
-            printf("\n");
-
-            // assert(as_wire(wire->opposite)->node == NULL);
-            // printf(" ");
-            // wire_print(wire->opposite, stdout);
-            // printf("\n");
-
-            wire_connect_value(vm, opposite_wire, stack_pop(vm->value_stack));
-
-            // assert(wire->opposite == opposite_wire);
-            // printf("opposite_wire::: ");
-            // wire_print(opposite_wire, stdout);
-            // printf("\n");
+            value_t top_value = stack_pop(vm->value_stack);
+            wire_connect_value(vm, wire, top_value);
         }
 
         vm_delete_node(vm, self->primitive_node);

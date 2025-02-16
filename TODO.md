@@ -1,9 +1,5 @@
 # primitive
 
-[net] `activity_react` -- handle `activity_is_primitive`
-
-- `primitive-node.test.lisp` -- get the right result
-
 [net] inline `return_local_values` and `delete_match_nodes` into `activity_react`
 
 # primitive test
