@@ -1,6 +1,5 @@
 # primitive
 
-[net] fix the use of `ports` in `matcher_match_node` and `delete_match_nodes`
 `primitive-node.test.lisp` -- get the right result
 
 # primitive test

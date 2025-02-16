@@ -4,7 +4,7 @@ net_matcher_t *
 net_matcher_new(const net_pattern_t *net_pattern) {
     net_matcher_t *self = new(net_matcher_t);
     self->net_pattern = net_pattern;
-    self->wire_hash = hash_of_string_key();
+    self->value_hash = hash_of_string_key();
     self->matched_nodes = allocate_pointers(net_pattern_length(net_pattern));
     self->principle_name_list = string_list_new();
     self->matched_principle_name_list = string_list_new();
@@ -16,7 +16,7 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         net_matcher_t *self = *self_pointer;
-        hash_destroy(&self->wire_hash);
+        hash_destroy(&self->value_hash);
         free(self->matched_nodes);
         list_destroy(&self->principle_name_list);
         list_destroy(&self->matched_principle_name_list);
@@ -25,32 +25,39 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
     }
 }
 
+static bool
+match_value(value_t first, value_t second) {
+    if (is_wire(first) && as_wire(first)->opposite == second)
+        return true;
+
+    if (!is_wire(first) && !is_wire(second))
+        return first == second;
+
+    return false;
+}
+
 static void
 matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
     const node_pattern_t *node_pattern =
         net_pattern_get(self->net_pattern, index);
 
-    if (node_pattern->ctor != node->ctor)
-        return;
+    if (node_pattern->ctor != node->ctor) return;
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
         port_info_t *port_info = node_pattern->port_infos[i];
-        // TODO `node->ports[i]` can be any value.
-        wire_t *wire = node->ports[i];
-        if (wire == NULL) return;
+        value_t value = node->ports[i];
+        if (value == NULL) return;
 
         if (port_info->is_principal) {
-            if (hash_has(self->wire_hash, port_info->name)) {
-                wire_t *existing_wire = hash_get(self->wire_hash, port_info->name);
-                if (!existing_wire) return;
-                if (!wire->opposite) return;
-                if (wire->opposite != existing_wire) return;
+            if (hash_has(self->value_hash, port_info->name)) {
+                value_t found = hash_get(self->value_hash, port_info->name);
+                if (!match_value(value, found)) return;
             } else {
                 list_push(self->principle_name_list, string_copy(port_info->name));
-                assert(hash_set(self->wire_hash, string_copy(port_info->name), wire));
+                assert(hash_set(self->value_hash, string_copy(port_info->name), value));
             }
         } else {
-            if (!hash_set(self->wire_hash, string_copy(port_info->name), wire))
+            if (!hash_set(self->value_hash, string_copy(port_info->name), value))
                 return;
         }
     }
@@ -90,7 +97,10 @@ matcher_next_index(net_matcher_t *self, const char *name) {
 
 static node_t *
 matcher_next_node(net_matcher_t *self, const char *name) {
-    wire_t *wire = hash_get(self->wire_hash, name);
+    value_t value = hash_get(self->value_hash, name);
+    if (!is_wire(value)) return NULL;
+
+    wire_t *wire = as_wire(value);
     if (!wire) return NULL;
     if (!is_wire(wire->opposite)) return NULL;
     if (!as_wire(wire->opposite)->node) return NULL;
@@ -129,16 +139,16 @@ net_matcher_print(const net_matcher_t *self, file_t *file) {
 
     net_pattern_print(self->net_pattern, file);
 
-    printf("<wire-hash>\n");
-    wire_t *wire = hash_first(self->wire_hash);
-    while (wire) {
-        printf("%s:\n", (char *) hash_cursor(self->wire_hash));
+    printf("<value-hash>\n");
+    value_t value = hash_first(self->value_hash);
+    while (value) {
+        printf("%s:\n", (char *) hash_cursor(self->value_hash));
         printf("  ");
-        wire_print(wire, file);
+        value_print(value, file);
         printf("\n");
-        wire = hash_next(self->wire_hash);
+        value = hash_next(self->value_hash);
     }
-    printf("</wire-hash>\n");
+    printf("</value-hash>\n");
 
     printf("<matched-nodes>\n");
     size_t length = net_pattern_length(self->net_pattern);

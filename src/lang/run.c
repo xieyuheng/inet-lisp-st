@@ -76,10 +76,15 @@ return_local_wires(vm_t *vm, net_matcher_t *net_matcher) {
         net_pattern_local_name_list(net_matcher->net_pattern);
     char *name = list_first(local_name_list);
     while (name) {
-        wire_t *wire = hash_get(net_matcher->wire_hash, name);
-        assert(wire);
-        wire_free_from_node(wire);
-        stack_push(vm->value_stack, wire);
+        value_t value = hash_get(net_matcher->value_hash, name);
+        assert(value);
+
+        if (is_wire(value)) {
+            wire_t *wire = as_wire(value);
+            wire_free_from_node(wire);
+        }
+
+        stack_push(vm->value_stack, value);
         name = list_next(local_name_list);
     }
 }
@@ -94,9 +99,12 @@ delete_match_nodes(vm_t *vm, net_matcher_t *net_matcher) {
             if (!is_wire(matched_node->ports[k]))
                 continue;
 
-            wire_t *wire = as_wire(matched_node->ports[k]);
-            if (wire_is_principal(wire))
-                vm_delete_wire(vm, wire);
+            value_t value = matched_node->ports[k];
+            if (is_wire(value)) {
+                wire_t *wire = as_wire(value);
+                if (wire_is_principal(wire))
+                    vm_delete_wire(vm, wire);
+            }
         }
 
         vm_delete_node(vm, matched_node);
