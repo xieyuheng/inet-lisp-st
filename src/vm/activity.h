@@ -5,7 +5,7 @@ struct activity_t {
     net_matcher_t *net_matcher;
 };
 
-activity_t *activity_new(const rule_t *rule, net_matcher_t *net_matcher);
+activity_t *activity_from_rule(const rule_t *rule, net_matcher_t *net_matcher);
 void activity_destroy(activity_t **self_pointer);
 
 void activate_node(vm_t *vm, node_t *node);

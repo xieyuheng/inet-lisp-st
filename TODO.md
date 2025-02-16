@@ -1,5 +1,9 @@
 # primitive
 
+[vm] `activity_t` -- has optional `primitive_node`
+[vm] `activity_from_primitive_node` -- as an alternative constructor
+[vm] `activity_is_primitive`
+
 [vm] `activate_primitive_node`
 `primitive-node.test.lisp` -- get the right result
 

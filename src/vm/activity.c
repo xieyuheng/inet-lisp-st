@@ -1,7 +1,7 @@
 #include "index.h"
 
 activity_t *
-activity_new(const rule_t *rule, net_matcher_t *net_matcher) {
+activity_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
     activity_t *self = new(activity_t);
     self->rule = rule;
     self->net_matcher = net_matcher;
@@ -41,7 +41,7 @@ activate_node(vm_t *vm, node_t *node) {
         net_matcher_t *net_matcher =
             match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
-            list_push(vm->activity_list, activity_new(rule, net_matcher));
+            list_push(vm->activity_list, activity_from_rule(rule, net_matcher));
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
                 set_add(vm->matched_node_set, net_matcher->matched_nodes[i]);
