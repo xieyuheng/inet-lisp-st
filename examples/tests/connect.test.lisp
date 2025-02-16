@@ -1,7 +1,7 @@
 (define-node sole value!)
 
 (define (main)
-  (let first second (link))
+  (= first second (link))
   (connect first (sole))
   (print second)
   (newline)

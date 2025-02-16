@@ -1,14 +1,10 @@
-`frame_get_variable` be linear -- all variables should be linear
-`frame_set_variable` be linear -- all variables should be linear
+rename let to assign
 
-ambr compile_set_variables compile_set_variables
-
-change let back to =
+`frame_get_variable` -- be linear -- all variables should be linear
+`frame_set_variable` -- be linear -- all variables should be linear
 
 [int] int-dup -- fix square
 [float] float-dup
-
-rename let to assign
 
 # linear variable
 

@@ -188,11 +188,11 @@ exp_print(const exp_t *self, file_t *file) {
 
     case EXP_LET: {
         if (list_is_empty(self->let.name_list)) {
-            fprintf(file, "(let)");
+            fprintf(file, "(=)");
             return;
         }
 
-        fprintf(file, "(let ");
+        fprintf(file, "(= ");
         name_list_print(self->let.name_list, file);
         fprintf(file, ")");
         return;

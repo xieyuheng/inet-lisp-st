@@ -3,7 +3,7 @@
 ;; o x o x x o (in a circle)
 
 (define (main)
-  (let l r (link))
+  (= l r (link))
   (connect l (o^ (x (o^ (x (x^ (o r))))))))
 
 (main)

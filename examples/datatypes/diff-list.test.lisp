@@ -3,8 +3,8 @@
 (import cons "list.lisp")
 
 (define (sole-diff-list)
-  (let front front-op (link))
-  (let back value (diff front))
+  (= front front-op (link))
+  (= back value (diff front))
   (cons (sole) (cons (sole) back) front-op)
   value)
 

@@ -51,7 +51,7 @@ parse_let(sexp_t *sexp) {
 
 exp_t *
 parse_exp(sexp_t *sexp) {
-    if (sexp_starts_with(sexp, "let")) {
+    if (sexp_starts_with(sexp, "=")) {
         return parse_let(sexp);
     } else if (is_atom_sexp(sexp)) {
         const token_t *token = sexp_token(sexp);
