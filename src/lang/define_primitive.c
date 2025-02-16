@@ -43,6 +43,7 @@ define_primitive_node(mod_t *mod, const char *name, const char *port_names[]) {
     size_t arity = primitive->input_arity + primitive->output_arity;
     node_ctor_t *node_ctor = node_ctor_new(name, arity);
     for (size_t i = 0; i < arity; i++) {
+        assert(port_names[i]);
         node_ctor->port_infos[i] =
             port_info_from_name(string_copy(port_names[i]));
     }

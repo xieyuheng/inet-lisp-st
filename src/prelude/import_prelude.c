@@ -12,7 +12,7 @@ import_prelude(mod_t *mod) {
 
     // value
 
-    define_primitive_fn_2(mod, "eq?", x_eq);
+    define_primitive_fn_node_2(mod, "eq?", x_eq, (const char*[]) { "x!", "y!", "result" });
 
     // testing
 
@@ -27,6 +27,7 @@ import_prelude(mod_t *mod) {
     define_primitive_fn_node_2(mod, "idiv", xint_div, (const char*[]) { "x!", "y!", "result" });
     define_primitive_fn_node_2(mod, "imod", xint_mod, (const char*[]) { "x!", "y!", "result" });
     define_primitive_fn_node_1(mod, "int-to-float", xint_to_xfloat, (const char*[]) { "i!", "f" });
+    define_primitive_fn_node(mod, "int-dup", 1, 2, xint_dup, (const char*[]) { "target!", "first", "second" });
 
     // float
 

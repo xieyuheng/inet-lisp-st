@@ -2,8 +2,8 @@
 
 void
 x_connect(vm_t *vm) {
-    wire_t *second = stack_pop(vm->value_stack);
-    wire_t *first = stack_pop(vm->value_stack);
+    value_t second = stack_pop(vm->value_stack);
+    value_t first = stack_pop(vm->value_stack);
 
     if (is_wire(first) && is_wire(second)) {
         wire_connect_wire(vm, as_wire(second), as_wire(first));
@@ -25,7 +25,7 @@ x_connect(vm_t *vm) {
 
 void
 x_wire_print_net(vm_t *vm) {
-    wire_t *wire = stack_top(vm->value_stack);
+    wire_t *wire = as_wire(stack_top(vm->value_stack));
     wire_print_net(wire, stdout);
     fprintf(stdout, "\n");
 }

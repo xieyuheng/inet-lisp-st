@@ -1,4 +1,3 @@
-[int] `int-dup` -- fix `int-square`
 [float] `float-dup` -- test by `float-square`
 
 # linear variable
