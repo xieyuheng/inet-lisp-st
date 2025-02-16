@@ -152,16 +152,67 @@ delete_match_nodes(vm_t *vm, net_matcher_t *net_matcher) {
     }
 }
 
+extern void apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity);
 extern void run_until(vm_t *vm, size_t base_length);
 
 void
 activity_react(vm_t *vm, activity_t *self) {
     if (activity_is_primitive(self)) {
         node_t *node = self->primitive_node;
-        const primitive_t *primitive = node->ctor->primitive;
+        primitive_t *primitive = node->ctor->primitive;
         assert(primitive);
-        // TODO
+        for (size_t i = 0; i < primitive->input_arity; i++) {
+            value_t value = node->ports[i];
+            if (is_wire(value)) {
+                wire_t *wire = as_wire(value);
+                assert(!is_wire(wire->opposite));
+                stack_push(vm->value_stack, wire->opposite);
+                wire_free_from_node(wire);
+                vm_delete_wire(vm, wire);
+            } else {
+                stack_push(vm->value_stack, value);
+            }
+        }
 
+        apply_primitive(vm, primitive, primitive->input_arity);
+
+        for (size_t i = 0; i < primitive->output_arity; i++) {
+            printf("start\n");
+            size_t arity = primitive->input_arity + primitive->output_arity;
+            size_t c = arity - 1 - i;
+            value_t value = node->ports[c];
+            wire_t *wire = as_wire(value);
+            wire_t *opposite_wire = as_wire(wire->opposite);
+            // printf("wire: ");
+            // wire_print(wire, stdout);
+            // printf("\n");
+
+            printf("opposite_wire: ");
+            wire_print(opposite_wire, stdout);
+            printf("\n");
+
+            // printf("wire->opposite: ");
+            // wire_print(wire->opposite, stdout);
+            wire_free_from_node(opposite_wire);
+
+            printf("opposite_wire: ");
+            wire_print(opposite_wire, stdout);
+            printf("\n");
+
+            // assert(as_wire(wire->opposite)->node == NULL);
+            // printf(" ");
+            // wire_print(wire->opposite, stdout);
+            // printf("\n");
+
+            wire_connect_value(vm, opposite_wire, stack_pop(vm->value_stack));
+
+            // assert(wire->opposite == opposite_wire);
+            // printf("opposite_wire::: ");
+            // wire_print(opposite_wire, stdout);
+            // printf("\n");
+        }
+
+        vm_delete_node(vm, self->primitive_node);
         activity_destroy(&self);
     } else {
         return_local_values(vm, self->net_matcher);

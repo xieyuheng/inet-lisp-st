@@ -28,6 +28,7 @@ node_ctor_destroy(node_ctor_t **self_pointer) {
             }
         }
 
+        // does not own `self->primitive`
         list_destroy(&self->rule_list);
         free(self->name);
         free(self);
