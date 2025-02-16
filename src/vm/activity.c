@@ -112,7 +112,7 @@ activity_print(activity_t *self, file_t *file) {
 }
 
 static void
-return_local_wires(vm_t *vm, net_matcher_t *net_matcher) {
+return_local_values(vm_t *vm, net_matcher_t *net_matcher) {
     list_t *local_name_list =
         net_pattern_local_name_list(net_matcher->net_pattern);
     char *name = list_first(local_name_list);
@@ -157,9 +157,14 @@ extern void run_until(vm_t *vm, size_t base_length);
 void
 activity_react(vm_t *vm, activity_t *self) {
     if (activity_is_primitive(self)) {
+        node_t *node = self->primitive_node;
+        const primitive_t *primitive = node->ctor->primitive;
+        assert(primitive);
         // TODO
+
+        activity_destroy(&self);
     } else {
-        return_local_wires(vm, self->net_matcher);
+        return_local_values(vm, self->net_matcher);
         delete_match_nodes(vm, self->net_matcher);
 
         size_t base_length = stack_length(vm->return_stack);
