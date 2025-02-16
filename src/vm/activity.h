@@ -17,4 +17,4 @@ void activate_node_and_neighbor(vm_t *vm, node_t *node);
 
 void activity_print(activity_t *self, file_t *file);
 
-void activity_react(vm_t *vm, activity_t *self);
+void react(vm_t *vm, activity_t *self);

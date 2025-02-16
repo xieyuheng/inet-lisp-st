@@ -75,7 +75,7 @@ step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
     if (activity == NULL) return;
 
-    activity_react(vm, activity);
+    react(vm, activity);
 }
 
 void

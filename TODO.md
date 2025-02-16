@@ -1,6 +1,6 @@
 # primitive
 
-[net] inline `return_local_values` and `delete_match_nodes` into `activity_react`
+[lang] inline `return_local_values` and `delete_match_nodes` into `react`
 
 # primitive test
 
