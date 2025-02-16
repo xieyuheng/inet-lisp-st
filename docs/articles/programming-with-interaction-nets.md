@@ -241,8 +241,8 @@ We can see that, the so called interaction can be viewed as:
 
 We design the statement for defining rule as follows:
 
-- The statement starts with `define-rule`, follows the name of two ports.
-- Put the disconnected wires to the stack.
+- The statement starts with `define-rule`, follows the pattern that matches a sub-graph.
+- Use the function application syntax to build graph.
 
 The the rule between `(add1)` and `(add)` as an example:
 
