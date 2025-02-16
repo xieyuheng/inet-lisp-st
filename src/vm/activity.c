@@ -11,6 +11,7 @@ activity_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
 activity_t *
 activity_from_primitive_node(node_t *primitive_node) {
     activity_t *self = new(activity_t);
+    assert(primitive_node->ctor->primitive);
     self->primitive_node = primitive_node;
     return self;
 }
@@ -24,6 +25,11 @@ activity_destroy(activity_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
+}
+
+bool
+activity_is_primitive(const activity_t *self) {
+    return self->primitive_node != NULL;
 }
 
 static void
