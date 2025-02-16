@@ -1,5 +1,3 @@
-[float] `float-dup` -- test by `float-square`
-
 # linear variable
 
 [lang] fix the use of `value_print` in `frame_print`

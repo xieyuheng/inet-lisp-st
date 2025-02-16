@@ -6,5 +6,6 @@
 #include "testing.h"
 #include "net.h"
 #include "xint.h"
+#include "xfloat.h"
 #include "console.h"
 #include "import_prelude.h"

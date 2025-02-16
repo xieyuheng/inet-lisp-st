@@ -1,8 +1,8 @@
 #include "index.h"
 
 void
-xint_dup(vm_t *vm) {
+xfloat_dup(vm_t *vm) {
     value_t target = stack_top(vm->value_stack);
-    assert(is_xint(target));
+    assert(is_xfloat(target));
     stack_push(vm->value_stack, target);
 }

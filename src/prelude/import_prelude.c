@@ -38,6 +38,7 @@ import_prelude(mod_t *mod) {
     define_primitive_fn_node_2(mod, "fdiv", xfloat_div, (const char*[]) { "x!", "y!", "result" });
     define_primitive_fn_node_2(mod, "fmod", xfloat_mod, (const char*[]) { "x!", "y!", "result" });
     define_primitive_fn_node_1(mod, "float-to-int", xfloat_to_xint, (const char*[]) { "f!", "i" });
+    define_primitive_fn_node(mod, "float-dup", 1, 2, xfloat_dup, (const char*[]) { "target!", "first", "second" });
 
     // net
 
