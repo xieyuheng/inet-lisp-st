@@ -1,7 +1,3 @@
-# primitive
-
-[lang] inline `return_local_values` and `delete_match_nodes` into `react`
-
 # primitive test
 
 [primitive] write `list-map` as example that uses function -- `function_t` as primitive value
