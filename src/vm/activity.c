@@ -34,8 +34,25 @@ activity_is_primitive(const activity_t *self) {
 
 static void
 activate_primitive_node(vm_t *vm, node_t *node) {
-    (void) vm;
-    (void) node;
+    assert(node_is_primitive(node));
+
+    for (size_t i = 0; i < node->ctor->arity; i++) {
+        if (!node->ctor->port_infos[i]->is_principal)
+            continue;
+
+        value_t value = node->ports[i];
+        // NOTE be careful that there are two cases:
+        // - (1) `[value]`   -- ready
+        // - (2) `-<[value]` -- ready
+        // - (3) `-<>-`      -- NOT ready
+        if (is_wire(value) && is_wire(as_wire(value)->opposite)) {
+            // do nothing when NOT ready
+            return;
+        }
+    }
+
+    list_push(vm->activity_list, activity_from_primitive_node(node));
+    set_add(vm->matched_node_set, node);
 }
 
 void

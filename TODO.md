@@ -1,9 +1,10 @@
 # primitive
 
-[vm] `activate_primitive_node` -- be careful about `-<[value]`
+[vm] extract `activate_react` -- from `run_net`
+
 [lang] `step_net` -- handle `activity_is_primitive`
 
-`primitive-node.test.lisp` -- get the right result
+- `primitive-node.test.lisp` -- get the right result
 
 # primitive test
 

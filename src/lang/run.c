@@ -116,6 +116,11 @@ step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
     if (activity == NULL) return;
 
+    if (activity_is_primitive(activity)) {
+        // TODO
+        return;
+    }
+
     return_local_wires(vm, activity->net_matcher);
     delete_match_nodes(vm, activity->net_matcher);
 
