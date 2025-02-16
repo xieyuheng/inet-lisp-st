@@ -46,7 +46,7 @@ parse_let(sexp_t *sexp) {
         name_sexp = list_next(sexp_list);
     }
 
-    return exp_let(name_list, exp);
+    return exp_assign(name_list, exp);
 }
 
 exp_t *

@@ -70,9 +70,9 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
         return;
     }
 
-    case EXP_LET: {
-        compile_exp(vm, function, exp->let.exp);
-        compile_set_variables(vm, function, exp->let.name_list);
+    case EXP_ASSIGN: {
+        compile_exp(vm, function, exp->assign.exp);
+        compile_set_variables(vm, function, exp->assign.name_list);
         return;
     }
 
