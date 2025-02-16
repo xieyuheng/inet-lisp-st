@@ -9,9 +9,8 @@
 
 # parallelism
 
-learn linux thread
-shared memory parallel execution of inet
-projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
+[parallelism] learn linux thread
+[parallelism] support shared memory parallel execution
 
 # debug
 
@@ -21,26 +20,11 @@ projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
 
 # arity checker
 
-[lang] write the arity checker like a type checker
-
-- choose good names in the problem domain
-
+[lang] write the arity checker like a type checker -- choose good names in the problem domain
 [lang] check arity -- compute arity from exp
-
-[lang] compile_exp -- EXP_AP -- should not get `arity` from `list_length(exp->ap.arg_list)`
-
-- should compute `arity` from each exp
-
-  - `exp_arity` -- for arg output arity
-  - `exp_target_arity` -- for target input arity
-    - need to infer output arity of function
-
-[lang] apply_function -- supplement wire if arity is short
-
-- [stack] stack_pop_list
-- [stack] stack_push_list
-
-- use stack_pop_list and stack_push_list to save arguments by arity
+[lang] compute `arity` from each exp -- what should be the function names?
+[lang] `compile_exp` -- `EXP_AP` -- should not get `arity` from `list_length(exp->ap.arg_list)`
+[lang] `apply_function` -- supplement wire if arity is short
 
 # module system
 
