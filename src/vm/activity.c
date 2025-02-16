@@ -110,3 +110,64 @@ activity_print(activity_t *self, file_t *file) {
     net_matcher_print(self->net_matcher, file);
     fprintf(file, "</activity>\n");
 }
+
+static void
+return_local_wires(vm_t *vm, net_matcher_t *net_matcher) {
+    list_t *local_name_list =
+        net_pattern_local_name_list(net_matcher->net_pattern);
+    char *name = list_first(local_name_list);
+    while (name) {
+        value_t value = hash_get(net_matcher->value_hash, name);
+        assert(value);
+
+        if (is_wire(value)) {
+            wire_t *wire = as_wire(value);
+            wire_free_from_node(wire);
+        }
+
+        stack_push(vm->value_stack, value);
+        name = list_next(local_name_list);
+    }
+}
+
+static void
+delete_match_nodes(vm_t *vm, net_matcher_t *net_matcher) {
+    size_t length = net_pattern_length(net_matcher->net_pattern);
+    for (size_t i = 0; i < length; i++) {
+        node_t *matched_node = net_matcher->matched_nodes[i];
+        assert(matched_node);
+        for (size_t k = 0; k < matched_node->ctor->arity; k++) {
+            if (!is_wire(matched_node->ports[k]))
+                continue;
+
+            value_t value = matched_node->ports[k];
+            if (is_wire(value)) {
+                wire_t *wire = as_wire(value);
+                if (wire_is_principal(wire))
+                    vm_delete_wire(vm, wire);
+            }
+        }
+
+        vm_delete_node(vm, matched_node);
+    }
+}
+
+extern void run_until(vm_t *vm, size_t base_length);
+
+void
+activity_react(vm_t *vm, activity_t *self) {
+    if (activity_is_primitive(self)) {
+        // TODO
+    } else {
+        return_local_wires(vm, self->net_matcher);
+        delete_match_nodes(vm, self->net_matcher);
+
+        size_t base_length = stack_length(vm->return_stack);
+        frame_t *frame = frame_new(self->rule->function);
+
+        activity_destroy(&self);
+
+        stack_push(vm->return_stack, frame);
+        run_until(vm, base_length);
+    }
+}

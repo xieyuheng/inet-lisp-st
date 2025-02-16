@@ -1,6 +1,6 @@
 #include "index.h"
 
-void
+static void
 step_op(vm_t *vm, frame_t *frame, op_t *op) {
     switch (op->kind) {
     case OP_APPLY: {
@@ -28,7 +28,7 @@ step_op(vm_t *vm, frame_t *frame, op_t *op) {
     }
 }
 
-void
+static void
 step(vm_t *vm) {
     if (stack_is_empty(vm->return_stack)) return;
 
@@ -70,67 +70,12 @@ run_until(vm_t *vm, size_t base_length) {
     }
 }
 
-static void
-return_local_wires(vm_t *vm, net_matcher_t *net_matcher) {
-    list_t *local_name_list =
-        net_pattern_local_name_list(net_matcher->net_pattern);
-    char *name = list_first(local_name_list);
-    while (name) {
-        value_t value = hash_get(net_matcher->value_hash, name);
-        assert(value);
-
-        if (is_wire(value)) {
-            wire_t *wire = as_wire(value);
-            wire_free_from_node(wire);
-        }
-
-        stack_push(vm->value_stack, value);
-        name = list_next(local_name_list);
-    }
-}
-
-static void
-delete_match_nodes(vm_t *vm, net_matcher_t *net_matcher) {
-    size_t length = net_pattern_length(net_matcher->net_pattern);
-    for (size_t i = 0; i < length; i++) {
-        node_t *matched_node = net_matcher->matched_nodes[i];
-        assert(matched_node);
-        for (size_t k = 0; k < matched_node->ctor->arity; k++) {
-            if (!is_wire(matched_node->ports[k]))
-                continue;
-
-            value_t value = matched_node->ports[k];
-            if (is_wire(value)) {
-                wire_t *wire = as_wire(value);
-                if (wire_is_principal(wire))
-                    vm_delete_wire(vm, wire);
-            }
-        }
-
-        vm_delete_node(vm, matched_node);
-    }
-}
-
 void
 step_net(vm_t *vm) {
     activity_t *activity = list_shift(vm->activity_list);
     if (activity == NULL) return;
 
-    if (activity_is_primitive(activity)) {
-        // TODO
-        return;
-    }
-
-    return_local_wires(vm, activity->net_matcher);
-    delete_match_nodes(vm, activity->net_matcher);
-
-    size_t base_length = stack_length(vm->return_stack);
-    frame_t *frame = frame_new(activity->rule->function);
-
-    activity_destroy(&activity);
-
-    stack_push(vm->return_stack, frame);
-    run_until(vm, base_length);
+    activity_react(vm, activity);
 }
 
 void

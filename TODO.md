@@ -1,8 +1,6 @@
 # primitive
 
-[vm] extract `activate_react` -- from `run_net`
-
-[lang] `step_net` -- handle `activity_is_primitive`
+[lang] `activity_react` -- handle `activity_is_primitive`
 
 - `primitive-node.test.lisp` -- get the right result
 
