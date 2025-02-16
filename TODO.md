@@ -1,7 +1,3 @@
-# primitive test
-
-[primitive] write `list-map` as example that uses function -- `function_t` as primitive value
-
 # parallelism
 
 [parallelism] learn linux thread

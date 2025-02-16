@@ -54,4 +54,8 @@ import_prelude(mod_t *mod) {
     define_primitive_fn_1(mod, "print", x_print);
     define_primitive_fn(mod, "newline", 0, 0, x_newline);
     define_primitive_fn_1(mod, "println", x_println);
+
+    // function
+
+    define_primitive_fn_node(mod, "fn-dup", 1, 2, x_fn_dup, (const char*[]) { "target!", "first", "second" });
 }
