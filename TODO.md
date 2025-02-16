@@ -1,5 +1,6 @@
 # primitive
 
+[vm] `activate_primitive_node`
 `primitive-node.test.lisp` -- get the right result
 
 # primitive test

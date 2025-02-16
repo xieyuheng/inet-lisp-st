@@ -81,5 +81,6 @@ apply_primitive(vm_t *vm, primitive_t *primitive, size_t arity) {
     node_t *node = vm_add_node(vm, primitive->node_ctor);
     apply_node_input_ports(vm, node, arity);
     apply_node_output_ports(vm, node, arity);
+    // TODO maybe no need to call `activate_node_and_neighbor`,
     activate_node_and_neighbor(vm, node);
 }

@@ -19,11 +19,22 @@ activity_destroy(activity_t **self_pointer) {
     }
 }
 
+static void
+activate_primitive_node(vm_t *vm, node_t *node) {
+    (void) vm;
+    (void) node;
+}
+
 void
 activate_node(vm_t *vm, node_t *node) {
     assert(node);
 
     if (set_has(vm->matched_node_set, node)) return;
+
+    if (node->ctor->primitive) {
+        activate_primitive_node(vm, node);
+        return;
+    }
 
     rule_t *rule = list_first(node->ctor->rule_list);
     while (rule) {
