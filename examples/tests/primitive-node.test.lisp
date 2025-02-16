@@ -2,7 +2,7 @@
   (= x x-op (link))
   (= y y-op (link))
   (= z (iadd x y))
-  (println z)
+  (= z (println z))
   (connect x-op 1)
   (connect y-op 2)
   (run)

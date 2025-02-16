@@ -1,7 +1,10 @@
 `frame_get_variable` -- be linear -- all variables should be linear
 `frame_set_variable` -- be linear -- all variables should be linear
 
+tests/linear-variable.error.lisp
+
 [int] int-dup -- fix square
+
 [float] float-dup
 
 # linear variable
