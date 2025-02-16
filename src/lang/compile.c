@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-compile_name_list(vm_t *vm, function_t *function, list_t *name_list) {
+compile_set_variables(vm_t *vm, function_t *function, list_t *name_list) {
     (void) vm;
 
     size_t index = hash_length(function->local_index_hash);
@@ -72,7 +72,7 @@ compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
 
     case EXP_LET: {
         compile_exp(vm, function, exp->let.exp);
-        compile_name_list(vm, function, exp->let.name_list);
+        compile_set_variables(vm, function, exp->let.name_list);
         return;
     }
 

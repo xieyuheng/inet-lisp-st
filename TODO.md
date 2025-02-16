@@ -1,7 +1,7 @@
 `frame_get_variable` be linear -- all variables should be linear
 `frame_set_variable` be linear -- all variables should be linear
 
-ambr compile_name_list compile_set_variables
+ambr compile_set_variables compile_set_variables
 
 change let back to =
 
