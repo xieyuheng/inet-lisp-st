@@ -1,6 +1,5 @@
 # primitive
 
-[vm/net] extract `node_is_primitive`
 [vm] `activate_primitive_node` -- be careful about `-<[value]`
 [lang] `step_net` -- handle `activity_is_primitive`
 

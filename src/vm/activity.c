@@ -11,7 +11,7 @@ activity_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
 activity_t *
 activity_from_primitive_node(node_t *primitive_node) {
     activity_t *self = new(activity_t);
-    assert(primitive_node->ctor->primitive);
+    assert(node_is_primitive(primitive_node));
     self->primitive_node = primitive_node;
     return self;
 }
@@ -44,7 +44,7 @@ activate_node(vm_t *vm, node_t *node) {
 
     if (set_has(vm->matched_node_set, node)) return;
 
-    if (node->ctor->primitive) {
+    if (node_is_primitive(node)) {
         activate_primitive_node(vm, node);
         return;
     }

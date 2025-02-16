@@ -45,3 +45,8 @@ node_print(const node_t *self, file_t *file) {
     fprintf(file, "(%s%s)", self->ctor->name, id_string);
     free(id_string);
 }
+
+bool
+node_is_primitive(const node_t *self) {
+    return self->ctor->primitive != NULL;
+}
