@@ -19,10 +19,6 @@ research new formal language for graph -- like DOT -- for console output
 [lang] `compile_exp` -- `EXP_AP` -- should not get `arity` from `list_length(exp->ap.arg_list)`
 [lang] `apply_function` -- supplement wire if arity is short
 
-# module system
-
-[question] how to handle defining rule for import nodes
-
 # error report
 
 improve undefined-node.error.lisp
