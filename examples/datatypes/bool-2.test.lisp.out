@@ -1,8 +1,5 @@
 <net>
-<root-wire>
--<>-z-(disj₁₅)
-</root-wire>
-<body>
+:root -<>-z-(disj₁₅)
 (disj₁₅
  :x! -<>-z-(conj₇)
  :y -<>-z-(disj₁₄)
@@ -47,16 +44,11 @@
  :value! -<>-y-(conj₃))
 (t₁
  :value! -<>-!x-(conj₃))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(t₂₉)
-</root-wire>
-<body>
+:root -<>-!value-(t₂₉)
 (t₂₉
  :value! -<>-)
-</body>
 </net>
 

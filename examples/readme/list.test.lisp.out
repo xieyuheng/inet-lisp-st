@@ -1,8 +1,5 @@
 <net>
-<root-wire>
--<>-result-(append₁₅)
-</root-wire>
-<body>
+:root -<>-result-(append₁₅)
 (append₁₅
  :target! -<>-!value-(cons₇)
  :rest -<>-!value-(cons₁₄)
@@ -47,14 +44,10 @@
  :value! -<>-head-(cons₆))
 (sole₁
  :value! -<>-head-(cons₇))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(cons₁₇)
-</root-wire>
-<body>
+:root -<>-!value-(cons₁₇)
 (cons₁₇
  :head -<>-!value-(sole₁)
  :tail -<>-!value-(cons₁₉)
@@ -93,6 +86,5 @@
  :value! -<>-head-(cons₁₉))
 (sole₁
  :value! -<>-head-(cons₁₇))
-</body>
 </net>
 

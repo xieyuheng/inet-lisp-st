@@ -1,8 +1,5 @@
 <net>
-<root-wire>
--<>-result-(add₇)
-</root-wire>
-<body>
+:root -<>-result-(add₇)
 (add₇
  :target! -<>-!value-(add1₃)
  :addend -<>-!value-(add1₆)
@@ -23,14 +20,10 @@
  :value! -<>-prev-(add1₃))
 (zero₁
  :value! -<>-prev-(add1₂))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(add1₉)
-</root-wire>
-<body>
+:root -<>-!value-(add1₉)
 (add1₉
  :prev -<>-!value-(add1₁₁)
  :value! -<>-)
@@ -45,6 +38,5 @@
  :value! -<>-prev-(add1₆))
 (zero₄
  :value! -<>-prev-(add1₅))
-</body>
 </net>
 

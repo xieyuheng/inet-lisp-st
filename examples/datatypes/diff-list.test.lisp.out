@@ -1,8 +1,5 @@
 <net>
-<root-wire>
--<>-result-(diff-append₁₁)
-</root-wire>
-<body>
+:root -<>-result-(diff-append₁₁)
 (diff-append₁₁
  :target! -<>-!value-(diff₁)
  :rest -<>-!value-(diff₆)
@@ -39,14 +36,10 @@
  :value! -<>-front-(diff₁))
 (sole₂
  :value! -<>-head-(cons₅))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(diff₁₂)
-</root-wire>
-<body>
+:root -<>-!value-(diff₁₂)
 (diff₁₂
  :front -<>-!value-(cons₅)
  :back -<>-tail-(cons₉)
@@ -75,6 +68,5 @@
  :value! -<>-front-(diff₁₂))
 (sole₂
  :value! -<>-head-(cons₅))
-</body>
 </net>
 

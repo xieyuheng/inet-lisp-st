@@ -1,5 +1,3 @@
-[net] `node_iter_t` -- use set instead of list
-
 # parallelism
 
 [parallelism] learn linux thread

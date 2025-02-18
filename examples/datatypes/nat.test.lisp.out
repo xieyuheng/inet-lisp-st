@@ -1,8 +1,5 @@
 <net>
-<root-wire>
--<>-result-(add₁₅)
-</root-wire>
-<body>
+:root -<>-result-(add₁₅)
 (add₁₅
  :target! -<>-result-(add₇)
  :addend -<>-result-(add₁₄)
@@ -47,14 +44,10 @@
  :value! -<>-prev-(add1₃))
 (zero₁
  :value! -<>-prev-(add1₂))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(add1₂₃)
-</root-wire>
-<body>
+:root -<>-!value-(add1₂₃)
 (add1₂₃
  :prev -<>-!value-(add1₂₇)
  :value! -<>-)
@@ -81,14 +74,10 @@
  :value! -<>-prev-(add1₁₃))
 (zero₁₁
  :value! -<>-prev-(add1₁₂))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-result-(mul₃₈)
-</root-wire>
-<body>
+:root -<>-result-(mul₃₈)
 (mul₃₈
  :target! -<>-!value-(add1₃₄)
  :mulend -<>-!value-(add1₃₇)
@@ -109,14 +98,10 @@
  :value! -<>-prev-(add1₃₄))
 (zero₃₂
  :value! -<>-prev-(add1₃₃))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(add1₇₆)
-</root-wire>
-<body>
+:root -<>-!value-(add1₇₆)
 (add1₇₆
  :prev -<>-!value-(add1₇₈)
  :value! -<>-)
@@ -131,14 +116,10 @@
  :value! -<>-prev-(add1₄₃))
 (zero₅₁
  :value! -<>-prev-(add1₄₆))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-result-(nat-max₈₄)
-</root-wire>
-<body>
+:root -<>-result-(nat-max₈₄)
 (nat-max₈₄
  :first! -<>-!value-(add1₈₀)
  :second -<>-!value-(add1₈₃)
@@ -156,14 +137,10 @@
  :value! -<>-!first-(nat-max₈₄))
 (zero₇₉
  :value! -<>-prev-(add1₈₀))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(add1₈₇)
-</root-wire>
-<body>
+:root -<>-!value-(add1₈₇)
 (add1₈₇
  :prev -<>-!value-(add1₈₂)
  :value! -<>-)
@@ -172,6 +149,5 @@
  :value! -<>-prev-(add1₈₇))
 (zero₈₁
  :value! -<>-prev-(add1₈₂))
-</body>
 </net>
 

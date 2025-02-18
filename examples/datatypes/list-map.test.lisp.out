@@ -1,8 +1,5 @@
 <net>
-<root-wire>
--<>-result-(list-map₂₀)
-</root-wire>
-<body>
+:root -<>-result-(list-map₂₀)
 (list-map₂₀
  :target! -<>-!value-(cons₁₉)
  :fn <function>
@@ -71,14 +68,10 @@
  :value! -<>-head-(cons₁₈))
 (zero₁₄
  :value! -<>-head-(cons₁₉))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(cons₂₄)
-</root-wire>
-<body>
+:root -<>-!value-(cons₂₄)
 (cons₂₄
  :head -<>-!value-(add1₂₂)
  :tail -<>-!value-(cons₂₈)
@@ -189,14 +182,10 @@
  :value! -<>-prev-(add1₂₂))
 (zero₁₄
  :value! -<>-prev-(add1₂₁))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-result-(list-map₆₈)
-</root-wire>
-<body>
+:root -<>-result-(list-map₆₈)
 (list-map₆₈
  :target! -<>-!value-(cons₆₇)
  :fn <function>
@@ -246,14 +235,10 @@
  :value! -<>-tail-(cons₆₀))
 (null₅₈
  :value! -<>-tail-(cons₅₉))
-</body>
 </net>
 
 <net>
-<root-wire>
--<>-!value-(cons₇₀)
-</root-wire>
-<body>
+:root -<>-!value-(cons₇₀)
 (cons₇₀
  :head 2
  :tail -<>-!value-(cons₇₂)
@@ -292,6 +277,5 @@
  :value! -<>-tail-(cons₈₄))
 (null₈₇
  :value! -<>-tail-(cons₈₆))
-</body>
 </net>
 

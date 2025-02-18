@@ -218,10 +218,9 @@ void
 wire_print_net(wire_t *self, file_t *file) {
     fprintf(file, "<net>\n");
 
-    fprintf(file, "<root-wire>\n");
+    fprintf(file, ":root ");
     value_print(self, file);
     fprintf(file, "\n");
-    fprintf(file, "</root-wire>\n");
 
     node_t *root_node = self->node;
     if (!root_node) {
@@ -231,8 +230,6 @@ wire_print_net(wire_t *self, file_t *file) {
     }
 
     if (root_node) {
-        fprintf(file, "<body>\n");
-
         node_iter_t *iter = node_iter_new(root_node);
         node_t *node = node_iter_first(iter);
         while (node) {
@@ -264,7 +261,6 @@ wire_print_net(wire_t *self, file_t *file) {
         }
 
         node_iter_destroy(&iter);
-        fprintf(file, "</body>\n");
     }
 
     fprintf(file, "</net>\n");
