@@ -18,6 +18,10 @@
 [lang] `compile_exp` -- `EXP_AP` -- should not get `arity` from `list_length(exp->ap.arg_list)`
 [lang] `apply_function` -- supplement wire if arity is short
 
+# linear variable
+
+[maybe] use `&x` to borrow a variable -- `(println &x)`
+
 # error report
 
 improve undefined-node.error.lisp
