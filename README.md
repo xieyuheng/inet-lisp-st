@@ -124,29 +124,45 @@ The whole program with test:
 
 ```
 <net>
-<root>
-(add₇)-result-<>-
-</root>
-<body>
-(add1₃)-value!-<>-!target-(add₇)
-(add1₆)-value!-<>-addend-(add₇)
-(add1₅)-value!-<>-prev-(add1₆)
-(zero₄)-value!-<>-prev-(add1₅)
-(add1₂)-value!-<>-prev-(add1₃)
-(zero₁)-value!-<>-prev-(add1₂)
-</body>
+:root -<>-result-(add₇)
+(add₇
+ :target! -<>-!value-(add1₃)
+ :addend -<>-!value-(add1₆)
+ :result -<>-)
+(add1₆
+ :prev -<>-!value-(add1₅)
+ :value! -<>-addend-(add₇))
+(add1₅
+ :prev -<>-!value-(zero₄)
+ :value! -<>-prev-(add1₆))
+(zero₄
+ :value! -<>-prev-(add1₅))
+(add1₃
+ :prev -<>-!value-(add1₂)
+ :value! -<>-!target-(add₇))
+(add1₂
+ :prev -<>-!value-(zero₁)
+ :value! -<>-prev-(add1₃))
+(zero₁
+ :value! -<>-prev-(add1₂))
 </net>
 
 <net>
-<root>
-(add1₉)-value!-<>-
-</root>
-<body>
-(add1₁₁)-value!-<>-prev-(add1₉)
-(add1₆)-value!-<>-prev-(add1₁₁)
-(add1₅)-value!-<>-prev-(add1₆)
-(zero₄)-value!-<>-prev-(add1₅)
-</body>
+:root -<>-!value-(add1₉)
+(add1₉
+ :prev -<>-!value-(add1₁₁)
+ :value! -<>-)
+(add1₁₁
+ :prev -<>-!value-(add1₆)
+ :value! -<>-prev-(add1₉))
+(add1₆
+ :prev -<>-!value-(add1₅)
+ :value! -<>-prev-(add1₁₁))
+(add1₅
+ :prev -<>-!value-(zero₄)
+ :value! -<>-prev-(add1₆))
+(zero₄
+ :value! -<>-prev-(add1₅))
 </net>
 ```
 
@@ -178,45 +194,93 @@ The whole program with test:
 
 ```
 <net>
-<root>
-(append₁₅)-result-<>-
-</root>
-<body>
-(cons₇)-value!-<>-!target-(append₁₅)
-(cons₁₄)-value!-<>-rest-(append₁₅)
-(sole₈)-value!-<>-head-(cons₁₄)
-(cons₁₃)-value!-<>-tail-(cons₁₄)
-(sole₉)-value!-<>-head-(cons₁₃)
-(cons₁₂)-value!-<>-tail-(cons₁₃)
-(sole₁₀)-value!-<>-head-(cons₁₂)
-(null₁₁)-value!-<>-tail-(cons₁₂)
-(sole₁)-value!-<>-head-(cons₇)
-(cons₆)-value!-<>-tail-(cons₇)
-(sole₂)-value!-<>-head-(cons₆)
-(cons₅)-value!-<>-tail-(cons₆)
-(sole₃)-value!-<>-head-(cons₅)
-(null₄)-value!-<>-tail-(cons₅)
-</body>
+:root -<>-result-(append₁₅)
+(append₁₅
+ :target! -<>-!value-(cons₇)
+ :rest -<>-!value-(cons₁₄)
+ :result -<>-)
+(cons₁₄
+ :head -<>-!value-(sole₈)
+ :tail -<>-!value-(cons₁₃)
+ :value! -<>-rest-(append₁₅))
+(cons₁₃
+ :head -<>-!value-(sole₉)
+ :tail -<>-!value-(cons₁₂)
+ :value! -<>-tail-(cons₁₄))
+(cons₁₂
+ :head -<>-!value-(sole₁₀)
+ :tail -<>-!value-(null₁₁)
+ :value! -<>-tail-(cons₁₃))
+(null₁₁
+ :value! -<>-tail-(cons₁₂))
+(sole₁₀
+ :value! -<>-head-(cons₁₂))
+(sole₉
+ :value! -<>-head-(cons₁₃))
+(sole₈
+ :value! -<>-head-(cons₁₄))
+(cons₇
+ :head -<>-!value-(sole₁)
+ :tail -<>-!value-(cons₆)
+ :value! -<>-!target-(append₁₅))
+(cons₆
+ :head -<>-!value-(sole₂)
+ :tail -<>-!value-(cons₅)
+ :value! -<>-tail-(cons₇))
+(cons₅
+ :head -<>-!value-(sole₃)
+ :tail -<>-!value-(null₄)
+ :value! -<>-tail-(cons₆))
+(null₄
+ :value! -<>-tail-(cons₅))
+(sole₃
+ :value! -<>-head-(cons₅))
+(sole₂
+ :value! -<>-head-(cons₆))
+(sole₁
+ :value! -<>-head-(cons₇))
 </net>
 
 <net>
-<root>
-(cons₁₇)-value!-<>-
-</root>
-<body>
-(sole₁)-value!-<>-head-(cons₁₇)
-(cons₁₉)-value!-<>-tail-(cons₁₇)
-(sole₂)-value!-<>-head-(cons₁₉)
-(cons₂₁)-value!-<>-tail-(cons₁₉)
-(sole₃)-value!-<>-head-(cons₂₁)
-(cons₁₄)-value!-<>-tail-(cons₂₁)
-(sole₈)-value!-<>-head-(cons₁₄)
-(cons₁₃)-value!-<>-tail-(cons₁₄)
-(sole₉)-value!-<>-head-(cons₁₃)
-(cons₁₂)-value!-<>-tail-(cons₁₃)
-(sole₁₀)-value!-<>-head-(cons₁₂)
-(null₁₁)-value!-<>-tail-(cons₁₂)
-</body>
+:root -<>-!value-(cons₁₇)
+(cons₁₇
+ :head -<>-!value-(sole₁)
+ :tail -<>-!value-(cons₁₉)
+ :value! -<>-)
+(cons₁₉
+ :head -<>-!value-(sole₂)
+ :tail -<>-!value-(cons₂₁)
+ :value! -<>-tail-(cons₁₇))
+(cons₂₁
+ :head -<>-!value-(sole₃)
+ :tail -<>-!value-(cons₁₄)
+ :value! -<>-tail-(cons₁₉))
+(cons₁₄
+ :head -<>-!value-(sole₈)
+ :tail -<>-!value-(cons₁₃)
+ :value! -<>-tail-(cons₂₁))
+(cons₁₃
+ :head -<>-!value-(sole₉)
+ :tail -<>-!value-(cons₁₂)
+ :value! -<>-tail-(cons₁₄))
+(cons₁₂
+ :head -<>-!value-(sole₁₀)
+ :tail -<>-!value-(null₁₁)
+ :value! -<>-tail-(cons₁₃))
+(null₁₁
+ :value! -<>-tail-(cons₁₂))
+(sole₁₀
+ :value! -<>-head-(cons₁₂))
+(sole₉
+ :value! -<>-head-(cons₁₃))
+(sole₈
+ :value! -<>-head-(cons₁₄))
+(sole₃
+ :value! -<>-head-(cons₂₁))
+(sole₂
+ :value! -<>-head-(cons₁₉))
+(sole₁
+ :value! -<>-head-(cons₁₇))
 </net>
 ```
 
