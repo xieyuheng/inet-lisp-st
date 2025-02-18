@@ -14,7 +14,6 @@
 #include "net/node.h"
 #include "net/node_iter.h"
 #include "net/wire.h"
-#include "net/wire_iter.h"
 #include "net/port_info.h"
 #include "net/node_ctor.h"
 #include "net/node_pattern.h"

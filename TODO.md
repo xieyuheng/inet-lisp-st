@@ -1,4 +1,3 @@
-[net] remove `wire_iter`
 [net] `node_iter_t` -- use set instead of list
 
 # parallelism
