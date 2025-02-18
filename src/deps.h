@@ -10,6 +10,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <math.h>
+#include <pthread.h>
 
 #include "config.h"
 #include "modules/index.h"
