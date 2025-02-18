@@ -73,7 +73,7 @@ function_print_name(const function_t *self, file_t *file) {
 
 void
 function_print(const function_t *self, file_t *file) {
-    fprintf(file, "<function>\n");
+    fprintf(file, "<function %s>\n", self->name);
     op_t *op = list_first(self->op_list);
     while (op) {
         op_print(op, file);

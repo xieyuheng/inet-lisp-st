@@ -1,5 +1,3 @@
-[vm] `function_print` -- also print function name in xml tag
-
 # parallelism
 
 [parallelism] support shared memory parallel execution
