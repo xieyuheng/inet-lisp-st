@@ -129,6 +129,7 @@ execute(vm_t *vm, stmt_t *stmt) {
     case STMT_DEFINE_FUNCTION: {
         size_t arity = list_length(stmt->define_function.arg_name_list);
         function_t *function = function_new(arity);
+        function->name = string_copy(stmt->define_function.name);
         compile_set_variables(vm, function, stmt->define_function.arg_name_list);
         compile_exp_list(vm, function, stmt->define_function.exp_list);
         function_build(function);

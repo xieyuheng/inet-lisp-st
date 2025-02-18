@@ -2,15 +2,7 @@
 :root -<>-result-(list-map₂₀)
 (list-map₂₀
  :target! -<>-!value-(cons₁₉)
- :fn <function>
-(set-variable 0)
-(get-variable 0)
-(literal (add1))
-(apply 1)
-(literal (add1))
-(apply 1)
-</function>
-
+ :fn add2
  :result -<>-)
 (cons₁₉
  :head -<>-!value-(zero₁₄)
@@ -188,14 +180,7 @@
 :root -<>-result-(list-map₆₈)
 (list-map₆₈
  :target! -<>-!value-(cons₆₇)
- :fn <function>
-(set-variable 0)
-(get-variable 0)
-(literal 2)
-(literal iadd)
-(apply 2)
-</function>
-
+ :fn iadd2
  :result -<>-)
 (cons₆₇
  :head 0

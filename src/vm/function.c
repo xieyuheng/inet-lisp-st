@@ -2,7 +2,7 @@
 
 object_spec_t function_object_spec = {
     .name = "function",
-    .print_fn = (print_fn_t *) function_print,
+    .print_fn = (print_fn_t *) function_print_name,
 };
 
 function_t *
@@ -64,6 +64,11 @@ function_build(function_t *self) {
 op_t *
 function_get_op(const function_t *self, size_t index) {
     return self->ops[index];
+}
+
+void
+function_print_name(const function_t *self, file_t *file) {
+    fprintf(file, "%s", self->name);
 }
 
 void
