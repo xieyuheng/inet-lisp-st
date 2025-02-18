@@ -1,4 +1,5 @@
-research new formal language for graph -- like DOT -- for console output
+[net] remove `wire_iter`
+[net] `node_iter_t` -- use set instead of list
 
 # parallelism
 

@@ -1,37 +1,80 @@
 <net>
-<root>
-(diff-append₁₁)-result-<>-
-</root>
+<root-wire>
+-<>-result-(diff-append₁₁)
+</root-wire>
 <body>
-(diff₁)-value!-<>-!target-(diff-append₁₁)
-(diff₆)-value!-<>-rest-(diff-append₁₁)
-(cons₁₀)-value!-<>-front-(diff₆)
-(cons₉)-tail-<>-back-(diff₆)
-(sole₈)-value!-<>-head-(cons₉)
-(cons₁₀)-tail-<>-!value-(cons₉)
-(sole₇)-value!-<>-head-(cons₁₀)
-(cons₅)-value!-<>-front-(diff₁)
-(cons₄)-tail-<>-back-(diff₁)
-(sole₃)-value!-<>-head-(cons₄)
-(cons₅)-tail-<>-!value-(cons₄)
-(sole₂)-value!-<>-head-(cons₅)
+(diff-append₁₁
+ :target! -<>-!value-(diff₁)
+ :rest -<>-!value-(diff₆)
+ :result -<>-)
+(diff₆
+ :front -<>-!value-(cons₁₀)
+ :back -<>-tail-(cons₉)
+ :value! -<>-rest-(diff-append₁₁))
+(cons₉
+ :head -<>-!value-(sole₈)
+ :tail -<>-back-(diff₆)
+ :value! -<>-tail-(cons₁₀))
+(sole₈
+ :value! -<>-head-(cons₉))
+(cons₁₀
+ :head -<>-!value-(sole₇)
+ :tail -<>-!value-(cons₉)
+ :value! -<>-front-(diff₆))
+(sole₇
+ :value! -<>-head-(cons₁₀))
+(diff₁
+ :front -<>-!value-(cons₅)
+ :back -<>-tail-(cons₄)
+ :value! -<>-!target-(diff-append₁₁))
+(cons₄
+ :head -<>-!value-(sole₃)
+ :tail -<>-back-(diff₁)
+ :value! -<>-tail-(cons₅))
+(sole₃
+ :value! -<>-head-(cons₄))
+(cons₅
+ :head -<>-!value-(sole₂)
+ :tail -<>-!value-(cons₄)
+ :value! -<>-front-(diff₁))
+(sole₂
+ :value! -<>-head-(cons₅))
 </body>
 </net>
 
 <net>
-<root>
-(diff₁₂)-value!-<>-
-</root>
+<root-wire>
+-<>-!value-(diff₁₂)
+</root-wire>
 <body>
-(cons₅)-value!-<>-front-(diff₁₂)
-(cons₉)-tail-<>-back-(diff₁₂)
-(sole₈)-value!-<>-head-(cons₉)
-(cons₁₀)-tail-<>-!value-(cons₉)
-(sole₇)-value!-<>-head-(cons₁₀)
-(cons₄)-tail-<>-!value-(cons₁₀)
-(sole₃)-value!-<>-head-(cons₄)
-(cons₅)-tail-<>-!value-(cons₄)
-(sole₂)-value!-<>-head-(cons₅)
+(diff₁₂
+ :front -<>-!value-(cons₅)
+ :back -<>-tail-(cons₉)
+ :value! -<>-)
+(cons₉
+ :head -<>-!value-(sole₈)
+ :tail -<>-back-(diff₁₂)
+ :value! -<>-tail-(cons₁₀))
+(cons₁₀
+ :head -<>-!value-(sole₇)
+ :tail -<>-!value-(cons₉)
+ :value! -<>-tail-(cons₄))
+(cons₄
+ :head -<>-!value-(sole₃)
+ :tail -<>-!value-(cons₁₀)
+ :value! -<>-tail-(cons₅))
+(sole₃
+ :value! -<>-head-(cons₄))
+(sole₇
+ :value! -<>-head-(cons₁₀))
+(sole₈
+ :value! -<>-head-(cons₉))
+(cons₅
+ :head -<>-!value-(sole₂)
+ :tail -<>-!value-(cons₄)
+ :value! -<>-front-(diff₁₂))
+(sole₂
+ :value! -<>-head-(cons₅))
 </body>
 </net>
 

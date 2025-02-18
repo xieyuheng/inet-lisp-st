@@ -40,10 +40,17 @@ value_t node_get(const node_t *self, size_t index) {
 }
 
 void
-node_print(const node_t *self, file_t *file) {
+node_print_name(const node_t *self, file_t *file) {
     char *id_string = uint_to_subscript(self->id);
-    fprintf(file, "(%s%s)", self->ctor->name, id_string);
+    fprintf(file, "%s%s", self->ctor->name, id_string);
     free(id_string);
+}
+
+void
+node_print(const node_t *self, file_t *file) {
+    fprintf(file, "(");
+    node_print_name(self, file);
+    fprintf(file, ")");
 }
 
 bool

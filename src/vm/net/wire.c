@@ -152,8 +152,8 @@ wire_connect_value(vm_t* vm, wire_t *wire, value_t value) {
     }
 }
 
-void
-wire_print_left(const wire_t *self, file_t *file) {
+static void
+wire_print_half_at_left(const wire_t *self, file_t *file) {
     if (!self->node) {
         fprintf(file, "-<");
         return;
@@ -168,8 +168,8 @@ wire_print_left(const wire_t *self, file_t *file) {
     }
 }
 
-void
-wire_print_right(const wire_t *self, file_t *file) {
+static void
+wire_print_half_at_right(const wire_t *self, file_t *file) {
     if (!self->node) {
         fprintf(file, ">-");
         return;
@@ -186,42 +186,86 @@ wire_print_right(const wire_t *self, file_t *file) {
 
 void
 wire_print(const wire_t *self, file_t *file) {
+    wire_print_half_at_left(self, file);
+
     if (self->opposite) {
         if (is_wire(self->opposite)) {
-            wire_print_left(self->opposite, file);
+            wire_print_half_at_right(self->opposite, file);
         } else {
             fprintf(file, "[");
             value_print(self->opposite, file);
             fprintf(file, "]");
         }
     }
+}
 
-    wire_print_right(self, file);
+static void
+wire_print_within_node(const wire_t *self, file_t *file) {
+    fprintf(file, "-<");
+
+    if (self->opposite) {
+        if (is_wire(self->opposite)) {
+            wire_print_half_at_right(self->opposite, file);
+        } else {
+            fprintf(file, "[");
+            value_print(self->opposite, file);
+            fprintf(file, "]");
+        }
+    }
 }
 
 void
 wire_print_net(wire_t *self, file_t *file) {
     fprintf(file, "<net>\n");
 
-    wire_iter_t *iter = wire_iter_new(self);
-    value_t value = wire_iter_first(iter);
-
-    fprintf(file, "<root>\n");
-    value_print(value, file);
+    fprintf(file, "<root-wire>\n");
+    value_print(self, file);
     fprintf(file, "\n");
-    fprintf(file, "</root>\n");
+    fprintf(file, "</root-wire>\n");
 
-    value = wire_iter_next(iter);
-
-    fprintf(file, "<body>\n");
-    while (value) {
-        value_print(value, file);
-        fprintf(file, "\n");
-        value = wire_iter_next(iter);
+    node_t *root_node = self->node;
+    if (!root_node) {
+        if (is_wire(self->opposite)) {
+            root_node = as_wire(self->opposite)->node;
+        }
     }
 
-    wire_iter_destroy(&iter);
-    fprintf(file, "</body>\n");
+    if (root_node) {
+        fprintf(file, "<body>\n");
+
+        node_iter_t *iter = node_iter_new(root_node);
+        node_t *node = node_iter_first(iter);
+        while (node) {
+            fprintf(file, "(");
+            node_print_name(node, file);
+            fprintf(file, "\n");
+            for (size_t i = 0; i < node->ctor->arity; i++) {
+                port_info_t *port_info = node->ctor->port_infos[i];
+                if (port_info->is_principal)
+                    fprintf(file, " :%s! ", port_info->name);
+                else
+                    fprintf(file, " :%s ", port_info->name);
+
+                value_t value = node->ports[i];
+                if (value) {
+                    if (is_wire(value)) {
+                        wire_print_within_node(as_wire(value), file);
+                    } else {
+                        value_print(value, file);
+                    }
+                }
+
+                if (i < node->ctor->arity - 1)
+                    fprintf(file, "\n");
+            }
+            fprintf(file, ")");
+            fprintf(file, "\n");
+            node = node_iter_next(iter);
+        }
+
+        node_iter_destroy(&iter);
+        fprintf(file, "</body>\n");
+    }
 
     fprintf(file, "</net>\n");
 }
