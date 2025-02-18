@@ -1,6 +1,5 @@
 # parallelism
 
-[parallelism] learn linux thread
 [parallelism] support shared memory parallel execution
 
 # debug
@@ -11,6 +10,7 @@
 
 # arity checker
 
+[lang] [maybe] write arity checker in inet-lisp itself!
 [lang] write the arity checker like a type checker -- choose good names in the problem domain
 [lang] check arity -- compute arity from exp
 [lang] compute `arity` from each exp -- what should be the function names?
