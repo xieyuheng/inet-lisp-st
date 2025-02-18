@@ -85,7 +85,7 @@ function_print(const function_t *self, file_t *file) {
 
 void
 function_print_with_cursor(const function_t *self, file_t *file, size_t cursor) {
-    fprintf(file, "<function>\n");
+    fprintf(file, "<function %s>\n", self->name);
     for (size_t i = 0; i < self->length; i++) {
         if (i == cursor) {
             op_print(self->ops[i], file);
