@@ -1,4 +1,4 @@
-[thread] `thread_start` -- simple API
+[thread] `thread_wait` -- simple API
 [thread] `thread_test` -- test shared-memory parallelism
 
 # parallelism
