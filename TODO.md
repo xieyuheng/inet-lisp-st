@@ -1,8 +1,3 @@
-refactor activity.c -- about matched node -- get matched node from activity
-
-[thread] `thread_print`
-[thread] `thread_test` -- test shared-memory parallelism
-
 # linear variable
 
 [lang] `(assign)` the same as `(=)`
@@ -10,7 +5,10 @@ refactor activity.c -- about matched node -- get matched node from activity
 
 # parallelism
 
-[parallelism] support shared memory parallel execution
+[thread] `thread_print`
+[thread] `thread_test` -- test shared-memory parallelism
+[parallelism] `vm` -- design API to support shared memory parallel execution
+- maybe need a scheduler
 
 # debug
 

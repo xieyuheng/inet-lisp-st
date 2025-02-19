@@ -16,5 +16,3 @@ void activate_node(vm_t *vm, node_t *node);
 void activate_node_and_neighbor(vm_t *vm, node_t *node);
 
 void activity_print(activity_t *self, file_t *file);
-
-void react(vm_t *vm, activity_t *self);
