@@ -1,5 +1,7 @@
 #include "index.h"
 
+bool global_is_debug = false;
+
 vm_t *
 vm_new(mod_t *mod) {
     vm_t *self = new(vm_t);
@@ -76,14 +78,20 @@ vm_print_value_stack(const vm_t *self, file_t *file) {
 node_t *
 vm_add_node(vm_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
-    set_add(self->node_set, node);
+
+    if (global_is_debug)
+        set_add(self->node_set, node);
+
     return node;
 }
 
 void
 vm_delete_node(vm_t* self, node_t *node) {
-    set_delete(self->node_set, node);
+    if (global_is_debug)
+        set_delete(self->node_set, node);
+
     set_delete(self->matched_node_set, node);
+
     node_destroy(&node);
 }
 

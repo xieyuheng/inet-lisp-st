@@ -1,5 +1,7 @@
 #pragma once
 
+extern bool global_is_debug;
+
 // A vm is like a little forth inner interpreter.
 
 struct vm_t {

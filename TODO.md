@@ -1,6 +1,3 @@
-`vm_t` -- has `is_debug`
-fix `vm_add_node` & `vm_delete_node` -- by `is_debug`
-
 [thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
 
