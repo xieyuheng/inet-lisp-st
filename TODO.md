@@ -1,4 +1,5 @@
-[thread] thread_test -- to learn pthread
+[thread] `thread_start` -- simple API
+[thread] `thread_test` -- test shared-memory parallelism
 
 # parallelism
 
