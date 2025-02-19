@@ -34,7 +34,8 @@ load_mod(path_t *path) {
 
     list_destroy(&sexp_list);
     list_destroy(&stmt_list);
-    vm_destroy(&vm);
+
+    mod->vm = vm;
 
     char *key = string_copy(path_string(path));
     assert(hash_set(global_mod_hash, key, mod));

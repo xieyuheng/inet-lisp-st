@@ -19,6 +19,7 @@ mod_destroy(mod_t **self_pointer) {
         path_destroy(&self->path);
         string_destroy(&self->code);
         hash_destroy(&self->value_hash);
+        vm_destroy(&self->vm);
         free(self);
         *self_pointer = NULL;
     }

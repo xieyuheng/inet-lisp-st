@@ -21,8 +21,7 @@ run(commander_t *commander) {
             path_t *path = path_new(cwd);
             path_join(path, src);
             mod_t *mod = load_mod(path);
-            (void) mod;
-            // debug_start(mod->vm);
+            debug_start(mod->vm);
         } else  {
             fprintf(stderr, "[debug] file name must ends with .lisp, given file name: %s\n", src);
             exit(1);

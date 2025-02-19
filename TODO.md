@@ -1,5 +1,3 @@
-`mod_t` has optional `vm` the `vm` that is used to load this `mod`2
-`debug_commend` -- call `debug_start`
 `vm_t` -- has `is_debug`
 fix `vm_add_node` & `vm_delete_node` -- by `is_debug`
 
