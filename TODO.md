@@ -1,3 +1,5 @@
+refactor activity.c
+refactor activity.c -- about matched node -- get matched node from activity
 [thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
 
