@@ -55,7 +55,7 @@ step(vm_t *vm) {
 
 void
 run_until(vm_t *vm, size_t base_length) {
-#if DEBUG
+#if STEP_LOG
     vm_print(vm, stdout);
     fprintf(stdout, "\n");
 #endif
@@ -63,7 +63,7 @@ run_until(vm_t *vm, size_t base_length) {
     while (stack_length(vm->return_stack) > base_length) {
         step(vm);
 
-#if DEBUG
+#if STEP_LOG
         vm_print(vm, stdout);
         fprintf(stdout, "\n");
 #endif
