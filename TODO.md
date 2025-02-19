@@ -1,4 +1,3 @@
-[vm] `vm_t` rename `node_set` to `debug_node_set`
 [thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
 

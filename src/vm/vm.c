@@ -11,7 +11,7 @@ vm_new(mod_t *mod) {
     // TODO We should use value_destroy to create value_stack.
     self->value_stack = stack_new();
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
-    self->node_set = set_new();
+    self->debug_node_set = set_new();
     self->node_id_count = 0;
     return self;
 }
@@ -25,7 +25,7 @@ vm_destroy(vm_t **self_pointer) {
         set_destroy(&self->matched_node_set);
         stack_destroy(&self->value_stack);
         stack_destroy(&self->return_stack);
-        set_destroy(&self->node_set);
+        set_destroy(&self->debug_node_set);
         free(self);
         *self_pointer = NULL;
     }
@@ -80,7 +80,7 @@ vm_add_node(vm_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
 
     if (global_debug_flag)
-        set_add(self->node_set, node);
+        set_add(self->debug_node_set, node);
 
     return node;
 }
@@ -88,7 +88,7 @@ vm_add_node(vm_t* self, const node_ctor_t *ctor) {
 void
 vm_delete_node(vm_t* self, node_t *node) {
     if (global_debug_flag)
-        set_delete(self->node_set, node);
+        set_delete(self->debug_node_set, node);
 
     set_delete(self->matched_node_set, node);
 

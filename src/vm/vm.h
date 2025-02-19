@@ -12,10 +12,8 @@ struct vm_t {
     stack_t *return_stack;
     size_t node_id_count;
     size_t fresh_name_count;
-    // wire and node should use managed memory,
-    // because some nets have no root.
-    // i simply record the pointers in vm for now.
-    set_t *node_set;
+    // only used when global_debug_flag is enabled.
+    set_t *debug_node_set;
 };
 
 vm_t *vm_new(mod_t *mod);

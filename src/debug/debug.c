@@ -114,10 +114,10 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 hash_t *
 debug_new_node_hash(debug_t *self) {
     hash_t *node_hash = hash_new();
-    node_t *node = set_first(self->vm->node_set);
+    node_t *node = set_first(self->vm->debug_node_set);
     while (node) {
         hash_set(node_hash, (void *) node->id, node);
-        node = set_next(self->vm->node_set);
+        node = set_next(self->vm->debug_node_set);
     }
 
     return node_hash;
