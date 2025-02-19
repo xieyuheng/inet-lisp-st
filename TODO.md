@@ -1,3 +1,5 @@
+[thread] thread_test -- to learn pthread
+
 # parallelism
 
 [parallelism] support shared memory parallel execution
