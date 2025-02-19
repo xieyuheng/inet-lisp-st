@@ -1,7 +1,7 @@
 # linear variable
 
 [lang] `(assign)` the same as `(=)`
-[lang] `(replace <name> <fn>)` the same as `(& <name> <fn>)`
+[lang] `(lend <name> <fn>)`
 
 # parallelism
 
