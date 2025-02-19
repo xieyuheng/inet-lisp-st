@@ -10,16 +10,12 @@ void
 thread_test(void) {
     printf("<thread_test>\n");
 
-    thread_id_t thread_id = thread_start(
-        (thread_fn_t *) thread_fn,
-        string_copy("hello world"));
+    char *message = string_copy("hello thread");
+    thread_id_t thread_id = thread_start((thread_fn_t *) thread_fn, message);
 
     printf("[thread_test]thread created: %lu\n", thread_id);
-
-    void *result;
-    pthread_join(thread_id, &result);
-
-    printf("[thread_test] thread returned: %lu\n", (size_t) result);
+    size_t length = (size_t) thread_wait(thread_id);
+    printf("[thread_test] thread returned: %lu\n", length);
 
     printf("</thread_test>\n");
 }
