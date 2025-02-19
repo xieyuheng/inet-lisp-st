@@ -3,6 +3,11 @@ refactor activity.c -- about matched node -- get matched node from activity
 [thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
 
+# linear variable
+
+[lang] `(assign)` the same as `(=)`
+[lang] `(ref-assign <name> <fn>)` the same as `(@ <name> <fn>)`
+
 # parallelism
 
 [parallelism] support shared memory parallel execution
@@ -22,10 +27,6 @@ refactor activity.c -- about matched node -- get matched node from activity
 [lang] compute `arity` from each exp -- what should be the function names?
 [lang] `compile_exp` -- `EXP_AP` -- should not get `arity` from `list_length(exp->ap.arg_list)`
 [lang] `apply_function` -- supplement wire if arity is short
-
-# linear variable
-
-[maybe] use `&x` to borrow a variable -- `(println &x)`
 
 # error report
 
