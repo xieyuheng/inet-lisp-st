@@ -1,6 +1,6 @@
 #include "index.h"
 
-bool global_is_debug = false;
+bool global_debug_flag = false;
 
 vm_t *
 vm_new(mod_t *mod) {
@@ -79,7 +79,7 @@ node_t *
 vm_add_node(vm_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
 
-    if (global_is_debug)
+    if (global_debug_flag)
         set_add(self->node_set, node);
 
     return node;
@@ -87,7 +87,7 @@ vm_add_node(vm_t* self, const node_ctor_t *ctor) {
 
 void
 vm_delete_node(vm_t* self, node_t *node) {
-    if (global_is_debug)
+    if (global_debug_flag)
         set_delete(self->node_set, node);
 
     set_delete(self->matched_node_set, node);

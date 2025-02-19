@@ -1,6 +1,6 @@
 #pragma once
 
-extern bool global_is_debug;
+extern bool global_debug_flag;
 
 // A vm is like a little forth inner interpreter.
 

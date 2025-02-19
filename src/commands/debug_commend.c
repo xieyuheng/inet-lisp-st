@@ -10,7 +10,7 @@ debug_command(commander_t *runner) {
     commander_add(runner, command);
 }
 
-extern bool global_is_debug;
+extern bool global_debug_flag;
 
 int
 run(commander_t *commander) {
@@ -22,7 +22,7 @@ run(commander_t *commander) {
             char *cwd = getcwd(NULL, 0);
             path_t *path = path_new(cwd);
             path_join(path, src);
-            global_is_debug = true;
+            global_debug_flag = true;
             mod_t *mod = load_mod(path);
             debug_start(mod->vm);
         } else  {
