@@ -55,17 +55,8 @@ activate_primitive_node(vm_t *vm, node_t *node) {
     set_add(vm->matched_node_set, node);
 }
 
-void
-activate_node(vm_t *vm, node_t *node) {
-    assert(node);
-
-    if (set_has(vm->matched_node_set, node)) return;
-
-    if (node_is_primitive(node)) {
-        activate_primitive_node(vm, node);
-        return;
-    }
-
+static void
+activate_matched_node(vm_t *vm, node_t *node) {
     rule_t *rule = list_first(node->ctor->rule_list);
     while (rule) {
         net_matcher_t *net_matcher =
@@ -81,6 +72,19 @@ activate_node(vm_t *vm, node_t *node) {
 
         rule = list_next(node->ctor->rule_list);
     }
+}
+
+void
+activate_node(vm_t *vm, node_t *node) {
+    assert(node);
+
+    if (set_has(vm->matched_node_set, node))
+        return;
+
+    if (node_is_primitive(node))
+        activate_primitive_node(vm, node);
+    else
+        activate_matched_node(vm, node);
 }
 
 void
