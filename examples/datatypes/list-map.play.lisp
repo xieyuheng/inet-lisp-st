@@ -12,5 +12,3 @@
    (three-more-0s
     (three-more-0s (null))))
   iadd2)
-
-(debug)

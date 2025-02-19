@@ -1,3 +1,5 @@
+inet-lisp debug v.s. run
+
 [thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
 

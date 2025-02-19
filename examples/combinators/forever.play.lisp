@@ -7,4 +7,4 @@
   (connect car-op second))
 
 (forever)
-(debug)
+

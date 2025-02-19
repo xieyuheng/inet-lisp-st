@@ -53,11 +53,3 @@ x_inspect_run(vm_t *vm) {
     x_run(vm);
     x_wire_print_net(vm);
 }
-
-void
-x_debug(vm_t *vm) {
-    fprintf(stdout, "[debug] start\n");
-    debug_start(vm);
-    fprintf(stdout, "[debug] end\n");
-    fprintf(stdout, "\n");
-}
