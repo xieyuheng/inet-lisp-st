@@ -72,6 +72,7 @@ activate_node(vm_t *vm, node_t *node) {
             match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
             list_push(vm->activity_list, activity_from_rule(rule, net_matcher));
+
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
                 set_add(vm->matched_node_set, net_matcher->matched_nodes[i]);

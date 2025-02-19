@@ -1,3 +1,4 @@
+[thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
 
 # parallelism
