@@ -1,5 +1,4 @@
 rename vm to worker
-rename vm/ to core/
 
 # linear variable
 
