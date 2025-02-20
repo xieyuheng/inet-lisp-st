@@ -1,8 +1,8 @@
 #include "index.h"
 
 static void
-react_by_primitive(vm_t *vm, activity_t *activity) {
-    node_t *node = activity->primitive_node;
+react_by_primitive(vm_t *vm, task_t *task) {
+    node_t *node = task->primitive_node;
     primitive_t *primitive = node->ctor->primitive;
     assert(primitive);
 
@@ -32,8 +32,8 @@ react_by_primitive(vm_t *vm, activity_t *activity) {
         wire_connect_value(vm, wire, top_value);
     }
 
-    vm_delete_node(vm, activity->primitive_node);
-    activity_destroy(&activity);
+    vm_delete_node(vm, task->primitive_node);
+    task_destroy(&task);
 }
 
 static void
@@ -78,23 +78,23 @@ delete_match_nodes(vm_t *vm, net_matcher_t *net_matcher) {
 }
 
 static void
-react_by_rule(vm_t *vm, activity_t *activity) {
-    return_local_values(vm, activity->net_matcher);
-    delete_match_nodes(vm, activity->net_matcher);
+react_by_rule(vm_t *vm, task_t *task) {
+    return_local_values(vm, task->net_matcher);
+    delete_match_nodes(vm, task->net_matcher);
 
     size_t base_length = stack_length(vm->return_stack);
-    frame_t *frame = frame_new(activity->rule->function);
+    frame_t *frame = frame_new(task->rule->function);
 
-    activity_destroy(&activity);
+    task_destroy(&task);
 
     stack_push(vm->return_stack, frame);
     run_until(vm, base_length);
 }
 
 void
-react(vm_t *vm, activity_t *activity) {
-    if (activity_is_primitive(activity))
-        react_by_primitive(vm, activity);
+react(vm_t *vm, task_t *task) {
+    if (task_is_primitive(task))
+        react_by_primitive(vm, task);
     else
-        react_by_rule(vm, activity);
+        react_by_rule(vm, task);
 }

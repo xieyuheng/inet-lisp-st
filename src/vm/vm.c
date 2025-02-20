@@ -6,7 +6,7 @@ vm_t *
 vm_new(mod_t *mod) {
     vm_t *self = new(vm_t);
     self->mod = mod;
-    self->activity_list = list_new_with((destroy_fn_t *) activity_destroy);
+    self->task_list = list_new_with((destroy_fn_t *) task_destroy);
     self->matched_node_set = set_new();
     // TODO We should use value_destroy to create value_stack.
     self->value_stack = stack_new();
@@ -21,7 +21,7 @@ vm_destroy(vm_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         vm_t *self = *self_pointer;
-        list_destroy(&self->activity_list);
+        list_destroy(&self->task_list);
         set_destroy(&self->matched_node_set);
         stack_destroy(&self->value_stack);
         stack_destroy(&self->return_stack);
@@ -35,14 +35,14 @@ void
 vm_print(const vm_t *self, file_t *file) {
     fprintf(file, "<vm>\n");
 
-    size_t activity_list_length = list_length(self->activity_list);
-    fprintf(file, "<activity-list length=\"%lu\">\n", activity_list_length);
-    activity_t *activity = list_first(self->activity_list);
-    while (activity) {
-        activity_print(activity, file);
-        activity = list_next(self->activity_list);
+    size_t task_list_length = list_length(self->task_list);
+    fprintf(file, "<task-list length=\"%lu\">\n", task_list_length);
+    task_t *task = list_first(self->task_list);
+    while (task) {
+        task_print(task, file);
+        task = list_next(self->task_list);
     }
-    fprintf(file, "</activity-list>\n");
+    fprintf(file, "</task-list>\n");
 
     vm_print_return_stack(self, file);
     vm_print_value_stack(self, file);

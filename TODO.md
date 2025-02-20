@@ -1,5 +1,5 @@
-rename activity to task
 rename vm to worker
+rename vm/ to core/
 
 # linear variable
 

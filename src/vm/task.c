@@ -1,26 +1,26 @@
 #include "index.h"
 
-activity_t *
-activity_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
-    activity_t *self = new(activity_t);
+task_t *
+task_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
+    task_t *self = new(task_t);
     self->rule = rule;
     self->net_matcher = net_matcher;
     return self;
 }
 
-activity_t *
-activity_from_primitive_node(node_t *primitive_node) {
-    activity_t *self = new(activity_t);
+task_t *
+task_from_primitive_node(node_t *primitive_node) {
+    task_t *self = new(task_t);
     assert(node_is_primitive(primitive_node));
     self->primitive_node = primitive_node;
     return self;
 }
 
 void
-activity_destroy(activity_t **self_pointer) {
+task_destroy(task_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        activity_t *self = *self_pointer;
+        task_t *self = *self_pointer;
         net_matcher_destroy(&self->net_matcher);
         free(self);
         *self_pointer = NULL;
@@ -28,7 +28,7 @@ activity_destroy(activity_t **self_pointer) {
 }
 
 bool
-activity_is_primitive(const activity_t *self) {
+task_is_primitive(const task_t *self) {
     return self->primitive_node != NULL;
 }
 
@@ -51,7 +51,7 @@ activate_primitive_node(vm_t *vm, node_t *node) {
         }
     }
 
-    list_push(vm->activity_list, activity_from_primitive_node(node));
+    list_push(vm->task_list, task_from_primitive_node(node));
     set_add(vm->matched_node_set, node);
 }
 
@@ -62,7 +62,7 @@ activate_matched_node(vm_t *vm, node_t *node) {
         net_matcher_t *net_matcher =
             match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
-            list_push(vm->activity_list, activity_from_rule(rule, net_matcher));
+            list_push(vm->task_list, task_from_rule(rule, net_matcher));
 
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
@@ -109,9 +109,9 @@ activate_node_and_neighbor(vm_t *vm, node_t *node) {
 }
 
 void
-activity_print(activity_t *self, file_t *file) {
-    fprintf(file, "<activity>\n");
+task_print(task_t *self, file_t *file) {
+    fprintf(file, "<task>\n");
     rule_print(self->rule, file);
     net_matcher_print(self->net_matcher, file);
-    fprintf(file, "</activity>\n");
+    fprintf(file, "</task>\n");
 }

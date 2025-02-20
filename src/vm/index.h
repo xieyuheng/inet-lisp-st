@@ -4,7 +4,7 @@
 #include "types.h"
 #include "mod.h"
 #include "frame.h"
-#include "activity.h"
+#include "task.h"
 #include "vm.h"
 #include "op.h"
 #include "function.h"

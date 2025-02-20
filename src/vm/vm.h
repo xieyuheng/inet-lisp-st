@@ -6,7 +6,7 @@ extern bool global_debug_flag;
 
 struct vm_t {
     mod_t *mod;
-    list_t *activity_list;
+    list_t *task_list;
     set_t *matched_node_set;
     stack_t *value_stack;
     stack_t *return_stack;

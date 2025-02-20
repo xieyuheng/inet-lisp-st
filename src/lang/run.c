@@ -72,15 +72,15 @@ run_until(vm_t *vm, size_t base_length) {
 
 void
 step_net(vm_t *vm) {
-    activity_t *activity = list_shift(vm->activity_list);
-    if (activity == NULL) return;
+    task_t *task = list_shift(vm->task_list);
+    if (task == NULL) return;
 
-    react(vm, activity);
+    react(vm, task);
 }
 
 void
 run_net(vm_t *vm) {
-    while (!list_is_empty(vm->activity_list)) {
+    while (!list_is_empty(vm->task_list)) {
         step_net(vm);
     }
 }
