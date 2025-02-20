@@ -12,9 +12,9 @@ typedef enum {
     // (lend <name> <fn>)
     // (& <name> <fn>)
     // lend value in variable <name> to <fn>,
-    // <fn> should return two values,
-    // return the first value to the variable,
-    // and view the second value as the value of this exp.
+    // <fn> should return two values:
+    // - the first value is viewed as the value of this exp,
+    // - the second value is returned to the variable.
 
     EXP_INT,
     EXP_FLOAT,

@@ -1,8 +1,3 @@
-# linear variable
-
-[vm] `op_swap` -- for `EXP_LEND`
-[lang] `compile_exp` -- handle `EXP_LEND` -- fix order use `op_swap`
-
 # parallelism
 
 [thread] `thread_print`
