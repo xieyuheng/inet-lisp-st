@@ -27,6 +27,15 @@ exp_assign(list_t *name_list, exp_t *exp) {
 }
 
 exp_t *
+exp_lend(char *name, exp_t *exp) {
+    exp_t *self = new(exp_t);
+    self->kind = EXP_LEND;
+    self->lend.name = name;
+    self->lend.exp = exp;
+    return self;
+}
+
+exp_t *
 exp_int(int64_t target) {
     exp_t *self = new(exp_t);
     self->kind = EXP_INT;
@@ -70,6 +79,11 @@ exp_destroy(exp_t **self_pointer) {
             break;
         }
 
+        case EXP_LEND: {
+            // TODO
+            return;
+        }        
+
         case EXP_INT: {
              break;
         }
@@ -102,6 +116,11 @@ exp_copy(const exp_t *self) {
         return exp_assign(
             string_list_copy(self->assign.name_list),
             exp_copy(self->assign.exp));
+    }
+
+    case EXP_LEND: {
+        // TODO
+        return NULL;
     }
 
     case EXP_INT: {
@@ -198,6 +217,11 @@ exp_print(const exp_t *self, file_t *file) {
         return;
     }
 
+    case EXP_LEND: {
+        // TODO
+        return;
+    }
+    
     case EXP_INT: {
         value_print(xint(self->i.target), file);
         return;

@@ -76,6 +76,11 @@ compile_exp(worker_t *worker, function_t *function, exp_t *exp) {
         return;
     }
 
+    case EXP_LEND: {
+        // TODO
+        return;
+    }
+
     case EXP_INT: {
         function_add_op(function, op_literal(xint(exp->i.target)));
         return;

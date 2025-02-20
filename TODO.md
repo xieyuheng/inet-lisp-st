@@ -1,5 +1,11 @@
 # linear variable
 
+[lang] `exp_destroy` -- handle `EXP_LEND`
+[lang] `exp_print` -- handle `EXP_LEND`
+[lang] `exp_copy` -- handle `EXP_LEND`
+
+[lang] `compile_exp` -- handle `EXP_LEND`
+
 [lang] `(lend <name> <fn>)` the same as `(& <name> <fn>)`
 
 # parallelism
