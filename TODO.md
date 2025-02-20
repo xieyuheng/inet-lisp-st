@@ -1,3 +1,6 @@
+rename activity to task
+rename vm to worker
+
 # linear variable
 
 [lang] `(assign)` the same as `(=)`
