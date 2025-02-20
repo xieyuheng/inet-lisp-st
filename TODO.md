@@ -1,7 +1,5 @@
 # linear variable
 
-[lang] `exp_copy` -- handle `EXP_LEND`
-
 [lang] `compile_exp` -- handle `EXP_LEND`
 
 [lang] `(lend <name> <fn>)` the same as `(& <name> <fn>)`

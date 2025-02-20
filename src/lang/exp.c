@@ -120,8 +120,9 @@ exp_copy(const exp_t *self) {
     }
 
     case EXP_LEND: {
-        // TODO
-        return NULL;
+        return exp_lend(
+            string_copy(self->lend.name),
+            exp_copy(self->lend.exp));
     }
 
     case EXP_INT: {
