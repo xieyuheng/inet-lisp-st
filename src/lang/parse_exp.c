@@ -57,6 +57,7 @@ parse_lend(sexp_t *sexp) {
     char *name = string_copy(sexp_string(name_sexp));
     sexp_t *exp_sexp = list_next(sexp_list);
     exp_t *exp = parse_exp(exp_sexp);
+    assert(list_next(sexp_list) == NULL);
     return exp_lend(name, exp);
 }
 
