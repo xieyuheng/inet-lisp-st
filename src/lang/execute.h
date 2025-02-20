@@ -1,3 +1,3 @@
 #pragma once
 
-void execute(vm_t *vm, stmt_t *stmt);
+void execute(worker_t *worker, stmt_t *stmt);

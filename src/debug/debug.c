@@ -1,9 +1,9 @@
 #include "index.h"
 
 debug_t *
-debug_new(vm_t *vm) {
+debug_new(worker_t *worker) {
     debug_t *self = new(debug_t);
-    self->vm = vm;
+    self->worker = worker;
 
     size_t width = 90 * TILE;
     size_t height = 60 * TILE;
@@ -83,7 +83,7 @@ init_canvas_font(canvas_t *canvas) {
     canvas->font = font_from_hex_string(blob_string(blob));
 }
 
-extern void step_net(vm_t *vm);
+extern void step_net(worker_t *worker);
 
 static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
@@ -93,7 +93,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
         self->running_frame_count += passed;
 
     if (self->running_frame_count > canvas->frame_rate / self->running_speed) {
-        step_net(self->vm);
+        step_net(self->worker);
         debug_update(self);
         self->running_frame_count = 0;
     }
@@ -114,10 +114,10 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 hash_t *
 debug_new_node_hash(debug_t *self) {
     hash_t *node_hash = hash_new();
-    node_t *node = set_first(self->vm->debug_node_set);
+    node_t *node = set_first(self->worker->debug_node_set);
     while (node) {
         hash_set(node_hash, (void *) node->id, node);
-        node = set_next(self->vm->debug_node_set);
+        node = set_next(self->worker->debug_node_set);
     }
 
     return node_hash;
@@ -167,10 +167,10 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
 }
 
 void
-debug_start(vm_t *vm) {
+debug_start(worker_t *worker) {
     srand(time(NULL));
 
-    debug_t *self = debug_new(vm);
+    debug_t *self = debug_new(worker);
 
     init_node_hash(self);
     init_node_physics(self);

@@ -1,8 +1,8 @@
 #include "index.h"
 
 void
-xint_dup(vm_t *vm) {
-    value_t target = stack_top(vm->value_stack);
+xint_dup(worker_t *worker) {
+    value_t target = stack_top(worker->value_stack);
     assert(is_xint(target));
-    stack_push(vm->value_stack, target);
+    stack_push(worker->value_stack, target);
 }

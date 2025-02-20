@@ -1,6 +1,6 @@
 #pragma once
 
-typedef void (primitive_fn_t)(vm_t *vm);
+typedef void (primitive_fn_t)(worker_t *worker);
 typedef value_t (primitive_fn_0_t)(void);
 typedef value_t (primitive_fn_1_t)(value_t x);
 typedef value_t (primitive_fn_2_t)(value_t x, value_t y);

@@ -5,8 +5,8 @@ value_t x_print(value_t x) {
     return x;
 }
 
-void x_newline(vm_t *vm) {
-    (void) vm;
+void x_newline(worker_t *worker) {
+    (void) worker;
     printf("\n");
 }
 

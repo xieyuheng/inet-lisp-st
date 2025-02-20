@@ -1,13 +1,13 @@
 #include "index.h"
 
 static node_pattern_t *
-build_node_pattern(vm_t *vm, exp_t *pattern_exp) {
+build_node_pattern(worker_t *worker, exp_t *pattern_exp) {
     assert(pattern_exp->kind == EXP_AP);
     exp_t *target = pattern_exp->ap.target;
     list_t *arg_list = pattern_exp->ap.arg_list;
 
     assert(target->kind == EXP_VAR);
-    value_t value = mod_find(vm->mod, target->var.name);
+    value_t value = mod_find(worker->mod, target->var.name);
     if (!value) {
         fprintf(stderr, "[build_node_pattern] undefined node: %s\n", target->var.name);
         exit(1);
@@ -31,12 +31,12 @@ build_node_pattern(vm_t *vm, exp_t *pattern_exp) {
 }
 
 static list_t *
-build_node_pattern_list(vm_t *vm, list_t *pattern_exp_list) {
+build_node_pattern_list(worker_t *worker, list_t *pattern_exp_list) {
     list_t *node_pattern_list =
         list_new_with((destroy_fn_t *) node_pattern_destroy);
     exp_t *pattern_exp = list_first(pattern_exp_list);
     while (pattern_exp) {
-        list_push(node_pattern_list, build_node_pattern(vm, pattern_exp));
+        list_push(node_pattern_list, build_node_pattern(worker, pattern_exp));
         pattern_exp = list_next(pattern_exp_list);
     }
 
@@ -45,7 +45,7 @@ build_node_pattern_list(vm_t *vm, list_t *pattern_exp_list) {
 
 static void
 translate_pattern_sub_tree(
-    vm_t *vm,
+    worker_t *worker,
     exp_t *pattern_exp,
     const char *last_arg_name,
     list_t *pattern_exp_list
@@ -53,7 +53,7 @@ translate_pattern_sub_tree(
 
 static list_t *
 translate_pattern_arg_list(
-    vm_t *vm,
+    worker_t *worker,
     list_t *arg_list,
     list_t *pattern_exp_list
 ) {
@@ -63,10 +63,10 @@ translate_pattern_arg_list(
         if (arg_exp->kind == EXP_VAR) {
             list_push(new_arg_list, exp_copy(arg_exp));
         } else {
-            char *fresh_name = vm_fresh_name(vm);
+            char *fresh_name = worker_fresh_name(worker);
             char *name = string_append(fresh_name, "!");
             string_destroy(&fresh_name);
-            translate_pattern_sub_tree(vm, arg_exp, name, pattern_exp_list);
+            translate_pattern_sub_tree(worker, arg_exp, name, pattern_exp_list);
             list_push(new_arg_list, exp_var(name));
         }
 
@@ -78,51 +78,51 @@ translate_pattern_arg_list(
 
 static void
 translate_pattern_sub_tree(
-    vm_t *vm,
+    worker_t *worker,
     exp_t *pattern_exp,
     const char *last_arg_name,
     list_t *pattern_exp_list
 ) {
     assert(pattern_exp->kind == EXP_AP);
     exp_t *target = exp_copy(pattern_exp->ap.target);
-    list_t *arg_list = translate_pattern_arg_list(vm, pattern_exp->ap.arg_list, pattern_exp_list);
+    list_t *arg_list = translate_pattern_arg_list(worker, pattern_exp->ap.arg_list, pattern_exp_list);
     list_push(arg_list, exp_var(string_copy(last_arg_name)));
     list_unshift(pattern_exp_list, exp_ap(target, arg_list));
 }
 
 static list_t *
-translate_pattern_tree(vm_t *vm, exp_t *pattern_exp) {
+translate_pattern_tree(worker_t *worker, exp_t *pattern_exp) {
     assert(pattern_exp->kind == EXP_AP);
     exp_t *target = exp_copy(pattern_exp->ap.target);
     list_t *pattern_exp_list = exp_list_new();
-    list_t *arg_list = translate_pattern_arg_list(vm, pattern_exp->ap.arg_list, pattern_exp_list);
+    list_t *arg_list = translate_pattern_arg_list(worker, pattern_exp->ap.arg_list, pattern_exp_list);
     list_unshift(pattern_exp_list, exp_ap(target, arg_list));
     return pattern_exp_list;
 }
 
 static void
-compute_exp(vm_t *vm, exp_t *exp) {
+compute_exp(worker_t *worker, exp_t *exp) {
     size_t arity = 0;
     function_t *function = function_new(arity);
-    compile_exp(vm, function, exp);
+    compile_exp(worker, function, exp);
     function_build(function);
 
-    size_t base_length = stack_length(vm->return_stack);
+    size_t base_length = stack_length(worker->return_stack);
     frame_t *frame = frame_new(function);
-    stack_push(vm->return_stack, frame);
-    run_until(vm, base_length);
+    stack_push(worker->return_stack, frame);
+    run_until(worker, base_length);
 
     function_destroy(&function);
     return;
 }
 
 void
-execute(vm_t *vm, stmt_t *stmt) {
+execute(worker_t *worker, stmt_t *stmt) {
     switch (stmt->kind) {
     case STMT_DEFINE: {
-        compute_exp(vm, stmt->define.exp);
-        value_t value = stack_pop(vm->value_stack);
-        define(vm->mod, stmt->define.name, value);
+        compute_exp(worker, stmt->define.exp);
+        value_t value = stack_pop(worker->value_stack);
+        define(worker->mod, stmt->define.name, value);
         return;
     }
 
@@ -130,23 +130,23 @@ execute(vm_t *vm, stmt_t *stmt) {
         size_t arity = list_length(stmt->define_function.arg_name_list);
         function_t *function = function_new(arity);
         function->name = string_copy(stmt->define_function.name);
-        compile_set_variables(vm, function, stmt->define_function.arg_name_list);
-        compile_exp_list(vm, function, stmt->define_function.exp_list);
+        compile_set_variables(worker, function, stmt->define_function.arg_name_list);
+        compile_exp_list(worker, function, stmt->define_function.exp_list);
         function_build(function);
-        define(vm->mod, stmt->define_function.name, function);
+        define(worker->mod, stmt->define_function.name, function);
         return;
     }
 
     case STMT_DEFINE_NODE: {
-        define_node(vm, stmt->define_node.name, stmt->define_node.port_name_list);
+        define_node(worker, stmt->define_node.name, stmt->define_node.port_name_list);
         return;
     }
 
     case STMT_DEFINE_RULE: {
-        list_t *pattern_exp_list = translate_pattern_tree(vm, stmt->define_rule.pattern_exp);
+        list_t *pattern_exp_list = translate_pattern_tree(worker, stmt->define_rule.pattern_exp);
         define_rule_star(
-            vm,
-            build_node_pattern_list(vm, pattern_exp_list),
+            worker,
+            build_node_pattern_list(worker, pattern_exp_list),
             stmt->define_rule.exp_list);
         list_destroy(&pattern_exp_list);
         return;
@@ -155,19 +155,19 @@ execute(vm_t *vm, stmt_t *stmt) {
     case STMT_DEFINE_RULE_STAR: {
         list_t *pattern_exp_list = stmt->define_rule_star.pattern_exp_list;
         define_rule_star(
-            vm,
-            build_node_pattern_list(vm, pattern_exp_list),
+            worker,
+            build_node_pattern_list(worker, pattern_exp_list),
             stmt->define_rule_star.exp_list);
         return;
     }
 
     case STMT_COMPUTE_EXP: {
-        compute_exp(vm, stmt->compute_exp.exp);
+        compute_exp(worker, stmt->compute_exp.exp);
         return;
     }
 
     case STMT_IMPORT: {
-        path_t *path = path_copy(vm->mod->path);
+        path_t *path = path_copy(worker->mod->path);
         path_join(path, "..");
         path_join(path, path_string(stmt->import.path));
         mod_t *imported_mod = load_mod(path);
@@ -180,7 +180,7 @@ execute(vm_t *vm, stmt_t *stmt) {
                 exit(1);
             }
 
-            define(vm->mod, name, value);
+            define(worker->mod, name, value);
             name = list_next(stmt->import.name_list);
         }
 

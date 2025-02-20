@@ -1,8 +1,8 @@
 #include "index.h"
 
 void
-compile_set_variables(vm_t *vm, function_t *function, list_t *name_list) {
-    (void) vm;
+compile_set_variables(worker_t *worker, function_t *function, list_t *name_list) {
+    (void) worker;
 
     size_t index = hash_length(function->local_index_hash);
     char *name = list_last(name_list);
@@ -21,10 +21,10 @@ compile_set_variables(vm_t *vm, function_t *function, list_t *name_list) {
 }
 
 void
-compile_exp_list(vm_t *vm, function_t *function, list_t *exp_list) {
+compile_exp_list(worker_t *worker, function_t *function, list_t *exp_list) {
     exp_t *exp = list_first(exp_list);
     while (exp) {
-        compile_exp(vm, function, exp);
+        compile_exp(worker, function, exp);
         exp = list_next(exp_list);
     }
 }
@@ -39,8 +39,8 @@ maybe_compile_get_variable(function_t *function, const char *name) {
 }
 
 static void
-compile_literal(vm_t *vm, function_t *function, const char *name) {
-    value_t value = mod_find(vm->mod, name);
+compile_literal(worker_t *worker, function_t *function, const char *name) {
+    value_t value = mod_find(worker->mod, name);
     if (value == NULL) {
         fprintf(stderr, "[compile_literal] undefined name: %s\n", name);
         fprintf(stderr, "[compile_literal] function:\n");
@@ -52,27 +52,27 @@ compile_literal(vm_t *vm, function_t *function, const char *name) {
 }
 
 void
-compile_exp(vm_t *vm, function_t *function, exp_t *exp) {
+compile_exp(worker_t *worker, function_t *function, exp_t *exp) {
     switch (exp->kind) {
     case EXP_VAR: {
         if (maybe_compile_get_variable(function, exp->var.name))
             return;
 
-        compile_literal(vm, function, exp->var.name);
+        compile_literal(worker, function, exp->var.name);
         return;
     }
 
     case EXP_AP: {
-        compile_exp_list(vm, function, exp->ap.arg_list);
-        compile_exp(vm, function, exp->ap.target);
+        compile_exp_list(worker, function, exp->ap.arg_list);
+        compile_exp(worker, function, exp->ap.target);
         size_t arity = list_length(exp->ap.arg_list);
         function_add_op(function, op_apply(arity));
         return;
     }
 
     case EXP_ASSIGN: {
-        compile_exp(vm, function, exp->assign.exp);
-        compile_set_variables(vm, function, exp->assign.name_list);
+        compile_exp(worker, function, exp->assign.exp);
+        compile_set_variables(worker, function, exp->assign.name_list);
         return;
     }
 

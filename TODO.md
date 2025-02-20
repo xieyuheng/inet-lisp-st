@@ -1,5 +1,3 @@
-rename vm to worker
-
 # linear variable
 
 [lang] `(assign)` the same as `(=)`
@@ -9,7 +7,7 @@ rename vm to worker
 
 [thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
-[parallelism] `vm` -- design API to support shared memory parallel execution
+[parallelism] `worker` -- design API to support shared memory parallel execution
 - maybe need a scheduler
 
 # debug

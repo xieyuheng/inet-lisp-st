@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-define_node(vm_t *vm, const char *name, list_t *port_name_list) {
+define_node(worker_t *worker, const char *name, list_t *port_name_list) {
     size_t arity = list_length(port_name_list);
     node_ctor_t *node_ctor = node_ctor_new(name, arity);
 
@@ -14,6 +14,6 @@ define_node(vm_t *vm, const char *name, list_t *port_name_list) {
         index++;
     }
 
-    define(vm->mod, name, node_ctor);
+    define(worker->mod, name, node_ctor);
     return;
 }

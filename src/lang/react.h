@@ -1,3 +1,3 @@
 #pragma once
 
-void react(vm_t *vm, task_t *task);
+void react(worker_t *worker, task_t *task);

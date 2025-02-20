@@ -1,6 +1,6 @@
 #pragma once
 
-void run_until(vm_t *vm, size_t base_length);
+void run_until(worker_t *worker, size_t base_length);
 
-void step_net(vm_t *vm);
-void run_net(vm_t *vm);
+void step_net(worker_t *worker);
+void run_net(worker_t *worker);

@@ -5,7 +5,7 @@
 #include "mod.h"
 #include "frame.h"
 #include "task.h"
-#include "vm.h"
+#include "worker.h"
 #include "op.h"
 #include "function.h"
 #include "primitive.h"

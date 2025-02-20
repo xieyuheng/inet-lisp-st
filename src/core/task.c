@@ -33,7 +33,7 @@ task_is_primitive(const task_t *self) {
 }
 
 static void
-activate_primitive_node(vm_t *vm, node_t *node) {
+activate_primitive_node(worker_t *worker, node_t *node) {
     assert(node_is_primitive(node));
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
@@ -51,22 +51,22 @@ activate_primitive_node(vm_t *vm, node_t *node) {
         }
     }
 
-    list_push(vm->task_list, task_from_primitive_node(node));
-    set_add(vm->matched_node_set, node);
+    list_push(worker->task_list, task_from_primitive_node(node));
+    set_add(worker->matched_node_set, node);
 }
 
 static void
-activate_matched_node(vm_t *vm, node_t *node) {
+activate_matched_node(worker_t *worker, node_t *node) {
     rule_t *rule = list_first(node->ctor->rule_list);
     while (rule) {
         net_matcher_t *net_matcher =
             match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
-            list_push(vm->task_list, task_from_rule(rule, net_matcher));
+            list_push(worker->task_list, task_from_rule(rule, net_matcher));
 
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
-                set_add(vm->matched_node_set, net_matcher->matched_nodes[i]);
+                set_add(worker->matched_node_set, net_matcher->matched_nodes[i]);
             return;
         }
 
@@ -75,21 +75,21 @@ activate_matched_node(vm_t *vm, node_t *node) {
 }
 
 void
-schedule_task_by(vm_t *vm, node_t *node) {
+schedule_task_by(worker_t *worker, node_t *node) {
     assert(node);
 
-    if (set_has(vm->matched_node_set, node))
+    if (set_has(worker->matched_node_set, node))
         return;
 
     if (node_is_primitive(node))
-        activate_primitive_node(vm, node);
+        activate_primitive_node(worker, node);
     else
-        activate_matched_node(vm, node);
+        activate_matched_node(worker, node);
 }
 
 void
-schedule_task_by_and_neighbor(vm_t *vm, node_t *node) {
-    schedule_task_by(vm, node);
+schedule_task_by_and_neighbor(worker_t *worker, node_t *node) {
+    schedule_task_by(worker, node);
 
     // NOTE for imported node ctor,
     // if is not enough to activate the new node only,
@@ -104,7 +104,7 @@ schedule_task_by_and_neighbor(vm_t *vm, node_t *node) {
         if (!is_wire(value)) continue;
         wire_t *wire = as_wire(value);
         if (is_wire(wire->opposite) && as_wire(wire->opposite)->node)
-            schedule_task_by(vm, as_wire(wire->opposite)->node);
+            schedule_task_by(worker, as_wire(wire->opposite)->node);
     }
 }
 

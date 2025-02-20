@@ -2,9 +2,9 @@
 
 bool global_debug_flag = false;
 
-vm_t *
-vm_new(mod_t *mod) {
-    vm_t *self = new(vm_t);
+worker_t *
+worker_new(mod_t *mod) {
+    worker_t *self = new(worker_t);
     self->mod = mod;
     self->task_list = list_new_with((destroy_fn_t *) task_destroy);
     self->matched_node_set = set_new();
@@ -17,10 +17,10 @@ vm_new(mod_t *mod) {
 }
 
 void
-vm_destroy(vm_t **self_pointer) {
+worker_destroy(worker_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        vm_t *self = *self_pointer;
+        worker_t *self = *self_pointer;
         list_destroy(&self->task_list);
         set_destroy(&self->matched_node_set);
         stack_destroy(&self->value_stack);
@@ -32,8 +32,8 @@ vm_destroy(vm_t **self_pointer) {
 }
 
 void
-vm_print(const vm_t *self, file_t *file) {
-    fprintf(file, "<vm>\n");
+worker_print(const worker_t *self, file_t *file) {
+    fprintf(file, "<worker>\n");
 
     size_t task_list_length = list_length(self->task_list);
     fprintf(file, "<task-list length=\"%lu\">\n", task_list_length);
@@ -44,14 +44,14 @@ vm_print(const vm_t *self, file_t *file) {
     }
     fprintf(file, "</task-list>\n");
 
-    vm_print_return_stack(self, file);
-    vm_print_value_stack(self, file);
+    worker_print_return_stack(self, file);
+    worker_print_value_stack(self, file);
 
-    fprintf(file, "</vm>\n");
+    fprintf(file, "</worker>\n");
 }
 
 void
-vm_print_return_stack(const vm_t *self, file_t *file) {
+worker_print_return_stack(const worker_t *self, file_t *file) {
     size_t return_stack_length = stack_length(self->return_stack);
     fprintf(file, "<return-stack length=\"%lu\">\n", return_stack_length);
     for (size_t i = 0; i < return_stack_length; i++) {
@@ -63,7 +63,7 @@ vm_print_return_stack(const vm_t *self, file_t *file) {
 }
 
 void
-vm_print_value_stack(const vm_t *self, file_t *file) {
+worker_print_value_stack(const worker_t *self, file_t *file) {
     size_t value_stack_length = stack_length(self->value_stack);
     fprintf(file, "<value-stack length=\"%lu\">\n", value_stack_length);
     for (size_t i = 0; i < value_stack_length; i++) {
@@ -76,7 +76,7 @@ vm_print_value_stack(const vm_t *self, file_t *file) {
 }
 
 node_t *
-vm_add_node(vm_t* self, const node_ctor_t *ctor) {
+worker_add_node(worker_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
 
     if (global_debug_flag)
@@ -86,7 +86,7 @@ vm_add_node(vm_t* self, const node_ctor_t *ctor) {
 }
 
 void
-vm_delete_node(vm_t* self, node_t *node) {
+worker_delete_node(worker_t* self, node_t *node) {
     if (global_debug_flag)
         set_delete(self->debug_node_set, node);
 
@@ -96,20 +96,20 @@ vm_delete_node(vm_t* self, node_t *node) {
 }
 
 wire_t *
-vm_add_wire(vm_t* self) {
+worker_add_wire(worker_t* self) {
     (void) self;
     wire_t *wire = wire_new();
     return wire;
 }
 
 void
-vm_delete_wire(vm_t* self, wire_t *wire) {
+worker_delete_wire(worker_t* self, wire_t *wire) {
     (void) self;
     wire_destroy(&wire);
 }
 
 char *
-vm_fresh_name(vm_t* self) {
+worker_fresh_name(worker_t* self) {
     size_t max_string_length = 256;
     char *buffer = allocate(max_string_length);
     sprintf(buffer, "%lu", self->fresh_name_count++);

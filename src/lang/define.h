@@ -3,9 +3,9 @@
 void define(mod_t *self, const char *name, value_t value);
 
 void define_rule(mod_t *self, const char *name, rule_t *rule);
-void define_rule_star(vm_t *vm, list_t *node_pattern_list, list_t *exp_list);
+void define_rule_star(worker_t *worker, list_t *node_pattern_list, list_t *exp_list);
 
-void define_node(vm_t *vm, const char *name, list_t *port_name_list);
+void define_node(worker_t *worker, const char *name, list_t *port_name_list);
 
 void define_primitive_fn(mod_t *mod, const char *name, size_t input_arity, size_t output_arity, primitive_fn_t *primitive_fn);
 void define_primitive_fn_0(mod_t *mod, const char *name, primitive_fn_0_t *primitive_fn_0);
