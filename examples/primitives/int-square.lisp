@@ -1,6 +1,5 @@
 (define (int-square x)
-  (= x1 x2 (int-dup x))
-  (imul x1 x2))
+  (imul (& x int-dup) x))
 
 (assert (eq? (int-square 1) 1))
 (assert (eq? (int-square 2) 4))

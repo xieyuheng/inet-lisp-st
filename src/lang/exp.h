@@ -4,17 +4,17 @@ typedef enum {
     EXP_VAR,
     EXP_AP,
 
+    EXP_ASSIGN,
     // (assign <name> ... <exp>)
     // (= <name> ... <exp>)
-    EXP_ASSIGN,
 
+    EXP_LEND,
     // (lend <name> <fn>)
     // (& <name> <fn>)
     // lend value in variable <name> to <fn>,
     // <fn> should return two values,
-    // one return to the variable,
-    // one as the value of this exp.
-    EXP_LEND,
+    // return the first value to the variable,
+    // and view the second value as the value of this exp.
 
     EXP_INT,
     EXP_FLOAT,

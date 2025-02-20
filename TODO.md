@@ -1,6 +1,10 @@
 # linear variable
 
-[lang] `compile_exp` -- handle `EXP_LEND`
+ambr parse_let parse_assign
+
+[vm] `op_swap` -- for `EXP_LEND`
+[lang] `compile_exp` -- handle `EXP_LEND` -- fix order use `op_swap`
+
 [lang] `(lend <name> <fn>)` the same as `(& <name> <fn>)` -- test by `lend.test.lisp`
 
 # parallelism

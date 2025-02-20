@@ -49,10 +49,23 @@ parse_let(sexp_t *sexp) {
     return exp_assign(name_list, exp);
 }
 
+static exp_t *
+parse_lend(sexp_t *sexp) {
+    list_t *sexp_list = sexp_sexp_list(sexp);
+    (void) list_first(sexp_list);
+    sexp_t *name_sexp = list_next(sexp_list);
+    char *name = string_copy(sexp_string(name_sexp));
+    sexp_t *exp_sexp = list_next(sexp_list);
+    exp_t *exp = parse_exp(exp_sexp);
+    return exp_lend(name, exp);
+}
+
 exp_t *
 parse_exp(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "=") || sexp_starts_with(sexp, "assign")) {
         return parse_let(sexp);
+    } else if (sexp_starts_with(sexp, "&") || sexp_starts_with(sexp, "lend")) {
+        return parse_lend(sexp);
     } else if (is_atom_sexp(sexp)) {
         const token_t *token = sexp_token(sexp);
         if (token->kind == INT_TOKEN)

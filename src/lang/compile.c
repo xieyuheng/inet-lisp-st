@@ -82,7 +82,10 @@ compile_exp(worker_t *worker, function_t *function, exp_t *exp) {
     }
 
     case EXP_LEND: {
-        // TODO
+        assert(maybe_compile_get_variable(function, exp->lend.name));
+        compile_exp(worker, function, exp->lend.exp);
+        function_add_op(function, op_apply(1));
+        compile_set_variable(worker, function, exp->lend.name);
         return;
     }
 
