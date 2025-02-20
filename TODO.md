@@ -1,6 +1,5 @@
 # linear variable
 
-[lang] `exp_print` -- handle `EXP_LEND`
 [lang] `exp_copy` -- handle `EXP_LEND`
 
 [lang] `compile_exp` -- handle `EXP_LEND`

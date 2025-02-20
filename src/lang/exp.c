@@ -219,7 +219,9 @@ exp_print(const exp_t *self, file_t *file) {
     }
 
     case EXP_LEND: {
-        // TODO
+        fprintf(file, "(& %s ", self->lend.name);
+        exp_print(self->lend.exp, file);
+        fprintf(file, ")");
         return;
     }
 
