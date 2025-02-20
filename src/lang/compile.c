@@ -1,21 +1,26 @@
 #include "index.h"
 
+static void
+compile_set_variable(worker_t *worker, function_t *function, char *name) {
+    (void) worker;
+
+    size_t index = hash_length(function->local_index_hash);
+    if (hash_has(function->local_index_hash, name)) {
+        size_t old_index = (size_t) hash_get(function->local_index_hash, name);
+        function_add_op(function, op_set_variable(old_index));
+    } else {
+        assert(hash_set(function->local_index_hash, string_copy(name), (void *) index));
+        function_add_op(function, op_set_variable(index));
+    }
+}
+
 void
 compile_set_variables(worker_t *worker, function_t *function, list_t *name_list) {
     (void) worker;
 
-    size_t index = hash_length(function->local_index_hash);
     char *name = list_last(name_list);
     while (name) {
-        if (hash_has(function->local_index_hash, name)) {
-            size_t old_index = (size_t) hash_get(function->local_index_hash, name);
-            function_add_op(function, op_set_variable(old_index));
-        } else {
-            assert(hash_set(function->local_index_hash, string_copy(name), (void *) index));
-            function_add_op(function, op_set_variable(index));
-            index++;
-        }
-
+        compile_set_variable(worker, function, name);
         name = list_prev(name_list);
     }
 }

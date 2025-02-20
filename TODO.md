@@ -1,8 +1,8 @@
 # linear variable
 
+ambr compile_set_variables  compile_set_variable_list
 [lang] `compile_exp` -- handle `EXP_LEND`
-
-[lang] `(lend <name> <fn>)` the same as `(& <name> <fn>)`
+[lang] `(lend <name> <fn>)` the same as `(& <name> <fn>)` -- test by `lend.test.lisp`
 
 # parallelism
 
