@@ -1,7 +1,7 @@
 #include "index.h"
 
 static void
-compile_set_variable(worker_t *worker, function_t *function, char *name) {
+compile_set_variable(worker_t *worker, function_t *function, const char *name) {
     (void) worker;
 
     size_t index = hash_length(function->local_index_hash);
