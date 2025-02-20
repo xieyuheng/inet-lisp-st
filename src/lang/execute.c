@@ -130,7 +130,7 @@ execute(worker_t *worker, stmt_t *stmt) {
         size_t arity = list_length(stmt->define_function.arg_name_list);
         function_t *function = function_new(arity);
         function->name = string_copy(stmt->define_function.name);
-        compile_set_variables(worker, function, stmt->define_function.arg_name_list);
+        compile_set_variable_list(worker, function, stmt->define_function.arg_name_list);
         compile_exp_list(worker, function, stmt->define_function.exp_list);
         function_build(function);
         define(worker->mod, stmt->define_function.name, function);

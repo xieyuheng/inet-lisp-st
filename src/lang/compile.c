@@ -15,7 +15,7 @@ compile_set_variable(worker_t *worker, function_t *function, char *name) {
 }
 
 void
-compile_set_variables(worker_t *worker, function_t *function, list_t *name_list) {
+compile_set_variable_list(worker_t *worker, function_t *function, list_t *name_list) {
     (void) worker;
 
     char *name = list_last(name_list);
@@ -77,7 +77,7 @@ compile_exp(worker_t *worker, function_t *function, exp_t *exp) {
 
     case EXP_ASSIGN: {
         compile_exp(worker, function, exp->assign.exp);
-        compile_set_variables(worker, function, exp->assign.name_list);
+        compile_set_variable_list(worker, function, exp->assign.name_list);
         return;
     }
 

@@ -13,7 +13,7 @@ define_rule_star(worker_t *worker, list_t *node_pattern_list, list_t *exp_list) 
     list_t *local_name_list = net_pattern_local_name_list(net_pattern);
     size_t arity = list_length(local_name_list);
     function_t *function = function_new(arity);
-    compile_set_variables(worker, function, local_name_list);
+    compile_set_variable_list(worker, function, local_name_list);
     compile_exp_list(worker, function, exp_list);
     function_build(function);
 
