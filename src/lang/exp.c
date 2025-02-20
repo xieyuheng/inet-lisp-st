@@ -80,9 +80,10 @@ exp_destroy(exp_t **self_pointer) {
         }
 
         case EXP_LEND: {
-            // TODO
+            string_destroy(&self->lend.name);
+            exp_destroy(&self->lend.exp);
             return;
-        }        
+        }
 
         case EXP_INT: {
              break;
@@ -221,7 +222,7 @@ exp_print(const exp_t *self, file_t *file) {
         // TODO
         return;
     }
-    
+
     case EXP_INT: {
         value_print(xint(self->i.target), file);
         return;
