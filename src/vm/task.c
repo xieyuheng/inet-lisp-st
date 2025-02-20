@@ -75,7 +75,7 @@ activate_matched_node(vm_t *vm, node_t *node) {
 }
 
 void
-activate_node(vm_t *vm, node_t *node) {
+schedule_task_by(vm_t *vm, node_t *node) {
     assert(node);
 
     if (set_has(vm->matched_node_set, node))
@@ -88,8 +88,8 @@ activate_node(vm_t *vm, node_t *node) {
 }
 
 void
-activate_node_and_neighbor(vm_t *vm, node_t *node) {
-    activate_node(vm, node);
+schedule_task_by_and_neighbor(vm_t *vm, node_t *node) {
+    schedule_task_by(vm, node);
 
     // NOTE for imported node ctor,
     // if is not enough to activate the new node only,
@@ -104,7 +104,7 @@ activate_node_and_neighbor(vm_t *vm, node_t *node) {
         if (!is_wire(value)) continue;
         wire_t *wire = as_wire(value);
         if (is_wire(wire->opposite) && as_wire(wire->opposite)->node)
-            activate_node(vm, as_wire(wire->opposite)->node);
+            schedule_task_by(vm, as_wire(wire->opposite)->node);
     }
 }
 

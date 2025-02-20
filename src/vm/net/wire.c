@@ -87,9 +87,9 @@ wire_connect_wire(vm_t* vm, wire_t *first_wire, wire_t *second_wire) {
         vm_delete_wire(vm, second_wire);
 
         if (first_opposite_wire->node)
-            activate_node(vm, first_opposite_wire->node);
+            schedule_task_by(vm, first_opposite_wire->node);
         if (second_opposite_wire->node)
-            activate_node(vm, second_opposite_wire->node);
+            schedule_task_by(vm, second_opposite_wire->node);
 
         return first_opposite_wire;
     } else if (is_wire(first_opposite)) {
@@ -100,7 +100,7 @@ wire_connect_wire(vm_t* vm, wire_t *first_wire, wire_t *second_wire) {
         vm_delete_wire(vm, second_wire);
 
         if (first_opposite_wire->node)
-            activate_node(vm, first_opposite_wire->node);
+            schedule_task_by(vm, first_opposite_wire->node);
 
         return first_opposite_wire;
     } else if (is_wire(second_opposite)) {
@@ -111,7 +111,7 @@ wire_connect_wire(vm_t* vm, wire_t *first_wire, wire_t *second_wire) {
         vm_delete_wire(vm, second_wire);
 
         if (second_opposite_wire->node)
-            activate_node(vm, second_opposite_wire->node);
+            schedule_task_by(vm, second_opposite_wire->node);
 
         return second_opposite_wire;
     } else {
@@ -140,7 +140,7 @@ wire_connect_value(vm_t* vm, wire_t *wire, value_t value) {
          vm_delete_wire(vm, wire);
 
          if (opposite_wire->node)
-             activate_node(vm, opposite_wire->node);
+             schedule_task_by(vm, opposite_wire->node);
 
          return opposite_wire;
      } else {

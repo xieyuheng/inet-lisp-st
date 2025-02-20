@@ -12,7 +12,7 @@ void task_destroy(task_t **self_pointer);
 
 bool task_is_primitive(const task_t *self);
 
-void activate_node(vm_t *vm, node_t *node);
-void activate_node_and_neighbor(vm_t *vm, node_t *node);
+void schedule_task_by(vm_t *vm, node_t *node);
+void schedule_task_by_and_neighbor(vm_t *vm, node_t *node);
 
 void task_print(task_t *self, file_t *file);
