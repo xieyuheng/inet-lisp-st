@@ -1,7 +1,5 @@
 # linear variable
 
-ambr parse_let parse_assign
-
 [vm] `op_swap` -- for `EXP_LEND`
 [lang] `compile_exp` -- handle `EXP_LEND` -- fix order use `op_swap`
 

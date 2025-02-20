@@ -31,7 +31,7 @@ parse_ap(sexp_t *sexp) {
 }
 
 static exp_t *
-parse_let(sexp_t *sexp) {
+parse_assign(sexp_t *sexp) {
     list_t *sexp_list = sexp_sexp_list(sexp);
     (void) list_first(sexp_list);
     list_t *name_list = string_list_new();
@@ -63,7 +63,7 @@ parse_lend(sexp_t *sexp) {
 exp_t *
 parse_exp(sexp_t *sexp) {
     if (sexp_starts_with(sexp, "=") || sexp_starts_with(sexp, "assign")) {
-        return parse_let(sexp);
+        return parse_assign(sexp);
     } else if (sexp_starts_with(sexp, "&") || sexp_starts_with(sexp, "lend")) {
         return parse_lend(sexp);
     } else if (is_atom_sexp(sexp)) {
