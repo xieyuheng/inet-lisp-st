@@ -326,7 +326,7 @@ commands:
 For examples:
 
 ```sh
-./bin/inet-lisp run examples/nat.fth
+./bin/inet-lisp run examples/readme/nat.test.lisp
 ```
 
 ## Development
