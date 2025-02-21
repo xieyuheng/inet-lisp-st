@@ -1,6 +1,9 @@
 # inet-lisp
 
-In 10 years, consumer processors will likely feature 64–128 cores, how to program them?
+Moore’s Law will gave our CPU more cores,
+from 16 cores to 32 cores to 64 cores ...
+
+How do we program them?
 
 The graph-based computation model [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
 is one possible solution, **inet-lisp** is an implementation of it
