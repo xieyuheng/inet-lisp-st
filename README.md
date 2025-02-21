@@ -9,7 +9,7 @@ The graph-based computation model [interaction nets](https://en.wikipedia.org/wi
 is one possible solution, **inet-lisp** is an implementation of it
 as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
 
-Our aim is to build a
+The aim of this project is to build a
 practical language based on interaction nets,
 so that when you write a program in this language,
 the running of the program can automatically make use of
