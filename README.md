@@ -1,30 +1,20 @@
 # inet-lisp
 
 In 10 years, consumer processors will likely feature 64–128 cores, how to program them?
-The graph based computation model [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
-is possible one solution.
 
-inet-lisp is an implementation of interaction nets
+The graph-based computation model [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
+is one possible solution, **inet-lisp** is an implementation of it
 as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
 
-The aim of this project is to build
-a practical language based on interaction nets,
+My aim is to build a
+practical language based on interaction nets,
 so that when you write a program in this language,
 the running of the program can automatically make use of
-any number threads on the machine.
-
-The language uses dynamic type tag,
-i.e. it has no static type checking,
-because we do not yet fully understand the logic behind
-the type system of this model of computation.
+any number cores on the machine.
 
 We use a lisp-like meta language to build interaction nets.
 lisp-like syntax helps us to keep the design flexible
 and the implementation simple.
-
-And we will program with interaction nets directly first,
-compiling (more conventional) functional programs
-to interaction combinators will be explored only later.
 
 ## Syntax
 
