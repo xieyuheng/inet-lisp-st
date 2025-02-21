@@ -1,6 +1,10 @@
 # inet-lisp
 
-inet-lisp is an implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
+In 10 years, consumer processors will likely feature 64–128 cores, how to program them?
+The graph based computation model [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
+is possible one solution.
+
+inet-lisp is an implementation of interaction nets
 as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
 
 The aim of this project is to build
