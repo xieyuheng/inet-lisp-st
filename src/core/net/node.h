@@ -4,6 +4,7 @@ struct node_t {
     const node_ctor_t *ctor;
     size_t id;
     value_t *ports;
+    bool is_matched;
 };
 
 node_t *node_new(const node_ctor_t *ctor, size_t id);

@@ -7,7 +7,6 @@ worker_new(mod_t *mod) {
     worker_t *self = new(worker_t);
     self->mod = mod;
     self->task_list = list_new_with((destroy_fn_t *) task_destroy);
-    self->matched_node_set = set_new();
     // TODO We should use value_destroy to create value_stack.
     self->value_stack = stack_new();
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
@@ -22,7 +21,6 @@ worker_destroy(worker_t **self_pointer) {
     if (*self_pointer) {
         worker_t *self = *self_pointer;
         list_destroy(&self->task_list);
-        set_destroy(&self->matched_node_set);
         stack_destroy(&self->value_stack);
         stack_destroy(&self->return_stack);
         set_destroy(&self->debug_node_set);
@@ -89,8 +87,6 @@ void
 worker_delete_node(worker_t* self, node_t *node) {
     if (global_debug_flag)
         set_delete(self->debug_node_set, node);
-
-    set_delete(self->matched_node_set, node);
 
     node_destroy(&node);
 }

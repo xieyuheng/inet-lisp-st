@@ -52,7 +52,7 @@ activate_primitive_node(worker_t *worker, node_t *node) {
     }
 
     list_push(worker->task_list, task_from_primitive_node(node));
-    set_add(worker->matched_node_set, node);
+    node->is_matched = true;
 }
 
 static void
@@ -66,7 +66,7 @@ activate_matched_node(worker_t *worker, node_t *node) {
 
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
-                set_add(worker->matched_node_set, net_matcher->matched_nodes[i]);
+                net_matcher->matched_nodes[i]->is_matched = true;
             return;
         }
 
@@ -78,7 +78,7 @@ void
 schedule_task_by(worker_t *worker, node_t *node) {
     assert(node);
 
-    if (set_has(worker->matched_node_set, node))
+    if (node->is_matched)
         return;
 
     if (node_is_primitive(node))
