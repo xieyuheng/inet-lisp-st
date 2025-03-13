@@ -1,5 +1,6 @@
 (define (float-square x)
-  (fmul (& x float-dup) x))
+  (= x x* (float-dup x))
+  (fmul x x*))
 
 (assert (eq? (float-square 1.0) 1.0))
 (assert (eq? (float-square 2.0) 4.0))

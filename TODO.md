@@ -1,5 +1,3 @@
-remove `&` and `lend` for now -- keep it simple
-
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`

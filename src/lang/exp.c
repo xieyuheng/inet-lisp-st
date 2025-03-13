@@ -27,15 +27,6 @@ exp_assign(list_t *name_list, exp_t *exp) {
 }
 
 exp_t *
-exp_lend(char *name, exp_t *exp) {
-    exp_t *self = new(exp_t);
-    self->kind = EXP_LEND;
-    self->lend.name = name;
-    self->lend.exp = exp;
-    return self;
-}
-
-exp_t *
 exp_int(int64_t target) {
     exp_t *self = new(exp_t);
     self->kind = EXP_INT;
@@ -79,12 +70,6 @@ exp_destroy(exp_t **self_pointer) {
             break;
         }
 
-        case EXP_LEND: {
-            string_destroy(&self->lend.name);
-            exp_destroy(&self->lend.exp);
-            return;
-        }
-
         case EXP_INT: {
              break;
         }
@@ -117,12 +102,6 @@ exp_copy(const exp_t *self) {
         return exp_assign(
             string_list_copy(self->assign.name_list),
             exp_copy(self->assign.exp));
-    }
-
-    case EXP_LEND: {
-        return exp_lend(
-            string_copy(self->lend.name),
-            exp_copy(self->lend.exp));
     }
 
     case EXP_INT: {
@@ -215,13 +194,6 @@ exp_print(const exp_t *self, file_t *file) {
 
         fprintf(file, "(= ");
         name_list_print(self->assign.name_list, file);
-        fprintf(file, ")");
-        return;
-    }
-
-    case EXP_LEND: {
-        fprintf(file, "(& %s ", self->lend.name);
-        exp_print(self->lend.exp, file);
         fprintf(file, ")");
         return;
     }
