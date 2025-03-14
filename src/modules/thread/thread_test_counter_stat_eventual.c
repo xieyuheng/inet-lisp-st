@@ -66,7 +66,7 @@ thread_test_counter_stat_eventual(void) {
     }
 
     relaxed_store(&eventual_run_p, true);
-    sleep(0.01);
+    sleep(0);
     printf("final count: %lu\n", counter_read());
     relaxed_store(&eventual_run_p, false);
 

@@ -14,7 +14,7 @@ thread_test_start(void) {
     thread_fn_t *thread_fn = (thread_fn_t *) example_thread_fn;
     thread_id_t thread_id = thread_start(thread_fn, message);
 
-    printf("thread created: %lu\n", thread_id);
+    printf("thread created: %lu\n", (uint64_t) thread_id);
     size_t length = (size_t) thread_wait(thread_id);
     printf("thread returned: %lu\n", length);
 
