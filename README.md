@@ -1,23 +1,23 @@
 # inet-lisp
 
-Moore’s Law will gave our CPU more cores,
-from 16 cores to 32 cores to 64 cores ...
+Moore's Law is broken.
 
-How do we program them?
+![Figure 6.11: MIPS/Clock-Frequency Trend for Intel CPUs](assets/images/mips-clock-frequency-trend-for-intel-cpus.png)
 
-The graph-based computation model [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
-is one possible solution, **inet-lisp** is an implementation of it
+(Figure 6.11 of ["Is Parallel Programming Hard, And, If So, What Can You Do About It?"](https://www.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html) by Paul E. McKenney)
+
+The exponential increase in single-threaded performance halted in about 2003.
+Therefore, increasing performance will increasingly require parallelism.
+
+How do we program a machine with many cores?
+
+One possible solution is the graph-based computation model
+-- [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets) --
+where a program in this computation model can automatically
+make use of any number cores in the machine.
+
+The project -- **inet-lisp** -- is an implementation of interaction nets
 as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
-
-The aim of this project is to build a
-practical language based on interaction nets,
-so that when you write a program in this language,
-the running of the program can automatically make use of
-any number cores on the machine.
-
-We use a lisp-like meta language to build interaction nets.
-lisp-like syntax helps us to keep the design flexible
-and the implementation simple.
 
 ## Syntax
 
