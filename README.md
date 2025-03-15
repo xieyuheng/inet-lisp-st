@@ -4,7 +4,7 @@ Moore's Law is broken.
 
 ![Figure 6.11: MIPS/Clock-Frequency Trend for Intel CPUs](assets/images/mips-clock-frequency-trend-for-intel-cpus.png)
 
-(Figure 6.11 of ["Is Parallel Programming Hard, And, If So, What Can You Do About It?"](https://www.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html) by Paul E. McKenney)
+(Figure 6.11: MIPS/Clock-Frequency Trend for Intel CPUs, from ["Is Parallel Programming Hard, And, If So, What Can You Do About It?"](https://www.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html), by Paul E. McKenney)
 
 The exponential increase in single-threaded performance halted in about 2003.
 Therefore, increasing performance will increasingly require parallelism.
