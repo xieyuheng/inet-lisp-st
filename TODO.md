@@ -1,4 +1,4 @@
-[queue] `queue_test_thread_safe`
+[queue] `queue_test_thread_safe` -- for real
 
 # parallelism
 
@@ -9,7 +9,6 @@
 [thread] test mutex
 
 [thread] `thread_print`
-[thread] `thread_test` -- test shared-memory parallelism
 
 # debug
 
