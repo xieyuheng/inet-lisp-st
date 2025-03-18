@@ -13,18 +13,8 @@ rename `run_net` and `step_net` and `react` by worker semantics
 
 [thread] test mutex
 
-[thread] `rwlock_t` for `pthread_relock_t`
-[thread] `rwlock_acquire_read`
-[thread] `rwlock_acquire_write`
-[thread] `rwlock_release`
-
-[thread] test rwlock
-
 [thread] `thread_print`
 [thread] `thread_test` -- test shared-memory parallelism
-
-[parallelism] `worker` -- design API to support shared memory parallel execution
-- maybe need a scheduler
 
 # debug
 
