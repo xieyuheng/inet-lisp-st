@@ -1,4 +1,3 @@
-[queue] `queue_is_empty`
 [queue] `queue_test` -- test enqueue and dequeue
 [queue] `queue_dequeue` -- NULL on empty
 [queue] `queue_length`
