@@ -77,14 +77,9 @@ queue_next_front_cursor(const queue_t *self) {
     return (self->front_cursor + 1) % self->size;
 }
 
-bool
-queue_is_full(const queue_t *self) {
-    return queue_next_back_cursor(self) == self->front_cursor;
-}
-
-bool
-queue_is_empty(const queue_t *self) {
-    return self->back_cursor == self->front_cursor;
+size_t
+queue_size(const queue_t *self) {
+    return self->size;
 }
 
 size_t
@@ -94,6 +89,16 @@ queue_length(const queue_t *self) {
     } else {
         return self->back_cursor + self->size - self->front_cursor;
     }
+}
+
+bool
+queue_is_full(const queue_t *self) {
+    return queue_next_back_cursor(self) == self->front_cursor;
+}
+
+bool
+queue_is_empty(const queue_t *self) {
+    return self->back_cursor == self->front_cursor;
 }
 
 void
