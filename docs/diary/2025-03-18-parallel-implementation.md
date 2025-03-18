@@ -77,4 +77,46 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
 - 当待补齐的数组完全消除时，
   就重新读所有 worker 的待处理 task 数量，再补齐一次。
 
-TODO 算法何时停止？如何开始？
+## 算法何时停止？
+
+如果 scheduler 正跑在消除某个数组的循环中，
+并且跑了几圈（比如 3 圈）发现自己的 N 个 task queue 里都全是空的，
+就可以停下来看看是不是所有 worker 都已经停止了，
+如果所有 worker 都已经停止了，
+并且再次检查自己的 N 个 task queue 还是全是空的，
+那么就可以确定是所有 task 都处理完了。
+
+设计这唯一个算法的停止条件就足够了，
+其他的情况都可以作为这个情况的特例。
+
+## 算法如何开始？
+
+启动所有 worker thread，
+初始化 scheduler 的时候，
+随便给 N 个 task queue 中的一个初始化一个 task，
+然后启动 scheduler，就可以了。
+
+## thread loop 到机器的类比
+
+每一个 thread 函数，
+都有一个无条件的循环，
+可以被全局变量控制是否退出。
+
+因此可以把一个运行中的 thread
+想象成是一个运行中的机器，
+全局变量就是开关。
+
+但是与人们正常使用机器的流程不同的是：
+
+- start thread = 制造机器 + 启动机器
+- variable off = 停止机器
+- join thread = 销毁机器
+
+差异就在于，一般的机器是会不频繁制造和销毁的。
+也许可以给每个循环都设计一个 explicit 开，
+这样就可以简化 thread 和思想模型之间的对应关系：
+
+- start thread = 制造机器
+- variable on = 启动机器
+- variable off = 停止机器
+- join thread = 销毁机器
