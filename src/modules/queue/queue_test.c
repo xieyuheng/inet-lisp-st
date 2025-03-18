@@ -8,6 +8,38 @@ queue_test(void) {
     assert(queue_size(queue) == 3);
     assert(queue_length(queue) == 0);
 
+    {
+        queue_enqueue(queue, (void *) 1);
+        queue_enqueue(queue, (void *) 2);
+        queue_enqueue(queue, (void *) 3);
+
+        assert(queue_length(queue) == 3);
+        assert(queue_is_full(queue));
+
+        assert(((uint64_t) queue_dequeue(queue)) == 1);
+        assert(((uint64_t) queue_dequeue(queue)) == 2);
+        assert(((uint64_t) queue_dequeue(queue)) == 3);
+        assert(queue_dequeue(queue) == NULL);
+
+        assert(queue_length(queue) == 0);
+    }
+
+    {
+        queue_enqueue(queue, (void *) 1);
+        queue_enqueue(queue, (void *) 2);
+        queue_enqueue(queue, (void *) 3);
+
+        assert(queue_length(queue) == 3);
+        assert(queue_is_full(queue));
+
+        assert(((uint64_t) queue_dequeue(queue)) == 1);
+        assert(((uint64_t) queue_dequeue(queue)) == 2);
+        assert(((uint64_t) queue_dequeue(queue)) == 3);
+        assert(queue_dequeue(queue) == NULL);
+
+        assert(queue_length(queue) == 0);
+    }
+
     queue_destroy(&queue);
 
     printf("</queue_test>\n");

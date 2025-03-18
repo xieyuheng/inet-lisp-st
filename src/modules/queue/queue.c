@@ -27,7 +27,7 @@ queue_new(size_t size) {
     assert(size > 1);
     queue_t *self = new(queue_t);
     self->size = size;
-    self->values = allocate_pointers(size);
+    self->values = allocate_pointers(size + 1);
     self->back_cursor = 0;
     self->front_cursor = 0;
     return self;
@@ -67,14 +67,9 @@ queue_new_with(size_t size, destroy_fn_t *destroy_fn) {
     return self;
 }
 
-static cursor_t
-queue_next_back_cursor(const queue_t *self) {
-    return (self->back_cursor + 1) % self->size;
-}
-
-static cursor_t
-queue_next_front_cursor(const queue_t *self) {
-    return (self->front_cursor + 1) % self->size;
+static size_t
+queue_internal_size(const queue_t *self) {
+    return self->size + 1;
 }
 
 size_t
@@ -82,12 +77,22 @@ queue_size(const queue_t *self) {
     return self->size;
 }
 
+static cursor_t
+queue_next_back_cursor(const queue_t *self) {
+    return (self->back_cursor + 1) % queue_internal_size(self);
+}
+
+static cursor_t
+queue_next_front_cursor(const queue_t *self) {
+    return (self->front_cursor + 1) % queue_internal_size(self);
+}
+
 size_t
 queue_length(const queue_t *self) {
     if (self->back_cursor >= self->front_cursor) {
         return self->back_cursor - self->front_cursor;
     } else {
-        return self->back_cursor + self->size - self->front_cursor;
+        return self->back_cursor + queue_internal_size(self) - self->front_cursor;
     }
 }
 

@@ -1,4 +1,3 @@
-[queue] `queue_test`
 [queue] `queue_test_thread_safe`
 
 # parallelism
