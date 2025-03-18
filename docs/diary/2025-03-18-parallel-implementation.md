@@ -17,28 +17,21 @@ date: 2025-03-18
 因为虽然 read 的数据重叠了（有 race），
 但是 write 的数据没有重叠（没有 race）。
 
-# 思路
-
-学习 Paul E. McKenney 在 "Is Parallel Programming Hard, And, If So, What Can You Do About It?" 中所说，按照如下顺序设计方案。
-
-- 划分（Partition）
-- 分批（Batch）
-
 # 划分
 
 设有一个 scheduler thread，和 N 个 worker thread。
 
 scheduler thread 有 N 个 task queue，分别对应 N 个 worker：
 
-- scheduler 可以 dequeue -- 把所收集到的 task 取出来，将会分配给某个 worker。
 - worker 可以 enqueue -- 把新生成的 task 返回给 scheduler。
+- scheduler 可以 dequeue -- 把所收集到的 task 取出来，将会分配给某个 worker。
 
 每个 worker thread 有一个 task queue：
 
-- scheduler 可以 enqueue -- 把某个 task 分配给这个 worker。
 - worker 可以 dequeue -- 取出 task 来处理。
+- scheduler 可以 enqueue -- 把某个 task 分配给这个 worker。
 
-# 分批
+# 分配
 
 worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
 分配 task 的策略可以多种多样，但是需要保证：
@@ -50,7 +43,8 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
 具体方案如下：
 
 - 首先，scheduler 读所有 worker 的待处理 task 数量，
-  不需要 lock，因为所读到的信息对于算法来说是 heuristic 的。
+  所读到的信息对于算法来说是 heuristic 的，
+  因此不需要精确的数量，因此不需要 lock，。
 
 - 然后，找到待处理 task 最多的 worker，
   思路是以它所待处理的 task 数量作为基准，
@@ -63,7 +57,7 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
   以保证所有的 worker 都能分配到新的 task，
   因此需要补充的 task 数量分别是 [17, 15, 13, 9, 1]。
 
-- 然后，scheduler 用 worker 返回给自己的 task
+- 然后，scheduler 用 worker 返回给 scheduler 的 task
   去补齐 worker 的待处理 task。
   scheduler 在一个件循环中，
   逐个 dequeue 属于它自己的 N 个 task queue，
