@@ -1,3 +1,10 @@
+rename `run_net` and `step_net` and `react` by worker semantics
+[diary] 2025-03-18-parallel-implementation.md -- 关于 task 的公平分配
+[queue] setup -- thread safe queue
+[queue] `queue_t`
+[queue] `queue_new`
+[queue] `queue_destroy`
+
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
