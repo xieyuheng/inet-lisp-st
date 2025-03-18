@@ -8,6 +8,7 @@ queue_t *queue_new_with(size_t size, destroy_fn_t *destroy_fn);
 
 bool queue_is_full(const queue_t *self);
 bool queue_is_empty(const queue_t *self);
+size_t queue_length(const queue_t *self);
 
 // fail on full
 void queue_enqueue(queue_t *self, void *value);

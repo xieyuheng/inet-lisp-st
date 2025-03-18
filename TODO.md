@@ -1,4 +1,3 @@
-[queue] `queue_length`
 [queue] `queue_purge` -- need `queue_dequeue` -- call `destroy_fn`
 [queue] `queue_destroy` -- call `queue_purge`
 [queue] `queue_test` -- test enqueue and dequeue

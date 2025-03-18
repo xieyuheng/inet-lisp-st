@@ -76,6 +76,15 @@ queue_is_empty(const queue_t *self) {
     return self->back_cursor == self->front_cursor;
 }
 
+size_t
+queue_length(const queue_t *self) {
+    if (self->back_cursor >= self->front_cursor) {
+        return self->back_cursor - self->front_cursor;
+    } else {
+        return self->back_cursor + self->size - self->front_cursor;
+    }
+}
+
 void
 queue_enqueue(queue_t *self, void *value) {
     if (queue_is_full(self)) {
