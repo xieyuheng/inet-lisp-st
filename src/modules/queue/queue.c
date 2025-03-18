@@ -16,6 +16,7 @@ typedef uint64_t cursor_t;
 
 struct queue_t {
     size_t size;
+    void **values;
     cursor_t front_cursor;
     cursor_t back_cursor;
 };
@@ -24,6 +25,7 @@ queue_t *
 queue_new(size_t size) {
     queue_t *self = new(queue_t);
     self->size = size;
+    self->values = allocate_pointers(size);
     self->back_cursor = 0;
     self->front_cursor = 0;
     return self;
@@ -34,7 +36,7 @@ queue_destroy(queue_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         queue_t *self = *self_pointer;
-        // free(self->values);
+        free(self->values);
         free(self);
         *self_pointer = NULL;
     }

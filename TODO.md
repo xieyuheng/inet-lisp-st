@@ -1,4 +1,3 @@
-[queue] `queue_t` -- has `values`
 [queue] `queue_t` -- has `destroy_fn`
 [queue] `queue_destroy` -- call `destroy_fn`
 
