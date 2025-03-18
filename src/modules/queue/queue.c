@@ -24,3 +24,14 @@ queue_new(size_t size) {
     self->size = size;
     return self;
 }
+
+void
+queue_destroy(queue_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        queue_t *self = *self_pointer;
+        // free(self->values);
+        free(self);
+        *self_pointer = NULL;
+    }
+}

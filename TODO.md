@@ -1,5 +1,3 @@
-[queue] `queue_destroy`
-
 [queue] `cursor` -- `cursor_decode_index` & `cursor_decode_winding_number` & `cursor_encode`
 
 [queue] `queue_new` -- call `cursor_encode`
