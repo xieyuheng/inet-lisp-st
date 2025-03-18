@@ -61,6 +61,11 @@ queue_next_back_cursor(const queue_t *self) {
     return (self->back_cursor + 1) % self->size;
 }
 
+static cursor_t
+queue_next_front_cursor(const queue_t *self) {
+    return (self->front_cursor + 1) % self->size;
+}
+
 bool
 queue_is_full(const queue_t *self) {
     return queue_next_back_cursor(self) == self->front_cursor;
@@ -81,4 +86,16 @@ queue_enqueue(queue_t *self, void *value) {
 
     self->values[self->back_cursor] = value;
     self->back_cursor = queue_next_back_cursor(self);
+}
+
+void *
+queue_dequeue(queue_t *self) {
+    if (queue_is_empty(self)) {
+        return NULL;
+    }
+
+    void *value = self->values[self->front_cursor];
+    self->values[self->front_cursor] = NULL;
+    self->front_cursor = queue_next_front_cursor(self);
+    return value;
 }
