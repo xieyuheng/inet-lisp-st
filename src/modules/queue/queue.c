@@ -12,7 +12,7 @@
 // - `front_cursor` must not go beyond `back_cursor`
 // - `back_cursor` must not catch `front_cursor` from behind
 
-typedef uint64_t cursor_t;
+typedef _Atomic uint64_t cursor_t;
 
 struct queue_t {
     size_t size;
@@ -56,15 +56,35 @@ queue_new_with(size_t size, destroy_fn_t *destroy_fn) {
     return self;
 }
 
+static cursor_t
+queue_back_cursor(const queue_t *self) {
+    return relaxed_load(&self->back_cursor);
+}
+
+static void
+queue_set_back_cursor(queue_t *self, cursor_t cursor) {
+    relaxed_store(&self->back_cursor, cursor);
+}
+
+static cursor_t
+queue_next_back_cursor(const queue_t *self) {
+    return (queue_back_cursor(self) + 1) % self->size;
+}
+
+bool
+queue_is_full(const queue_t *self) {
+    cursor_t next_back_cursor = queue_next_back_cursor(self);
+    return next_back_cursor == self->front_cursor;
+}
+
 void
 queue_enqueue(queue_t *self, void *value) {
-    cursor_t next_back_cursor = (self->back_cursor + 1) % self->size;
-    if (next_back_cursor == self->front_cursor) {
+    if (queue_is_full(self)) {
         // - `back_cursor` must not catch `front_cursor` from behind
         fprintf(stderr, "[queue_enqueue] the queue is full\n");
         exit(1);
     }
 
     self->values[self->back_cursor] = value;
-    self->back_cursor = next_back_cursor;
+    queue_set_back_cursor(self, queue_next_back_cursor(self));
 }
