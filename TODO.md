@@ -1,4 +1,3 @@
-[queue] `queue_t` -- has `start_cursor` and `end_cursor` -- shoud be atomic
 [queue] `cursor` -- `cursor_decode_index` & `cursor_decode_winding_number` & `cursor_encode`
 [queue] `queue_new`
 [queue] `queue_destroy`
