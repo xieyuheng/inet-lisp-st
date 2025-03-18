@@ -34,10 +34,21 @@ queue_new(size_t size) {
 }
 
 void
+queue_purge(queue_t *self) {
+    assert(self);
+    while(!queue_is_empty(self)) {
+        void *value = queue_dequeue(self);
+        if (self->destroy_fn)
+            self->destroy_fn(&value);
+    }
+}
+
+void
 queue_destroy(queue_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         queue_t *self = *self_pointer;
+        queue_purge(self);
         free(self->values);
         free(self);
         *self_pointer = NULL;

@@ -1,6 +1,7 @@
 #pragma once
 
 queue_t *queue_new(size_t size);
+void queue_purge(queue_t *self);
 void queue_destroy(queue_t **self_pointer);
 
 void queue_set_destroy_fn(queue_t *self, destroy_fn_t *destroy_fn);
