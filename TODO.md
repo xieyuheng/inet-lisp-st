@@ -1,5 +1,5 @@
-[queue] `queue_enqueue` -- fail on full
 [queue] `queue_dequeue` -- NULL on empty
+[queue] `queue_length`
 
 [queue] `queue_is_empty`
 [queue] `queue_is_full`

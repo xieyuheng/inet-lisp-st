@@ -24,6 +24,7 @@ struct queue_t {
 
 queue_t *
 queue_new(size_t size) {
+    assert(size > 1);
     queue_t *self = new(queue_t);
     self->size = size;
     self->values = allocate_pointers(size);
@@ -53,4 +54,17 @@ queue_new_with(size_t size, destroy_fn_t *destroy_fn) {
     queue_t *self = queue_new(size);
     self->destroy_fn = destroy_fn;
     return self;
+}
+
+void
+queue_enqueue(queue_t *self, void *value) {
+    cursor_t next_back_cursor = (self->back_cursor + 1) % self->size;
+    if (next_back_cursor == self->front_cursor) {
+        // - `back_cursor` must not catch `front_cursor` from behind
+        fprintf(stderr, "[queue_enqueue] the queue is full\n");
+        exit(1);
+    }
+
+    self->values[self->back_cursor] = value;
+    self->back_cursor = next_back_cursor;
 }
