@@ -1,6 +1,3 @@
-[queue] `queue_set_destroy_fn`
-[queue] `queue_new_with`
-
 [queue] `queue_purge` -- call `destroy_fn`
 [queue] `queue_destroy` -- call `queue_purge`
 

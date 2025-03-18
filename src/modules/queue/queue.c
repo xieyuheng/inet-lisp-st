@@ -42,3 +42,15 @@ queue_destroy(queue_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+queue_set_destroy_fn(queue_t *self, destroy_fn_t *destroy_fn) {
+    self->destroy_fn = destroy_fn;
+}
+
+queue_t *
+queue_new_with(size_t size, destroy_fn_t *destroy_fn) {
+    queue_t *self = queue_new(size);
+    self->destroy_fn = destroy_fn;
+    return self;
+}
