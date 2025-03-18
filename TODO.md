@@ -1,6 +1,11 @@
-[queue] `cursor` -- `cursor_decode_index` & `cursor_decode_winding_number` & `cursor_encode`
-[queue] `queue_new`
 [queue] `queue_destroy`
+
+[queue] `cursor` -- `cursor_decode_index` & `cursor_decode_winding_number` & `cursor_encode`
+
+[queue] `queue_new` -- call `cursor_encode`
+
+[queue] `queue_t` -- has `values`
+[queue] `queue_t` -- has `*destroy_fn`
 
 # parallelism
 
