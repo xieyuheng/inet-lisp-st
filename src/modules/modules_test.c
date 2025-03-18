@@ -26,6 +26,7 @@ modules_test(void) {
     image_test();
     store_test();
     thread_test();
+    queue_test();
 
     printf("</modules_test>\n");
 }

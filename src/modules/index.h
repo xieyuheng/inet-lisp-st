@@ -24,5 +24,6 @@
 #include "canvas/index.h"
 #include "commander/index.h"
 #include "thread/index.h"
+#include "queue/index.h"
 
 #include "modules_test.h"

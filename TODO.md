@@ -1,4 +1,3 @@
-[queue] setup -- thread safe queue
 [queue] `queue_t`
 [queue] `queue_new`
 [queue] `queue_destroy`
