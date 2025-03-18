@@ -80,7 +80,8 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
 ## 算法何时停止？
 
 如果 scheduler 正跑在消除某个数组的循环中，
-并且跑了几圈（比如 3 圈）发现自己的 N 个 task queue 里都全是空的，
+并且跑了几圈（比如 3 圈）之后，
+发现这几圈下来 N 个 task queue 里都全是空的，
 就可以停下来看看是不是所有 worker 都已经停止了，
 如果所有 worker 都已经停止了，
 并且再次检查自己的 N 个 task queue 还是全是空的，
