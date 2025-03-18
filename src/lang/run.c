@@ -71,7 +71,7 @@ run_until(worker_t *worker, size_t base_length) {
 }
 
 void
-step_net(worker_t *worker) {
+step_task(worker_t *worker) {
     task_t *task = list_shift(worker->task_list);
     if (task == NULL) return;
 
@@ -79,8 +79,8 @@ step_net(worker_t *worker) {
 }
 
 void
-run_net(worker_t *worker) {
+run_task(worker_t *worker) {
     while (!list_is_empty(worker->task_list)) {
-        step_net(worker);
+        step_task(worker);
     }
 }

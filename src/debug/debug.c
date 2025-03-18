@@ -83,7 +83,7 @@ init_canvas_font(canvas_t *canvas) {
     canvas->font = font_from_hex_string(blob_string(blob));
 }
 
-extern void step_net(worker_t *worker);
+extern void step_task(worker_t *worker);
 
 static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
@@ -93,7 +93,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
         self->running_frame_count += passed;
 
     if (self->running_frame_count > canvas->frame_rate / self->running_speed) {
-        step_net(self->worker);
+        step_task(self->worker);
         debug_update(self);
         self->running_frame_count = 0;
     }
