@@ -1,5 +1,3 @@
-[queue] `queue_test_thread_safe` -- for real
-
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
