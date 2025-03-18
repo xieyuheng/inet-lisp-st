@@ -1,4 +1,4 @@
-[diary] 2025-03-18-parallel-implementation.md -- 关于 task 的公平分配
+[diary] 2025-03-18-parallel-implementation.md -- 关于开始与停止
 [queue] setup -- thread safe queue
 [queue] `queue_t`
 [queue] `queue_new`
