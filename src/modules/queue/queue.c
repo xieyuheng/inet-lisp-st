@@ -1,6 +1,6 @@
 #include "index.h"
 
-// a thread safe queue:
+// a thread safe circular queue:
 //
 //     +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 //     |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -9,8 +9,10 @@
 //                               |           |
 //         (dequeue) => front_cursor       back_cursor => (enqueue)
 //
+// - `front_cursor` must not go beyond `back_cursor`
+// - `back_cursor` must not catch `front_cursor` from behind
 
-typedef _Atomic uint64_t cursor_t;
+typedef uint64_t cursor_t;
 
 struct queue_t {
     size_t size;
@@ -22,6 +24,8 @@ queue_t *
 queue_new(size_t size) {
     queue_t *self = new(queue_t);
     self->size = size;
+    self->back_cursor = 0;
+    self->front_cursor = 0;
     return self;
 }
 
