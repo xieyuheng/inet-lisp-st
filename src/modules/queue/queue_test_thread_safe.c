@@ -66,6 +66,7 @@ queue_test_thread_safe(void) {
 
     {
         printf("uint_producer v.s. uint_consumer\n");
+
         thread_id_t producer_id =
             thread_start((thread_fn_t *) uint_producer, queue);
         thread_id_t consumer_id =
