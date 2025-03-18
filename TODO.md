@@ -1,5 +1,11 @@
-[queue] `queue_t` -- has `destroy_fn`
-[queue] `queue_destroy` -- call `destroy_fn`
+[queue] `queue_set_destroy_fn`
+[queue] `queue_new_with`
+
+[queue] `queue_purge` -- call `destroy_fn`
+[queue] `queue_destroy` -- call `queue_purge`
+
+void array_set_destroy_fn(array_t *self, destroy_fn_t *destroy_fn);
+array_t *array_new_with(size_t size, destroy_fn_t *destroy_fn);
 
 [queue] `queue_enqueue`
 [queue] `queue_dequeue`

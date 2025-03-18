@@ -19,6 +19,7 @@ struct queue_t {
     void **values;
     cursor_t front_cursor;
     cursor_t back_cursor;
+    destroy_fn_t *destroy_fn;
 };
 
 queue_t *
