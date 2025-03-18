@@ -1,11 +1,11 @@
-[queue] `queue_purge` -- call `destroy_fn`
+[queue] `queue_enqueue` -- fail on full
+[queue] `queue_dequeue` -- NULL on empty
+
+[queue] `queue_is_empty`
+[queue] `queue_is_full`
+
+[queue] `queue_purge` -- need `queue_dequeue` -- call `destroy_fn`
 [queue] `queue_destroy` -- call `queue_purge`
-
-void array_set_destroy_fn(array_t *self, destroy_fn_t *destroy_fn);
-array_t *array_new_with(size_t size, destroy_fn_t *destroy_fn);
-
-[queue] `queue_enqueue`
-[queue] `queue_dequeue`
 
 # parallelism
 
