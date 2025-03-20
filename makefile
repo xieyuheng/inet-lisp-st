@@ -1,6 +1,26 @@
 cc = cc
-ldflags = -L/usr/local/lib -lX11 -lm -pthread $(LDFLAGS)
-cflags = -I/usr/local/include -g -Wall -Wwrite-strings -Wextra -Werror -Wpedantic -O0 -std=c2x -D_POSIX_C_SOURCE=199309L $(CFLAGS)
+
+ldflags = \
+	-L/usr/local/lib \
+	-lX11 \
+	-lm \
+	-pthread \
+	$(LDFLAGS)
+
+cflags = \
+	-g \
+	-O0 \
+	-std=c2x \
+	-I/usr/local/include \
+	-Wall \
+	-Wwrite-strings \
+	-Wextra \
+	-Werror \
+	-Wpedantic \
+	-D_POSIX_C_SOURCE=199309L \
+	-D_TIME_BITS=64 \
+	-D_FILE_OFFSET_BITS=64 \
+	 $(CFLAGS)
 
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
