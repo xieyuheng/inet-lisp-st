@@ -37,8 +37,7 @@ queue_test_throughput(void) {
 
     printf("uint_producer v.s. uint_consumer\n");
 
-    struct timespec time_start;
-    timespec_get(&time_start, TIME_UTC);
+    double start_second = time_second();
 
     thread_id_t producer_id =
         thread_start((thread_fn_t *) uint_producer, queue);
@@ -48,14 +47,9 @@ queue_test_throughput(void) {
     thread_wait(producer_id);
     thread_wait(consumer_id);
 
-    struct timespec time_end;
-    timespec_get(&time_end, TIME_UTC);
-
-    double time_spent =
-        (time_end.tv_sec + time_end.tv_nsec * 1e-9) -
-        (time_start.tv_sec + time_start.tv_nsec * 1e-9);
-
-    printf("throughput: %.f k/s\n", LENGTH / time_spent / 1000);
+    double end_second = time_second();
+    double passed_second = end_second - start_second;
+    printf("throughput: %.f k/s\n", LENGTH / passed_second / 1000);
 
     queue_destroy(&queue);
 

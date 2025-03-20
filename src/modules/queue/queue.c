@@ -41,6 +41,8 @@ queue_new(size_t size) {
     self->values = allocate_pointers(size + 1);
     self->back_cursor = new_shared(cursor_t);
     self->front_cursor = new_shared(cursor_t);
+    // self->back_cursor = new(cursor_t);
+    // self->front_cursor = new(cursor_t);
     return self;
 }
 

@@ -1,5 +1,3 @@
-[queue] improve `queue_test_throughput` by time
-
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
