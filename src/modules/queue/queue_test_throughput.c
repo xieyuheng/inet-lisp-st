@@ -37,7 +37,6 @@ queue_test_throughput(void) {
 
     printf("uint_producer v.s. uint_consumer\n");
 
-
     struct timespec time_start;
     timespec_get(&time_start, TIME_UTC);
 
