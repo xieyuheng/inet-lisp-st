@@ -12,7 +12,7 @@
 // - `front_cursor` must not go beyond `back_cursor`
 // - `back_cursor` must not catch `front_cursor` from behind
 
-typedef uint64_t cursor_t;
+typedef size_t cursor_t;
 
 struct queue_t {
     size_t size;
