@@ -1,3 +1,6 @@
+[queue] use atomic for real safety -- use tsan to test data race
+[queue] cursor should be in different cache line
+
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`

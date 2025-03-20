@@ -73,7 +73,7 @@ queue_new_with(size_t size, destroy_fn_t *destroy_fn) {
 }
 
 static size_t
-queue_internal_size(const queue_t *self) {
+real_size(const queue_t *self) {
     return self->size + 1;
 }
 
@@ -84,12 +84,12 @@ queue_size(const queue_t *self) {
 
 static cursor_t
 queue_next_back_cursor(const queue_t *self) {
-    return (self->back_cursor + 1) % queue_internal_size(self);
+    return (self->back_cursor + 1) % real_size(self);
 }
 
 static cursor_t
 queue_next_front_cursor(const queue_t *self) {
-    return (self->front_cursor + 1) % queue_internal_size(self);
+    return (self->front_cursor + 1) % real_size(self);
 }
 
 size_t
@@ -97,7 +97,7 @@ queue_length(const queue_t *self) {
     if (self->back_cursor >= self->front_cursor) {
         return self->back_cursor - self->front_cursor;
     } else {
-        return self->back_cursor + queue_internal_size(self) - self->front_cursor;
+        return self->back_cursor + real_size(self) - self->front_cursor;
     }
 }
 

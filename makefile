@@ -1,6 +1,6 @@
 cc = clang
-ldflags =  -L/usr/local/lib -lX11 -lm -pthread
-cflags = -I/usr/local/include -g -Wall -Wwrite-strings -Wextra -Werror -Wpedantic -O0 -std=c2x -D_POSIX_C_SOURCE=199309L
+ldflags =  -L/usr/local/lib -lX11 -lm -pthread -fsanitize=thread
+cflags = -I/usr/local/include -fsanitize=thread -g -Wall -Wwrite-strings -Wextra -Werror -Wpedantic -O0 -std=c2x -D_POSIX_C_SOURCE=199309L
 
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
