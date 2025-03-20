@@ -1,5 +1,3 @@
-[queue] improve memory order for atomic operations
-
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
@@ -9,6 +7,10 @@
 [thread] test mutex
 
 [thread] `thread_print`
+
+# queue
+
+[queue] improve memory order for atomic operations
 
 # debug
 
