@@ -1,8 +1,6 @@
 [queue] cursor should be in different cache line
 [queue] improve memory order for atomic operations
 
-[path] fix `path_test` for tsan
-
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
