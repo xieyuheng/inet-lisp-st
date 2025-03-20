@@ -341,7 +341,8 @@ make test     # compile and run test
 make clean    # clean up compiled files
 ```
 
-Using [tsan (ThreadSanitizer)](https://github.com/google/sanitizers/wiki/threadsanitizercppmanual):
+Using [tsan (ThreadSanitizer)](https://github.com/google/sanitizers/wiki/threadsanitizercppmanual)
+to test data race in parallel program:
 
 ```shell
 LDFLAGS=-fsanitize=thread CFLAGS=-fsanitize=thread make -j
