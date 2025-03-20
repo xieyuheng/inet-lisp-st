@@ -1,4 +1,3 @@
-[info] `info_command` -- print cache size
 [info] `info_command` -- number of cores
 
 [queue] use `aligned_alloc` to avoid false sharing -- cursor should be in different cache line
