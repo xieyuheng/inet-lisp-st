@@ -91,23 +91,34 @@ queue_length(const queue_t *self) {
     }
 }
 
+static inline bool
+inline_is_full(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
+    size_t next_back_cursor = (back_cursor + 1) % real_size(self);
+    return next_back_cursor == front_cursor;
+}
+
+static inline bool
+inline_is_empty(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
+    (void) self;
+    return back_cursor == front_cursor;
+}
+
 bool
 queue_is_full(const queue_t *self) {
-    size_t back_cursor = self->back_cursor;
-    size_t next_back_cursor = (back_cursor + 1) % real_size(self);
-    return next_back_cursor == self->front_cursor;
+    return inline_is_full(self, self->front_cursor, self->back_cursor);
 }
 
 bool
 queue_is_empty(const queue_t *self) {
-    return self->back_cursor == self->front_cursor;
+    return inline_is_empty(self, self->front_cursor, self->back_cursor);
 }
 
 void
 queue_enqueue(queue_t *self, void *value) {
+    size_t front_cursor = self->front_cursor;
     size_t back_cursor = self->back_cursor;
     size_t next_back_cursor = (back_cursor + 1) % real_size(self);
-    if (queue_is_full(self)) {
+    if (inline_is_full(self, front_cursor, back_cursor)) {
         // - `back_cursor` must not catch `front_cursor` from behind
         fprintf(stderr, "[queue_enqueue] the queue is full\n");
         exit(1);
@@ -120,7 +131,8 @@ queue_enqueue(queue_t *self, void *value) {
 void *
 queue_dequeue(queue_t *self) {
     size_t front_cursor = self->front_cursor;
-    if (queue_is_empty(self)) {
+    size_t back_cursor = self->back_cursor;
+    if (inline_is_empty(self, front_cursor, back_cursor)) {
         return NULL;
     }
 

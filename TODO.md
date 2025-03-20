@@ -1,4 +1,3 @@
-[queue] `inline_is_full` & `inline_is_empty`
 [queue] use atomic for real safety -- use tsan to test data race
 [queue] cursor should be in different cache line
 
