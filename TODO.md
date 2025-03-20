@@ -1,3 +1,5 @@
+[makefile] ensure 64 bit time
+
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
