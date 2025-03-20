@@ -1,6 +1,6 @@
 #include "index.h"
 
-// a thread safe circular queue:
+// a single producer single consumer thread safe circular queue:
 //
 //     +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 //     |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -9,8 +9,13 @@
 //                               |           |
 //         (dequeue) => front_cursor       back_cursor => (enqueue)
 //
-// - `front_cursor` must not go beyond `back_cursor`
-// - `back_cursor` must not catch `front_cursor` from behind
+// just like people waiting in a line:
+// - enqueue -- a new person enter the queue from the back;
+// - dequeue -- the next person exit the queue from the front.
+//
+// constraints of the circular buffer:
+// - `front_cursor` must not go beyond `back_cursor`;
+// - `back_cursor` must not catch `front_cursor` from behind.
 
 typedef size_t cursor_t;
 
