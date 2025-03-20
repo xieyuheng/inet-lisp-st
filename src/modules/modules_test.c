@@ -4,6 +4,7 @@ void
 modules_test(void) {
     printf("<modules_test>\n");
 
+    memory_test();
     char_test();
     string_test();
     list_test();

@@ -30,6 +30,12 @@ allocate_pointers(size_t size) {
     return allocate_many(size, sizeof(void *));
 }
 
+bool
+pointer_is_cache_line_aligned(void *pointer) {
+    size_t cache_line_size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+    return (((uintptr_t) pointer) % cache_line_size) == 0;
+}
+
 void *
 allocate_shared(size_t size) {
     size_t cache_line_size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
@@ -38,5 +44,6 @@ allocate_shared(size_t size) {
     void *pointer = aligned_alloc(cache_line_size, real_size);
     assert(pointer);
     assert(pointer_is_8_bytes_aligned(pointer));
+    assert(pointer_is_cache_line_aligned(pointer));
     return pointer;
 }
