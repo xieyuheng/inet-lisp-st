@@ -335,10 +335,17 @@ For examples:
 ## Development
 
 ```shell
-make all      # compile src/ files to lib/ and bin/
+make -j       # compile src/ files to lib/ and bin/
 make run      # compile and run the command-line program
 make test     # compile and run test
 make clean    # clean up compiled files
+```
+
+Using [tsan (ThreadSanitizer)](https://github.com/google/sanitizers/wiki/threadsanitizercppmanual):
+
+```shell
+LDFLAGS=-fsanitize=thread CFLAGS=-fsanitize=thread make -j
+make self-test
 ```
 
 ## Implementations
