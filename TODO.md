@@ -1,5 +1,3 @@
-[info] `info_command` -- number of cores
-
 [queue] use `aligned_alloc` to avoid false sharing -- cursor should be in different cache line
 [queue] improve memory order for atomic operations
 [queue] test throughput

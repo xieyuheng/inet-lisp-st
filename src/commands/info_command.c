@@ -16,17 +16,19 @@ run(commander_t *commander) {
 
     printf("page size: %ld bytes\n", sysconf(_SC_PAGE_SIZE));
 
-    printf("l1 data cache size: %ld bytes\n", sysconf(_SC_LEVEL1_DCACHE_SIZE));
-    printf("l1 data cache associativity: %ld lines\n", sysconf(_SC_LEVEL1_DCACHE_ASSOC));
-    printf("l1 data cache line size: %ld bytes\n", sysconf(_SC_LEVEL1_DCACHE_LINESIZE));
+    printf("number of processors: %ld\n", sysconf(_SC_NPROCESSORS_ONLN));
 
-    printf("l2 data cache size: %ld bytes\n", sysconf(_SC_LEVEL2_CACHE_SIZE));
-    printf("l2 data cache associativity: %ld lines\n", sysconf(_SC_LEVEL2_CACHE_ASSOC));
-    printf("l2 data cache line size: %ld bytes\n", sysconf(_SC_LEVEL2_CACHE_LINESIZE));
+    printf("l1 cache size: %ld bytes\n", sysconf(_SC_LEVEL1_DCACHE_SIZE));
+    printf("l1 cache associativity: %ld lines\n", sysconf(_SC_LEVEL1_DCACHE_ASSOC));
+    printf("l1 cache line size: %ld bytes\n", sysconf(_SC_LEVEL1_DCACHE_LINESIZE));
 
-    printf("l3 data cache size: %ld bytes\n", sysconf(_SC_LEVEL3_CACHE_SIZE));
-    printf("l3 data cache associativity: %ld lines\n", sysconf(_SC_LEVEL3_CACHE_ASSOC));
-    printf("l3 data cache line size: %ld bytes\n", sysconf(_SC_LEVEL3_CACHE_LINESIZE));
+    printf("l2 cache size: %ld bytes\n", sysconf(_SC_LEVEL2_CACHE_SIZE));
+    printf("l2 cache associativity: %ld lines\n", sysconf(_SC_LEVEL2_CACHE_ASSOC));
+    printf("l2 cache line size: %ld bytes\n", sysconf(_SC_LEVEL2_CACHE_LINESIZE));
+
+    printf("l3 cache size: %ld bytes\n", sysconf(_SC_LEVEL3_CACHE_SIZE));
+    printf("l3 cache associativity: %ld lines\n", sysconf(_SC_LEVEL3_CACHE_ASSOC));
+    printf("l3 cache line size: %ld bytes\n", sysconf(_SC_LEVEL3_CACHE_LINESIZE));
 
     return 0;
 }
