@@ -1,4 +1,5 @@
-[memory] `new_shared` -- use `aligned_alloc` to avoid false sharing
+[memory] `pointer_is_cache_line_aligned` -- test `allocate_shared`
+[memory] `new_shared` macro
 [memory] test `new_shared`
 
 [queue] `queue_t` -- create by use `new_shared`

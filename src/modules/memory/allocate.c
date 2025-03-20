@@ -29,3 +29,14 @@ void *
 allocate_pointers(size_t size) {
     return allocate_many(size, sizeof(void *));
 }
+
+void *
+allocate_shared(size_t size) {
+    size_t cache_line_size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+    assert(cache_line_size > 0);
+    size_t real_size = ((size / cache_line_size) + 1) * cache_line_size;
+    void *pointer = aligned_alloc(cache_line_size, real_size);
+    assert(pointer);
+    assert(pointer_is_8_bytes_aligned(pointer));
+    return pointer;
+}
