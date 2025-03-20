@@ -1,6 +1,6 @@
 #include "index.h"
 
-#define LIMIT 1000000
+#define LIMIT 10000000
 
 static void *
 uint_producer(queue_t *queue) {
