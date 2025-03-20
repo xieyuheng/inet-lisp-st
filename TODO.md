@@ -1,8 +1,6 @@
-[queue] `queue_t` -- create by use `new_shared`
-[queue] `queue_t` -- has pointer to `cursor_t` -- use `new_shared` to avoid false sharing
-
-[queue] improve memory order for atomic operations
 [queue] test throughput
+[queue] `queue_t` -- has pointer to `cursor_t` -- use `new_shared` to avoid false sharing
+[queue] improve memory order for atomic operations
 
 # parallelism
 

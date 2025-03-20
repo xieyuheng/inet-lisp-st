@@ -30,7 +30,7 @@ struct queue_t {
 queue_t *
 queue_new(size_t size) {
     assert(size > 1);
-    queue_t *self = new(queue_t);
+    queue_t *self = new_shared(queue_t);
     self->size = size;
     self->values = allocate_pointers(size + 1);
     self->back_cursor = 0;
