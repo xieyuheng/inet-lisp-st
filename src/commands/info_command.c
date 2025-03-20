@@ -14,6 +14,9 @@ int
 run(commander_t *commander) {
     (void) commander;
 
+    // for more system infos, see:
+    // - https://www.gnu.org/software/libc/manual/html_node/Constants-for-Sysconf.html
+
     printf("page size: %ld bytes\n", sysconf(_SC_PAGE_SIZE));
 
     printf("number of processors: %ld\n", sysconf(_SC_NPROCESSORS_ONLN));
