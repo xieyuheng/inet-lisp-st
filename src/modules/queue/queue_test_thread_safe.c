@@ -1,12 +1,13 @@
 #include "index.h"
 
-#define LIMIT 1000000
+#define QUEUE_SIZE 3
+#define LENGTH 1000000
 
 static void *
 uint_producer(queue_t *queue) {
     size_t count = 0;
     while (true) {
-        if (count == LIMIT) return NULL;
+        if (count == LENGTH) return NULL;
 
         while (queue_is_full(queue)) {}
 
@@ -19,7 +20,7 @@ static void *
 uint_consumer(queue_t *queue) {
     size_t count = 0;
     while (true) {
-        if (count == LIMIT) return NULL;
+        if (count == LENGTH) return NULL;
 
         while (queue_is_empty(queue)) {}
 
@@ -32,7 +33,7 @@ static void *
 string_producer(queue_t *queue) {
     size_t count = 0;
     while (true) {
-        if (count == LIMIT) return NULL;
+        if (count == LENGTH) return NULL;
 
         while (queue_is_full(queue)) {}
 
@@ -45,7 +46,7 @@ static void *
 string_consumer(queue_t *queue) {
     size_t count = 0;
     while (true) {
-        if (count == LIMIT) return NULL;
+        if (count == LENGTH) return NULL;
 
         while (queue_is_empty(queue)) {}
 
@@ -62,7 +63,7 @@ void
 queue_test_thread_safe(void) {
     printf("<queue_test_thread_safe>\n");
 
-    queue_t *queue = queue_new(3);
+    queue_t *queue = queue_new(QUEUE_SIZE);
 
     {
         printf("uint_producer v.s. uint_consumer\n");

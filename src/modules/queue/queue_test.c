@@ -5,6 +5,7 @@ queue_test(void) {
     printf("<queue_test>\n");
 
     queue_test_thread_safe();
+    queue_test_throughput();
 
     queue_t *queue = queue_new(3);
     assert(queue_size(queue) == 3);
