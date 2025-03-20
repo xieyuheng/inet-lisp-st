@@ -19,7 +19,7 @@ run(commander_t *commander) {
 
     printf("page size: %ld bytes\n", sysconf(_SC_PAGE_SIZE));
     printf("number of processors: %ld\n", sysconf(_SC_NPROCESSORS_ONLN));
-    printf("size of time: %ld bits\n", sizeof(time_t) * 8);
+    printf("size of time_t: %ld bits\n", sizeof(time_t) * 8);
 
     printf("l1 cache size: %ld bytes\n", sysconf(_SC_LEVEL1_DCACHE_SIZE));
     printf("l1 cache associativity: %ld lines\n", sysconf(_SC_LEVEL1_DCACHE_ASSOC));
