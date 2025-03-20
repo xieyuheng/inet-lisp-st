@@ -17,7 +17,7 @@ cflags = \
 	-Wextra \
 	-Werror \
 	-Wpedantic \
-	-D_POSIX_C_SOURCE=199309L \
+	-D_POSIX_C_SOURCE=200809L \
 	-D_TIME_BITS=64 \
 	-D_FILE_OFFSET_BITS=64 \
 	 $(CFLAGS)
