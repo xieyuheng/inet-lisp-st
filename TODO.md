@@ -1,5 +1,5 @@
-[queue] use atomic for real safety -- use tsan to test data race
 [queue] cursor should be in different cache line
+[queue] improve memory order for atomic operations
 
 [path] fix `path_test` for tsan
 
