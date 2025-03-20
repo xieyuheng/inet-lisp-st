@@ -22,8 +22,8 @@ typedef _Atomic size_t cursor_t;
 struct queue_t {
     size_t size;
     void **values;
-    cursor_t front_cursor;
-    cursor_t back_cursor;
+    cursor_t *front_cursor;
+    cursor_t *back_cursor;
     destroy_fn_t *destroy_fn;
 };
 
@@ -33,8 +33,8 @@ queue_new(size_t size) {
     queue_t *self = new_shared(queue_t);
     self->size = size;
     self->values = allocate_pointers(size + 1);
-    self->back_cursor = 0;
-    self->front_cursor = 0;
+    self->back_cursor = new_shared(cursor_t);
+    self->front_cursor = new_shared(cursor_t);
     return self;
 }
 
@@ -55,6 +55,8 @@ queue_destroy(queue_t **self_pointer) {
         queue_t *self = *self_pointer;
         queue_purge(self);
         free(self->values);
+        free(self->front_cursor);
+        free(self->back_cursor);
         free(self);
         *self_pointer = NULL;
     }
@@ -84,10 +86,10 @@ queue_size(const queue_t *self) {
 
 size_t
 queue_length(const queue_t *self) {
-    if (self->back_cursor >= self->front_cursor) {
-        return self->back_cursor - self->front_cursor;
+    if (*self->back_cursor >= *self->front_cursor) {
+        return *self->back_cursor - *self->front_cursor;
     } else {
-        return self->back_cursor + real_size(self) - self->front_cursor;
+        return *self->back_cursor + real_size(self) - *self->front_cursor;
     }
 }
 
@@ -105,18 +107,19 @@ inline_is_empty(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor
 
 bool
 queue_is_full(const queue_t *self) {
-    return inline_is_full(self, self->front_cursor, self->back_cursor);
+    return inline_is_full(self, *self->front_cursor, *self->back_cursor);
 }
 
 bool
 queue_is_empty(const queue_t *self) {
-    return inline_is_empty(self, self->front_cursor, self->back_cursor);
+    return inline_is_empty(self, *self->front_cursor, *self->back_cursor);
 }
 
 void
 queue_enqueue(queue_t *self, void *value) {
-    size_t front_cursor = atomic_load(&self->front_cursor);
-    size_t back_cursor = atomic_load(&self->back_cursor);
+    size_t front_cursor = atomic_load(self->front_cursor);
+    size_t back_cursor = atomic_load(self->back_cursor);
+
     if (inline_is_full(self, front_cursor, back_cursor)) {
         // - `back_cursor` must not catch `front_cursor` from behind
         fprintf(stderr, "[queue_enqueue] the queue is full\n");
@@ -125,13 +128,14 @@ queue_enqueue(queue_t *self, void *value) {
 
     self->values[back_cursor] = value;
     size_t next_back_cursor = (back_cursor + 1) % real_size(self);
-    atomic_store(&self->back_cursor, next_back_cursor);
+    atomic_store(self->back_cursor, next_back_cursor);
 }
 
 void *
 queue_dequeue(queue_t *self) {
-    size_t front_cursor = atomic_load(&self->front_cursor);
-    size_t back_cursor = atomic_load(&self->back_cursor);
+    size_t front_cursor = atomic_load(self->front_cursor);
+    size_t back_cursor = atomic_load(self->back_cursor);
+
     if (inline_is_empty(self, front_cursor, back_cursor)) {
         return NULL;
     }
@@ -139,6 +143,6 @@ queue_dequeue(queue_t *self) {
     void *value = self->values[front_cursor];
     self->values[front_cursor] = NULL;
     size_t next_front_cursor = (front_cursor + 1) % real_size(self);
-    atomic_store(&self->front_cursor, next_front_cursor);
+    atomic_store(self->front_cursor, next_front_cursor);
     return value;
 }

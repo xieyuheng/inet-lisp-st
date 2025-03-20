@@ -1,4 +1,3 @@
-[queue] `queue_t` -- has pointer to `cursor_t` -- use `new_shared` to avoid false sharing
 [queue] improve memory order for atomic operations
 
 # parallelism

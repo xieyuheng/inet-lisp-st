@@ -56,7 +56,7 @@ queue_test_throughput(void) {
         (time_end.tv_sec + time_end.tv_nsec * 1e-9) -
         (time_start.tv_sec + time_start.tv_nsec * 1e-9);
 
-    printf("throughput: %.f/s\n", LENGTH / time_spent);
+    printf("throughput: %.f k/s\n", LENGTH / time_spent / 1000);
 
     queue_destroy(&queue);
 

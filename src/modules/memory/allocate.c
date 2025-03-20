@@ -42,6 +42,7 @@ allocate_shared(size_t size) {
     assert(cache_line_size > 0);
     size_t real_size = ((size / cache_line_size) + 1) * cache_line_size;
     void *pointer = aligned_alloc(cache_line_size, real_size);
+    memset(pointer, 0, real_size);
     assert(pointer);
     assert(pointer_is_8_bytes_aligned(pointer));
     assert(pointer_is_cache_line_aligned(pointer));
