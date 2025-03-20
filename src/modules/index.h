@@ -23,6 +23,7 @@
 #include "store/index.h"
 #include "canvas/index.h"
 #include "commander/index.h"
+#include "time/index.h"
 #include "thread/index.h"
 #include "queue/index.h"
 

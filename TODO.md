@@ -1,4 +1,3 @@
-[time] setup
 [time] `time_second` -- return double
 improve `queue_test_throughput` by time
 

@@ -26,6 +26,7 @@ modules_test(void) {
     canvas_test();
     image_test();
     store_test();
+    time_test();
     thread_test();
     queue_test();
 
