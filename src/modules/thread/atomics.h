@@ -4,7 +4,16 @@
 // ensuring that the program always reads
 // the most up-to-date value of the variable.
 
-#define relaxed_load(pointer) \
+#define load_relaxed(pointer) \
     atomic_load_explicit(pointer, memory_order_relaxed)
-#define relaxed_store(pointer, value) \
+#define load_acquire(pointer) \
+    atomic_load_explicit(pointer, memory_order_acquire)
+#define load_release(pointer) \
+    atomic_load_explicit(pointer, memory_order_release)
+
+#define store_relaxed(pointer, value) \
     atomic_store_explicit(pointer, value, memory_order_relaxed)
+#define store_acquire(pointer, value) \
+    atomic_store_explicit(pointer, value, memory_order_acquire)
+#define store_release(pointer, value) \
+    atomic_store_explicit(pointer, value, memory_order_release)

@@ -8,10 +8,6 @@
 
 [thread] `thread_print`
 
-# queue
-
-[queue] improve memory order for atomic operations
-
 # debug
 
 [debug] 尝试使用真实的物理学来实现 force
