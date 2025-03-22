@@ -25,6 +25,8 @@ struct queue_t {
     void **values;
     atomic_cursor_t *front_cursor;
     atomic_cursor_t *back_cursor;
+    cursor_t *cached_front_cursor;
+    cursor_t *cached_back_cursor;
     destroy_fn_t *destroy_fn;
 };
 
@@ -36,6 +38,8 @@ queue_new(size_t size) {
     self->values = allocate_pointers(size + 1);
     self->back_cursor = new_shared(atomic_cursor_t);
     self->front_cursor = new_shared(atomic_cursor_t);
+    self->cached_back_cursor = new_shared(cursor_t);
+    self->cached_front_cursor = new_shared(cursor_t);
     return self;
 }
 
@@ -58,6 +62,8 @@ queue_destroy(queue_t **self_pointer) {
         free(self->values);
         free(self->front_cursor);
         free(self->back_cursor);
+        free(self->cached_front_cursor);
+        free(self->cached_back_cursor);
         free(self);
         *self_pointer = NULL;
     }
@@ -119,10 +125,12 @@ queue_is_empty(const queue_t *self) {
 void
 queue_enqueue(queue_t *self, void *value) {
     cursor_t back_cursor = load_relaxed(self->back_cursor);
-    cursor_t front_cursor = load_acquire(self->front_cursor);
-    if (inline_is_full(self, front_cursor, back_cursor)) {
-        fprintf(stderr, "[queue_enqueue] the queue is full\n");
-        exit(1);
+    if (inline_is_full(self, *self->cached_front_cursor, back_cursor)) {
+        *self->cached_front_cursor = load_acquire(self->front_cursor);
+        if (inline_is_full(self, *self->cached_front_cursor, back_cursor)) {
+            fprintf(stderr, "[queue_enqueue] the queue is full\n");
+            exit(1);
+        }
     }
 
     self->values[back_cursor] = value;
@@ -133,9 +141,11 @@ queue_enqueue(queue_t *self, void *value) {
 void *
 queue_dequeue(queue_t *self) {
     cursor_t front_cursor = load_relaxed(self->front_cursor);
-    cursor_t back_cursor = load_acquire(self->back_cursor);
-    if (inline_is_empty(self, front_cursor, back_cursor)) {
-        return NULL;
+    if (inline_is_empty(self, front_cursor, *self->cached_back_cursor)) {
+        *self->cached_back_cursor = load_acquire(self->back_cursor);
+        if (inline_is_empty(self, front_cursor, *self->cached_back_cursor)) {
+            return NULL;
+        }
     }
 
     void *value = self->values[front_cursor];
