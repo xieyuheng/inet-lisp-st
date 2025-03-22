@@ -107,33 +107,33 @@ queue_length(const queue_t *self) {
 }
 
 static inline bool
-inline_is_full(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
+is_full(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
     cursor_t next_back_cursor = (back_cursor + 1) % real_size(self);
     return next_back_cursor == front_cursor;
 }
 
 static inline bool
-inline_is_empty(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
+is_empty(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
     (void) self;
     return back_cursor == front_cursor;
 }
 
 bool
 queue_is_full(const queue_t *self) {
-    return inline_is_full(self, *self->front_cursor, *self->back_cursor);
+    return is_full(self, *self->front_cursor, *self->back_cursor);
 }
 
 bool
 queue_is_empty(const queue_t *self) {
-    return inline_is_empty(self, *self->front_cursor, *self->back_cursor);
+    return is_empty(self, *self->front_cursor, *self->back_cursor);
 }
 
 void
 queue_enqueue(queue_t *self, void *value) {
     cursor_t back_cursor = load_relaxed(self->back_cursor);
-    if (inline_is_full(self, *self->cached_front_cursor, back_cursor)) {
+    if (is_full(self, *self->cached_front_cursor, back_cursor)) {
         *self->cached_front_cursor = load_acquire(self->front_cursor);
-        if (inline_is_full(self, *self->cached_front_cursor, back_cursor)) {
+        if (is_full(self, *self->cached_front_cursor, back_cursor)) {
             fprintf(stderr, "[queue_enqueue] the queue is full\n");
             exit(1);
         }
@@ -147,9 +147,9 @@ queue_enqueue(queue_t *self, void *value) {
 void *
 queue_dequeue(queue_t *self) {
     cursor_t front_cursor = load_relaxed(self->front_cursor);
-    if (inline_is_empty(self, front_cursor, *self->cached_back_cursor)) {
+    if (is_empty(self, front_cursor, *self->cached_back_cursor)) {
         *self->cached_back_cursor = load_acquire(self->back_cursor);
-        if (inline_is_empty(self, front_cursor, *self->cached_back_cursor)) {
+        if (is_empty(self, front_cursor, *self->cached_back_cursor)) {
             return NULL;
         }
     }
