@@ -1,4 +1,3 @@
-[queue] `get_value` and `set_value`
 [queue] handle circular buffer by `get_value` and `set_value` -- remove `real_size`
 [queue] limit the size of queue to use and and mask
 

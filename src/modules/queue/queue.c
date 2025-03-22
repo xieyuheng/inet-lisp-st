@@ -106,6 +106,16 @@ queue_length(const queue_t *self) {
     }
 }
 
+static inline void *
+get_value(const queue_t *self, cursor_t cursor) {
+    return self->values[cursor];
+}
+
+static inline void
+set_value(const queue_t *self, cursor_t cursor, void *value) {
+    self->values[cursor] = value;
+}
+
 static inline bool
 is_full(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
     cursor_t next_back_cursor = (back_cursor + 1) % real_size(self);
@@ -139,7 +149,7 @@ queue_enqueue(queue_t *self, void *value) {
         }
     }
 
-    self->values[back_cursor] = value;
+    set_value(self, back_cursor, value);
     cursor_t next_back_cursor = (back_cursor + 1) % real_size(self);
     store_release(self->back_cursor, next_back_cursor);
 }
@@ -154,8 +164,8 @@ queue_dequeue(queue_t *self) {
         }
     }
 
-    void *value = self->values[front_cursor];
-    self->values[front_cursor] = NULL;
+    void *value = get_value(self, front_cursor);
+    set_value(self, front_cursor, NULL);
     cursor_t next_front_cursor = (front_cursor + 1) % real_size(self);
     store_release(self->front_cursor, next_front_cursor);
     return value;
