@@ -42,6 +42,8 @@ queue_new(size_t size) {
     self->values = allocate_pointers(size + 1);
     self->back_cursor = new_shared(atomic_cursor_t);
     self->front_cursor = new_shared(atomic_cursor_t);
+    assert(atomic_is_lock_free(self->back_cursor));
+    assert(atomic_is_lock_free(self->front_cursor));
     self->cached_back_cursor = new_shared(cursor_t);
     self->cached_front_cursor = new_shared(cursor_t);
     return self;
