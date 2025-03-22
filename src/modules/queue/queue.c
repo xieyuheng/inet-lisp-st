@@ -16,6 +16,10 @@
 // constraints of the circular buffer:
 // - `front_cursor` must not go beyond `back_cursor`;
 // - `back_cursor` must not catch `front_cursor` from behind.
+//
+// optimization is learned from:
+// - code: https://github.com/CharlesFrasch/cppcon2023
+// - talk: https://www.youtube.com/watch?v=K3P_Lmq6pw0
 
 typedef size_t cursor_t;
 typedef _Atomic cursor_t atomic_cursor_t;
