@@ -1,5 +1,3 @@
-[queue] limit the size of queue to use and and mask
-
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
