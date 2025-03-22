@@ -26,6 +26,7 @@ typedef _Atomic cursor_t atomic_cursor_t;
 
 struct queue_t {
     size_t size;
+    size_t mask;
     void **values;
     atomic_cursor_t *front_cursor;
     atomic_cursor_t *back_cursor;
@@ -41,9 +42,11 @@ is_power_of_two(size_t n) {
 
 queue_t *
 queue_new(size_t size) {
+    assert(size > 1);
     assert(is_power_of_two(size));
     queue_t *self = new_shared(queue_t);
     self->size = size;
+    self->mask = size - 1;
     self->values = allocate_pointers(size + 1);
     self->back_cursor = new_shared(atomic_cursor_t);
     self->front_cursor = new_shared(atomic_cursor_t);
@@ -92,11 +95,6 @@ queue_new_with(size_t size, destroy_fn_t *destroy_fn) {
     return self;
 }
 
-static size_t
-real_size(const queue_t *self) {
-    return self->size + 1;
-}
-
 size_t
 queue_size(const queue_t *self) {
     return self->size;
@@ -104,27 +102,22 @@ queue_size(const queue_t *self) {
 
 size_t
 queue_length(const queue_t *self) {
-    if (*self->back_cursor >= *self->front_cursor) {
-        return *self->back_cursor - *self->front_cursor;
-    } else {
-        return *self->back_cursor + real_size(self) - *self->front_cursor;
-    }
+    return *self->back_cursor - *self->front_cursor;
 }
 
 static inline void *
 get_value(const queue_t *self, cursor_t cursor) {
-    return self->values[cursor];
+    return self->values[cursor & self->mask];
 }
 
 static inline void
 set_value(const queue_t *self, cursor_t cursor, void *value) {
-    self->values[cursor] = value;
+    self->values[cursor & self->mask] = value;
 }
 
 static inline bool
 is_full(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
-    cursor_t next_back_cursor = (back_cursor + 1) % real_size(self);
-    return next_back_cursor == front_cursor;
+    return back_cursor - front_cursor == self->size;
 }
 
 static inline bool
@@ -155,8 +148,7 @@ queue_enqueue(queue_t *self, void *value) {
     }
 
     set_value(self, back_cursor, value);
-    cursor_t next_back_cursor = (back_cursor + 1) % real_size(self);
-    store_release(self->back_cursor, next_back_cursor);
+    store_release(self->back_cursor, back_cursor + 1);
 }
 
 void *
@@ -170,8 +162,6 @@ queue_dequeue(queue_t *self) {
     }
 
     void *value = get_value(self, front_cursor);
-    set_value(self, front_cursor, NULL);
-    cursor_t next_front_cursor = (front_cursor + 1) % real_size(self);
-    store_release(self->front_cursor, next_front_cursor);
+    store_release(self->front_cursor, (front_cursor + 1));
     return value;
 }
