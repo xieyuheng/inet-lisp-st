@@ -1,6 +1,6 @@
 #include "index.h"
 
-#define QUEUE_SIZE 1000
+#define QUEUE_SIZE 1024
 #define LENGTH 10000000
 
 static void *

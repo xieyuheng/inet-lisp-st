@@ -34,9 +34,14 @@ struct queue_t {
     destroy_fn_t *destroy_fn;
 };
 
+static bool
+is_power_of_two(size_t n) {
+  return (n > 0) && ((n & (n - 1)) == 0);
+}
+
 queue_t *
 queue_new(size_t size) {
-    assert(size > 1);
+    assert(is_power_of_two(size));
     queue_t *self = new_shared(queue_t);
     self->size = size;
     self->values = allocate_pointers(size + 1);
