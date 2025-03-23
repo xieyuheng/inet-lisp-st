@@ -1,6 +1,6 @@
 # worker & scheduler
 
-[queue] test `queue_get`
+[queue] extract `queue_test_single_thread` -- be symmetric
 
 [scheduler] setup `scheduler_t`
 [scheduler] `scheduler_new`
