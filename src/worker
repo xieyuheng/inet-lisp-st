@@ -1,0 +1,4 @@
+[32m./lang/load.c:[37m    [33mmod-[37m>worker = worker;
+[32m./lang/execute.c:[37m        path_t *path = path_copy(worker->[33mmod-[37m>path);
+[32m./commands/debug_commend.c:[37m            debug_start([33mmod-[37m>worker);
+(B[m

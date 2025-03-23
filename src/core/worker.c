@@ -6,8 +6,9 @@ worker_t *
 worker_new(mod_t *mod) {
     worker_t *self = new_shared(worker_t);
     self->mod = mod;
-    size_t task_queue_size = 1 << 20;
-    self->task_queue = queue_new_with(task_queue_size, (destroy_fn_t *) task_destroy);
+    self->task_queue = queue_new_with(
+        WORKER_TASK_QUEUE_SIZE,
+        (destroy_fn_t *) task_destroy);
     // TODO We should use value_destroy to create value_stack.
     self->value_stack = stack_new();
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);

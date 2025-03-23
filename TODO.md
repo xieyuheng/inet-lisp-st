@@ -1,6 +1,7 @@
-[scheduler] setup `scheduler_test`
+[scheduler] `scheduler_new` -- use `SCHEDULER_TASK_QUEUE_SIZE`
 
-[worker] `worker_new` -- take `task_queue_size`
+[core] `mod_t` -- should not have `worker`
+
 [worker] safe use of `task_queue` -- size is limited now
 
 # parallelism
