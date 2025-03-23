@@ -1,7 +1,5 @@
 # worker & scheduler
 
-[thread] remove `load_release` and `store_acquire` -- undefined behavior
-
 [queue] test `queue_get`
 
 [scheduler] setup `scheduler_t`
