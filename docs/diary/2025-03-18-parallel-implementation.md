@@ -40,11 +40,17 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
 - 分配要公平，要避免某个 worker 被分配了很多 task，
   而另外的 worker 没有分配 task 的情况。
 
+大致思路是：
+
+- scheduler query 所有 worker 的状态，
+  以这些信息为依据，分配一波 task。
+  然后循环。
+
 具体方案如下：
 
 - 首先，scheduler 读所有 worker 的待处理 task 数量，
   所读到的信息对于算法来说是 heuristic 的，
-  因此不需要精确的数量，因此不需要 lock，。
+  因此不需要精确的数量，因此不需要 lock。
 
 - 然后，找到待处理 task 最多的 worker，
   思路是以它所待处理的 task 数量作为基准，
@@ -175,3 +181,7 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
   把测试跑起来。然后再：
   - 开启一个 worker，把两个 queue 都用起来；
   - 开启多个 worker，实现调度算法。
+
+- 也许根本没有 false sharing 问题，
+  因为设想要放在 `worker_ctx_t` 中的数据是只读的。
+  可以先尝试简单的 `worker_t` 有 `scheduler_t` + `index` 的方案。

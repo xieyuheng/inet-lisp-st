@@ -1,3 +1,9 @@
+[core] `worker_t` has optional `scheduler` and `index` -- like how wire link back to node
+[core] `worker_is_in_pool`
+[lang] extract `run_task_in_parallel` from `run_task` -- for non debug call
+[lang] `run_task_in_parallel` -- create `scheduler` and one `worker`
+[lang] `run_task_in_parallel` -- run `scheduler` and the one `worker` in different thread
+
 # later
 
 [worker] safe use of `task_queue` -- size is limited now
