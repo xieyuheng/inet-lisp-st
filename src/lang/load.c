@@ -32,12 +32,10 @@ load_mod(path_t *path) {
         stmt = list_next(stmt_list);
     }
 
-    list_destroy(&sexp_list);
     list_destroy(&stmt_list);
+    list_destroy(&sexp_list);
 
-    // mod->worker = worker;
-
-    worker_destroy(&worker);
+    mod->loader_worker = worker;
 
     char *key = string_copy(path_string(path));
     assert(hash_set(global_mod_hash, key, mod));

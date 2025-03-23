@@ -9,7 +9,8 @@ struct mod_t {
     hash_t *value_hash;
     // the worker that is used to load this mod,
     // owned by this mod.
-    worker_t *worker;
+    // - used by `debug_start`
+    worker_t *loader_worker;
 };
 
 mod_t *mod_new(path_t *path, char *code);

@@ -19,7 +19,7 @@ mod_destroy(mod_t **self_pointer) {
         path_destroy(&self->path);
         string_destroy(&self->code);
         hash_destroy(&self->value_hash);
-        worker_destroy(&self->worker);
+        worker_destroy(&self->loader_worker);
         free(self);
         *self_pointer = NULL;
     }
