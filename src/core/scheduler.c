@@ -18,3 +18,22 @@ scheduler_new(mod_t *mod, size_t worker_pool_size) {
 
     return self;
 }
+
+void
+scheduler_destroy(scheduler_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        scheduler_t *self = *self_pointer;
+
+        for (size_t i = 0; i < self->worker_pool_size; i++)
+            worker_destroy(&self->workers[i]);
+        free(self->workers);
+
+        for (size_t i = 0; i < self->worker_pool_size; i++)
+            queue_destroy(&self->task_queues[i]);
+        free(self->task_queues);
+
+        free(self);
+        *self_pointer = NULL;
+    }
+}

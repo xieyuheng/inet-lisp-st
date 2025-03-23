@@ -9,3 +9,4 @@ struct scheduler_t {
 };
 
 scheduler_t *scheduler_new(mod_t *mod, size_t worker_pool_size);
+void scheduler_destroy(scheduler_t **self_pointer);

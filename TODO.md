@@ -1,4 +1,4 @@
-[scheduler] `scheduler_destroy`
+[scheduler] setup `scheduler_test`
 
 [worker] `worker_new` -- take `task_queue_size`
 [worker] safe use of `task_queue` -- size is limited now
