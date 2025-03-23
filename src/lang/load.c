@@ -22,20 +22,20 @@ load_mod(path_t *path) {
 
     mod_t *mod = mod_new(path, code);
     import_prelude(mod);
-    worker_t *worker = worker_new(mod);
+    worker_t *loader_worker = worker_new(mod);
 
     list_t *sexp_list = sexp_parse_list(code) ;
     list_t *stmt_list = parse_stmt_list(sexp_list);
     stmt_t *stmt = list_first(stmt_list);
     while (stmt) {
-        execute(worker, stmt);
+        execute(loader_worker, stmt);
         stmt = list_next(stmt_list);
     }
 
     list_destroy(&stmt_list);
     list_destroy(&sexp_list);
 
-    mod->loader_worker = worker;
+    mod->loader_worker = loader_worker;
 
     char *key = string_copy(path_string(path));
     assert(hash_set(global_mod_hash, key, mod));

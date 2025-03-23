@@ -121,3 +121,57 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
 - variable on = 启动机器
 - variable off = 停止机器
 - join thread = 销毁机器
+
+# [2025-03-23] 讨论实现细节
+
+已经完成了 thread safe queue，
+回到 scheduler 的问题讨论实现细节：
+
+- 首先 `mod_t` 有自然的 `loader_worker`，
+  这个 worker 是不参与并行计算的，
+  只会在调用 `load_mod` 时参与单线程计算。
+
+- 可以把 `(run)` 这个函数作为并行计算的 API：
+  - 如果是在 debug，就单线程地 run task；
+  - 如果不是在 debug，就创建 scheduler，
+    然后把当前的 worker 中的 task 转移到 scheduler，
+    调用 scheduler 的 API 来做并行计算。
+
+- 也就是说 `worker_t` 有两类：
+  - 一类是 scheduler 创建的 -- 也许可以称作 pool worker；
+  - 一类是 `loader_worker`。
+  pool worker 为了能够把新生成的 task 返回给 scheduler，
+  要引用到创建这个 pool worker 的 scheduler，
+  还要有一个 index 代表是 scheduler 所创建的第几个 worker。
+  是否有引用到 scheduler 就区分了 pool worker。
+  可以实现一个 `worker_is_in_pool`。
+
+- `worker_t` 不知道 thread id，
+  启动和停止 thread 都用 `scheduler_t` 的 API 来管理。
+  因此 `scheduler_t` 在启动所有 worker 之后，
+  要把 `thread_id` 保存到 `worker_thread_ids`。
+
+- 也许为了避免 false sharing，
+  应该给每个 worker thread 分出来一个 `worker_ctx_t`，
+  而不是只是用 index 从 scheduler 中取数据。
+  这个 ctx 可以是 `thread_start` 时传递的参数，
+  因此可以保持 worker 简单。
+
+- `worker_ctx_t` 包含 `worker_t` 和 return task queue。
+  因此 `scheduler_t` 应该有 `worker_ctxs`，
+  而不是有 `workers` 和 `task_queues`。
+  以后所有给 `thread_fn_t` 的参数都可以叫做什么 `ctx_t`。
+  但是 `scheduler_t` 应该不需要 `scheduler_ctx_t` 了。
+
+- 虽然有 `worker_ctx_t` 了，
+  但是 `worker_t` 还是需要引用 `scheduler_t` 和 `index`，
+  因为在生成 node id 的时候，
+  可以用这个 index 作为前缀，
+  来保证 node id 的唯一性。
+
+- 现在可以先创建 `worker_ctx_t`，
+  并且让 `run_task` 在非 debug 时调用 `run_task_in_parallel`。
+  先让 `scheduler_t` 用最简单的方式实现 `run_task_in_parallel`，
+  把测试跑起来。然后再：
+  - 开启一个 worker，把两个 queue 都用起来；
+  - 开启多个 worker，实现调度算法。
