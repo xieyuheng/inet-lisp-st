@@ -1,7 +1,7 @@
-# worker & scheduler
-
-[scheduler] `scheduler_new` -- create `workers` and `task_queues` by `worker_pool_size`
 [scheduler] `scheduler_destroy`
+
+[worker] `worker_new` -- take `task_queue_size`
+[worker] safe use of `task_queue` -- size is limited now
 
 # parallelism
 
