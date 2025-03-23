@@ -130,31 +130,31 @@ is_empty(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
 
 bool
 queue_is_full(const queue_t *self) {
-    cursor_t back_cursor = load_relaxed(self->back_cursor);
     cursor_t front_cursor = load_relaxed(self->front_cursor);
+    cursor_t back_cursor = load_relaxed(self->back_cursor);
     return is_full(self, front_cursor, back_cursor);
 }
 
 bool
 queue_is_empty(const queue_t *self) {
-    cursor_t back_cursor = load_relaxed(self->back_cursor);
     cursor_t front_cursor = load_relaxed(self->front_cursor);
+    cursor_t back_cursor = load_relaxed(self->back_cursor);
     return is_empty(self, front_cursor, back_cursor);
 }
 
-void
+bool
 queue_enqueue(queue_t *self, void *value) {
     cursor_t back_cursor = load_relaxed(self->back_cursor);
     if (is_full(self, *self->cached_front_cursor, back_cursor)) {
         *self->cached_front_cursor = load_acquire(self->front_cursor);
         if (is_full(self, *self->cached_front_cursor, back_cursor)) {
-            fprintf(stderr, "[queue_enqueue] the queue is full\n");
-            exit(1);
+            return false;
         }
     }
 
     set_value(self, back_cursor, value);
     store_release(self->back_cursor, back_cursor + 1);
+    return true;
 }
 
 void *

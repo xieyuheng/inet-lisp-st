@@ -12,10 +12,10 @@ queue_test(void) {
     assert(queue_length(queue) == 0);
 
     {
-        queue_enqueue(queue, (void *) 1);
-        queue_enqueue(queue, (void *) 2);
-        queue_enqueue(queue, (void *) 3);
-        queue_enqueue(queue, (void *) 4);
+        assert(queue_enqueue(queue, (void *) 1));
+        assert(queue_enqueue(queue, (void *) 2));
+        assert(queue_enqueue(queue, (void *) 3));
+        assert(queue_enqueue(queue, (void *) 4));
 
         assert(queue_length(queue) == 4);
         assert(queue_is_full(queue));
@@ -32,10 +32,10 @@ queue_test(void) {
     // repeat the code above
 
     {
-        queue_enqueue(queue, (void *) 1);
-        queue_enqueue(queue, (void *) 2);
-        queue_enqueue(queue, (void *) 3);
-        queue_enqueue(queue, (void *) 4);
+        assert(queue_enqueue(queue, (void *) 1));
+        assert(queue_enqueue(queue, (void *) 2));
+        assert(queue_enqueue(queue, (void *) 3));
+        assert(queue_enqueue(queue, (void *) 4));
 
         assert(queue_length(queue) == 4);
         assert(queue_is_full(queue));

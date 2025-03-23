@@ -12,6 +12,6 @@ size_t queue_length(const queue_t *self);
 bool queue_is_full(const queue_t *self);
 bool queue_is_empty(const queue_t *self);
 
-// fail on full
-void queue_enqueue(queue_t *self, void *value);
+// return successful or not
+bool queue_enqueue(queue_t *self, void *value);
 void *queue_dequeue(queue_t *self);

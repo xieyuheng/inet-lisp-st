@@ -11,7 +11,7 @@ uint_producer(queue_t *queue) {
 
         while (queue_is_full(queue)) {}
 
-        queue_enqueue(queue, (void *) count);
+        assert(queue_enqueue(queue, (void *) count));
         count++;
     }
 }
