@@ -4,9 +4,6 @@ void
 queue_test_single_thread(void) {
     printf("<queue_test_single_thread>\n");
 
-    queue_test_multi_thread();
-    queue_test_throughput();
-
     queue_t *queue = queue_new(4);
     assert(queue_size(queue) == 4);
     assert(queue_length(queue) == 0);
