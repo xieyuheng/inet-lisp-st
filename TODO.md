@@ -1,3 +1,11 @@
+# worker & scheduler
+
+[queue] `queue_get` (not thread safe) -- fix `worker_print`
+
+[scheduler] setup `scheduler_t`
+[scheduler] `scheduler_new`
+[scheduler] `scheduler_destroy`
+
 # parallelism
 
 [thread] `lock_t` for `pthread_mutex_t`
