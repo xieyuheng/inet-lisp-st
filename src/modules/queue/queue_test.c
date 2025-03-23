@@ -4,7 +4,7 @@ void
 queue_test(void) {
     printf("<queue_test>\n");
 
-    queue_test_thread_safe();
+    queue_test_multi_thread();
     queue_test_throughput();
 
     queue_t *queue = queue_new(4);

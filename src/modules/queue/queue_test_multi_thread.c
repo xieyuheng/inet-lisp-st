@@ -60,8 +60,8 @@ string_consumer(queue_t *queue) {
 }
 
 void
-queue_test_thread_safe(void) {
-    printf("<queue_test_thread_safe>\n");
+queue_test_multi_thread(void) {
+    printf("<queue_test_multi_thread>\n");
 
     queue_t *queue = queue_new(QUEUE_SIZE);
 
@@ -91,5 +91,5 @@ queue_test_thread_safe(void) {
 
     queue_destroy(&queue);
 
-    printf("</queue_test_thread_safe>\n");
+    printf("</queue_test_multi_thread>\n");
 }
