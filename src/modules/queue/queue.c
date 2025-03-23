@@ -171,3 +171,16 @@ queue_dequeue(queue_t *self) {
     store_release(self->front_cursor, (front_cursor + 1));
     return value;
 }
+
+void *
+queue_get(const queue_t *self, size_t index) {
+    cursor_t front_cursor = load_relaxed(self->front_cursor);
+    if (is_empty(self, front_cursor, *self->cached_back_cursor)) {
+        *self->cached_back_cursor = load_acquire(self->back_cursor);
+        if (is_empty(self, front_cursor, *self->cached_back_cursor)) {
+            return NULL;
+        }
+    }
+
+    return get_value(self, front_cursor + index);
+}

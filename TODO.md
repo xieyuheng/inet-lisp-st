@@ -1,6 +1,8 @@
 # worker & scheduler
 
-[queue] `queue_get` (not thread safe) -- fix `worker_print`
+[thread] remove `load_release` and `store_acquire` -- undefined behavior
+
+[queue] test `queue_get`
 
 [scheduler] setup `scheduler_t`
 [scheduler] `scheduler_new`

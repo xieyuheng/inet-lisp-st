@@ -34,14 +34,13 @@ void
 worker_print(const worker_t *self, file_t *file) {
     fprintf(file, "<worker>\n");
 
-    // size_t task_list_length = list_length(self->task_list);
-    // fprintf(file, "<task-list length=\"%lu\">\n", task_list_length);
-    // task_t *task = list_first(self->task_list);
-    // while (task) {
-    //     task_print(task, file);
-    //     task = list_next(self->task_list);
-    // }
-    // fprintf(file, "</task-list>\n");
+    size_t task_queue_length = queue_length(self->task_queue);
+    fprintf(file, "<task-queue length=\"%lu\">\n", task_queue_length);
+    for (size_t i = 0; i < task_queue_length; i++) {
+        task_t *task = queue_get(self->task_queue, i);
+        task_print(task, file);
+    }
+    fprintf(file, "</task-queue>\n");
 
     worker_print_return_stack(self, file);
     worker_print_value_stack(self, file);
