@@ -1,5 +1,3 @@
-[scheduler] `scheduler_new` -- use `SCHEDULER_TASK_QUEUE_SIZE`
-
 [core] `mod_t` -- should not have `worker`
 
 [worker] safe use of `task_queue` -- size is limited now
