@@ -4,7 +4,7 @@ bool global_debug_flag = false;
 
 worker_t *
 worker_new(mod_t *mod) {
-    worker_t *self = new(worker_t);
+    worker_t *self = new_shared(worker_t);
     self->mod = mod;
     size_t task_queue_size = 1 << 20;
     self->task_queue = queue_new_with(task_queue_size, (destroy_fn_t *) task_destroy);

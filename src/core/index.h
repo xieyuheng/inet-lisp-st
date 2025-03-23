@@ -5,11 +5,12 @@
 #include "mod.h"
 #include "frame.h"
 #include "task.h"
-#include "worker.h"
 #include "op.h"
 #include "function.h"
 #include "primitive.h"
 #include "rule.h"
+#include "worker.h"
+#include "scheduler.h"
 
 #include "net/node.h"
 #include "net/node_iter.h"

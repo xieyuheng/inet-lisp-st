@@ -1,8 +1,6 @@
 # worker & scheduler
 
-[scheduler] setup `scheduler_t` -- has `task_queue_size`
-
-[scheduler] `scheduler_new` -- take `mod` and `worker_pool_size` -- like `worker_new`
+[scheduler] `scheduler_new` -- create `workers` and `task_queues` by `worker_pool_size`
 [scheduler] `scheduler_destroy`
 
 # parallelism
