@@ -102,7 +102,9 @@ queue_size(const queue_t *self) {
 
 size_t
 queue_length(const queue_t *self) {
-    return *self->back_cursor - *self->front_cursor;
+    cursor_t back_cursor = load_relaxed(self->back_cursor);
+    cursor_t front_cursor = load_relaxed(self->front_cursor);
+    return back_cursor - front_cursor;
 }
 
 static inline void *
@@ -128,12 +130,16 @@ is_empty(const queue_t *self, cursor_t front_cursor, cursor_t back_cursor) {
 
 bool
 queue_is_full(const queue_t *self) {
-    return is_full(self, *self->front_cursor, *self->back_cursor);
+    cursor_t back_cursor = load_relaxed(self->back_cursor);
+    cursor_t front_cursor = load_relaxed(self->front_cursor);
+    return is_full(self, front_cursor, back_cursor);
 }
 
 bool
 queue_is_empty(const queue_t *self) {
-    return is_empty(self, *self->front_cursor, *self->back_cursor);
+    cursor_t back_cursor = load_relaxed(self->back_cursor);
+    cursor_t front_cursor = load_relaxed(self->front_cursor);
+    return is_empty(self, front_cursor, back_cursor);
 }
 
 void
