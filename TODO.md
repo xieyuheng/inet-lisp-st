@@ -1,4 +1,3 @@
-[core] `worker_ctx_t` -- has `worker` and `atomic_is_turned_off` and `atomic_is_processing`
 [core] `worker_ctx_new` -- use `new_shared`
 [core] `worker_ctx_destroy`
 
