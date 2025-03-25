@@ -1,7 +1,6 @@
 [lang] `worker_thread_fn` -- take `worker_ctx` instead of `worker`
-
+[core] `manager_t` -- remove `worker_switches`
 [lang] `worker_thread_fn` -- set `worker_ctx` to `atomic_is_processing`
-
 [lang] `manager_no_more_task` -- by `worker_ctx->atomic_is_processing`
 
 - example should pass now:
@@ -9,8 +8,6 @@
   ```
   make -j && make self-test && ./bin/inet-lisp run examples/readme/nat.test.lisp
   ```
-
-[core] `manager_t` -- has `worker_ctxs`
 
 [lang] `manager_thread_fn` -- dispatch task -- be fair
 

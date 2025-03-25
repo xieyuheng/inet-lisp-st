@@ -12,6 +12,8 @@ struct manager_t {
     // worker threads
     thread_id_t *worker_thread_ids;
     atomic_bool *worker_switches;
+    worker_ctx_t **worker_ctxs;
+
 };
 
 manager_t *manager_new(mod_t *mod, size_t worker_pool_size);
