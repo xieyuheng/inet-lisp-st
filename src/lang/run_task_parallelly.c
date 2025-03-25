@@ -54,7 +54,7 @@ static void *
 worker_thread_fn(worker_ctx_t *ctx) {
     worker_t *worker = ctx->worker;
     manager_t *manager = worker->manager;
-    
+
     printf("[worker_thread_fn %ld] started\n", worker->index);
     while (true) {
         // TODO set worker_ctx to is_processing
@@ -93,7 +93,7 @@ manager_start(manager_t *manager, queue_t *init_task_queue) {
     // start worker threads
 
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        manager->worker_thread_ids[i] =
+        manager->worker_ctxs[i]->thread_id =
             thread_start(
                 (thread_fn_t *) worker_thread_fn,
                 manager->worker_ctxs[i]);
@@ -103,7 +103,7 @@ manager_start(manager_t *manager, queue_t *init_task_queue) {
 static void
 manager_wait(manager_t *manager) {
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        thread_wait(manager->worker_thread_ids[i]);
+        thread_wait(manager->worker_ctxs[i]->thread_id);
     }
 
     thread_wait(manager->thread_id);

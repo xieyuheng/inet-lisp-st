@@ -10,7 +10,6 @@ struct manager_t {
     thread_id_t thread_id;
     bool is_started;
     // worker threads
-    thread_id_t *worker_thread_ids;
     worker_ctx_t **worker_ctxs;
 
 };
