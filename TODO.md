@@ -1,5 +1,4 @@
-[lang] `worker_thread_fn` -- take `worker_ctx` instead of `worker`
-[core] `manager_t` -- remove `worker_switches`
+[core] `manager_t` -- merge `worker_thread_ids` into `worker_ctxs`
 [lang] `worker_thread_fn` -- set `worker_ctx` to `atomic_is_processing`
 [lang] `manager_no_more_task` -- by `worker_ctx->atomic_is_processing`
 

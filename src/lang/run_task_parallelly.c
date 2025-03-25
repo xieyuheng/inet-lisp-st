@@ -43,7 +43,7 @@ manager_thread_fn(manager_t *manager) {
     manager_dispatch(manager);
 
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        atomic_store(&manager->worker_switches[i], false);
+        atomic_store(&manager->worker_ctxs[i]->atomic_is_turned_off, true);
     }
 
     return NULL;
@@ -51,7 +51,10 @@ manager_thread_fn(manager_t *manager) {
 }
 
 static void *
-worker_thread_fn(worker_t *worker) {
+worker_thread_fn(worker_ctx_t *ctx) {
+    worker_t *worker = ctx->worker;
+    manager_t *manager = worker->manager;
+    
     printf("[worker_thread_fn %ld] started\n", worker->index);
     while (true) {
         // TODO set worker_ctx to is_processing
@@ -60,7 +63,7 @@ worker_thread_fn(worker_t *worker) {
             step_task(worker);
         }
 
-        if (!atomic_load(&worker->manager->worker_switches[worker->index])) {
+        if (atomic_load(&manager->worker_ctxs[worker->index]->atomic_is_turned_off)) {
             return NULL;
         }
 
@@ -90,11 +93,10 @@ manager_start(manager_t *manager, queue_t *init_task_queue) {
     // start worker threads
 
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        atomic_store(&manager->worker_switches[i], true);
-    }
-
-    for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        manager->worker_thread_ids[i] = thread_start((thread_fn_t *) worker_thread_fn, manager->workers[i]);
+        manager->worker_thread_ids[i] =
+            thread_start(
+                (thread_fn_t *) worker_thread_fn,
+                manager->worker_ctxs[i]);
     }
 }
 

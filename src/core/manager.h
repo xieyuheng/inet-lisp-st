@@ -11,7 +11,6 @@ struct manager_t {
     bool is_started;
     // worker threads
     thread_id_t *worker_thread_ids;
-    atomic_bool *worker_switches;
     worker_ctx_t **worker_ctxs;
 
 };
