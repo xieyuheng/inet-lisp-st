@@ -6,6 +6,9 @@ struct manager_t {
     worker_t **workers;
     size_t task_queue_size;
     queue_t **task_queues;
+    // for thread
+    thread_id_t thread_id;
+    bool is_started;
 };
 
 manager_t *manager_new(mod_t *mod, size_t worker_pool_size);

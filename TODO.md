@@ -1,10 +1,16 @@
 # core
 
-[core] `manager_start`
+[core] `manager_thread_fn` -- setup
+[core] `manager_start` -- create manager thread
 
-# lang
+[core] `manager_wait`
+[lang] `run_task_parallelly` -- call `manager_start` and `manager_wait`
 
-[lang] `run_task_parallelly` -- run `manager`
+[core] `manager_start` -- create worker threads
+
+- [core] `manager_t` -- has `worker_thread_ids`
+
+[core] `manager_thread_fn` -- thread loop
 
 # later
 
