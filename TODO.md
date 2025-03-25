@@ -1,10 +1,10 @@
 # core
 
-[core] `scheduler_start`
+[core] `manager_start`
 
 # lang
 
-[lang] `run_task_parallelly` -- run `scheduler`
+[lang] `run_task_parallelly` -- run `manager`
 
 # later
 

@@ -11,7 +11,7 @@
 #include "primitive.h"
 #include "rule.h"
 #include "worker.h"
-#include "scheduler.h"
+#include "manager.h"
 
 #include "net/node.h"
 #include "net/node_iter.h"

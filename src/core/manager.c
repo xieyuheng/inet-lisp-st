@@ -1,15 +1,15 @@
 #include "index.h"
 
-scheduler_t *
-scheduler_new(mod_t *mod, size_t worker_pool_size) {
-    scheduler_t *self = new_shared(scheduler_t);
+manager_t *
+manager_new(mod_t *mod, size_t worker_pool_size) {
+    manager_t *self = new_shared(manager_t);
     self->mod = mod;
 
     self->worker_pool_size = worker_pool_size;
     self->workers = allocate_pointers(worker_pool_size);
     for (size_t i = 0; i < worker_pool_size; i++) {
         self->workers[i] = worker_new(mod);
-        self->workers[i]->scheduler = self;
+        self->workers[i]->manager = self;
         self->workers[i]->index = i;
     }
 
@@ -25,10 +25,10 @@ scheduler_new(mod_t *mod, size_t worker_pool_size) {
 }
 
 void
-scheduler_destroy(scheduler_t **self_pointer) {
+manager_destroy(manager_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        scheduler_t *self = *self_pointer;
+        manager_t *self = *self_pointer;
 
         for (size_t i = 0; i < self->worker_pool_size; i++)
             worker_destroy(&self->workers[i]);

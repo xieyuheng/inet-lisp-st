@@ -115,5 +115,5 @@ worker_fresh_name(worker_t* self) {
 
 bool
 worker_is_in_pool(const worker_t* self) {
-    return self->scheduler != NULL;
+    return self->manager != NULL;
 }

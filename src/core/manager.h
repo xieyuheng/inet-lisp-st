@@ -1,6 +1,6 @@
 #pragma once
 
-struct scheduler_t {
+struct manager_t {
     mod_t *mod;
     size_t worker_pool_size;
     worker_t **workers;
@@ -8,5 +8,5 @@ struct scheduler_t {
     queue_t **task_queues;
 };
 
-scheduler_t *scheduler_new(mod_t *mod, size_t worker_pool_size);
-void scheduler_destroy(scheduler_t **self_pointer);
+manager_t *manager_new(mod_t *mod, size_t worker_pool_size);
+void manager_destroy(manager_t **self_pointer);

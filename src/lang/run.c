@@ -88,13 +88,13 @@ run_task_sequentially(worker_t *worker) {
 void
 run_task_parallelly(worker_t *worker) {
     size_t processor_count = sysconf(_SC_NPROCESSORS_ONLN);
-    scheduler_t *scheduler = scheduler_new(worker->mod, processor_count - 1);
+    manager_t *manager = manager_new(worker->mod, processor_count - 1);
 
     while (!queue_is_empty(worker->task_queue)) {
         step_task(worker);
     }
 
-    scheduler_destroy(&scheduler);
+    manager_destroy(&manager);
 }
 
 void
