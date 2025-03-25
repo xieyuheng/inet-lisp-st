@@ -104,9 +104,8 @@ manager_start(manager_t *manager, queue_t *init_task_queue) {
 
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
         manager->worker_ctxs[i]->thread_id =
-            thread_start(
-                (thread_fn_t *) worker_thread_fn,
-                manager->worker_ctxs[i]);
+            thread_start((thread_fn_t *) worker_thread_fn, manager->worker_ctxs[i]);
+        manager->worker_ctxs[i]->is_started = true;
     }
 }
 
