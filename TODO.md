@@ -1,5 +1,4 @@
-[lang] `run_task_parallelly` -- create `scheduler` and one `worker`
-[lang] `run_task_parallelly` -- run `scheduler` and the one `worker` in different thread
+[lang] `run_task_parallelly` -- run `scheduler`
 
 # later
 
