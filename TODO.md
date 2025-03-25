@@ -1,8 +1,4 @@
-[core] `manager_start` -- create worker threads
-
-- `manager_t` -- has `worker_thread_ids`
-- `worker_thread_fn` -- setup
-
+[core] `manager_wait` -- wait all worker threads
 [core] `worker_thread_fn` -- thread loop
 [core] `manager_thread_fn` -- thread loop
 

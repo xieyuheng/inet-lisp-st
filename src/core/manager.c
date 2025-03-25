@@ -21,6 +21,7 @@ manager_new(mod_t *mod, size_t worker_pool_size) {
             (destroy_fn_t *) task_destroy);
     }
 
+    self->worker_thread_ids = allocate_pointers(worker_pool_size);
     return self;
 }
 
@@ -44,31 +45,44 @@ manager_destroy(manager_t **self_pointer) {
 }
 
 static void *
-manager_thread_fn(manager_t *self) {
-    (void) self;
+manager_thread_fn(manager_t *manager) {
+    (void) manager;
+    return NULL;
+}
+
+static void *
+worker_thread_fn(worker_t *worker) {
+    (void) worker;
     return NULL;
 }
 
 void
 manager_start(manager_t *self, queue_t *init_task_queue) {
+    size_t pool_size = self->worker_pool_size;
+
     // prepare tasks
 
     size_t cursor = 0;
     while (!queue_is_empty(init_task_queue)) {
         task_t *task = queue_dequeue(init_task_queue);
-        size_t real_cursor = cursor % self->worker_pool_size;
+        size_t real_cursor = cursor % pool_size;
         queue_t *next_task_queue = self->task_queues[real_cursor];
         bool ok = queue_enqueue(next_task_queue, task);
         assert(ok);
         cursor++;
     }
 
-    // start thread
+    // start manager thread
 
     self->thread_id = thread_start((thread_fn_t *) manager_thread_fn, self);
     self->is_started = true;
 
-    // TODO
+    // start worker threads
+
+    for (size_t i = 0; i < pool_size; i++) {
+        self->worker_thread_ids[i] =
+            thread_start((thread_fn_t *) worker_thread_fn, self->workers[i]);
+    }
 }
 
 void
