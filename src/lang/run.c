@@ -78,14 +78,14 @@ step_task(worker_t *worker) {
     react(worker, task);
 }
 
-static void
+void
 run_task_sequentially(worker_t *worker) {
     while (!queue_is_empty(worker->task_queue)) {
         step_task(worker);
     }
 }
 
-static void
+void
 run_task_parallelly(worker_t *worker) {
     size_t processor_count = sysconf(_SC_NPROCESSORS_ONLN);
     scheduler_t *scheduler = scheduler_new(worker->mod, processor_count - 1);
