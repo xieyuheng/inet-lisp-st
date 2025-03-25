@@ -1,5 +1,7 @@
 [diary] problem of parallel subgraph pattern matching
 
+- multiple principle ports 必定导致 subgraph pattern matching，而后者很难并行。
+
 [bug] `activate_matched_node` should not iterate `rule_list`, which is not thread safe
 
 [lang] fix `manager_no_more_task` -- `worker_ctx->atomic_is_processing` is not enough
