@@ -1,9 +1,9 @@
-[core] `manager_start` -- take `init_task_queue`
-
 [core] `manager_start` -- create worker threads
 
-- [core] `manager_t` -- has `worker_thread_ids`
+- `manager_t` -- has `worker_thread_ids`
+- `worker_thread_fn` -- setup
 
+[core] `worker_thread_fn` -- thread loop
 [core] `manager_thread_fn` -- thread loop
 
 # later

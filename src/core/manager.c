@@ -51,9 +51,24 @@ manager_thread_fn(manager_t *self) {
 
 void
 manager_start(manager_t *self, queue_t *init_task_queue) {
-    (void) init_task_queue;
+    // prepare tasks
+
+    size_t cursor = 0;
+    while (!queue_is_empty(init_task_queue)) {
+        task_t *task = queue_dequeue(init_task_queue);
+        size_t real_cursor = cursor % self->worker_pool_size;
+        queue_t *next_task_queue = self->task_queues[real_cursor];
+        bool ok = queue_enqueue(next_task_queue, task);
+        assert(ok);
+        cursor++;
+    }
+
+    // start thread
+
     self->thread_id = thread_start((thread_fn_t *) manager_thread_fn, self);
     self->is_started = true;
+
+    // TODO
 }
 
 void
