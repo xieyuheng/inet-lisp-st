@@ -1,6 +1,6 @@
-[lang] extract `run_task_in_parallel` from `run_task` -- for non debug call
-[lang] `run_task_in_parallel` -- create `scheduler` and one `worker`
-[lang] `run_task_in_parallel` -- run `scheduler` and the one `worker` in different thread
+[lang] extract `run_task_parallelly` and `run_task_sequentially` from `run_task` -- for non debug call
+[lang] `run_task_parallelly` -- create `scheduler` and one `worker`
+[lang] `run_task_parallelly` -- run `scheduler` and the one `worker` in different thread
 
 # later
 

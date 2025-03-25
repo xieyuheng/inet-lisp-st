@@ -176,8 +176,8 @@ worker 返回给 scheduler 的 task 需要被重新分配给各个 worker，
   来保证 node id 的唯一性。
 
 - 现在可以先创建 `worker_ctx_t`，
-  并且让 `run_task` 在非 debug 时调用 `run_task_in_parallel`。
-  先让 `scheduler_t` 用最简单的方式实现 `run_task_in_parallel`，
+  并且让 `run_task` 在非 debug 时调用 `run_task_parallelly`。
+  先让 `scheduler_t` 用最简单的方式实现 `run_task_parallelly`，
   把测试跑起来。然后再：
   - 开启一个 worker，把两个 queue 都用起来；
   - 开启多个 worker，实现调度算法。
