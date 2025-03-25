@@ -10,8 +10,6 @@ debug_command(commander_t *runner) {
     commander_add(runner, command);
 }
 
-extern bool global_debug_flag;
-
 int
 run(commander_t *commander) {
     char **argv = commander_rest_argv(commander);
