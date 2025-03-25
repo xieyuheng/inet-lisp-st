@@ -22,6 +22,7 @@ manager_new(mod_t *mod, size_t worker_pool_size) {
     }
 
     self->worker_thread_ids = allocate_pointers(worker_pool_size);
+    self->worker_switches = allocate_pointers(worker_pool_size);
     return self;
 }
 
@@ -39,6 +40,8 @@ manager_destroy(manager_t **self_pointer) {
             queue_destroy(&self->task_queues[i]);
         free(self->task_queues);
 
+        free(self->worker_thread_ids);
+        free(self->worker_switches);
         free(self);
         *self_pointer = NULL;
     }
