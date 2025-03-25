@@ -1,4 +1,3 @@
-[core] `manager_wait` -- wait all worker threads
 [core] `worker_thread_fn` -- thread loop
 [core] `manager_thread_fn` -- thread loop
 

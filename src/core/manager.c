@@ -46,26 +46,26 @@ manager_destroy(manager_t **self_pointer) {
 
 static void *
 manager_thread_fn(manager_t *manager) {
+    printf("[manager_thread_fn] started\n");
     (void) manager;
     return NULL;
 }
 
 static void *
 worker_thread_fn(worker_t *worker) {
+    printf("[worker_thread_fn] started\n");
     (void) worker;
     return NULL;
 }
 
 void
 manager_start(manager_t *self, queue_t *init_task_queue) {
-    size_t pool_size = self->worker_pool_size;
-
     // prepare tasks
 
     size_t cursor = 0;
     while (!queue_is_empty(init_task_queue)) {
         task_t *task = queue_dequeue(init_task_queue);
-        size_t real_cursor = cursor % pool_size;
+        size_t real_cursor = cursor % self->worker_pool_size;
         queue_t *next_task_queue = self->task_queues[real_cursor];
         bool ok = queue_enqueue(next_task_queue, task);
         assert(ok);
@@ -79,7 +79,7 @@ manager_start(manager_t *self, queue_t *init_task_queue) {
 
     // start worker threads
 
-    for (size_t i = 0; i < pool_size; i++) {
+    for (size_t i = 0; i < self->worker_pool_size; i++) {
         self->worker_thread_ids[i] =
             thread_start((thread_fn_t *) worker_thread_fn, self->workers[i]);
     }
@@ -89,4 +89,8 @@ void
 manager_wait(manager_t *self) {
     assert(self->thread_id);
     thread_wait(self->thread_id);
+
+    for (size_t i = 0; i < self->worker_pool_size; i++) {
+        thread_wait(self->worker_thread_ids[i]);
+    }
 }
