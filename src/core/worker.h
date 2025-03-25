@@ -32,3 +32,4 @@ void worker_delete_wire(worker_t* self, wire_t *wire);
 char *worker_fresh_name(worker_t* self);
 
 bool worker_is_in_pool(const worker_t* self);
+void worker_return_task(worker_t* self, task_t *task);

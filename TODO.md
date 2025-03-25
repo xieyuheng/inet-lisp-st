@@ -1,6 +1,3 @@
-[core] extract `worker_return_task`
-[core] `worker_return_task` -- if not debug, return task to manager
-
 [core] `manager_start` -- take `init_task_queue`
 
 [core] `manager_start` -- create worker threads

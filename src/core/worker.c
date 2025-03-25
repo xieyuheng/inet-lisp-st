@@ -117,3 +117,12 @@ bool
 worker_is_in_pool(const worker_t* self) {
     return self->manager != NULL;
 }
+
+void
+worker_return_task(worker_t* self, task_t *task) {
+    if (worker_is_in_pool(self)) {
+        queue_enqueue(self->manager->task_queues[self->index], task);
+    } else {
+        queue_enqueue(self->task_queue, task);
+    }
+}

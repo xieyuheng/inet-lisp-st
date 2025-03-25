@@ -96,8 +96,9 @@ run_task_parallelly(worker_t *worker) {
 
 void
 run_task(worker_t *worker) {
-    if (core_debug_flag)
+    if (core_debug_flag) {
         run_task_sequentially(worker);
-    else
+    } else {
         run_task_parallelly(worker);
+    }
 }
