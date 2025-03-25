@@ -38,7 +38,9 @@ manager_dispatch(manager_t *manager) {
 
         // printf("[manager_thread_fn] dispatch one round\n");
 
-        if (manager_no_more_task(manager)) return;
+        if (manager_no_more_task(manager)) {
+            return;
+        }
     }
 }
 

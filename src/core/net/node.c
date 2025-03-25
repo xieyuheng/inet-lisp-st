@@ -6,7 +6,7 @@ node_new(const node_ctor_t *ctor, size_t id) {
     self->ctor = ctor;
     self->id = id;
     self->ports = allocate_pointers(ctor->arity);
-    self->is_matched = false;
+    self->atomic_is_matched = false;
     return self;
 }
 
