@@ -1,8 +1,5 @@
 # core
 
-[core] `manager_thread_fn` -- setup
-[core] `manager_start` -- create manager thread
-
 [core] `manager_wait`
 [lang] `run_task_parallelly` -- call `manager_start` and `manager_wait`
 

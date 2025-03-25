@@ -42,3 +42,15 @@ manager_destroy(manager_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+static void *
+manager_thread_fn(manager_t *self) {
+    (void) self;
+    return NULL;
+}
+
+void
+manager_start(manager_t *self) {
+    self->thread_id = thread_start((thread_fn_t *) manager_thread_fn, self);
+    self->is_started = true;
+}
