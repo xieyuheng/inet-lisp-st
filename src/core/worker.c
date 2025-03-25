@@ -1,6 +1,6 @@
 #include "index.h"
 
-bool global_debug_flag = false;
+bool core_debug_flag = false;
 
 worker_t *
 worker_new(mod_t *mod) {
@@ -78,7 +78,7 @@ node_t *
 worker_add_node(worker_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
 
-    if (global_debug_flag)
+    if (core_debug_flag)
         set_add(self->debug_node_set, node);
 
     return node;
@@ -86,7 +86,7 @@ worker_add_node(worker_t* self, const node_ctor_t *ctor) {
 
 void
 worker_delete_node(worker_t* self, node_t *node) {
-    if (global_debug_flag)
+    if (core_debug_flag)
         set_delete(self->debug_node_set, node);
 
     node_destroy(&node);

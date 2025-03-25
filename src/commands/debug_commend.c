@@ -20,7 +20,7 @@ run(commander_t *commander) {
             char *cwd = getcwd(NULL, 0);
             path_t *path = path_new(cwd);
             path_join(path, src);
-            global_debug_flag = true;
+            core_debug_flag = true;
             mod_t *mod = load_mod(path);
             debug_start(mod->loader_worker);
         } else  {
