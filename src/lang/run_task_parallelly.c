@@ -2,9 +2,11 @@
 
 static bool
 manager_no_more_task(manager_t *manager) {
-    for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        if (!queue_is_empty(manager->task_queues[i])) {
-            return false;
+    for (size_t i = 0; i < 3; i++) {
+        for (size_t i = 0; i < manager->worker_pool_size; i++) {
+            if (!queue_is_empty(manager->task_queues[i])) {
+                return false;
+            }
         }
     }
 
