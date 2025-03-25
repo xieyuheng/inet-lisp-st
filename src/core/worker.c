@@ -114,3 +114,8 @@ worker_fresh_name(worker_t* self) {
     free(buffer);
     return string;
 }
+
+bool
+worker_is_in_pool(const worker_t* self) {
+    return self->scheduler != NULL;
+}
