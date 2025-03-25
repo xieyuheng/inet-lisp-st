@@ -28,23 +28,20 @@ lib = $(patsubst src/%,lib/%,$(patsubst %.c,%.o,$(src)))
 app = inet-lisp
 bin = bin/$(app)
 
-.PHONY: all
+.PHONY: all run self-test run-examples test clean
+
 all: bin/$(app)
 
-.PHONY: run
 run: bin/$(app)
 	./bin/$(app)
 
-.PHONY: test
-test: self-test run-examples
-
-.PHONY: self-test
 self-test: bin/$(app)
 	./bin/$(app) self-test
 
-.PHONY: run-examples
 run-examples: bin/$(app)
 	bash run-examples.sh
+
+test: self-test run-examples
 
 bin/$(app): $(lib) lib/$(app).o
 	mkdir -p $(dir $@); $(cc) $^ $(ldflags) -o $@
@@ -52,6 +49,5 @@ bin/$(app): $(lib) lib/$(app).o
 lib/%.o: src/%.c $(headers)
 	mkdir -p $(dir $@); $(cc) -c $(cflags) $< -o $@
 
-.PHONY: clean
 clean:
 	rm -rf lib bin
