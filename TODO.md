@@ -1,6 +1,11 @@
-[lang] `worker_thread_fn` -- can be turn off by manager
-
 [lang] `manager_thread_fn` -- dispatch task -- not fair version for now
+
+[core] `worker_ctx_t` -- has `atomic_switch`
+[core] `worker_ctx_new`
+[core] `worker_ctx_destroy`
+
+[core] `manager_t` -- has `worker_ctxs`
+
 [lang] `manager_thread_fn` -- dispatch task -- be fair
 
 # later

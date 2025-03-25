@@ -4,7 +4,9 @@ static void *
 manager_thread_fn(manager_t *manager) {
     printf("[manager_thread_fn] started\n");
     while (true) {
-        (void) manager;
+        for (size_t i = 0; i < manager->worker_pool_size; i++) {
+            atomic_store(&manager->worker_switches[i], false);
+        }
 
         return NULL;
     }
@@ -12,25 +14,28 @@ manager_thread_fn(manager_t *manager) {
 
 static void *
 worker_thread_fn(worker_t *worker) {
-    printf("[worker_thread_fn] started\n");
+    printf("[worker_thread_fn %ld] started\n", worker->index);
     while (true) {
         while (!queue_is_empty(worker->task_queue)) {
+            printf("[worker_thread_fn %ld] step task\n", worker->index);
             step_task(worker);
         }
 
-        return NULL;
+        if (!atomic_load(&worker->manager->worker_switches[worker->index])) {
+            return NULL;
+        }
     }
 }
 
 static void
-manager_start(manager_t *self, queue_t *init_task_queue) {
+manager_start(manager_t *manager, queue_t *init_task_queue) {
     // prepare tasks
 
     size_t cursor = 0;
     while (!queue_is_empty(init_task_queue)) {
         task_t *task = queue_dequeue(init_task_queue);
-        size_t real_cursor = cursor % self->worker_pool_size;
-        queue_t *next_task_queue = self->task_queues[real_cursor];
+        size_t real_cursor = cursor % manager->worker_pool_size;
+        queue_t *next_task_queue = manager->task_queues[real_cursor];
         bool ok = queue_enqueue(next_task_queue, task);
         assert(ok);
         cursor++;
@@ -38,25 +43,27 @@ manager_start(manager_t *self, queue_t *init_task_queue) {
 
     // start manager thread
 
-    self->thread_id = thread_start((thread_fn_t *) manager_thread_fn, self);
-    self->is_started = true;
+    manager->thread_id = thread_start((thread_fn_t *) manager_thread_fn, manager);
+    manager->is_started = true;
 
     // start worker threads
 
-    for (size_t i = 0; i < self->worker_pool_size; i++) {
-        self->worker_thread_ids[i] =
-            thread_start((thread_fn_t *) worker_thread_fn, self->workers[i]);
+    for (size_t i = 0; i < manager->worker_pool_size; i++) {
+        atomic_store(&manager->worker_switches[i], true);
+    }
+
+    for (size_t i = 0; i < manager->worker_pool_size; i++) {
+        manager->worker_thread_ids[i] = thread_start((thread_fn_t *) worker_thread_fn, manager->workers[i]);
     }
 }
 
 static void
-manager_wait(manager_t *self) {
-    assert(self->thread_id);
-    thread_wait(self->thread_id);
-
-    for (size_t i = 0; i < self->worker_pool_size; i++) {
-        thread_wait(self->worker_thread_ids[i]);
+manager_wait(manager_t *manager) {
+    for (size_t i = 0; i < manager->worker_pool_size; i++) {
+        thread_wait(manager->worker_thread_ids[i]);
     }
+
+    thread_wait(manager->thread_id);
 }
 
 void

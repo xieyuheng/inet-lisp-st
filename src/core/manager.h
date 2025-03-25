@@ -11,7 +11,7 @@ struct manager_t {
     bool is_started;
     // worker threads
     thread_id_t *worker_thread_ids;
-    bool *worker_switches;
+    atomic_bool *worker_switches;
 };
 
 manager_t *manager_new(mod_t *mod, size_t worker_pool_size);
