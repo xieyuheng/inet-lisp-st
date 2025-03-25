@@ -1,7 +1,5 @@
 #include "index.h"
 
-bool core_debug_flag = false;
-
 worker_t *
 worker_new(mod_t *mod) {
     worker_t *self = new_shared(worker_t);

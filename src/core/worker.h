@@ -1,7 +1,5 @@
 #pragma once
 
-extern bool core_debug_flag;
-
 // A worker is like a little forth inner interpreter.
 
 struct worker_t {
