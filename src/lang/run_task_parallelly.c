@@ -3,18 +3,20 @@
 static void *
 manager_thread_fn(manager_t *manager) {
     printf("[manager_thread_fn] started\n");
-    (void) manager;
-    return NULL;
+    while (true) {
+        (void) manager;
+
+        return NULL;
+    }
 }
 
 static void *
 worker_thread_fn(worker_t *worker) {
     printf("[worker_thread_fn] started\n");
     while (true) {
-        (void) worker;
-        // while (!queue_is_empty(worker->task_queue)) {
-        //     step_task(worker);
-        // }
+        while (!queue_is_empty(worker->task_queue)) {
+            step_task(worker);
+        }
 
         return NULL;
     }

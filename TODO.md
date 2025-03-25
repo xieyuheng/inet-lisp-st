@@ -1,5 +1,6 @@
-[lang] `worker_thread_fn` -- thread loop
-[lang] `manager_thread_fn` -- thread loop
+[lang] `manager_thread_fn` -- dispatch task -- not fair version for now
+[lang] `worker_thread_fn` -- can be turn off by manager
+[lang] `manager_thread_fn` -- dispatch task -- be fair
 
 # later
 
