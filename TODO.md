@@ -1,8 +1,18 @@
-[lang] `manager_thread_fn` -- dispatch task -- not fair version for now
-
-[core] `worker_ctx_t` -- has `atomic_switch`
-[core] `worker_ctx_new`
+[core] `worker_ctx_t` -- has `worker` and `atomic_is_turned_off` and `atomic_is_processing`
+[core] `worker_ctx_new` -- use `new_shared`
 [core] `worker_ctx_destroy`
+
+[lang] `worker_thread_fn` -- take `worker_ctx` instead of `worker`
+
+[lang] `worker_thread_fn` -- set `worker_ctx` to `atomic_is_processing`
+
+[lang] `manager_no_more_task` -- by `worker_ctx->atomic_is_processing`
+
+- example should pass now:
+
+  ```
+  make -j && make self-test && ./bin/inet-lisp run examples/readme/nat.test.lisp
+  ```
 
 [core] `manager_t` -- has `worker_ctxs`
 
