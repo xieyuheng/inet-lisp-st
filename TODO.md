@@ -1,6 +1,6 @@
 # core
 
-[lang] `run_task_parallelly` -- call `manager_start` and `manager_wait`
+[core] `manager_start` -- take `init_task_queue`
 
 [core] `manager_start` -- create worker threads
 

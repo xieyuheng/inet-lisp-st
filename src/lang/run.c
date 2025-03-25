@@ -89,6 +89,8 @@ void
 run_task_parallelly(worker_t *worker) {
     size_t processor_count = sysconf(_SC_NPROCESSORS_ONLN);
     manager_t *manager = manager_new(worker->mod, processor_count - 1);
+    manager_start(manager);
+    manager_wait(manager);
 
     while (!queue_is_empty(worker->task_queue)) {
         step_task(worker);
