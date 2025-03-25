@@ -86,15 +86,6 @@ run_task_sequentially(worker_t *worker) {
 }
 
 void
-run_task_parallelly(worker_t *worker) {
-    size_t processor_count = sysconf(_SC_NPROCESSORS_ONLN);
-    manager_t *manager = manager_new(worker->mod, processor_count - 1);
-    manager_start(manager, worker->task_queue);
-    manager_wait(manager);
-    manager_destroy(&manager);
-}
-
-void
 run_task(worker_t *worker) {
     if (core_debug_flag) {
         run_task_sequentially(worker);

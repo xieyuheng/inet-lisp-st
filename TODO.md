@@ -1,5 +1,5 @@
-[core] `worker_thread_fn` -- thread loop
-[core] `manager_thread_fn` -- thread loop
+[lang] `worker_thread_fn` -- thread loop
+[lang] `manager_thread_fn` -- thread loop
 
 # later
 
