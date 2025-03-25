@@ -1,6 +1,3 @@
-[core] `worker_ctx_new` -- use `new_shared`
-[core] `worker_ctx_destroy`
-
 [lang] `worker_thread_fn` -- take `worker_ctx` instead of `worker`
 
 [lang] `worker_thread_fn` -- set `worker_ctx` to `atomic_is_processing`
