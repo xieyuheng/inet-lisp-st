@@ -15,3 +15,4 @@ manager_t *manager_new(mod_t *mod, size_t worker_pool_size);
 void manager_destroy(manager_t **self_pointer);
 
 void manager_start(manager_t *self);
+void manager_wait(manager_t *self);

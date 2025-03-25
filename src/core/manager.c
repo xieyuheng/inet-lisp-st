@@ -54,3 +54,9 @@ manager_start(manager_t *self) {
     self->thread_id = thread_start((thread_fn_t *) manager_thread_fn, self);
     self->is_started = true;
 }
+
+void
+manager_wait(manager_t *self) {
+    assert(self->thread_id);
+    thread_wait(self->thread_id);
+}
