@@ -11,8 +11,11 @@ struct worker_t {
     stack_t *return_stack;
     size_t node_id_count;
     size_t fresh_name_count;
-    // only used when global_debug_flag is enabled.
+    // only used when global_debug_flag is enabled
     set_t *debug_node_set;
+    // for worker in pool
+    scheduler_t *scheduler;
+    size_t index;
 };
 
 worker_t *worker_new(mod_t *mod);
