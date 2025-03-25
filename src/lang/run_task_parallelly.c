@@ -9,6 +9,12 @@ manager_no_more_task(manager_t *manager) {
     }
 
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
+        if (atomic_load(&manager->worker_ctxs[i]->atomic_is_processing)) {
+            return false;
+        }
+    }
+
+    for (size_t i = 0; i < manager->worker_pool_size; i++) {
         if (!queue_is_empty(manager->workers[i]->task_queue)) {
             return false;
         }
@@ -30,7 +36,7 @@ manager_dispatch(manager_t *manager) {
             }
         }
 
-        printf("[manager_thread_fn] dispatch one round\n");
+        // printf("[manager_thread_fn] dispatch one round\n");
 
         if (manager_no_more_task(manager)) return;
     }
@@ -38,7 +44,7 @@ manager_dispatch(manager_t *manager) {
 
 static void *
 manager_thread_fn(manager_t *manager) {
-    printf("[manager_thread_fn] started\n");
+    // printf("[manager_thread_fn] started\n");
 
     manager_dispatch(manager);
 
@@ -55,19 +61,23 @@ worker_thread_fn(worker_ctx_t *ctx) {
     worker_t *worker = ctx->worker;
     manager_t *manager = worker->manager;
 
-    printf("[worker_thread_fn %ld] started\n", worker->index);
+    // printf("[worker_thread_fn %ld] started\n", worker->index);
     while (true) {
-        // TODO set worker_ctx to is_processing
-        while (!queue_is_empty(worker->task_queue)) {
-            printf("[worker_thread_fn %ld] step task\n", worker->index);
-            step_task(worker);
+        if (!queue_is_empty(worker->task_queue)) {
+            atomic_store(&manager->worker_ctxs[worker->index]->atomic_is_processing, true);
+
+            while (!queue_is_empty(worker->task_queue)) {
+                // printf("[worker_thread_fn %ld] step task\n", worker->index);
+                step_task(worker);
+            }
+            atomic_store(&manager->worker_ctxs[worker->index]->atomic_is_processing, false);
         }
 
         if (atomic_load(&manager->worker_ctxs[worker->index]->atomic_is_turned_off)) {
             return NULL;
         }
 
-        printf("[worker_thread_fn %ld] spinning\n", worker->index);
+        // printf("[worker_thread_fn %ld] spinning\n", worker->index);
     }
 }
 
