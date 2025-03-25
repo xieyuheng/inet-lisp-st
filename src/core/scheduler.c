@@ -9,6 +9,8 @@ scheduler_new(mod_t *mod, size_t worker_pool_size) {
     self->workers = allocate_pointers(worker_pool_size);
     for (size_t i = 0; i < worker_pool_size; i++) {
         self->workers[i] = worker_new(mod);
+        self->workers[i]->scheduler = self;
+        self->workers[i]->index = i;
     }
 
     self->task_queue_size = SCHEDULER_TASK_QUEUE_SIZE;

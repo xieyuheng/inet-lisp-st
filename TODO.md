@@ -1,3 +1,9 @@
+# core
+
+[core] `scheduler_start`
+
+# lang
+
 [lang] `run_task_parallelly` -- run `scheduler`
 
 # later
