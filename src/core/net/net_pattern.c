@@ -3,21 +3,19 @@
 struct net_pattern_t {
     array_t *node_pattern_array;
     set_t *local_name_set;
-    list_t *local_name_list;
+    array_t *local_name_array;
 };
 
 static void
-init_local_name_set(set_t *local_name_set, list_t *node_pattern_list) {
-    node_pattern_t *node_pattern = list_first(node_pattern_list);
-    while (node_pattern) {
+init_local_name_set(set_t *local_name_set, array_t *node_pattern_array) {
+    for (size_t i = 0; i < array_length(node_pattern_array); i++) {
+        node_pattern_t *node_pattern = array_get(node_pattern_array, i);
         for (size_t i = 0; i < node_pattern->ctor->arity; i++) {
             port_info_t *port_info = node_pattern->port_infos[i];
             if (!port_info->is_principal) {
                 set_put(local_name_set, string_copy(port_info->name));
             }
         }
-
-        node_pattern = list_next(node_pattern_list);
     }
 }
 
@@ -33,8 +31,8 @@ net_pattern_new(list_t *node_pattern_list) {
     }
 
     self->local_name_set = string_set_new();
-    init_local_name_set(self->local_name_set, node_pattern_list);
-    self->local_name_list = set_to_list(self->local_name_set);
+    init_local_name_set(self->local_name_set, self->node_pattern_array);
+    self->local_name_array = set_to_array(self->local_name_set);
     return self;
 }
 
@@ -45,7 +43,7 @@ net_pattern_destroy(net_pattern_t **self_pointer) {
         net_pattern_t *self = *self_pointer;
         array_destroy(&self->node_pattern_array);
         set_destroy(&self->local_name_set);
-        list_destroy(&self->local_name_list);
+        array_destroy(&self->local_name_array);
         free(self);
         *self_pointer = NULL;
     }
@@ -61,9 +59,9 @@ net_pattern_get(const net_pattern_t *self, size_t index) {
     return array_get(self->node_pattern_array, index);
 }
 
-list_t *
-net_pattern_local_name_list(const net_pattern_t *self) {
-    return self->local_name_list;
+array_t *
+net_pattern_local_name_array(const net_pattern_t *self) {
+    return self->local_name_array;
 }
 
 void
@@ -78,9 +76,9 @@ net_pattern_print(const net_pattern_t *self, file_t *file) {
     }
     fprintf(file, "</node-pattern-list>\n");
 
-    fprintf(file, "<local-name-list>");
-    string_list_print(self->local_name_list, ", ", file);
-    fprintf(file, "</local-name-list>\n");
+    fprintf(file, "<local-name-array>");
+    string_array_print(self->local_name_array, ", ", file);
+    fprintf(file, "</local-name-array>\n");
 
     fprintf(file, "</net-pattern>\n");
 }

@@ -38,10 +38,11 @@ react_by_primitive(worker_t *worker, task_t *task) {
 
 static void
 return_local_values(worker_t *worker, net_matcher_t *net_matcher) {
-    list_t *local_name_list =
-        net_pattern_local_name_list(net_matcher->net_pattern);
-    char *name = list_first(local_name_list);
-    while (name) {
+    array_t *local_name_array =
+        net_pattern_local_name_array(net_matcher->net_pattern);
+    
+    for (size_t i = 0; i < array_length(local_name_array); i++) {
+        char *name = array_get(local_name_array, i);
         value_t value = hash_get(net_matcher->value_hash, name);
         assert(value);
 
@@ -50,8 +51,7 @@ return_local_values(worker_t *worker, net_matcher_t *net_matcher) {
             wire_free_from_node(wire);
         }
 
-        stack_push(worker->value_stack, value);
-        name = list_next(local_name_list);
+        stack_push(worker->value_stack, value);        
     }
 }
 
