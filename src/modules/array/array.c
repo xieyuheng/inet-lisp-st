@@ -2,6 +2,7 @@
 
 struct array_t {
     size_t size;
+    size_t grow_size;
     size_t cursor;
     void **values;
     destroy_fn_t *destroy_fn;
@@ -11,6 +12,7 @@ array_t *
 array_new(size_t size) {
     array_t *self = new(array_t);
     self->size = size;
+    self->grow_size = size;
     self->cursor = 0;
     self->values = allocate_pointers(size);
     return self;
@@ -56,6 +58,16 @@ array_size(const array_t *self) {
 }
 
 size_t
+array_grow_size(const array_t *self) {
+    return self->grow_size;
+}
+
+void
+array_set_grow_size(array_t *self, size_t grow_size) {
+    self->grow_size = grow_size;
+}
+
+size_t
 array_length(const array_t *self) {
     return self->cursor;
 }
@@ -96,6 +108,10 @@ array_pop(array_t *self) {
 
 void
 array_push(array_t *self, void *value) {
+    // if (array_is_full(self)) {
+    //     array_grow();
+    // }
+
     self->values[self->cursor] = value;
     self->cursor++;
 }
