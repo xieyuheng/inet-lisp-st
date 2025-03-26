@@ -1,7 +1,7 @@
 #include "index.h"
 
 struct net_pattern_t {
-    list_t *node_pattern_list;
+    array_t *node_pattern_array;
     set_t *local_name_set;
     list_t *local_name_list;
 };
@@ -24,7 +24,14 @@ init_local_name_set(set_t *local_name_set, list_t *node_pattern_list) {
 net_pattern_t *
 net_pattern_new(list_t *node_pattern_list) {
     net_pattern_t *self = new(net_pattern_t);
-    self->node_pattern_list = node_pattern_list;
+
+    self->node_pattern_array = array_auto();
+    node_pattern_t *node_pattern = list_first(node_pattern_list);
+    while (node_pattern) {
+        array_push(self->node_pattern_array, node_pattern);
+        node_pattern = list_next(node_pattern_list);
+    }
+
     self->local_name_set = string_set_new();
     init_local_name_set(self->local_name_set, node_pattern_list);
     self->local_name_list = set_to_list(self->local_name_set);
@@ -36,6 +43,7 @@ net_pattern_destroy(net_pattern_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         net_pattern_t *self = *self_pointer;
+        array_destroy(&self->node_pattern_array);
         set_destroy(&self->local_name_set);
         list_destroy(&self->local_name_list);
         free(self);
@@ -45,12 +53,12 @@ net_pattern_destroy(net_pattern_t **self_pointer) {
 
 size_t
 net_pattern_length(const net_pattern_t *self) {
-    return list_length(self->node_pattern_list);
+    return array_length(self->node_pattern_array);
 }
 
 node_pattern_t *
 net_pattern_get(const net_pattern_t *self, size_t index) {
-    return list_get(self->node_pattern_list, index);
+    return array_get(self->node_pattern_array, index);
 }
 
 list_t *
@@ -63,11 +71,10 @@ net_pattern_print(const net_pattern_t *self, file_t *file) {
     fprintf(file, "<net-pattern>\n");
 
     fprintf(file, "<node-pattern-list>\n");
-    node_pattern_t *node_pattern = list_first(self->node_pattern_list);
-    while (node_pattern) {
+    for (size_t i = 0; i < array_length(self->node_pattern_array); i++) {
+        node_pattern_t *node_pattern = array_get(self->node_pattern_array, i);
         node_pattern_print(node_pattern, file);
         printf("\n");
-        node_pattern = list_next(self->node_pattern_list);
     }
     fprintf(file, "</node-pattern-list>\n");
 
