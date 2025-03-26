@@ -127,5 +127,29 @@ array_test(void) {
         assert(array == NULL);
     }
 
+    {
+        // array_push + auto grow
+
+        array_t *array = array_new(3);
+
+        array_push(array, (void *) 1);
+        array_push(array, (void *) 2);
+        array_push(array, (void *) 3);
+
+        assert(array_is_full(array));
+
+        array_push(array, (void *) 4);
+        assert(!array_is_full(array));
+        assert(array_size(array) == 6);
+
+        array_push(array, (void *) 5);
+        array_push(array, (void *) 6);
+
+        assert(array_is_full(array));
+
+        array_destroy(&array);
+        assert(array == NULL);
+    }
+
     printf("</array_test>\n");
 }

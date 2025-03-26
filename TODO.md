@@ -1,6 +1,4 @@
-# array
-
-[array] `array_push` -- call `array_grow`
+[core] remove `op_list` -- use `op_array` (auto grow)
 
 # bug
 

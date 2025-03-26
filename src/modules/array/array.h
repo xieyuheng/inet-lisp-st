@@ -10,8 +10,8 @@ void array_set_destroy_fn(array_t *self, destroy_fn_t *destroy_fn);
 array_t *array_new_with(size_t size, destroy_fn_t *destroy_fn);
 
 size_t array_size(const array_t *self);
-size_t array_grow_size(const array_t *self);
-void array_set_grow_size(array_t *self, size_t grow_size);
+size_t array_auto_grow_size(const array_t *self);
+void array_set_auto_grow_size(array_t *self, size_t auto_grow_size);
 size_t array_length(const array_t *self);
 bool array_is_empty(const array_t *self);
 bool array_is_full(const array_t *self);
