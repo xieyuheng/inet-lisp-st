@@ -12,8 +12,7 @@ node_ctor_new(const char *name, size_t arity) {
     self->name = string_copy(name);
     self->arity = arity;
     self->port_infos = allocate_pointers(arity);
-    size_t init_array_size = 32;
-    self->rule_array = array_new_with(init_array_size, (destroy_fn_t *) rule_destroy);
+    self->rule_array = array_auto_with((destroy_fn_t *) rule_destroy);
     return self;
 }
 

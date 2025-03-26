@@ -1,5 +1,3 @@
-[array] `array_auto_with` -- no size argument
-
 # bug
 
 > fix the use of list in rule (nested)

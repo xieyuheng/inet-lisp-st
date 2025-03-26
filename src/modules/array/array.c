@@ -52,6 +52,16 @@ array_new_with(size_t size, destroy_fn_t *destroy_fn) {
     return self;
 }
 
+array_t *
+array_auto(void) {
+    return array_new(ARRAY_AUTO_SIZE);
+}
+
+array_t *
+array_auto_with(destroy_fn_t *destroy_fn) {
+    return array_new_with(ARRAY_AUTO_SIZE, destroy_fn);
+}
+
 size_t
 array_size(const array_t *self) {
     return self->size;
