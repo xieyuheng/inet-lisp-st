@@ -1,7 +1,5 @@
 # bug
 
-> fix the use of list in rule (nested)
-
 [lang] fix `manager_no_more_task` -- `worker_ctx->atomic_is_processing` is not enough
 
 - example should pass now:
