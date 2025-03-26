@@ -7,9 +7,7 @@ struct function_t {
     char *name;
     size_t arity;
     hash_t *local_index_hash;
-    list_t *op_list;
-    size_t length;
-    op_t **ops;
+    array_t *op_array;
 };
 
 function_t *function_new(size_t arity);
@@ -18,8 +16,9 @@ void function_destroy(function_t **self_pointer);
 bool is_function(value_t value);
 function_t *as_function(value_t value);
 
+size_t function_length(const function_t *self);
+
 void function_add_op(function_t *self, op_t *op);
-void function_build(function_t *self);
 op_t *function_get_op(const function_t *self, size_t index);
 
 void function_print_name(const function_t *self, file_t *file);

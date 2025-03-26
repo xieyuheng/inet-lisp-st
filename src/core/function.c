@@ -11,9 +11,8 @@ function_new(size_t arity) {
     self->spec = &function_object_spec;
     self->arity = arity;
     self->local_index_hash = hash_of_string_key();
-    self->op_list = list_new_with((destroy_fn_t *) op_destroy);
-    self->length = 0;
-    self->ops = NULL;
+    size_t init_array_size = 64;
+    self->op_array = array_new_with(init_array_size, (destroy_fn_t *) op_destroy);
     return self;
 }
 
@@ -24,8 +23,7 @@ function_destroy(function_t **self_pointer) {
         function_t *self = *self_pointer;
         string_destroy(&self->name);
         hash_destroy(&self->local_index_hash);
-        list_destroy(&self->op_list);
-        if (self->ops) free(self->ops);
+        array_destroy(&self->op_array);
         free(self);
         *self_pointer = NULL;
     }
@@ -43,27 +41,19 @@ as_function(value_t value) {
     return (function_t *) value;
 }
 
-void
-function_add_op(function_t *self, op_t *op) {
-    list_push(self->op_list, op);
+size_t
+function_length(const function_t *self) {
+    return array_length(self->op_array);
 }
 
 void
-function_build(function_t *self) {
-    self->length = list_length(self->op_list);
-    self->ops = allocate_pointers(self->length);
-    size_t index = 0;
-    op_t *op = list_first(self->op_list);
-    while (op) {
-        self->ops[index] = op;
-        op = list_next(self->op_list);
-        index++;
-    }
+function_add_op(function_t *self, op_t *op) {
+    array_push(self->op_array, op);
 }
 
 op_t *
 function_get_op(const function_t *self, size_t index) {
-    return self->ops[index];
+    return array_get(self->op_array, index);
 }
 
 void
@@ -74,11 +64,10 @@ function_print_name(const function_t *self, file_t *file) {
 void
 function_print(const function_t *self, file_t *file) {
     fprintf(file, "<function %s>\n", self->name);
-    op_t *op = list_first(self->op_list);
-    while (op) {
+    for (size_t i = 0; i < function_length(self); i++) {
+        op_t *op = array_get(self->op_array, i);
         op_print(op, file);
         fprintf(file, "\n");
-        op = list_next(self->op_list);
     }
     fprintf(file, "</function>\n");
 }
@@ -86,13 +75,13 @@ function_print(const function_t *self, file_t *file) {
 void
 function_print_with_cursor(const function_t *self, file_t *file, size_t cursor) {
     fprintf(file, "<function %s>\n", self->name);
-    for (size_t i = 0; i < self->length; i++) {
+    for (size_t i = 0; i < function_length(self); i++) {
         if (i == cursor) {
-            op_print(self->ops[i], file);
+            op_print(function_get_op(self, i), file);
             fprintf(file, " <<<");
             fprintf(file, "\n");
         } else {
-            op_print(self->ops[i], file);
+            op_print(function_get_op(self, i), file);
             fprintf(file, "\n");
         }
     }

@@ -1,5 +1,3 @@
-[core] `function_t` -- remove `op_list` and `ops` -- use `op_array` (auto grow)
-
 # bug
 
 [bug] `activate_matched_node` -- should has `rule_array` instead of `rule_list` which is not thread safe

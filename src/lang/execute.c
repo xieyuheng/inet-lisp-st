@@ -105,7 +105,6 @@ compute_exp(worker_t *worker, exp_t *exp) {
     size_t arity = 0;
     function_t *function = function_new(arity);
     compile_exp(worker, function, exp);
-    function_build(function);
 
     size_t base_length = stack_length(worker->return_stack);
     frame_t *frame = frame_new(function);
@@ -132,7 +131,6 @@ execute(worker_t *worker, stmt_t *stmt) {
         function->name = string_copy(stmt->define_function.name);
         compile_set_variable_list(worker, function, stmt->define_function.arg_name_list);
         compile_exp_list(worker, function, stmt->define_function.exp_list);
-        function_build(function);
         define(worker->mod, stmt->define_function.name, function);
         return;
     }
