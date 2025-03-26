@@ -1,6 +1,11 @@
+[array] `array_auto_with` -- no size argument
+
 # bug
 
-[bug] fix the use of list in rule (nested)
+> fix the use of list in rule (nested)
+
+[bug] `net_pattern_t` -- has `node_pattern_array` instead of `node_pattern_list`
+[bug] `net_pattern_t` -- has `local_name_array` instead of `local_name_list`
 
 [lang] fix `manager_no_more_task` -- `worker_ctx->atomic_is_processing` is not enough
 
