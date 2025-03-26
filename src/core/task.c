@@ -57,8 +57,9 @@ activate_primitive_node(worker_t *worker, node_t *node) {
 
 static void
 activate_matched_node(worker_t *worker, node_t *node) {
-    rule_t *rule = list_first(node->ctor->rule_list);
-    while (rule) {
+    size_t length = array_length(node->ctor->rule_array);
+    for (size_t i = 0; i < length; i++) {
+        rule_t *rule = array_get(node->ctor->rule_array, i);
         net_matcher_t *net_matcher =
             match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
@@ -68,8 +69,6 @@ activate_matched_node(worker_t *worker, node_t *node) {
                 atomic_store(&net_matcher->matched_nodes[i]->atomic_is_matched, true);
             return;
         }
-
-        rule = list_next(node->ctor->rule_list);
     }
 }
 

@@ -8,7 +8,7 @@ struct node_ctor_t {
     primitive_t *primitive;
     size_t arity;
     port_info_t **port_infos;
-    list_t *rule_list;
+    array_t *rule_array;
 };
 
 node_ctor_t *node_ctor_new(const char *name, size_t arity);

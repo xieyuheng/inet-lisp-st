@@ -1,7 +1,5 @@
 # bug
 
-[bug] `activate_matched_node` -- should has `rule_array` instead of `rule_list` which is not thread safe
-
 [bug] fix the use of list in rule (nested)
 
 [lang] fix `manager_no_more_task` -- `worker_ctx->atomic_is_processing` is not enough
