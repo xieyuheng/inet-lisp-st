@@ -1,4 +1,4 @@
-[core] remove `op_list` -- use `op_array` (auto grow)
+[core] `function_t` -- remove `op_list` and `ops` -- use `op_array` (auto grow)
 
 # bug
 
