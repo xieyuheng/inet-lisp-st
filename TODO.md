@@ -1,8 +1,3 @@
-# memory
-
-[memory] `reallocate_many`
-[memory] `reallocate_pointers`
-
 # array
 
 [array] `array_t` be growable

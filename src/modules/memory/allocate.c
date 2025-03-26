@@ -33,8 +33,26 @@ allocate_pointers(size_t size) {
 void *
 reallocate(void *pointer, size_t old_size, size_t new_size) {
     void *new_pointer = realloc(pointer, new_size);
-    memset(((char *) new_pointer + old_size), 0, new_size);
+    assert(new_pointer);
+    assert(pointer_is_8_bytes_aligned(new_pointer));
+    memset((((char *) new_pointer) + old_size), 0, new_size - old_size);
     return new_pointer;
+}
+
+void *
+reallocate_many(void *pointer, size_t old_size, size_t new_size, size_t unit_size) {
+    void *new_pointer = realloc(pointer, new_size * unit_size);
+    assert(new_pointer);
+    assert(pointer_is_8_bytes_aligned(new_pointer));
+    memset((((char *) new_pointer) + old_size * unit_size),
+           0,
+           (new_size - old_size) * unit_size);
+    return new_pointer;
+}
+
+void *
+reallocate_pointers(void *pointer, size_t old_size, size_t new_size) {
+    return reallocate_many(pointer, old_size, new_size, sizeof(void *));
 }
 
 bool
