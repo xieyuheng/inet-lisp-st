@@ -1,8 +1,6 @@
 # array
 
-[array] `array_t` be growable
-[array] `array_grow`
-[array] `array_push` -- grow the array when needed
+[array] `array_push` -- call `array_grow`
 
 # bug
 

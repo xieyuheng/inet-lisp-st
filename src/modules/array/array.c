@@ -70,6 +70,15 @@ array_is_full(const array_t *self) {
     return self->cursor == self->size;
 }
 
+void
+array_grow(array_t *self, size_t larger_size) {
+    assert(larger_size >= self->size);
+    if (larger_size == self->size) return;
+
+    self->values = reallocate_pointers(self->values, self->size, larger_size);
+    self->size = larger_size;
+}
+
 void *
 array_top(array_t *self) {
     assert(self->cursor > 0);
