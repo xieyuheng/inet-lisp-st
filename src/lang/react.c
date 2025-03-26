@@ -56,7 +56,7 @@ return_local_values(worker_t *worker, net_matcher_t *net_matcher) {
 }
 
 static void
-delete_match_nodes(worker_t *worker, net_matcher_t *net_matcher) {
+delete_matched_nodes(worker_t *worker, net_matcher_t *net_matcher) {
     size_t length = net_pattern_length(net_matcher->net_pattern);
     for (size_t i = 0; i < length; i++) {
         node_t *matched_node = net_matcher->matched_nodes[i];
@@ -80,7 +80,7 @@ delete_match_nodes(worker_t *worker, net_matcher_t *net_matcher) {
 static void
 react_by_rule(worker_t *worker, task_t *task) {
     return_local_values(worker, task->net_matcher);
-    delete_match_nodes(worker, task->net_matcher);
+    delete_matched_nodes(worker, task->net_matcher);
 
     size_t base_length = stack_length(worker->return_stack);
     frame_t *frame = frame_new(task->rule->function);
