@@ -1,6 +1,5 @@
 # memory
 
-[memory] `reallocate`
 [memory] `reallocate_many`
 [memory] `reallocate_pointers`
 

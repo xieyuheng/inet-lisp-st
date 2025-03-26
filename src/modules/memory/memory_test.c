@@ -19,6 +19,28 @@ memory_test(void) {
     }
 
     {
+        uint8_t *pointer = allocate(3);
+        pointer[0] = 1;
+        pointer[1] = 2;
+        pointer[2] = 3;
+
+        assert(pointer[0] == 1);
+        assert(pointer[1] == 2);
+        assert(pointer[2] == 3);
+
+        pointer = reallocate(pointer, 3, 6);
+
+        assert(pointer[0] == 1);
+        assert(pointer[1] == 2);
+        assert(pointer[2] == 3);
+        assert(pointer[3] == 0);
+        assert(pointer[4] == 0);
+        assert(pointer[5] == 0);
+
+        destroy((void **) &pointer);
+    }
+
+    {
         void *pointer = allocate_shared(10);
         assert(pointer_is_8_bytes_aligned(pointer));
         assert(pointer_is_cache_line_aligned(pointer));
