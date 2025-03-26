@@ -9,7 +9,7 @@ ldflags = \
 
 cflags = \
 	-g \
-	-O0 \
+	-O3 \
 	-std=c2x \
 	-I/usr/local/include \
 	-Wall \
