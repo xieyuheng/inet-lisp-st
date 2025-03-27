@@ -13,7 +13,6 @@ run_command(commander_t *runner) {
 int
 run(commander_t *commander) {
     char **argv = commander_rest_argv(commander);
-    argv = commander_rest_argv(commander);
     while (*argv) {
         char *src = *argv++;
         if (string_ends_with(src, ".lisp")) {
