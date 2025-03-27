@@ -1,6 +1,4 @@
-# embarrassingly parallel
-
-[lang] `manager_thread_fn` -- wait for all worker to stop processing
+[bug] embarrassingly parallel still not working for subgraph pattern matching
 
 # later
 
