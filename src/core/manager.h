@@ -8,7 +8,6 @@ struct manager_t {
     queue_t **task_queues;
     // manager thread
     thread_id_t thread_id;
-    bool is_started;
     // worker threads
     worker_ctx_t **worker_ctxs;
 

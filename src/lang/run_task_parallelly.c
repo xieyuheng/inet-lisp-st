@@ -1,15 +1,7 @@
 #include "index.h"
 
 static bool
-manager_no_more_task(manager_t *manager) {
-    for (size_t i = 0; i < 3; i++) {
-        for (size_t i = 0; i < manager->worker_pool_size; i++) {
-            if (!queue_is_empty(manager->task_queues[i])) {
-                return false;
-            }
-        }
-    }
-
+all_worker_finished(manager_t *manager) {
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
         if (atomic_load(&manager->worker_ctxs[i]->atomic_is_processing)) {
             return false;
@@ -19,6 +11,19 @@ manager_no_more_task(manager_t *manager) {
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
         if (!queue_is_empty(manager->workers[i]->task_queue)) {
             return false;
+        }
+    }
+
+    return true;
+}
+
+static bool
+manager_no_more_task(manager_t *manager) {
+    for (size_t i = 0; i < 3; i++) {
+        for (size_t i = 0; i < manager->worker_pool_size; i++) {
+            if (!queue_is_empty(manager->task_queues[i])) {
+                return false;
+            }
         }
     }
 
@@ -40,7 +45,7 @@ manager_dispatch(manager_t *manager) {
 
         // printf("[manager_thread_fn] dispatch one round\n");
 
-        if (manager_no_more_task(manager)) {
+        if (all_worker_finished(manager) & manager_no_more_task(manager)) {
             return;
         }
     }
@@ -57,7 +62,6 @@ manager_thread_fn(manager_t *manager) {
     }
 
     return NULL;
-
 }
 
 static void *
@@ -74,6 +78,7 @@ worker_thread_fn(worker_ctx_t *ctx) {
                 // printf("[worker_thread_fn %ld] step task\n", worker->index);
                 step_task(worker);
             }
+
             atomic_store(&manager->worker_ctxs[worker->index]->atomic_is_processing, false);
         }
 
@@ -102,14 +107,12 @@ manager_start(manager_t *manager, queue_t *init_task_queue) {
     // start manager thread
 
     manager->thread_id = thread_start((thread_fn_t *) manager_thread_fn, manager);
-    manager->is_started = true;
 
     // start worker threads
 
     for (size_t i = 0; i < manager->worker_pool_size; i++) {
         manager->worker_ctxs[i]->thread_id =
             thread_start((thread_fn_t *) worker_thread_fn, manager->worker_ctxs[i]);
-        manager->worker_ctxs[i]->is_started = true;
     }
 }
 
