@@ -63,31 +63,11 @@
 </net>
 
 <net>
-:root -<>-!value-(cons₄)
-(cons₄
- :head -<>-!value-(add1₂)
- :tail -<>-!value-(cons₈)
- :value! -<>-)
-(cons₈
- :head -<>-!value-(add1₆)
- :tail -<>-!value-(cons₁₂)
- :value! -<>-tail-(cons₄))
-(cons₁₂
- :head -<>-!value-(add1₁₀)
- :tail -<>-!value-(cons₁₆)
- :value! -<>-tail-(cons₈))
-(cons₁₆
- :head -<>-!value-(add1₁₄)
- :tail -<>-!value-(cons₂₀)
- :value! -<>-tail-(cons₁₂))
-(cons₂₀
- :head -<>-!value-(add1₁₈)
- :tail -<>-!value-(cons₂₄)
- :value! -<>-tail-(cons₁₆))
+:root -<>-!value-(cons₂₄)
 (cons₂₄
  :head -<>-!value-(add1₂₂)
  :tail -<>-!value-(cons₂₈)
- :value! -<>-tail-(cons₂₀))
+ :value! -<>-)
 (cons₂₈
  :head -<>-!value-(add1₂₆)
  :tail -<>-!value-(cons₃₂)
@@ -98,169 +78,189 @@
  :value! -<>-tail-(cons₂₈))
 (cons₃₆
  :head -<>-!value-(add1₃₄)
- :tail -<>-!value-(null₃₇)
+ :tail -<>-!value-(cons₄₀)
  :value! -<>-tail-(cons₃₂))
-(null₃₇
+(cons₄₀
+ :head -<>-!value-(add1₃₈)
+ :tail -<>-!value-(cons₄₄)
  :value! -<>-tail-(cons₃₆))
+(cons₄₄
+ :head -<>-!value-(add1₄₂)
+ :tail -<>-!value-(cons₄₈)
+ :value! -<>-tail-(cons₄₀))
+(cons₄₈
+ :head -<>-!value-(add1₄₆)
+ :tail -<>-!value-(cons₅₂)
+ :value! -<>-tail-(cons₄₄))
+(cons₅₂
+ :head -<>-!value-(add1₅₀)
+ :tail -<>-!value-(cons₅₆)
+ :value! -<>-tail-(cons₄₈))
+(cons₅₆
+ :head -<>-!value-(add1₅₄)
+ :tail -<>-!value-(null₅₇)
+ :value! -<>-tail-(cons₅₂))
+(null₅₇
+ :value! -<>-tail-(cons₅₆))
+(add1₅₄
+ :prev -<>-!value-(add1₅₃)
+ :value! -<>-head-(cons₅₆))
+(add1₅₃
+ :prev -<>-!value-(zero₄)
+ :value! -<>-prev-(add1₅₄))
+(zero₄
+ :value! -<>-prev-(add1₅₃))
+(add1₅₀
+ :prev -<>-!value-(add1₄₉)
+ :value! -<>-head-(cons₅₂))
+(add1₄₉
+ :prev -<>-!value-(zero₃)
+ :value! -<>-prev-(add1₅₀))
+(zero₃
+ :value! -<>-prev-(add1₄₉))
+(add1₄₆
+ :prev -<>-!value-(add1₄₅)
+ :value! -<>-head-(cons₄₈))
+(add1₄₅
+ :prev -<>-!value-(zero₂)
+ :value! -<>-prev-(add1₄₆))
+(zero₂
+ :value! -<>-prev-(add1₄₅))
+(add1₄₂
+ :prev -<>-!value-(add1₄₁)
+ :value! -<>-head-(cons₄₄))
+(add1₄₁
+ :prev -<>-!value-(zero₁₀)
+ :value! -<>-prev-(add1₄₂))
+(zero₁₀
+ :value! -<>-prev-(add1₄₁))
+(add1₃₈
+ :prev -<>-!value-(add1₃₇)
+ :value! -<>-head-(cons₄₀))
+(add1₃₇
+ :prev -<>-!value-(zero₉)
+ :value! -<>-prev-(add1₃₈))
+(zero₉
+ :value! -<>-prev-(add1₃₇))
 (add1₃₄
  :prev -<>-!value-(add1₃₃)
  :value! -<>-head-(cons₃₆))
 (add1₃₃
- :prev -<>-!value-(zero₄)
+ :prev -<>-!value-(zero₈)
  :value! -<>-prev-(add1₃₄))
-(zero₄
+(zero₈
  :value! -<>-prev-(add1₃₃))
 (add1₃₀
  :prev -<>-!value-(add1₂₉)
  :value! -<>-head-(cons₃₂))
 (add1₂₉
- :prev -<>-!value-(zero₃)
+ :prev -<>-!value-(zero₁₆)
  :value! -<>-prev-(add1₃₀))
-(zero₃
+(zero₁₆
  :value! -<>-prev-(add1₂₉))
 (add1₂₆
  :prev -<>-!value-(add1₂₅)
  :value! -<>-head-(cons₂₈))
 (add1₂₅
- :prev -<>-!value-(zero₂)
+ :prev -<>-!value-(zero₁₅)
  :value! -<>-prev-(add1₂₆))
-(zero₂
+(zero₁₅
  :value! -<>-prev-(add1₂₅))
 (add1₂₂
  :prev -<>-!value-(add1₂₁)
  :value! -<>-head-(cons₂₄))
 (add1₂₁
- :prev -<>-!value-(zero₁₀)
- :value! -<>-prev-(add1₂₂))
-(zero₁₀
- :value! -<>-prev-(add1₂₁))
-(add1₁₈
- :prev -<>-!value-(add1₁₇)
- :value! -<>-head-(cons₂₀))
-(add1₁₇
- :prev -<>-!value-(zero₉)
- :value! -<>-prev-(add1₁₈))
-(zero₉
- :value! -<>-prev-(add1₁₇))
-(add1₁₄
- :prev -<>-!value-(add1₁₃)
- :value! -<>-head-(cons₁₆))
-(add1₁₃
- :prev -<>-!value-(zero₈)
- :value! -<>-prev-(add1₁₄))
-(zero₈
- :value! -<>-prev-(add1₁₃))
-(add1₁₀
- :prev -<>-!value-(add1₉)
- :value! -<>-head-(cons₁₂))
-(add1₉
- :prev -<>-!value-(zero₁₆)
- :value! -<>-prev-(add1₁₀))
-(zero₁₆
- :value! -<>-prev-(add1₉))
-(add1₆
- :prev -<>-!value-(add1₅)
- :value! -<>-head-(cons₈))
-(add1₅
- :prev -<>-!value-(zero₁₅)
- :value! -<>-prev-(add1₆))
-(zero₁₅
- :value! -<>-prev-(add1₅))
-(add1₂
- :prev -<>-!value-(add1₁)
- :value! -<>-head-(cons₄))
-(add1₁
  :prev -<>-!value-(zero₁₄)
- :value! -<>-prev-(add1₂))
+ :value! -<>-prev-(add1₂₂))
 (zero₁₄
- :value! -<>-prev-(add1₁))
+ :value! -<>-prev-(add1₂₁))
 </net>
 
 <net>
-:root -<>-result-(list-map₃₁)
-(list-map₃₁
- :target! -<>-!value-(cons₃₀)
+:root -<>-result-(list-map₆₈)
+(list-map₆₈
+ :target! -<>-!value-(cons₆₇)
  :fn iadd2
  :result -<>-)
-(cons₃₀
+(cons₆₇
  :head 0
- :tail -<>-!value-(cons₂₉)
- :value! -<>-!target-(list-map₃₁))
-(cons₂₉
+ :tail -<>-!value-(cons₆₆)
+ :value! -<>-!target-(list-map₆₈))
+(cons₆₆
  :head 0
- :tail -<>-!value-(cons₂₈)
- :value! -<>-tail-(cons₃₀))
-(cons₂₈
+ :tail -<>-!value-(cons₆₅)
+ :value! -<>-tail-(cons₆₇))
+(cons₆₅
  :head 0
- :tail -<>-!value-(cons₂₇)
- :value! -<>-tail-(cons₂₉))
-(cons₂₇
+ :tail -<>-!value-(cons₆₄)
+ :value! -<>-tail-(cons₆₆))
+(cons₆₄
  :head 0
- :tail -<>-!value-(cons₂₆)
- :value! -<>-tail-(cons₂₈))
-(cons₂₆
+ :tail -<>-!value-(cons₆₃)
+ :value! -<>-tail-(cons₆₅))
+(cons₆₃
  :head 0
- :tail -<>-!value-(cons₂₅)
- :value! -<>-tail-(cons₂₇))
-(cons₂₅
+ :tail -<>-!value-(cons₆₂)
+ :value! -<>-tail-(cons₆₄))
+(cons₆₂
  :head 0
- :tail -<>-!value-(cons₂₄)
- :value! -<>-tail-(cons₂₆))
-(cons₂₄
+ :tail -<>-!value-(cons₆₁)
+ :value! -<>-tail-(cons₆₃))
+(cons₆₁
  :head 0
- :tail -<>-!value-(cons₂₃)
- :value! -<>-tail-(cons₂₅))
-(cons₂₃
+ :tail -<>-!value-(cons₆₀)
+ :value! -<>-tail-(cons₆₂))
+(cons₆₀
  :head 0
- :tail -<>-!value-(cons₂₂)
- :value! -<>-tail-(cons₂₄))
-(cons₂₂
+ :tail -<>-!value-(cons₅₉)
+ :value! -<>-tail-(cons₆₁))
+(cons₅₉
  :head 0
- :tail -<>-!value-(null₂₁)
- :value! -<>-tail-(cons₂₃))
-(null₂₁
- :value! -<>-tail-(cons₂₂))
+ :tail -<>-!value-(null₅₈)
+ :value! -<>-tail-(cons₆₀))
+(null₅₈
+ :value! -<>-tail-(cons₅₉))
 </net>
 
 <net>
-:root -<>-!value-(cons₂)
-(cons₂
+:root -<>-!value-(cons₇₀)
+(cons₇₀
  :head 2
- :tail -<>-!value-(cons₄)
+ :tail -<>-!value-(cons₇₂)
  :value! -<>-)
-(cons₄
+(cons₇₂
  :head 2
- :tail -<>-!value-(cons₆)
- :value! -<>-tail-(cons₂))
-(cons₆
+ :tail -<>-!value-(cons₇₄)
+ :value! -<>-tail-(cons₇₀))
+(cons₇₄
  :head 2
- :tail -<>-!value-(cons₈)
- :value! -<>-tail-(cons₄))
-(cons₈
+ :tail -<>-!value-(cons₇₆)
+ :value! -<>-tail-(cons₇₂))
+(cons₇₆
  :head 2
- :tail -<>-!value-(cons₁₀)
- :value! -<>-tail-(cons₆))
-(cons₁₀
+ :tail -<>-!value-(cons₇₈)
+ :value! -<>-tail-(cons₇₄))
+(cons₇₈
  :head 2
- :tail -<>-!value-(cons₁₂)
- :value! -<>-tail-(cons₈))
-(cons₁₂
+ :tail -<>-!value-(cons₈₀)
+ :value! -<>-tail-(cons₇₆))
+(cons₈₀
  :head 2
- :tail -<>-!value-(cons₁₄)
- :value! -<>-tail-(cons₁₀))
-(cons₁₄
+ :tail -<>-!value-(cons₈₂)
+ :value! -<>-tail-(cons₇₈))
+(cons₈₂
  :head 2
- :tail -<>-!value-(cons₁₆)
- :value! -<>-tail-(cons₁₂))
-(cons₁₆
+ :tail -<>-!value-(cons₈₄)
+ :value! -<>-tail-(cons₈₀))
+(cons₈₄
  :head 2
- :tail -<>-!value-(cons₁₈)
- :value! -<>-tail-(cons₁₄))
-(cons₁₈
+ :tail -<>-!value-(cons₈₆)
+ :value! -<>-tail-(cons₈₂))
+(cons₈₆
  :head 2
- :tail -<>-!value-(null₁₉)
- :value! -<>-tail-(cons₁₆))
-(null₁₉
- :value! -<>-tail-(cons₁₈))
+ :tail -<>-!value-(null₈₇)
+ :value! -<>-tail-(cons₈₄))
+(null₈₇
+ :value! -<>-tail-(cons₈₆))
 </net>
 

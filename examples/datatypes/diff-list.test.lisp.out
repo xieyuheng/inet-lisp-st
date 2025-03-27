@@ -39,14 +39,14 @@
 </net>
 
 <net>
-:root -<>-!value-(diff₁)
-(diff₁
+:root -<>-!value-(diff₁₂)
+(diff₁₂
  :front -<>-!value-(cons₅)
  :back -<>-tail-(cons₉)
  :value! -<>-)
 (cons₉
  :head -<>-!value-(sole₈)
- :tail -<>-back-(diff₁)
+ :tail -<>-back-(diff₁₂)
  :value! -<>-tail-(cons₁₀))
 (cons₁₀
  :head -<>-!value-(sole₇)
@@ -65,7 +65,7 @@
 (cons₅
  :head -<>-!value-(sole₂)
  :tail -<>-!value-(cons₄)
- :value! -<>-front-(diff₁))
+ :value! -<>-front-(diff₁₂))
 (sole₂
  :value! -<>-head-(cons₅))
 </net>

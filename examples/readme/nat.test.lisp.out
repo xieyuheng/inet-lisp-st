@@ -23,16 +23,16 @@
 </net>
 
 <net>
-:root -<>-!value-(add1₂)
-(add1₂
- :prev -<>-!value-(add1₄)
+:root -<>-!value-(add1₉)
+(add1₉
+ :prev -<>-!value-(add1₁₁)
  :value! -<>-)
-(add1₄
+(add1₁₁
  :prev -<>-!value-(add1₆)
- :value! -<>-prev-(add1₂))
+ :value! -<>-prev-(add1₉))
 (add1₆
  :prev -<>-!value-(add1₅)
- :value! -<>-prev-(add1₄))
+ :value! -<>-prev-(add1₁₁))
 (add1₅
  :prev -<>-!value-(zero₄)
  :value! -<>-prev-(add1₆))
