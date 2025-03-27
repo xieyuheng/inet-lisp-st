@@ -116,55 +116,6 @@ The whole program with test:
 (inspect-run (add (two) (two)))
 ```
 
-<details>
-<summary>output</summary>
-
-```
-<net>
-:root -<>-result-(add₇)
-(add₇
- :target! -<>-!value-(add1₃)
- :addend -<>-!value-(add1₆)
- :result -<>-)
-(add1₆
- :prev -<>-!value-(add1₅)
- :value! -<>-addend-(add₇))
-(add1₅
- :prev -<>-!value-(zero₄)
- :value! -<>-prev-(add1₆))
-(zero₄
- :value! -<>-prev-(add1₅))
-(add1₃
- :prev -<>-!value-(add1₂)
- :value! -<>-!target-(add₇))
-(add1₂
- :prev -<>-!value-(zero₁)
- :value! -<>-prev-(add1₃))
-(zero₁
- :value! -<>-prev-(add1₂))
-</net>
-
-<net>
-:root -<>-!value-(add1₉)
-(add1₉
- :prev -<>-!value-(add1₁₁)
- :value! -<>-)
-(add1₁₁
- :prev -<>-!value-(add1₆)
- :value! -<>-prev-(add1₉))
-(add1₆
- :prev -<>-!value-(add1₅)
- :value! -<>-prev-(add1₁₁))
-(add1₅
- :prev -<>-!value-(zero₄)
- :value! -<>-prev-(add1₆))
-(zero₄
- :value! -<>-prev-(add1₅))
-</net>
-```
-
-</details>
-
 ### List
 
 ```
@@ -186,103 +137,6 @@ The whole program with test:
     (cons (sole) (cons (sole) (cons (sole) (null))))))
 ```
 
-<details>
-<summary>output</summary>
-
-```
-<net>
-:root -<>-result-(append₁₅)
-(append₁₅
- :target! -<>-!value-(cons₇)
- :rest -<>-!value-(cons₁₄)
- :result -<>-)
-(cons₁₄
- :head -<>-!value-(sole₈)
- :tail -<>-!value-(cons₁₃)
- :value! -<>-rest-(append₁₅))
-(cons₁₃
- :head -<>-!value-(sole₉)
- :tail -<>-!value-(cons₁₂)
- :value! -<>-tail-(cons₁₄))
-(cons₁₂
- :head -<>-!value-(sole₁₀)
- :tail -<>-!value-(null₁₁)
- :value! -<>-tail-(cons₁₃))
-(null₁₁
- :value! -<>-tail-(cons₁₂))
-(sole₁₀
- :value! -<>-head-(cons₁₂))
-(sole₉
- :value! -<>-head-(cons₁₃))
-(sole₈
- :value! -<>-head-(cons₁₄))
-(cons₇
- :head -<>-!value-(sole₁)
- :tail -<>-!value-(cons₆)
- :value! -<>-!target-(append₁₅))
-(cons₆
- :head -<>-!value-(sole₂)
- :tail -<>-!value-(cons₅)
- :value! -<>-tail-(cons₇))
-(cons₅
- :head -<>-!value-(sole₃)
- :tail -<>-!value-(null₄)
- :value! -<>-tail-(cons₆))
-(null₄
- :value! -<>-tail-(cons₅))
-(sole₃
- :value! -<>-head-(cons₅))
-(sole₂
- :value! -<>-head-(cons₆))
-(sole₁
- :value! -<>-head-(cons₇))
-</net>
-
-<net>
-:root -<>-!value-(cons₁₇)
-(cons₁₇
- :head -<>-!value-(sole₁)
- :tail -<>-!value-(cons₁₉)
- :value! -<>-)
-(cons₁₉
- :head -<>-!value-(sole₂)
- :tail -<>-!value-(cons₂₁)
- :value! -<>-tail-(cons₁₇))
-(cons₂₁
- :head -<>-!value-(sole₃)
- :tail -<>-!value-(cons₁₄)
- :value! -<>-tail-(cons₁₉))
-(cons₁₄
- :head -<>-!value-(sole₈)
- :tail -<>-!value-(cons₁₃)
- :value! -<>-tail-(cons₂₁))
-(cons₁₃
- :head -<>-!value-(sole₉)
- :tail -<>-!value-(cons₁₂)
- :value! -<>-tail-(cons₁₄))
-(cons₁₂
- :head -<>-!value-(sole₁₀)
- :tail -<>-!value-(null₁₁)
- :value! -<>-tail-(cons₁₃))
-(null₁₁
- :value! -<>-tail-(cons₁₂))
-(sole₁₀
- :value! -<>-head-(cons₁₂))
-(sole₉
- :value! -<>-head-(cons₁₃))
-(sole₈
- :value! -<>-head-(cons₁₄))
-(sole₃
- :value! -<>-head-(cons₂₁))
-(sole₂
- :value! -<>-head-(cons₁₉))
-(sole₁
- :value! -<>-head-(cons₁₇))
-</net>
-```
-
-</details>
-
 ### More
 
 For more examples, please see the [examples/](examples/) directory.
@@ -300,9 +154,7 @@ For more examples, please see the [examples/](examples/) directory.
 
 Dependencies:
 
-- `libx11`:
-  - debian: `sudo apt install libx11-dev`
-  - ubuntu: `sudo apt install libx11-dev`
+- debian/ubuntu: `sudo apt install libx11-dev`
 
 Compile:
 
