@@ -1,14 +1,6 @@
-# bug
+# embarrassingly parallel
 
-[lang] fix `manager_no_more_task` -- `worker_ctx->atomic_is_processing` is not enough
-
-- example should pass now:
-
-  ```
-  make -j && make self-test && ./bin/inet-lisp run examples/readme/nat.test.lisp
-  ```
-
-[lang] `manager_thread_fn` -- dispatch task -- be fair
+[lang] `manager_thread_fn` -- wait for all worker to stop processing
 
 # later
 
