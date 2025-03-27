@@ -6,5 +6,5 @@
   (null result))
 
 (define-rule (list-map (cons head tail) fn result)
-  (= fn1 fn2 (fn-dup fn))
-  (cons (fn1 head) (list-map tail fn2) result))
+  (= fn fn* (fn-dup fn))
+  (cons (fn head) (list-map tail fn*) result))
