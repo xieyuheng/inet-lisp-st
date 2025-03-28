@@ -73,7 +73,7 @@ activate_matched_node(worker_t *worker, node_t *node) {
 }
 
 void
-schedule_task_by_node(worker_t *worker, node_t *node) {
+maybe_return_task_by_node(worker_t *worker, node_t *node) {
     assert(node);
 
     if (atomic_load(&node->atomic_is_matched))
@@ -86,8 +86,8 @@ schedule_task_by_node(worker_t *worker, node_t *node) {
 }
 
 void
-schedule_task_by_node_and_neighbor(worker_t *worker, node_t *node) {
-    schedule_task_by_node(worker, node);
+maybe_return_task_by_node_and_neighbor(worker_t *worker, node_t *node) {
+    maybe_return_task_by_node(worker, node);
 
     // NOTE for imported node ctor,
     // if is not enough to activate the new node only,
@@ -102,7 +102,7 @@ schedule_task_by_node_and_neighbor(worker_t *worker, node_t *node) {
         if (!is_wire(value)) continue;
         wire_t *wire = as_wire(value);
         if (is_wire(wire->opposite) && as_wire(wire->opposite)->node)
-            schedule_task_by_node(worker, as_wire(wire->opposite)->node);
+            maybe_return_task_by_node(worker, as_wire(wire->opposite)->node);
     }
 }
 

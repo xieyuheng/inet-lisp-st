@@ -16,9 +16,9 @@ connect_wire(worker_t* worker, wire_t *first_wire, wire_t *second_wire) {
         worker_delete_wire(worker, second_wire);
 
         if (first_opposite_wire->node)
-            schedule_task_by_node(worker, first_opposite_wire->node);
+            maybe_return_task_by_node(worker, first_opposite_wire->node);
         if (second_opposite_wire->node)
-            schedule_task_by_node(worker, second_opposite_wire->node);
+            maybe_return_task_by_node(worker, second_opposite_wire->node);
 
         return first_opposite_wire;
     } else if (is_wire(first_opposite)) {
@@ -29,7 +29,7 @@ connect_wire(worker_t* worker, wire_t *first_wire, wire_t *second_wire) {
         worker_delete_wire(worker, second_wire);
 
         if (first_opposite_wire->node)
-            schedule_task_by_node(worker, first_opposite_wire->node);
+            maybe_return_task_by_node(worker, first_opposite_wire->node);
 
         return first_opposite_wire;
     } else if (is_wire(second_opposite)) {
@@ -40,7 +40,7 @@ connect_wire(worker_t* worker, wire_t *first_wire, wire_t *second_wire) {
         worker_delete_wire(worker, second_wire);
 
         if (second_opposite_wire->node)
-            schedule_task_by_node(worker, second_opposite_wire->node);
+            maybe_return_task_by_node(worker, second_opposite_wire->node);
 
         return second_opposite_wire;
     } else {
@@ -69,7 +69,7 @@ connect_value(worker_t* worker, wire_t *wire, value_t value) {
          worker_delete_wire(worker, wire);
 
          if (opposite_wire->node)
-             schedule_task_by_node(worker, opposite_wire->node);
+             maybe_return_task_by_node(worker, opposite_wire->node);
 
          return opposite_wire;
      } else {

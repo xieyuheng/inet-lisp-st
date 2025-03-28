@@ -81,6 +81,6 @@ apply_primitive(worker_t *worker, primitive_t *primitive, size_t arity) {
     node_t *node = worker_add_node(worker, primitive->node_ctor);
     apply_node_input_ports(worker, node, arity);
     apply_node_output_ports(worker, node, arity);
-    // TODO maybe no need to call `schedule_task_by_node_and_neighbor`,
-    schedule_task_by_node_and_neighbor(worker, node);
+    // TODO maybe no need to call `maybe_return_task_by_node_and_neighbor`,
+    maybe_return_task_by_node_and_neighbor(worker, node);
 }

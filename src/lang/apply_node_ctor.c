@@ -33,5 +33,5 @@ apply_node_ctor(worker_t *worker, node_ctor_t *node_ctor, size_t arity) {
     node_t *node = worker_add_node(worker, node_ctor);
     apply_node_input_ports(worker, node, arity);
     apply_node_output_ports(worker, node, arity);
-    schedule_task_by_node_and_neighbor(worker, node);
+    maybe_return_task_by_node_and_neighbor(worker, node);
 }
