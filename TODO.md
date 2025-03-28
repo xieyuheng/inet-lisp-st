@@ -1,5 +1,3 @@
-rename manager back to scheduler
-
 [bug] embarrassingly parallel still not working for subgraph pattern matching
 
 - 需要对 match 的过程和 schedule 新 task 的过程有更好的理解，才能找到 data race

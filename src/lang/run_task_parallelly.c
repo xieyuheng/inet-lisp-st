@@ -1,10 +1,10 @@
 #include "index.h"
 
 static bool
-manager_no_more_task(manager_t *manager) {
+scheduler_no_more_task(scheduler_t *scheduler) {
     for (size_t i = 0; i < 3; i++) {
-        for (size_t i = 0; i < manager->worker_pool_size; i++) {
-            if (!queue_is_empty(manager->task_queues[i])) {
+        for (size_t i = 0; i < scheduler->worker_pool_size; i++) {
+            if (!queue_is_empty(scheduler->task_queues[i])) {
                 return false;
             }
         }
@@ -14,13 +14,13 @@ manager_no_more_task(manager_t *manager) {
 }
 
 static void
-manager_dispatch_tasks(manager_t *manager) {
+scheduler_dispatch_tasks(scheduler_t *scheduler) {
     size_t cursor = 0;
-    for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        while (!queue_is_empty(manager->task_queues[i])) {
-            task_t *task = queue_dequeue(manager->task_queues[i]);
-            size_t real_cursor = cursor % manager->worker_pool_size;
-            queue_enqueue(manager->workers[real_cursor]->task_queue, task);
+    for (size_t i = 0; i < scheduler->worker_pool_size; i++) {
+        while (!queue_is_empty(scheduler->task_queues[i])) {
+            task_t *task = queue_dequeue(scheduler->task_queues[i]);
+            size_t real_cursor = cursor % scheduler->worker_pool_size;
+            queue_enqueue(scheduler->workers[real_cursor]->task_queue, task);
             cursor++;
         }
     }
@@ -38,62 +38,62 @@ worker_thread_fn(worker_ctx_t *ctx) {
 }
 
 static void
-start_all_worker_threads(manager_t *manager) {
-    for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        manager->worker_ctxs[i]->thread_id =
-            thread_start((thread_fn_t *) worker_thread_fn, manager->worker_ctxs[i]);
+start_all_worker_threads(scheduler_t *scheduler) {
+    for (size_t i = 0; i < scheduler->worker_pool_size; i++) {
+        scheduler->worker_ctxs[i]->thread_id =
+            thread_start((thread_fn_t *) worker_thread_fn, scheduler->worker_ctxs[i]);
     }
 }
 
 static void
-wait_all_worker_threads(manager_t *manager) {
-    for (size_t i = 0; i < manager->worker_pool_size; i++) {
-        thread_wait(manager->worker_ctxs[i]->thread_id);
+wait_all_worker_threads(scheduler_t *scheduler) {
+    for (size_t i = 0; i < scheduler->worker_pool_size; i++) {
+        thread_wait(scheduler->worker_ctxs[i]->thread_id);
     }
 }
 
 static void *
-manager_thread_fn(manager_t *manager) {
+scheduler_thread_fn(scheduler_t *scheduler) {
     while (true) {
-        if (manager_no_more_task(manager)) {
+        if (scheduler_no_more_task(scheduler)) {
             return NULL;
         }
 
-        manager_dispatch_tasks(manager);
-        start_all_worker_threads(manager);
-        wait_all_worker_threads(manager);
+        scheduler_dispatch_tasks(scheduler);
+        start_all_worker_threads(scheduler);
+        wait_all_worker_threads(scheduler);
     }
 }
 
 static void
-manager_start(manager_t *manager, queue_t *init_task_queue) {
+scheduler_start(scheduler_t *scheduler, queue_t *init_task_queue) {
     // prepare tasks
 
     size_t cursor = 0;
     while (!queue_is_empty(init_task_queue)) {
         task_t *task = queue_dequeue(init_task_queue);
-        size_t real_cursor = cursor % manager->worker_pool_size;
-        queue_t *next_task_queue = manager->task_queues[real_cursor];
+        size_t real_cursor = cursor % scheduler->worker_pool_size;
+        queue_t *next_task_queue = scheduler->task_queues[real_cursor];
         bool ok = queue_enqueue(next_task_queue, task);
         assert(ok);
         cursor++;
     }
 
-    // start manager thread
+    // start scheduler thread
 
-    manager->thread_id = thread_start((thread_fn_t *) manager_thread_fn, manager);
+    scheduler->thread_id = thread_start((thread_fn_t *) scheduler_thread_fn, scheduler);
 }
 
 static void
-manager_wait(manager_t *manager) {
-    thread_wait(manager->thread_id);
+scheduler_wait(scheduler_t *scheduler) {
+    thread_wait(scheduler->thread_id);
 }
 
 void
 run_task_parallelly(worker_t *worker) {
     size_t processor_count = sysconf(_SC_NPROCESSORS_ONLN);
-    manager_t *manager = manager_new(worker->mod, processor_count - 1);
-    manager_start(manager, worker->task_queue);
-    manager_wait(manager);
-    manager_destroy(&manager);
+    scheduler_t *scheduler = scheduler_new(worker->mod, processor_count - 1);
+    scheduler_start(scheduler, worker->task_queue);
+    scheduler_wait(scheduler);
+    scheduler_destroy(&scheduler);
 }

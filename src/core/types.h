@@ -10,4 +10,4 @@ typedef struct def_t def_t;
 typedef struct op_t op_t;
 typedef struct worker_t worker_t;
 typedef struct worker_ctx_t worker_ctx_t;
-typedef struct manager_t manager_t;
+typedef struct scheduler_t scheduler_t;

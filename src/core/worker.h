@@ -12,7 +12,7 @@ struct worker_t {
     // only used when core_debug_flag is enabled
     set_t *debug_node_set;
     // for worker in pool
-    manager_t *manager;
+    scheduler_t *scheduler;
     size_t index;
 };
 
