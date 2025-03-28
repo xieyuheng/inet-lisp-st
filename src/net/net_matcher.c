@@ -6,8 +6,8 @@ net_matcher_new(const net_pattern_t *net_pattern) {
     self->net_pattern = net_pattern;
     self->value_hash = hash_of_string_key();
     self->matched_nodes = allocate_pointers(net_pattern_length(net_pattern));
-    self->principle_name_list = string_list_new();
-    self->matched_principle_name_list = string_list_new();
+    self->principal_name_list = string_list_new();
+    self->matched_principal_name_list = string_list_new();
     return self;
 }
 
@@ -18,8 +18,8 @@ net_matcher_destroy(net_matcher_t **self_pointer) {
         net_matcher_t *self = *self_pointer;
         hash_destroy(&self->value_hash);
         free(self->matched_nodes);
-        list_destroy(&self->principle_name_list);
-        list_destroy(&self->matched_principle_name_list);
+        list_destroy(&self->principal_name_list);
+        list_destroy(&self->matched_principal_name_list);
         free(self);
         *self_pointer = NULL;
     }
@@ -53,7 +53,7 @@ matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
                 value_t found = hash_get(self->value_hash, port_info->name);
                 if (!match_value(value, found)) return;
             } else {
-                list_push(self->principle_name_list, string_copy(port_info->name));
+                list_push(self->principal_name_list, string_copy(port_info->name));
                 assert(hash_set(self->value_hash, string_copy(port_info->name), value));
             }
         } else {
@@ -66,11 +66,11 @@ matcher_match_node(net_matcher_t *self, size_t index, node_t *node) {
 }
 
 static const char *
-matcher_next_principle_name(net_matcher_t *self) {
-    char *name = list_pop(self->principle_name_list);
+matcher_next_principal_name(net_matcher_t *self) {
+    char *name = list_pop(self->principal_name_list);
     if (!name) return NULL;
 
-    list_push(self->matched_principle_name_list, name);
+    list_push(self->matched_principal_name_list, name);
     return name;
 }
 
@@ -84,7 +84,7 @@ matcher_next_index(net_matcher_t *self, const char *name) {
     size_t length = net_pattern_length(self->net_pattern);
     for (size_t i = 0; i < length; i++) {
         node_pattern_t *node_pattern = net_pattern_get(self->net_pattern, i);
-        if (node_pattern_has_principle_name(node_pattern, name) &&
+        if (node_pattern_has_principal_name(node_pattern, name) &&
             !matcher_index_is_used(self, i))
         {
             return i;
@@ -122,7 +122,7 @@ static void
 matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
     size_t index = starting_index;
     matcher_match_node(self, index, node);
-    const char *name = matcher_next_principle_name(self);
+    const char *name = matcher_next_principal_name(self);
     while (name) {
         node = matcher_next_node(self, name);
         if (node == NULL) return;
@@ -131,7 +131,7 @@ matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
         index = matcher_next_index(self, name);
         matcher_match_node(self, index, node);
 
-        name = matcher_next_principle_name(self);
+        name = matcher_next_principal_name(self);
     }
 }
 
@@ -165,13 +165,13 @@ net_matcher_print(const net_matcher_t *self, file_t *file) {
     }
     printf("</matched-nodes>\n");
 
-    printf("<principle-name-list>");
-    string_list_print(self->principle_name_list, ", ", file);
-    printf("</principle-name-list>\n");
+    printf("<principal-name-list>");
+    string_list_print(self->principal_name_list, ", ", file);
+    printf("</principal-name-list>\n");
 
-    printf("<matched-principle-name-list>");
-    string_list_print(self->matched_principle_name_list, ", ", file);
-    printf("</matched-principle-name-list>\n");
+    printf("<matched-principal-name-list>");
+    string_list_print(self->matched_principal_name_list, ", ", file);
+    printf("</matched-principal-name-list>\n");
 
     printf("</net-matcher>\n");
 }

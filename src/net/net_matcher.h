@@ -4,8 +4,8 @@ struct net_matcher_t {
     const net_pattern_t *net_pattern;
     hash_t *value_hash;
     node_t **matched_nodes;
-    list_t *principle_name_list;
-    list_t *matched_principle_name_list;
+    list_t *principal_name_list;
+    list_t *matched_principal_name_list;
 };
 
 net_matcher_t *net_matcher_new(const net_pattern_t *net_pattern);

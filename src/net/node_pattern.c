@@ -40,7 +40,7 @@ node_pattern_set_port_info(node_pattern_t *self, size_t index, port_info_t *port
 }
 
 bool
-node_pattern_has_principle_name(node_pattern_t *self, const char *name) {
+node_pattern_has_principal_name(node_pattern_t *self, const char *name) {
     for (size_t i = 0; i < self->ctor->arity; i++) {
         if (self->port_infos[i]->is_principal &&
             string_equal(self->port_infos[i]->name, name))
