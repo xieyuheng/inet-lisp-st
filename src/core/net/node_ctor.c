@@ -21,12 +21,14 @@ node_ctor_destroy(node_ctor_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         node_ctor_t *self = *self_pointer;
+
         for (size_t i = 0; i < self->arity; i++) {
             port_info_t *port_info = self->port_infos[i];
             if (port_info) {
                 port_info_destroy(&port_info);
             }
         }
+        free(self->port_infos);
 
         // does not own `self->primitive`
         array_destroy(&self->rule_array);
