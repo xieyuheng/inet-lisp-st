@@ -84,7 +84,7 @@ connect_value(worker_t* worker, wire_t *wire, value_t value) {
 static void
 react_by_primitive(worker_t *worker, task_t *task) {
     node_t *node = task->primitive_node;
-    primitive_t *primitive = node->ctor->primitive;
+    primitive_t *primitive = as_primitive(node->ctor->primitive);
     assert(primitive);
 
     // return input port values to the stack
