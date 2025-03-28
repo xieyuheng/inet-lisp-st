@@ -64,8 +64,7 @@ void
 function_print(const function_t *self, file_t *file) {
     fprintf(file, "<function %s>\n", self->name);
     for (size_t i = 0; i < function_length(self); i++) {
-        op_t *op = array_get(self->op_array, i);
-        op_print(op, file);
+        op_print(function_get_op(self, i), file);
         fprintf(file, "\n");
     }
     fprintf(file, "</function>\n");
