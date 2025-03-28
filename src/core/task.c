@@ -33,7 +33,7 @@ task_is_primitive(const task_t *self) {
 }
 
 static void
-activate_primitive_node(worker_t *worker, node_t *node) {
+by_primitive_node(worker_t *worker, node_t *node) {
     assert(node_is_primitive(node));
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
@@ -56,7 +56,7 @@ activate_primitive_node(worker_t *worker, node_t *node) {
 }
 
 static void
-activate_matched_node(worker_t *worker, node_t *node) {
+by_matched_node(worker_t *worker, node_t *node) {
     size_t length = array_length(node->ctor->rule_array);
     for (size_t i = 0; i < length; i++) {
         rule_t *rule = array_get(node->ctor->rule_array, i);
@@ -80,9 +80,9 @@ maybe_return_task_by_node(worker_t *worker, node_t *node) {
         return;
 
     if (node_is_primitive(node))
-        activate_primitive_node(worker, node);
+        by_primitive_node(worker, node);
     else
-        activate_matched_node(worker, node);
+        by_matched_node(worker, node);
 }
 
 void
