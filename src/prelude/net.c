@@ -5,12 +5,10 @@ x_connect(worker_t *worker) {
     value_t second = stack_pop(worker->value_stack);
     value_t first = stack_pop(worker->value_stack);
 
-    if (is_wire(first) && is_wire(second)) {
-        wire_connect_wire(worker, as_wire(second), as_wire(first));
-    } else if (is_wire(first)) {
-        wire_connect_value(worker, as_wire(first), second);
+    if (is_wire(first)) {
+        connect_value(worker, as_wire(first), second);
     } else if (is_wire(second)) {
-        wire_connect_value(worker, as_wire(second), first);
+        connect_value(worker, as_wire(second), first);
     } else {
         fprintf(stderr, "[x_connect] can not connect value to value\n");
         fprintf(stderr, "[x_connect] first: ");

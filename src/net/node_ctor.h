@@ -5,7 +5,7 @@ extern object_spec_t node_ctor_object_spec;
 struct node_ctor_t {
     object_spec_t *spec;
     char *name;
-    primitive_t *primitive;
+    void *primitive;
     size_t arity;
     port_info_t **port_infos;
     array_t *rule_array;

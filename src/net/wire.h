@@ -23,9 +23,6 @@ void wire_free_from_node(wire_t *self);
 bool wire_is_free(const wire_t *self);
 bool wire_is_principal(const wire_t *self);
 
-wire_t *wire_connect_wire(worker_t* worker, wire_t *first_wire, wire_t *second_wire);
-wire_t *wire_connect_value(worker_t* worker, wire_t *wire, value_t value);
-
 void wire_print(const wire_t *self, file_t *file);
 
 void wire_print_net(wire_t *self, file_t *file);

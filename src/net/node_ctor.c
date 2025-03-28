@@ -5,6 +5,8 @@ object_spec_t node_ctor_object_spec = {
     .print_fn = (print_fn_t *) node_ctor_print,
 };
 
+extern destroy_fn_t rule_destroy;
+
 node_ctor_t *
 node_ctor_new(const char *name, size_t arity) {
     node_ctor_t *self = new(node_ctor_t);
@@ -12,7 +14,7 @@ node_ctor_new(const char *name, size_t arity) {
     self->name = string_copy(name);
     self->arity = arity;
     self->port_infos = allocate_pointers(arity);
-    self->rule_array = array_auto_with((destroy_fn_t *) rule_destroy);
+    self->rule_array = array_auto_with(rule_destroy);
     return self;
 }
 
