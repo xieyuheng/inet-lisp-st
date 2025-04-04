@@ -27,8 +27,6 @@ draw_toggle_light_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
     }
 }
 
-extern void step_task(worker_t *worker);
-
 static void
 on_click_step_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     (void) canvas;
@@ -83,8 +81,6 @@ draw_run_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
             (on_click_fn_t *) on_click_run_button);
     }
 }
-
-extern void run_task(worker_t *worker);
 
 static void
 on_click_end_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {

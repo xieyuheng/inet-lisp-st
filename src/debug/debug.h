@@ -2,7 +2,6 @@
 
 struct debug_t {
     worker_t *worker;
-
     canvas_t *canvas;
     bool toggle_light_button_is_pressed;
     bool step_button_is_pressed;

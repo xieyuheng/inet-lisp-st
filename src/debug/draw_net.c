@@ -49,19 +49,20 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
 
 static void
 draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
+    wire_t *opposite = wire->opposite;
     if (!wire->node ||
-        !is_wire(wire->opposite) ||
-        !as_wire(wire->opposite)->node)
+        !opposite ||
+        !opposite->node)
         return;
 
     uint32_t pixel = canvas->palette[FG_COLOR];
-    if (wire_is_principal(wire) && wire_is_principal(wire->opposite))
+    if (wire_is_principal(wire) && wire_is_principal(opposite))
         pixel = canvas->palette[SL_COLOR];
 
     node_model_t *node_model1 =
         hash_get(self->node_model_hash, (void *) wire->node->id);
     node_model_t *node_model2 =
-        hash_get(self->node_model_hash, (void *) as_wire(wire->opposite)->node->id);
+        hash_get(self->node_model_hash, (void *) opposite->node->id);
 
     if (node_model1 && node_model2) {
         canvas_draw_line(
@@ -97,10 +98,9 @@ draw_net(debug_t *self, canvas_t *canvas) {
     node_t *node = hash_first(self->node_hash);
     while (node) {
         for (size_t i = 0; i < node->ctor->arity; i++) {
-            if (!is_wire(node->ports[i]))
-                continue;
-
-            wire_t *wire = as_wire(node->ports[i]);
+            value_t *value = node_get(node, i);
+            if (!is_wire(value)) continue;
+            wire_t *wire = as_wire(value);
             draw_wire(self, canvas, wire);
         }
 
