@@ -91,7 +91,7 @@ array_test(void) {
     }
 
     {
-        // array_grow
+        // array_resize
 
         array_t *array = array_new(3);
 
@@ -105,7 +105,7 @@ array_test(void) {
 
         assert(array_is_full(array));
 
-        array_grow(array, 6);
+        array_resize(array, 6);
 
         assert(((uint64_t) array_get(array, 0)) == 1);
         assert(((uint64_t) array_get(array, 1)) == 2);
@@ -146,6 +146,25 @@ array_test(void) {
         array_push(array, (void *) 6);
 
         assert(array_is_full(array));
+
+        array_destroy(&array);
+        assert(array == NULL);
+    }
+
+    {
+        // array_size + auto grow
+
+        array_t *array = array_new(3);
+
+        array_set(array, 4, (void *) 1);
+        assert(array_length(array) == 5);
+
+        assert(array_get(array, 0) == NULL);
+        assert(array_get(array, 1) == NULL);
+        assert(array_get(array, 2) == NULL);
+        assert(array_get(array, 3) == NULL);
+        assert(array_get(array, 4) == (void *) 1);
+        assert(array_get(array, 5) == NULL);
 
         array_destroy(&array);
         assert(array == NULL);

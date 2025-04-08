@@ -21,12 +21,13 @@ size_t array_length(const array_t *self);
 bool array_is_empty(const array_t *self);
 bool array_is_full(const array_t *self);
 
-void array_grow(array_t *self, size_t larger_size);
+void array_resize(array_t *self, size_t larger_size);
 
 void *array_top(array_t *self);
 void *array_pop(array_t *self);
 void array_push(array_t *self, void *value);
 
 void *array_get(const array_t *self, size_t index);
+void *array_pick(const array_t *self, size_t back_index);
+
 void array_set(array_t *self, size_t index, void *value);
-void *array_pick(array_t *self, size_t index);
