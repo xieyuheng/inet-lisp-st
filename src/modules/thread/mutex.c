@@ -3,8 +3,12 @@
 mutex_t *
 mutex_new(void) {
     mutex_t *self = new(mutex_t);
-    int errno = pthread_mutex_init(self, NULL);
+    pthread_mutexattr_t mutex_attr;
+    pthread_mutexattr_init(&mutex_attr);
+    pthread_mutexattr_settype(&mutex_attr, PTHREAD_MUTEX_ERRORCHECK);
+    int errno = pthread_mutex_init(self, &mutex_attr);
     assert(errno == 0);
+    pthread_mutexattr_destroy(&mutex_attr);
     return self;
 }
 

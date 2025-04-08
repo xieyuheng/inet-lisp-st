@@ -2,7 +2,7 @@
 
 worker_t *
 worker_new(mod_t *mod) {
-    worker_t *self = new_shared(worker_t);
+    worker_t *self = new_page_aligned(worker_t);
     self->mod = mod;
     self->task_queue = queue_new_with(
         WORKER_TASK_QUEUE_SIZE,
