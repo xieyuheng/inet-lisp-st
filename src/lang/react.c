@@ -89,7 +89,7 @@ react_by_primitive(worker_t *worker, task_t *task) {
 
     // return input port values to the stack
     for (size_t i = 0; i < primitive->input_arity; i++) {
-        value_t value = node->ports[i];
+        value_t value = node_get(node, i);
         if (is_wire(value)) {
             wire_t *wire = as_wire(value);
             assert(!is_wire(wire->opposite));
@@ -107,7 +107,7 @@ react_by_primitive(worker_t *worker, task_t *task) {
     for (size_t i = 0; i < primitive->output_arity; i++) {
         size_t arity = primitive->input_arity + primitive->output_arity;
         size_t c = arity - 1 - i;
-        value_t value = node->ports[c];
+        value_t value = node_get(node, c);
         wire_t *wire = as_wire(value);
         value_t top_value = stack_pop(worker->value_stack);
         connect_value(worker, wire, top_value);
@@ -143,10 +143,10 @@ delete_matched_nodes(worker_t *worker, net_matcher_t *net_matcher) {
         node_t *matched_node = net_matcher->matched_nodes[i];
         assert(matched_node);
         for (size_t k = 0; k < matched_node->ctor->arity; k++) {
-            if (!is_wire(matched_node->ports[k]))
+            if (!is_wire(node_get(matched_node, k)))
                 continue;
 
-            value_t value = matched_node->ports[k];
+            value_t value = node_get(matched_node, k);
             if (is_wire(value)) {
                 wire_t *wire = as_wire(value);
                 if (wire_is_principal(wire))

@@ -39,8 +39,8 @@ by_primitive_node(worker_t *worker, node_t *node) {
     for (size_t i = 0; i < node->ctor->arity; i++) {
         if (!node->ctor->port_infos[i]->is_principal)
             continue;
-
-        value_t value = node->ports[i];
+            
+        value_t value = node_get(node, i);
         // NOTE be careful that there are two cases:
         // - (1) `[value]`   -- ready
         // - (2) `-<[value]` -- ready
@@ -98,7 +98,7 @@ maybe_return_task_by_node_and_neighbor(worker_t *worker, node_t *node) {
     // also activate the neighboring nodes.
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
-        value_t value = node->ports[i];
+        value_t value = node_get(node, i);
         if (!is_wire(value)) continue;
         wire_t *wire = as_wire(value);
         if (is_wire(wire->opposite) && as_wire(wire->opposite)->node)

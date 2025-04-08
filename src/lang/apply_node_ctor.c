@@ -22,7 +22,7 @@ apply_node_output_ports(worker_t *worker, node_t *node, size_t arity) {
         size_t i = arity + c;
         node_wire->node = node;
         node_wire->index = i;
-        node->ports[i] = node_wire;
+        node_set(node, i, node_wire);
 
         stack_push(worker->value_stack, free_wire);
     }

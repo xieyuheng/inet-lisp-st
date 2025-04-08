@@ -35,9 +35,9 @@ node_iter_first(node_iter_t *self) {
     list_push(self->occurred_node_list, node);
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
-        if (!is_wire(node->ports[i])) continue;
+        if (!is_wire(node_get(node, i))) continue;
 
-        wire_t *wire = as_wire(node->ports[i]);
+        wire_t *wire = as_wire(node_get(node, i));
         if (wire->opposite && is_wire(wire->opposite)) {
             wire_t *opposite_wire = as_wire(wire->opposite);
             if (opposite_wire->node == NULL)
@@ -62,9 +62,9 @@ node_iter_next(node_iter_t *self) {
     list_push(self->occurred_node_list, node);
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
-        if (!is_wire(node->ports[i])) continue;
+        if (!is_wire(node_get(node, i))) continue;
 
-        wire_t *wire = as_wire(node->ports[i]);
+        wire_t *wire = as_wire(node_get(node, i));
         if (wire->opposite && is_wire(wire->opposite)) {
             wire_t *opposite_wire = as_wire(wire->opposite);
             if (opposite_wire->node == NULL ||

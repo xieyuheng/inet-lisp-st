@@ -3,7 +3,7 @@
 struct node_t {
     const node_ctor_t *ctor;
     size_t id;
-    value_t *ports;
+    array_t *value_array;
     atomic_bool atomic_is_matched;
 };
 
