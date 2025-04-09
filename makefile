@@ -29,7 +29,7 @@ cflags = \
 	 $(CFLAGS)
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
-lib = $(patsubst src/%,lib/%,$(patsubst %.c,%.o,$(src)))
+lib = $(patsubst src/%, lib/%, $(patsubst %.c, %.o, $(src)))
 app = inet-lisp
 bin = bin/$(app)
 
