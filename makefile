@@ -1,19 +1,17 @@
 cc = cc
-# ldflags = \
-# 	-static \
-# 	-L/usr/local/lib \
-# 	-lm \
-# 	-lX11 \
-# 	-lxcb \
-# 	-lXau \
-# 	-lXdmcp \
-# 	-pthread \
-# 	$(LDFLAGS)
+ifeq ($(STATIC), true)
+static_ldflags = \
+	-static \
+	-lxcb \
+	-lXau \
+	-lXdmcp
+endif
 ldflags = \
 	-L/usr/local/lib \
 	-lm \
 	-lX11 \
 	-pthread \
+	$(static_ldflags) \
 	$(LDFLAGS)
 cflags = \
 	-g \
