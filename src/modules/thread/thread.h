@@ -1,7 +1,8 @@
 #pragma once
 
-thread_id_t thread_start(thread_fn_t *thread_fn, void *arg);
+tid_t thread_start(thread_fn_t *thread_fn, void *arg);
+tid_t thread_tid(void);
+void *thread_wait(tid_t tid);
 
-void *thread_wait(thread_id_t thread_id);
-
-double clock_elapsed_seconds(clock_t start_clock);
+bool tid_equal(tid_t T1, tid_t T2);
+void tid_print(tid_t tid);

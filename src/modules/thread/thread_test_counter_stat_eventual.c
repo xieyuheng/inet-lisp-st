@@ -44,25 +44,25 @@ counter_read(void) {
 void
 thread_test_counter_stat_eventual(void) {
     printf("<thread_test_counter_stat_eventual>\n");
-    clock_t start_clock = clock();
+    double start_second = time_second();
 
     list_t *list = list_new();
 
-    thread_id_t eventual_thread_id = thread_start(eventual, NULL);
+    tid_t eventual_tid = thread_start(eventual, NULL);
     relaxed_store(&eventual_run_p, true);
 
     thread_fn_t *thread_fn = (thread_fn_t *) counter_add1;
     for (size_t i = 0; i < THREAD_NUMBER; i++) {
-        thread_id_t thread_id = thread_start(thread_fn, &counts[i]);
-        list_push(list, (void *) thread_id);
+        tid_t tid = thread_start(thread_fn, &counts[i]);
+        list_push(list, (void *) tid);
     }
 
     printf("final count: %lu\n", counter_read());
     relaxed_store(&eventual_run_p, false);
 
     while (!list_is_empty(list)) {
-        thread_id_t thread_id = (thread_id_t) list_pop(list);
-        thread_wait(thread_id);
+        tid_t tid = (tid_t) list_pop(list);
+        thread_wait(tid);
     }
 
     relaxed_store(&eventual_run_p, true);
@@ -71,10 +71,10 @@ thread_test_counter_stat_eventual(void) {
     relaxed_store(&eventual_run_p, false);
 
     relaxed_store(&eventual_stop_p, true);
-    thread_wait(eventual_thread_id);
+    thread_wait(eventual_tid);
 
     list_destroy(&list);
 
-    printf("elapsed seconds: %fs\n", clock_elapsed_seconds(start_clock));
+    printf("elapsed seconds: %fs\n", time_passed_second(start_second));
     printf("</thread_test_counter_stat_eventual>\n");
 }

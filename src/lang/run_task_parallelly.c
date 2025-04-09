@@ -40,7 +40,7 @@ worker_thread_fn(worker_ctx_t *ctx) {
 static void
 start_all_worker_threads(scheduler_t *scheduler) {
     for (size_t i = 0; i < scheduler->worker_pool_size; i++) {
-        scheduler->worker_ctxs[i]->thread_id =
+        scheduler->worker_ctxs[i]->tid =
             thread_start((thread_fn_t *) worker_thread_fn, scheduler->worker_ctxs[i]);
     }
 }
@@ -48,7 +48,7 @@ start_all_worker_threads(scheduler_t *scheduler) {
 static void
 wait_all_worker_threads(scheduler_t *scheduler) {
     for (size_t i = 0; i < scheduler->worker_pool_size; i++) {
-        thread_wait(scheduler->worker_ctxs[i]->thread_id);
+        thread_wait(scheduler->worker_ctxs[i]->tid);
     }
 }
 
@@ -81,12 +81,12 @@ scheduler_start(scheduler_t *scheduler, queue_t *init_task_queue) {
 
     // start scheduler thread
 
-    scheduler->thread_id = thread_start((thread_fn_t *) scheduler_thread_fn, scheduler);
+    scheduler->tid = thread_start((thread_fn_t *) scheduler_thread_fn, scheduler);
 }
 
 static void
 scheduler_wait(scheduler_t *scheduler) {
-    thread_wait(scheduler->thread_id);
+    thread_wait(scheduler->tid);
 }
 
 void

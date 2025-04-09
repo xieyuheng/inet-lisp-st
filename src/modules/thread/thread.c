@@ -1,23 +1,32 @@
 #include "index.h"
 
-thread_id_t
+tid_t
 thread_start(thread_fn_t *thread_fn, void *arg) {
-    thread_id_t thread_id;
-    int ok = pthread_create(&thread_id, NULL, thread_fn, arg);
+    tid_t tid;
+    int ok = pthread_create(&tid, NULL, thread_fn, arg);
     assert(ok == 0);
-    return thread_id;
+    return tid;
+}
+
+tid_t
+thread_tid(void) {
+    return pthread_self();
 }
 
 void *
-thread_wait(thread_id_t thread_id) {
+thread_wait(tid_t tid) {
     void *result;
-    int ok = pthread_join(thread_id, &result);
+    int ok = pthread_join(tid, &result);
     assert(ok == 0);
     return result;
 }
 
-double
-clock_elapsed_seconds(clock_t start_clock) {
-    clock_t end_clock = clock();
-    return ((double) (end_clock - start_clock)) / CLOCKS_PER_SEC;
+bool
+tid_equal(tid_t T1, tid_t T2) {
+    return pthread_equal(T1, T2);
+}
+
+void
+tid_print(tid_t tid) {
+    printf("%lu", (uint64_t) tid);
 }

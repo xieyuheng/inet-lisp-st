@@ -19,24 +19,24 @@ counter_read(void) {
 void
 thread_test_counter_non_atomic(void) {
     printf("<thread_test_counter_non_atomic>\n");
-    clock_t start_clock = clock();
+    double start_second = time_second();
 
     list_t *list = list_new();
 
     thread_fn_t *thread_fn = (thread_fn_t *) counter_add1;
     for (size_t i = 0; i < 1000; i++) {
-        thread_id_t thread_id = thread_start(thread_fn, NULL);
-        list_push(list, (void *) thread_id);
+        tid_t tid = thread_start(thread_fn, NULL);
+        list_push(list, (void *) tid);
     }
 
     while (!list_is_empty(list)) {
-        thread_id_t thread_id = (thread_id_t) list_pop(list);
-        thread_wait(thread_id);
+        tid_t tid = (tid_t) list_pop(list);
+        thread_wait(tid);
     }
 
     list_destroy(&list);
 
     printf("final count: %lu\n", counter_read());
-    printf("elapsed seconds: %fs\n", clock_elapsed_seconds(start_clock));
+    printf("elapsed seconds: %fs\n", time_passed_second(start_second));
     printf("</thread_test_counter_non_atomic>\n");
 }
