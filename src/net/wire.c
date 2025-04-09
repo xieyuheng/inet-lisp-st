@@ -149,8 +149,8 @@ wire_print_net(wire_t *self, file_t *file) {
     }
 
     if (root_node) {
-        node_iter_t *iter = node_iter_new(root_node);
-        node_t *node = node_iter_first(iter);
+        connected_node_iter_t *iter = connected_node_iter_new(root_node);
+        node_t *node = connected_node_iter_first(iter);
         while (node) {
             fprintf(file, "(");
             node_print_name(node, file);
@@ -176,10 +176,10 @@ wire_print_net(wire_t *self, file_t *file) {
             }
             fprintf(file, ")");
             fprintf(file, "\n");
-            node = node_iter_next(iter);
+            node = connected_node_iter_next(iter);
         }
 
-        node_iter_destroy(&iter);
+        connected_node_iter_destroy(&iter);
     }
 
     fprintf(file, "</net>\n");

@@ -1,15 +1,15 @@
 #include "index.h"
 
-struct node_iter_t {
+struct connected_node_iter_t {
     node_t *root;
     set_t *occurred_node_set;
     list_t *remaining_node_list;
 };
 
-node_iter_t *
-node_iter_new(node_t *root) {
+connected_node_iter_t *
+connected_node_iter_new(node_t *root) {
     assert(root);
-    node_iter_t *self = new(node_iter_t);
+    connected_node_iter_t *self = new(connected_node_iter_t);
     self->root = root;
     self->occurred_node_set = set_new();
     self->remaining_node_list = list_new();
@@ -17,11 +17,11 @@ node_iter_new(node_t *root) {
 }
 
 void
-node_iter_destroy(node_iter_t **self_pointer) {
+connected_node_iter_destroy(connected_node_iter_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer == NULL) return;
 
-    node_iter_t *self = *self_pointer;
+    connected_node_iter_t *self = *self_pointer;
     set_destroy(&self->occurred_node_set);
     list_destroy(&self->remaining_node_list);
     free(self);
@@ -29,7 +29,7 @@ node_iter_destroy(node_iter_t **self_pointer) {
 }
 
 node_t *
-node_iter_first(node_iter_t *self) {
+connected_node_iter_first(connected_node_iter_t *self) {
     node_t *node = self->root;
     set_add(self->occurred_node_set, node);
 
@@ -54,7 +54,7 @@ node_iter_first(node_iter_t *self) {
 }
 
 node_t *
-node_iter_next(node_iter_t *self) {
+connected_node_iter_next(connected_node_iter_t *self) {
     node_t *node = list_pop(self->remaining_node_list);
     if (!node) return NULL;
 
