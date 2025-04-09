@@ -14,15 +14,15 @@ mod_new(path_t *path, char *code) {
 void
 mod_destroy(mod_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        mod_t *self = *self_pointer;
-        path_destroy(&self->path);
-        string_destroy(&self->code);
-        hash_destroy(&self->value_hash);
-        worker_destroy(&self->loader_worker);
-        free(self);
-        *self_pointer = NULL;
-    }
+    if (*self_pointer == NULL) return;
+
+    mod_t *self = *self_pointer;
+    path_destroy(&self->path);
+    string_destroy(&self->code);
+    hash_destroy(&self->value_hash);
+    worker_destroy(&self->loader_worker);
+    free(self);
+    *self_pointer = NULL;
 }
 
 value_t

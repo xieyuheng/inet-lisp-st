@@ -13,12 +13,12 @@ node_new(const node_ctor_t *ctor, size_t id) {
 void
 node_destroy(node_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        node_t *self = *self_pointer;
-        array_destroy(&self->value_array);
-        free(self);
-        *self_pointer = NULL;
-    }
+    if (*self_pointer == NULL) return;
+
+    node_t *self = *self_pointer;
+    array_destroy(&self->value_array);
+    free(self);
+    *self_pointer = NULL;
 }
 
 void

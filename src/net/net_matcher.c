@@ -14,15 +14,15 @@ net_matcher_new(const net_pattern_t *net_pattern) {
 void
 net_matcher_destroy(net_matcher_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        net_matcher_t *self = *self_pointer;
-        hash_destroy(&self->value_hash);
-        free(self->matched_nodes);
-        list_destroy(&self->principal_name_list);
-        list_destroy(&self->matched_principal_name_list);
-        free(self);
-        *self_pointer = NULL;
-    }
+    if (*self_pointer == NULL) return;
+
+    net_matcher_t *self = *self_pointer;
+    hash_destroy(&self->value_hash);
+    free(self->matched_nodes);
+    list_destroy(&self->principal_name_list);
+    list_destroy(&self->matched_principal_name_list);
+    free(self);
+    *self_pointer = NULL;
 }
 
 static bool

@@ -19,12 +19,12 @@ task_from_primitive_node(node_t *primitive_node) {
 void
 task_destroy(task_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        task_t *self = *self_pointer;
-        net_matcher_destroy(&self->net_matcher);
-        free(self);
-        *self_pointer = NULL;
-    }
+    if (*self_pointer == NULL) return;
+
+    task_t *self = *self_pointer;
+    net_matcher_destroy(&self->net_matcher);
+    free(self);
+    *self_pointer = NULL;
 }
 
 bool

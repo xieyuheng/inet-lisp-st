@@ -35,30 +35,30 @@ op_set_variable(size_t index) {
 void
 op_destroy(op_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        op_t *self = *self_pointer;
-        switch (self->kind) {
-        case OP_APPLY: {
-            break;
-        }
+    if (*self_pointer == NULL) return;
 
-        case OP_LITERAL: {
-            break;
-        }
-
-        case OP_GET_VARIABLE: {
-            break;
-        }
-
-        case OP_SET_VARIABLE: {
-            break;
-        }
-        }
-
-        free(self);
-        *self_pointer = NULL;
-        return;
+    op_t *self = *self_pointer;
+    switch (self->kind) {
+    case OP_APPLY: {
+        break;
     }
+
+    case OP_LITERAL: {
+        break;
+    }
+
+    case OP_GET_VARIABLE: {
+        break;
+    }
+
+    case OP_SET_VARIABLE: {
+        break;
+    }
+    }
+
+    free(self);
+    *self_pointer = NULL;
+    return;
 }
 
 void

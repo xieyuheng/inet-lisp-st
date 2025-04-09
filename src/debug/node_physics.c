@@ -16,11 +16,11 @@ node_physics_new(size_t x, size_t y, size_t width, size_t height) {
 void
 node_physics_destroy(node_physics_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        node_physics_t *self = *self_pointer;
-        free(self);
-        *self_pointer = NULL;
-    }
+    if (*self_pointer == NULL) return;
+
+    node_physics_t *self = *self_pointer;
+    free(self);
+    *self_pointer = NULL;
 }
 
 void
@@ -28,7 +28,7 @@ node_physics_add_nodes(
     node_physics_t *self,
     hash_t *node_hash,
     hash_t *node_model_hash
-) {
+    ) {
     node_t *node = hash_first(node_hash);
     while (node) {
         node_model_t *found = hash_get(node_model_hash, (void *) node->id);
@@ -50,7 +50,7 @@ node_physics_update_nodes(
     hash_t *new_node_hash,
     hash_t *old_node_hash,
     hash_t *node_model_hash
-) {
+    ) {
     node_t *old_node = hash_first(old_node_hash);
     while (old_node) {
         node_model_t *found = hash_get(new_node_hash, (void *) old_node->id);

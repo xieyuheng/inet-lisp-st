@@ -50,39 +50,39 @@ exp_list_new(void) {
 void
 exp_destroy(exp_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        exp_t *self = *self_pointer;
-        switch (self->kind) {
-        case EXP_VAR: {
-            string_destroy(&self->var.name);
-            break;
-        }
+    if (*self_pointer == NULL) return;
 
-        case EXP_AP: {
-            exp_destroy(&self->ap.target);
-            list_destroy(&self->ap.arg_list);
-            break;
-        }
-
-        case EXP_ASSIGN: {
-            list_destroy(&self->assign.name_list);
-            exp_destroy(&self->assign.exp);
-            break;
-        }
-
-        case EXP_INT: {
-             break;
-        }
-
-        case EXP_FLOAT: {
-            break;
-        }
-        }
-
-        free(self);
-        *self_pointer = NULL;
-        return;
+    exp_t *self = *self_pointer;
+    switch (self->kind) {
+    case EXP_VAR: {
+        string_destroy(&self->var.name);
+        break;
     }
+
+    case EXP_AP: {
+        exp_destroy(&self->ap.target);
+        list_destroy(&self->ap.arg_list);
+        break;
+    }
+
+    case EXP_ASSIGN: {
+        list_destroy(&self->assign.name_list);
+        exp_destroy(&self->assign.exp);
+        break;
+    }
+
+    case EXP_INT: {
+        break;
+    }
+
+    case EXP_FLOAT: {
+        break;
+    }
+    }
+
+    free(self);
+    *self_pointer = NULL;
+    return;
 }
 
 exp_t *

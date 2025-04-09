@@ -11,18 +11,18 @@ node_pattern_new(const node_ctor_t *ctor) {
 void
 node_pattern_destroy(node_pattern_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        node_pattern_t *self = *self_pointer;
-        for (size_t i = 0; i < self->ctor->arity; i++) {
-            port_info_t *port_info = self->port_infos[i];
-            if (port_info) {
-                port_info_destroy(&port_info);
-            }
-        }
+    if (*self_pointer == NULL) return;
 
-        free(self);
-        *self_pointer = NULL;
+    node_pattern_t *self = *self_pointer;
+    for (size_t i = 0; i < self->ctor->arity; i++) {
+        port_info_t *port_info = self->port_infos[i];
+        if (port_info) {
+            port_info_destroy(&port_info);
+        }
     }
+
+    free(self);
+    *self_pointer = NULL;
 }
 
 list_t *

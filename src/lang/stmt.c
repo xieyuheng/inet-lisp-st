@@ -66,56 +66,56 @@ stmt_import(list_t *name_list, path_t *path) {
 void
 stmt_destroy(stmt_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        stmt_t *self = *self_pointer;
-        switch (self->kind) {
-        case STMT_DEFINE: {
-            string_destroy(&self->define.name);
-            exp_destroy(&self->define.exp);
-            break;
-        }
+    if (*self_pointer == NULL) return;
 
-        case STMT_DEFINE_FUNCTION: {
-            string_destroy(&self->define_function.name);
-            list_destroy(&self->define_function.arg_name_list);
-            list_destroy(&self->define_function.exp_list);
-            break;
-        }
-
-        case STMT_DEFINE_NODE: {
-            string_destroy(&self->define_node.name);
-            list_destroy(&self->define_node.port_name_list);
-            break;
-        }
-
-        case STMT_DEFINE_RULE: {
-            exp_destroy(&self->define_rule.pattern_exp);
-            list_destroy(&self->define_rule.exp_list);
-            break;
-        }
-
-        case STMT_DEFINE_RULE_STAR: {
-            list_destroy(&self->define_rule_star.pattern_exp_list);
-            list_destroy(&self->define_rule_star.exp_list);
-            break;
-        }
-
-        case STMT_COMPUTE_EXP: {
-            exp_destroy(&self->compute_exp.exp);
-            break;
-        }
-
-        case STMT_IMPORT: {
-            list_destroy(&self->import.name_list);
-            path_destroy(&self->import.path);
-            break;
-        }
-        }
-
-        free(self);
-        *self_pointer = NULL;
-        return;
+    stmt_t *self = *self_pointer;
+    switch (self->kind) {
+    case STMT_DEFINE: {
+        string_destroy(&self->define.name);
+        exp_destroy(&self->define.exp);
+        break;
     }
+
+    case STMT_DEFINE_FUNCTION: {
+        string_destroy(&self->define_function.name);
+        list_destroy(&self->define_function.arg_name_list);
+        list_destroy(&self->define_function.exp_list);
+        break;
+    }
+
+    case STMT_DEFINE_NODE: {
+        string_destroy(&self->define_node.name);
+        list_destroy(&self->define_node.port_name_list);
+        break;
+    }
+
+    case STMT_DEFINE_RULE: {
+        exp_destroy(&self->define_rule.pattern_exp);
+        list_destroy(&self->define_rule.exp_list);
+        break;
+    }
+
+    case STMT_DEFINE_RULE_STAR: {
+        list_destroy(&self->define_rule_star.pattern_exp_list);
+        list_destroy(&self->define_rule_star.exp_list);
+        break;
+    }
+
+    case STMT_COMPUTE_EXP: {
+        exp_destroy(&self->compute_exp.exp);
+        break;
+    }
+
+    case STMT_IMPORT: {
+        list_destroy(&self->import.name_list);
+        path_destroy(&self->import.path);
+        break;
+    }
+    }
+
+    free(self);
+    *self_pointer = NULL;
+    return;
 }
 
 void

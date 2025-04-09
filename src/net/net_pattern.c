@@ -39,14 +39,14 @@ net_pattern_new(list_t *node_pattern_list) {
 void
 net_pattern_destroy(net_pattern_t **self_pointer) {
     assert(self_pointer);
-    if (*self_pointer) {
-        net_pattern_t *self = *self_pointer;
-        array_destroy(&self->node_pattern_array);
-        set_destroy(&self->local_name_set);
-        array_destroy(&self->local_name_array);
-        free(self);
-        *self_pointer = NULL;
-    }
+    if (*self_pointer == NULL) return;
+
+    net_pattern_t *self = *self_pointer;
+    array_destroy(&self->node_pattern_array);
+    set_destroy(&self->local_name_set);
+    array_destroy(&self->local_name_array);
+    free(self);
+    *self_pointer = NULL;
 }
 
 size_t
