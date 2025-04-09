@@ -9,7 +9,6 @@ struct node_iter_t {
 node_iter_t *
 node_iter_new(node_t *root) {
     assert(root);
-
     node_iter_t *self = new(node_iter_t);
     self->root = root;
     self->occurred_node_set = set_new();
