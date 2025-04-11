@@ -1,4 +1,3 @@
-[lang] refactor `apply_node_ctor` -- extract `node_take_input`
 [lang] refactor `apply_node_ctor` -- extract `node_return_output`
 
 [bug] embarrassingly parallel still not working for subgraph pattern matching
