@@ -1,22 +1,10 @@
-[lang] refactor `apply_node_ctor` -- extract `node_return_output`
+remove `scheduler_t`
+`atomic_is_matched` should be `is_matched`
+update readme about no parallel
 
-[bug] embarrassingly parallel still not working for subgraph pattern matching
+# core
 
-- 需要对 match 的过程和 schedule 新 task 的过程有更好的理解，才能找到 data race
-
-# later
-
-[worker] safe use of `task_queue` -- size is limited now
-
-# parallelism
-
-[thread] `lock_t` for `pthread_mutex_t`
-[thread] `lock_acquire`
-[thread] `lock_release`
-
-[thread] test mutex
-
-[thread] `thread_print`
+[core] safe use of `task_queue` -- size is limited now
 
 # debug
 

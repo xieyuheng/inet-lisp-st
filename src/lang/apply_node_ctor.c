@@ -6,23 +6,22 @@ node_take_input(worker_t *worker, node_t *node, size_t index, value_t value) {
     node_set(node, index, value);
 }
 
-static void
-node_return_output(worker_t *worker, node_t *node, size_t arity) {
-    size_t output_arity = node->ctor->arity - arity;
-    for (size_t c = 0; c < output_arity; c++) {
-        wire_t *node_wire = wire_new();
-        wire_t *free_wire = wire_new();
+static value_t
+node_return_output(worker_t *worker, node_t *node, size_t index) {
+    (void) worker;
 
-        node_wire->opposite = free_wire;
-        free_wire->opposite = node_wire;
+    wire_t *node_wire = wire_new();
+    wire_t *free_wire = wire_new();
 
-        size_t i = arity + c;
-        node_wire->node = node;
-        node_wire->index = i;
-        node_set(node, i, node_wire);
+    node_set(node, index, node_wire);
 
-        stack_push(worker->value_stack, free_wire);
-    }
+    node_wire->opposite = free_wire;
+    free_wire->opposite = node_wire;
+
+    node_wire->node = node;
+    node_wire->index = index;
+
+    return free_wire;
 }
 
 void
@@ -33,7 +32,13 @@ apply_node(worker_t *worker, node_t *node, size_t arity) {
         node_take_input(worker, node, index, value);
     }
 
-    node_return_output(worker, node, arity);
+    size_t output_arity = node->ctor->arity - arity;
+    for (size_t count = 0; count < output_arity; count++) {
+        size_t index = arity + count;
+        value_t value = node_return_output(worker, node, index);
+        stack_push(worker->value_stack, value);
+    }
+
     maybe_return_task_by_node_and_neighbor(worker, node);
 }
 
