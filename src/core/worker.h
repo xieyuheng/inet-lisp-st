@@ -11,9 +11,6 @@ struct worker_t {
     size_t fresh_name_count;
     // only used when core_debug_flag is enabled
     set_t *debug_node_set;
-    // for worker in pool
-    scheduler_t *scheduler;
-    size_t index;
 };
 
 worker_t *worker_new(mod_t *mod);
@@ -31,5 +28,4 @@ void worker_delete_wire(worker_t* self, wire_t *wire);
 
 char *worker_fresh_name(worker_t* self);
 
-bool worker_is_in_pool(const worker_t* self);
 void worker_return_task(worker_t* self, task_t *task);
