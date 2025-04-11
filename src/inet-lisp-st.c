@@ -7,7 +7,7 @@ int
 main(int argc, char *argv[]) {
     setup_io();
 
-    commander_t *commander = commander_new("inet-lisp-st", INET_LISP_VERSION, argc, argv);
+    commander_t *commander = commander_new("inet-lisp-st", INET_LISP_ST_VERSION, argc, argv);
 
     commander_use(commander, run_command);
     commander_use(commander, debug_command);
