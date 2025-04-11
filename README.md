@@ -1,6 +1,6 @@
-# inet-lisp
+# inet-lisp-st
 
-This project is an **single-threaded** implementation of
+This project is a **single-threaded** implementation of
 [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
 as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
 
@@ -148,17 +148,17 @@ Dependencies:
 Compile:
 
 ```
-git clone https://github.com/cicada-lang/inet-lisp
-cd inet-lisp
+git clone https://github.com/cicada-lang/inet-lisp-st
+cd inet-lisp-st
 gmake -j
 gmake test
 ```
 
-The compiled binary `./bin/inet-lisp` is the command-line program.
+The compiled binary `./bin/inet-lisp-st` is the command-line program.
 
 ```sh
-$ ./bin/inet-lisp
-inet-lisp 0.1.0
+$ ./bin/inet-lisp-st
+inet-lisp-st 0.1.0
 
 commands:
   run -- run files
@@ -170,7 +170,7 @@ commands:
 For examples:
 
 ```sh
-./bin/inet-lisp run examples/readme/nat.test.lisp
+./bin/inet-lisp-st run examples/readme/nat.test.lisp
 ```
 
 ## Development
@@ -195,7 +195,7 @@ gmake self-test
 - [inet-cute](https://github.com/cicada-lang/inet-cute)
 - [inet-js](https://github.com/cicada-lang/inet-js)
 - [inet-forth](https://github.com/cicada-lang/inet-forth)
-- [inet-lisp](https://github.com/cicada-lang/inet-lisp)
+- [inet-lisp-st](https://github.com/cicada-lang/inet-lisp-st)
 
 ## References
 

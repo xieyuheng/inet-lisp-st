@@ -30,7 +30,7 @@ cflags = \
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
 lib = $(patsubst src/%, lib/%, $(patsubst %.c, %.o, $(src)))
-app = inet-lisp
+app = inet-lisp-st
 bin = bin/$(app)
 
 .PHONY: all run self-test run-examples test clean
