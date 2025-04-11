@@ -5,9 +5,8 @@ This project is an **single-threaded** implementation of
 as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
 
 Single-threaded environment allow us
-to support multiple principal ports.
-With multiple principal ports
-rule can be expressed by subgraph matching.
+to support multiple principal ports,
+with which rules can be expressed by subgraph matching.
 
 ## Syntax
 
