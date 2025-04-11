@@ -1,6 +1,6 @@
 #include "index.h"
 
-void
+static void
 apply_node_input_ports(worker_t *worker, node_t *node, size_t arity) {
     for (size_t c = 0; c < arity; c++) {
         value_t value = stack_pop(worker->value_stack);
@@ -9,7 +9,7 @@ apply_node_input_ports(worker_t *worker, node_t *node, size_t arity) {
     }
 }
 
-void
+static void
 apply_node_output_ports(worker_t *worker, node_t *node, size_t arity) {
     size_t output_arity = node->ctor->arity - arity;
     for (size_t c = 0; c < output_arity; c++) {
@@ -29,9 +29,14 @@ apply_node_output_ports(worker_t *worker, node_t *node, size_t arity) {
 }
 
 void
-apply_node_ctor(worker_t *worker, node_ctor_t *node_ctor, size_t arity) {
-    node_t *node = worker_add_node(worker, node_ctor);
+apply_node(worker_t *worker, node_t *node, size_t arity) {
     apply_node_input_ports(worker, node, arity);
     apply_node_output_ports(worker, node, arity);
     maybe_return_task_by_node_and_neighbor(worker, node);
+}
+
+void
+apply_node_ctor(worker_t *worker, node_ctor_t *node_ctor, size_t arity) {
+    node_t *node = worker_add_node(worker, node_ctor);
+    apply_node(worker, node, arity);
 }
