@@ -4,9 +4,7 @@ worker_t *
 worker_new(mod_t *mod) {
     worker_t *self = new_page_aligned(worker_t);
     self->mod = mod;
-    self->task_queue = queue_new_with(
-        WORKER_TASK_QUEUE_SIZE,
-        (destroy_fn_t *) task_destroy);
+    self->task_list = list_new_with((destroy_fn_t *) task_destroy);
     // TODO We should use value_destroy to create value_stack.
     self->value_stack = stack_new();
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
@@ -21,7 +19,7 @@ worker_destroy(worker_t **self_pointer) {
     if (*self_pointer == NULL) return;
 
     worker_t *self = *self_pointer;
-    queue_destroy(&self->task_queue);
+    list_destroy(&self->task_list);
     stack_destroy(&self->value_stack);
     stack_destroy(&self->return_stack);
     set_destroy(&self->debug_node_set);
@@ -33,10 +31,10 @@ void
 worker_print(const worker_t *self, file_t *file) {
     fprintf(file, "<worker>\n");
 
-    size_t task_queue_length = queue_length(self->task_queue);
-    fprintf(file, "<task-queue length=\"%lu\">\n", task_queue_length);
-    for (size_t i = 0; i < task_queue_length; i++) {
-        task_t *task = queue_get(self->task_queue, i);
+    size_t task_count = list_length(self->task_list);
+    fprintf(file, "<task-queue length=\"%lu\">\n", task_count);
+    for (size_t i = 0; i < task_count; i++) {
+        task_t *task = list_get(self->task_list, i);
         task_print(task, file);
     }
     fprintf(file, "</task-queue>\n");
@@ -115,5 +113,5 @@ worker_fresh_name(worker_t* self) {
 
 void
 worker_return_task(worker_t* self, task_t *task) {
-    queue_enqueue(self->task_queue, task);
+    list_unshift(self->task_list, task);
 }

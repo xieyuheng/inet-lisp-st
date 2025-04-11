@@ -72,7 +72,7 @@ run_until(worker_t *worker, size_t base_length) {
 
 void
 step_task(worker_t *worker) {
-    task_t *task = queue_dequeue(worker->task_queue);
+    task_t *task = list_pop(worker->task_list);
     if (task == NULL) return;
 
     react(worker, task);
@@ -80,7 +80,7 @@ step_task(worker_t *worker) {
 
 void
 run_task(worker_t *worker) {
-    while (!queue_is_empty(worker->task_queue)) {
+    while (!list_is_empty(worker->task_list)) {
         step_task(worker);
     }
 }

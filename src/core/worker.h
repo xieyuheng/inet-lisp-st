@@ -4,7 +4,7 @@
 
 struct worker_t {
     mod_t *mod;
-    queue_t *task_queue;
+    list_t *task_list;
     stack_t *value_stack;
     stack_t *return_stack;
     size_t node_id_count;

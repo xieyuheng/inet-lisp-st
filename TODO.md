@@ -1,5 +1,3 @@
-[core] use `task_list` instead of `task_queue`
-
 # debug
 
 [debug] use real physics force
