@@ -4,6 +4,11 @@ This project is an **single-threaded** implementation of
 [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
 as a [lisp-like language](https://en.wikipedia.org/wiki/lisp_(programming_language)).
 
+Single-threaded environment allow us
+to support multiple principal ports.
+With multiple principal ports
+rule can be expressed by subgraph matching.
+
 ## Syntax
 
 ```

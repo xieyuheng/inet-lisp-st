@@ -1,5 +1,4 @@
-[queue] `queue_t` should auto resize
-[core] safe use of `task_queue` -- size is limited now
+[core] use `task_list` instead of `task_queue`
 
 # debug
 
