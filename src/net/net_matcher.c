@@ -126,7 +126,7 @@ matcher_start(net_matcher_t *self, size_t starting_index, node_t *node) {
     while (name) {
         node = matcher_next_node(self, name);
         if (node == NULL) return;
-        if (atomic_load(&node->atomic_is_matched)) return;
+        if (node->is_matched) return;
 
         index = matcher_next_index(self, name);
         matcher_match_node(self, index, node);

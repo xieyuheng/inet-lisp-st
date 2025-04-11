@@ -4,7 +4,7 @@ struct node_t {
     const node_ctor_t *ctor;
     size_t id;
     array_t *value_array;
-    atomic_bool atomic_is_matched;
+    bool is_matched;
 };
 
 node_t *node_new(const node_ctor_t *ctor, size_t id);

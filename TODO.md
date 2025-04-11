@@ -1,4 +1,3 @@
-[net] `node_t` -- `atomic_is_matched` should be `is_matched`
 [readme] update readme about no parallel
 
 # core

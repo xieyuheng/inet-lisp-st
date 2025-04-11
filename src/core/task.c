@@ -52,7 +52,7 @@ by_primitive_node(worker_t *worker, node_t *node) {
     }
 
     worker_return_task(worker, task_from_primitive_node(node));
-    atomic_store(&node->atomic_is_matched, true);
+    node->is_matched = true;
 }
 
 static void
@@ -66,7 +66,7 @@ by_matched_node(worker_t *worker, node_t *node) {
             worker_return_task(worker, task_from_rule(rule, net_matcher));
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
-                atomic_store(&net_matcher->matched_nodes[i]->atomic_is_matched, true);
+                net_matcher->matched_nodes[i]->is_matched = true;
             return;
         }
     }
@@ -76,7 +76,7 @@ void
 maybe_return_task_by_node(worker_t *worker, node_t *node) {
     assert(node);
 
-    if (atomic_load(&node->atomic_is_matched))
+    if (node->is_matched)
         return;
 
     if (node_is_primitive(node))
