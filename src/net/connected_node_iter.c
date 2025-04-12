@@ -34,9 +34,9 @@ connected_node_iter_first(connected_node_iter_t *self) {
     set_add(self->occurred_node_set, node);
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
-        if (!is_wire(node_get(node, i))) continue;
+        if (!is_wire(node_get_value(node, i))) continue;
 
-        wire_t *wire = as_wire(node_get(node, i));
+        wire_t *wire = as_wire(node_get_value(node, i));
         if (wire->opposite && is_wire(wire->opposite)) {
             wire_t *opposite_wire = as_wire(wire->opposite);
             if (opposite_wire->node == NULL)
@@ -61,9 +61,9 @@ connected_node_iter_next(connected_node_iter_t *self) {
     set_add(self->occurred_node_set, node);
 
     for (size_t i = 0; i < node->ctor->arity; i++) {
-        if (!is_wire(node_get(node, i))) continue;
+        if (!is_wire(node_get_value(node, i))) continue;
 
-        wire_t *wire = as_wire(node_get(node, i));
+        wire_t *wire = as_wire(node_get_value(node, i));
         if (wire->opposite && is_wire(wire->opposite)) {
             wire_t *opposite_wire = as_wire(wire->opposite);
             if (opposite_wire->node == NULL ||

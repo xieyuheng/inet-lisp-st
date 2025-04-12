@@ -162,7 +162,7 @@ wire_print_net(wire_t *self, file_t *file) {
                 else
                     fprintf(file, " :%s ", port_info->name);
 
-                value_t value = node_get(node, i);
+                value_t value = node_get_value(node, i);
                 if (value) {
                     if (is_wire(value)) {
                         wire_print_within_node(as_wire(value), file);
