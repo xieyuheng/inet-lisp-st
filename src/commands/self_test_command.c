@@ -14,11 +14,7 @@ int
 run(commander_t *commander) {
     (void) commander;
 
-    printf("<self_test>\n");
-
     modules_test();
-
-    printf("</self_test>\n");
 
     return 0;
 }
