@@ -5,7 +5,7 @@ node_new(const node_ctor_t *ctor, size_t id) {
     node_t *self = new(node_t);
     self->ctor = ctor;
     self->id = id;
-    self->value_array = array_auto();
+    self->value_array = array_new_auto();
     self->is_matched = false;
     return self;
 }

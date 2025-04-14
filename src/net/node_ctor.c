@@ -14,7 +14,7 @@ node_ctor_new(const char *name, size_t arity) {
     self->name = string_copy(name);
     self->arity = arity;
     self->port_infos = allocate_pointers(arity);
-    self->rule_array = array_auto_with(rule_destroy);
+    self->rule_array = array_new_auto_with(rule_destroy);
     return self;
 }
 
