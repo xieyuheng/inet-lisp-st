@@ -1,3 +1,5 @@
+rename debug to viewer
+
 # debug
 
 [debug] use real physics force
