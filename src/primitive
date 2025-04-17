@@ -1,8 +1,0 @@
-net/node_ctor.c:60:    for (size_t i = 0; i < node_ctor->arity; i++) {
-net/node_ctor.c:61:        port_info_t *port_info = node_ctor->port_infos[i];
-net/node_ctor.c:67:           node_ctor->name,
-lang/define_rule.c:7:    array_push(node_ctor->rule_array, rule);
-lang/apply_primitive.c:9:            primitive->node_ctor->port_infos[i]->is_principal)
-lang/define_node.c:11:        node_ctor->port_infos[index] =
-lang/define_primitive.c:47:        node_ctor->port_infos[i] =
-lang/define_primitive.c:52:    node_ctor->primitive = primitive;
