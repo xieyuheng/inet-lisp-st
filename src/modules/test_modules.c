@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-modules_test(void) {
+test_modules(void) {
     test_test();
     memory_test();
     char_test();
@@ -28,5 +28,6 @@ modules_test(void) {
     time_test();
     thread_test();
     queue_test();
+    deque_test();
     allocator_test();
 }
