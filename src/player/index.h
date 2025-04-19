@@ -6,4 +6,4 @@
 #include "node_forces.h"
 #include "node_physics.h"
 #include "drawings.h"
-#include "debug.h"
+#include "player.h"

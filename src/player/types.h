@@ -1,6 +1,6 @@
 #pragma once
 
-typedef struct debug_t debug_t;
+typedef struct player_t player_t;
 typedef struct node_model_t node_model_t;
 typedef struct node_physics_t node_physics_t;
 

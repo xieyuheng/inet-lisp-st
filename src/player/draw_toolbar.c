@@ -1,13 +1,13 @@
 #include "index.h"
 
 static void
-on_click_toggle_light_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
+on_click_toggle_light_button(player_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     (void) canvas;
 
     if (button == 1) {
         if (is_release) {
             self->toggle_light_button_is_pressed = false;
-            debug_toggle_light(self);
+            player_toggle_light(self);
         } else {
             self->toggle_light_button_is_pressed = true;
         }
@@ -15,7 +15,7 @@ on_click_toggle_light_button(debug_t *self, canvas_t *canvas, uint8_t button, bo
 }
 
 static void
-draw_toggle_light_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
+draw_toggle_light_button(player_t *self, canvas_t *canvas, size_t x, size_t y) {
     if (self->toggle_light_button_is_pressed) {
         canvas_draw_image_button(
             canvas, x, y, "images/toggle-light-button-down-03x03.chr", TR_AP_BLENDING,
@@ -28,14 +28,14 @@ draw_toggle_light_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
 }
 
 static void
-on_click_step_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
+on_click_step_button(player_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     (void) canvas;
 
     if (button == 1) {
         if (is_release) {
             self->step_button_is_pressed = false;
             step_task(self->worker);
-            debug_update(self);
+            player_update(self);
         } else {
             self->step_button_is_pressed = true;
         }
@@ -43,7 +43,7 @@ on_click_step_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_re
 }
 
 static void
-draw_step_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
+draw_step_button(player_t *self, canvas_t *canvas, size_t x, size_t y) {
     if (self->step_button_is_pressed) {
         canvas_draw_image_button(
             canvas, x, y, "images/step-button-down-03x03.chr", TR_AP_BLENDING,
@@ -56,7 +56,7 @@ draw_step_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
 }
 
 static void
-on_click_run_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
+on_click_run_button(player_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     (void) canvas;
 
     if (button == 1) {
@@ -70,7 +70,7 @@ on_click_run_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_rel
 }
 
 static void
-draw_run_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
+draw_run_button(player_t *self, canvas_t *canvas, size_t x, size_t y) {
     if (self->run_button_is_pressed || self->is_running) {
         canvas_draw_image_button(
             canvas, x, y, "images/run-button-down-03x03.chr", TR_AP_BLENDING,
@@ -83,14 +83,14 @@ draw_run_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
 }
 
 static void
-on_click_end_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
+on_click_end_button(player_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     (void) canvas;
 
     if (button == 1) {
         if (is_release) {
             self->end_button_is_pressed = false;
             run_task(self->worker);
-            debug_update(self);
+            player_update(self);
         } else {
             self->end_button_is_pressed = true;
         }
@@ -98,7 +98,7 @@ on_click_end_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_rel
 }
 
 static void
-draw_end_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
+draw_end_button(player_t *self, canvas_t *canvas, size_t x, size_t y) {
     if (self->end_button_is_pressed) {
         canvas_draw_image_button(
             canvas, x, y, "images/end-button-down-03x03.chr", TR_AP_BLENDING,
@@ -111,7 +111,7 @@ draw_end_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
 }
 
 void
-draw_toolbar(debug_t *self, canvas_t *canvas) {
+draw_toolbar(player_t *self, canvas_t *canvas) {
     draw_toggle_light_button(
         self, canvas,
         3 * TILE,

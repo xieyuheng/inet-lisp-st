@@ -1,5 +1,5 @@
-rename `debug_t` to `player_t`
 [readme] update commands
+rename `core_player_flag`
 
 # debug
 

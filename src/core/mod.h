@@ -9,7 +9,7 @@ struct mod_t {
     hash_t *value_hash;
     // the worker that is used to load this mod,
     // owned by this mod.
-    // - used by `debug_start`
+    // - used by `player_start`
     worker_t *loader_worker;
 };
 

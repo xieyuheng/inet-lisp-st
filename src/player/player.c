@@ -1,8 +1,8 @@
 #include "index.h"
 
-debug_t *
-debug_new(worker_t *worker) {
-    debug_t *self = new(debug_t);
+player_t *
+player_new(worker_t *worker) {
+    player_t *self = new(player_t);
     self->worker = worker;
 
     size_t width = 90 * TILE;
@@ -34,11 +34,11 @@ debug_new(worker_t *worker) {
 }
 
 void
-debug_destroy(debug_t **self_pointer) {
+player_destroy(player_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer == NULL) return;
 
-    debug_t *self = *self_pointer;
+    player_t *self = *self_pointer;
     canvas_destroy(&self->canvas);
     hash_destroy(&self->node_model_hash);
     free(self);
@@ -46,7 +46,7 @@ debug_destroy(debug_t **self_pointer) {
 }
 
 bool
-debug_is_any_button_pressed(debug_t *self) {
+player_is_any_button_pressed(player_t *self) {
     return (self->toggle_light_button_is_pressed ||
             self->step_button_is_pressed ||
             self->run_button_is_pressed ||
@@ -62,7 +62,7 @@ init_canvas_theme(canvas_t *canvas) {
 }
 
 void
-debug_toggle_light(debug_t *self) {
+player_toggle_light(player_t *self) {
     color_t fg_color = self->canvas->palette[FG_COLOR];
     color_t ap_color = self->canvas->palette[AP_COLOR];
 
@@ -84,7 +84,7 @@ init_canvas_font(canvas_t *canvas) {
 }
 
 static void
-on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
+on_frame(player_t *self, canvas_t *canvas, uint64_t passed) {
     (void) passed;
 
     if (self->is_running)
@@ -92,7 +92,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 
     if (self->running_frame_count > canvas->frame_rate / self->running_speed) {
         step_task(self->worker);
-        debug_update(self);
+        player_update(self);
         self->running_frame_count = 0;
     }
 
@@ -110,20 +110,20 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 }
 
 hash_t *
-debug_new_node_hash(debug_t *self) {
+player_new_node_hash(player_t *self) {
     hash_t *node_hash = hash_new();
-    node_t *node = set_first(self->worker->debug_node_set);
+    node_t *node = set_first(self->worker->player_node_set);
     while (node) {
         hash_set(node_hash, (void *) node->id, node);
-        node = set_next(self->worker->debug_node_set);
+        node = set_next(self->worker->player_node_set);
     }
 
     return node_hash;
 }
 
 void
-debug_update(debug_t *self) {
-    hash_t *new_node_hash = debug_new_node_hash(self);
+player_update(player_t *self) {
+    hash_t *new_node_hash = player_new_node_hash(self);
     node_physics_update_nodes(
         self->node_physics,
         new_node_hash,
@@ -134,13 +134,13 @@ debug_update(debug_t *self) {
 }
 
 static void
-init_node_hash(debug_t *self) {
+init_node_hash(player_t *self) {
     hash_destroy(&self->node_hash);
-    self->node_hash = debug_new_node_hash(self);
+    self->node_hash = player_new_node_hash(self);
 }
 
 static void
-init_node_physics(debug_t *self) {
+init_node_physics(player_t *self) {
     node_physics_add_nodes(
         self->node_physics,
         self->node_hash,
@@ -148,7 +148,7 @@ init_node_physics(debug_t *self) {
 }
 
 static void
-on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
+on_click(player_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     (void) canvas;
 
     // to handle click inside a button,
@@ -165,10 +165,10 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
 }
 
 void
-debug_start(worker_t *worker) {
+player_start(worker_t *worker) {
     srand(time(NULL));
 
-    debug_t *self = debug_new(worker);
+    player_t *self = player_new(worker);
 
     init_node_hash(self);
     init_node_physics(self);
@@ -181,5 +181,5 @@ debug_start(worker_t *worker) {
     self->canvas->hide_system_cursor = true;
 
     canvas_open(self->canvas);
-    debug_destroy(&self);
+    player_destroy(&self);
 }

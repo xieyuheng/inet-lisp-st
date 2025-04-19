@@ -20,9 +20,9 @@ run(commander_t *commander) {
             char *cwd = getcwd(NULL, 0);
             path_t *path = path_new(cwd);
             path_join(path, src);
-            core_debug_flag = true;
+            core_player_flag = true;
             mod_t *mod = load_mod(path);
-            debug_start(mod->loader_worker);
+            player_start(mod->loader_worker);
         } else  {
             test_printf("[debug] file name must ends with .lisp, given file name: %s\n", src);
             exit(1);

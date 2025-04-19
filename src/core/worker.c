@@ -8,7 +8,7 @@ worker_new(mod_t *mod) {
     // TODO We should use value_destroy to create value_stack.
     self->value_stack = stack_new();
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
-    self->debug_node_set = set_new();
+    self->player_node_set = set_new();
     self->node_id_count = 0;
     return self;
 }
@@ -22,7 +22,7 @@ worker_destroy(worker_t **self_pointer) {
     list_destroy(&self->task_list);
     stack_destroy(&self->value_stack);
     stack_destroy(&self->return_stack);
-    set_destroy(&self->debug_node_set);
+    set_destroy(&self->player_node_set);
     free(self);
     *self_pointer = NULL;
 }
@@ -74,16 +74,16 @@ node_t *
 worker_add_node(worker_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
 
-    if (core_debug_flag)
-        set_add(self->debug_node_set, node);
+    if (core_player_flag)
+        set_add(self->player_node_set, node);
 
     return node;
 }
 
 void
 worker_delete_node(worker_t* self, node_t *node) {
-    if (core_debug_flag)
-        set_delete(self->debug_node_set, node);
+    if (core_player_flag)
+        set_delete(self->player_node_set, node);
 
     node_destroy(&node);
 }

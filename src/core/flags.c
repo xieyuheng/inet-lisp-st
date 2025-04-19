@@ -1,3 +1,3 @@
 #include "index.h"
 
-bool core_debug_flag = false;
+bool core_player_flag = false;

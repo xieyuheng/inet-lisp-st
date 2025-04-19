@@ -1,7 +1,7 @@
 #include "index.h"
 
 static void
-draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_model) {
+draw_node(player_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_model) {
     node_t *node = hash_get(self->node_hash, (void *) node_id);
     if (!node) return;
 
@@ -48,7 +48,7 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
 }
 
 static void
-draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
+draw_wire(player_t *self, canvas_t *canvas, const wire_t *wire) {
     wire_t *opposite = wire->opposite;
     if (!wire->node ||
         !opposite ||
@@ -76,7 +76,7 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
 }
 
 static void
-draw_net_border(debug_t *self, canvas_t *canvas, bool really) {
+draw_net_border(player_t *self, canvas_t *canvas, bool really) {
     if (!really) return;
 
     size_t thickness = 1;
@@ -92,7 +92,7 @@ draw_net_border(debug_t *self, canvas_t *canvas, bool really) {
 }
 
 void
-draw_net(debug_t *self, canvas_t *canvas) {
+draw_net(player_t *self, canvas_t *canvas) {
     draw_net_border(self, canvas, false);
 
     node_t *node = hash_first(self->node_hash);
