@@ -162,7 +162,10 @@ inet-lisp-st 0.1.0
 
 commands:
   run -- run files
+  play -- play files
+  info -- print system info
   test-self -- run self test
+  test-modules -- run test for modules
   version -- print version
   help -- print help message
 ```

@@ -15,15 +15,10 @@ run(commander_t *commander) {
     char **argv = commander_rest_argv(commander);
     while (*argv) {
         char *src = *argv++;
-        if (string_ends_with(src, ".lisp")) {
-            char *cwd = getcwd(NULL, 0);
-            path_t *path = path_new(cwd);
-            path_join(path, src);
-            load_mod(path);
-        } else  {
-            fprintf(stderr, "[run] file name must ends with .lisp, given file name: %s\n", src);
-            exit(1);
-        }
+        char *cwd = getcwd(NULL, 0);
+        path_t *path = path_new(cwd);
+        path_join(path, src);
+        load_mod(path);
     }
 
     return 0;

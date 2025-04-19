@@ -1,4 +1,3 @@
-[readme] update commands
 rename `core_player_flag`
 
 # debug
