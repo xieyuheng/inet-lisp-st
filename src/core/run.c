@@ -55,7 +55,7 @@ step(worker_t *worker) {
 
 void
 run_until(worker_t *worker, size_t base_length) {
-#if STEP_LOG
+#if DEBUG_STEP_LOG
     worker_print(worker, stdout);
     fprintf(stdout, "\n");
 #endif
@@ -63,7 +63,7 @@ run_until(worker_t *worker, size_t base_length) {
     while (stack_length(worker->return_stack) > base_length) {
         step(worker);
 
-#if STEP_LOG
+#if DEBUG_STEP_LOG
         worker_print(worker, stdout);
         fprintf(stdout, "\n");
 #endif
