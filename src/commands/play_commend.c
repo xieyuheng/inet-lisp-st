@@ -3,9 +3,9 @@
 static int run(commander_t *commander);
 
 void
-debug_command(commander_t *runner) {
-    command_t *command = command_new("debug");
-    command->description = "debug files";
+play_command(commander_t *runner) {
+    command_t *command = command_new("play");
+    command->description = "play files";
     command->run = run;
     commander_add(runner, command);
 }
@@ -24,7 +24,7 @@ run(commander_t *commander) {
             mod_t *mod = load_mod(path);
             debug_start(mod->loader_worker);
         } else  {
-            fprintf(stderr, "[debug] file name must ends with .lisp, given file name: %s\n", src);
+            test_printf("[debug] file name must ends with .lisp, given file name: %s\n", src);
             exit(1);
         }
     }

@@ -1,4 +1,5 @@
-rename debug to viewer
+rename `debug_t` to `player_t`
+[readme] update commands
 
 # debug
 
