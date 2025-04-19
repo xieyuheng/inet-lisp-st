@@ -1,3 +1,7 @@
+[core] `worker_disconnect_node`
+[core] `worker_reconnect_node`
+[core] move run and apply to core
+
 # player
 
 [player] use real physics force
