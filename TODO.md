@@ -1,11 +1,11 @@
 rename `core_player_flag`
 
-# debug
+# player
 
-[debug] use real physics force
-[debug] `node_physics_simulate` -- move by `velocity` and clear `force` for every `node_model`
-[debug] remove `node_physics_fake_simulate`
-[debug] `draw_net` -- print non-wire value -- test by `list-map.play.lisp`
+[player] use real physics force
+[player] `node_physics_simulate` -- move by `velocity` and clear `force` for every `node_model`
+[player] remove `node_physics_fake_simulate`
+[player] `draw_net` -- print non-wire value -- test by `list-map.play.lisp`
 
 # arity checker
 
