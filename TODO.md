@@ -1,5 +1,3 @@
-rename `core_player_flag`
-
 # player
 
 [player] use real physics force

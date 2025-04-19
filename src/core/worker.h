@@ -9,7 +9,7 @@ struct worker_t {
     stack_t *return_stack;
     size_t node_id_count;
     size_t fresh_name_count;
-    // only used when core_player_flag is enabled
+    // only used when player_flag is enabled
     set_t *player_node_set;
 };
 

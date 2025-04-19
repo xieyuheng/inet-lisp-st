@@ -74,7 +74,7 @@ node_t *
 worker_add_node(worker_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
 
-    if (core_player_flag)
+    if (player_flag)
         set_add(self->player_node_set, node);
 
     return node;
@@ -82,7 +82,7 @@ worker_add_node(worker_t* self, const node_ctor_t *ctor) {
 
 void
 worker_delete_node(worker_t* self, node_t *node) {
-    if (core_player_flag)
+    if (player_flag)
         set_delete(self->player_node_set, node);
 
     node_destroy(&node);

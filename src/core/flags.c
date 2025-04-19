@@ -1,3 +1,3 @@
 #include "index.h"
 
-bool core_player_flag = false;
+bool player_flag = false;

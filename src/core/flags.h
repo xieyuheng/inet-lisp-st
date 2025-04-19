@@ -1,3 +1,3 @@
 #pragma once
 
-extern bool core_player_flag;
+extern bool player_flag;

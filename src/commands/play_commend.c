@@ -19,7 +19,7 @@ run(commander_t *commander) {
         char *cwd = getcwd(NULL, 0);
         path_t *path = path_new(cwd);
         path_join(path, src);
-        core_player_flag = true;
+        player_flag = true;
         mod_t *mod = load_mod(path);
         player_start(mod->loader_worker);
     }
