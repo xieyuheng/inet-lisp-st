@@ -3,14 +3,14 @@
 // TODO just use list + lock for now
 
 struct deque_t {
-    mutex_t *mutex;
+    fast_spinlock_t *fast_spinlock;
     list_t *list;
 };
 
 deque_t *
 deque_new(void) {
     deque_t *self = new(deque_t);
-    self->mutex = mutex_new();
+    self->fast_spinlock = fast_spinlock_new();
     self->list = list_new();
     return self;
 }
@@ -21,7 +21,7 @@ deque_destroy(deque_t **self_pointer) {
     if (*self_pointer == NULL) return;
 
     deque_t *self = *self_pointer;
-    mutex_destroy(&self->mutex);
+    fast_spinlock_destroy(&self->fast_spinlock);
     list_destroy(&self->list);
     free(self);
     *self_pointer = NULL;
@@ -29,45 +29,45 @@ deque_destroy(deque_t **self_pointer) {
 
 size_t
 deque_length(deque_t *self) {
-    mutex_lock(self->mutex);
+    fast_spinlock_lock(self->fast_spinlock);
     size_t length = list_length(self->list);
-    mutex_unlock(self->mutex);
+    fast_spinlock_unlock(self->fast_spinlock);
     return length;
 }
 
 bool
 deque_is_empty(deque_t *self) {
-    mutex_lock(self->mutex);
+    fast_spinlock_lock(self->fast_spinlock);
     bool is_empty = list_is_empty(self->list);
-    mutex_unlock(self->mutex);
+    fast_spinlock_unlock(self->fast_spinlock);
     return is_empty;
 }
 
 void
-deque_front_push(deque_t *self, void *value) {
-    mutex_lock(self->mutex);
+deque_push_front(deque_t *self, void *value) {
+    fast_spinlock_lock(self->fast_spinlock);
     list_unshift(self->list, value);
-    mutex_unlock(self->mutex);
+    fast_spinlock_unlock(self->fast_spinlock);
 }
 
 void *
-deque_front_pop(deque_t *self) {
-    mutex_lock(self->mutex);
+deque_pop_front(deque_t *self) {
+    fast_spinlock_lock(self->fast_spinlock);
     void *value = list_shift(self->list);
-    mutex_unlock(self->mutex);
+    fast_spinlock_unlock(self->fast_spinlock);
     return value;
 }
 
 void
-deque_back_push(deque_t *self, void *value) {
-    mutex_lock(self->mutex);
+deque_push_back(deque_t *self, void *value) {
+    fast_spinlock_lock(self->fast_spinlock);
     list_push(self->list, value);
-    mutex_unlock(self->mutex);
+    fast_spinlock_unlock(self->fast_spinlock);
 }
 
-void *deque_back_pop(deque_t *self) {
-    mutex_lock(self->mutex);
+void *deque_pop_back(deque_t *self) {
+    fast_spinlock_lock(self->fast_spinlock);
     void *value = list_pop(self->list);
-    mutex_unlock(self->mutex);
+    fast_spinlock_unlock(self->fast_spinlock);
     return value;
 }

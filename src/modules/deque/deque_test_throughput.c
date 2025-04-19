@@ -1,46 +1,43 @@
 #include "index.h"
 
-#define QUEUE_SIZE 1024
 #define LENGTH 10000000
 
 static void *
-uint_producer(queue_t *queue) {
+uint_producer(deque_t *deque) {
     size_t count = 0;
     while (true) {
         if (count == LENGTH) return NULL;
 
-        while (queue_is_full(queue)) {}
-
-        assert(queue_push_back(queue, (void *) count));
+        deque_push_back(deque, (void *) count);
         count++;
     }
 }
 
 static void *
-uint_consumer(queue_t *queue) {
+uint_consumer(deque_t *deque) {
     size_t count = 0;
     while (true) {
         if (count == LENGTH) return NULL;
 
-        while (queue_is_empty(queue)) {}
+        while (deque_is_empty(deque)) {}
 
-        assert(((size_t) queue_pop_front(queue)) == count);
+        assert(((size_t) deque_pop_front(deque)) == count);
         count++;
     }
 }
 
 void
-queue_test_throughput(void) {
+deque_test_throughput(void) {
     test_start();
 
-    queue_t *queue = queue_new(QUEUE_SIZE);
+    deque_t *deque = deque_new();
 
     double start_second = time_second();
 
     tid_t producer_id =
-        thread_start((thread_fn_t *) uint_producer, queue);
+        thread_start((thread_fn_t *) uint_producer, deque);
     tid_t consumer_id =
-        thread_start((thread_fn_t *) uint_consumer, queue);
+        thread_start((thread_fn_t *) uint_consumer, deque);
 
     thread_wait(producer_id);
     thread_wait(consumer_id);
@@ -48,7 +45,7 @@ queue_test_throughput(void) {
     double throughput = LENGTH / 1000 / time_passed_second(start_second);
     test_printf("throughput: %.f k/s\n", throughput);
 
-    queue_destroy(&queue);
+    deque_destroy(&deque);
 
     test_end();
 }
