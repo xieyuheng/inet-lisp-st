@@ -11,3 +11,6 @@
 #include "primitive.h"
 #include "rule.h"
 #include "worker.h"
+#include "apply.h"
+#include "react.h"
+#include "run.h"
