@@ -79,5 +79,5 @@ apply_primitive(worker_t *worker, primitive_t *primitive, size_t arity) {
     }
 
     node_t *node = worker_add_node(worker, primitive->node_ctor);
-    apply_node(worker, node, arity);
+    worker_reconnect_node(worker, node, arity);
 }
