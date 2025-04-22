@@ -1,5 +1,3 @@
-[core] extract `worker_disconnect_node`
-
 # player
 
 [player] use real physics force
