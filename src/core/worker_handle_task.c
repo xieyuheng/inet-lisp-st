@@ -12,8 +12,8 @@ connect_wire(worker_t* worker, wire_t *first_wire, wire_t *second_wire) {
         first_opposite_wire->opposite = second_opposite_wire;
         second_opposite_wire->opposite = first_opposite_wire;
 
-        worker_delete_wire(worker, first_wire);
-        worker_delete_wire(worker, second_wire);
+        wire_destroy(&first_wire);
+        wire_destroy(&second_wire);
 
         if (first_opposite_wire->node)
             maybe_return_task_by_node(worker, first_opposite_wire->node);
@@ -25,8 +25,8 @@ connect_wire(worker_t* worker, wire_t *first_wire, wire_t *second_wire) {
         wire_t *first_opposite_wire = as_wire(first_opposite);
         first_opposite_wire->opposite = second_opposite;
 
-        worker_delete_wire(worker, first_wire);
-        worker_delete_wire(worker, second_wire);
+        wire_destroy(&first_wire);
+        wire_destroy(&second_wire);
 
         if (first_opposite_wire->node)
             maybe_return_task_by_node(worker, first_opposite_wire->node);
@@ -36,8 +36,8 @@ connect_wire(worker_t* worker, wire_t *first_wire, wire_t *second_wire) {
         wire_t *second_opposite_wire = as_wire(second_opposite);
         second_opposite_wire->opposite = first_opposite;
 
-        worker_delete_wire(worker, first_wire);
-        worker_delete_wire(worker, second_wire);
+        wire_destroy(&first_wire);
+        wire_destroy(&second_wire);
 
         if (second_opposite_wire->node)
             maybe_return_task_by_node(worker, second_opposite_wire->node);
@@ -66,7 +66,7 @@ connect_value(worker_t* worker, wire_t *wire, value_t value) {
          wire_t *opposite_wire = as_wire(wire->opposite);
          opposite_wire->opposite = value;
 
-         worker_delete_wire(worker, wire);
+        wire_destroy(&wire);
 
          if (opposite_wire->node)
              maybe_return_task_by_node(worker, opposite_wire->node);
@@ -95,7 +95,7 @@ react_by_primitive(worker_t *worker, task_t *task) {
             assert(!is_wire(wire->opposite));
             stack_push(worker->value_stack, wire->opposite);
             wire_free_from_node(wire);
-            worker_delete_wire(worker, wire);
+            wire_destroy(&wire);
         } else {
             stack_push(worker->value_stack, value);
         }
@@ -150,7 +150,7 @@ delete_matched_nodes(worker_t *worker, net_matcher_t *net_matcher) {
             if (is_wire(value)) {
                 wire_t *wire = as_wire(value);
                 if (wire_is_principal(wire))
-                    worker_delete_wire(worker, wire);
+                    wire_destroy(&wire);
             }
         }
 

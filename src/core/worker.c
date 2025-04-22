@@ -45,19 +45,6 @@ worker_delete_node(worker_t* self, node_t *node) {
     node_destroy(&node);
 }
 
-wire_t *
-worker_add_wire(worker_t* self) {
-    (void) self;
-    wire_t *wire = wire_new();
-    return wire;
-}
-
-void
-worker_delete_wire(worker_t* self, wire_t *wire) {
-    (void) self;
-    wire_destroy(&wire);
-}
-
 char *
 worker_fresh_name(worker_t* self) {
     size_t max_string_length = 256;

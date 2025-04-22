@@ -19,9 +19,6 @@ void worker_destroy(worker_t **self_pointer);
 node_t *worker_add_node(worker_t* self, const node_ctor_t *ctor);
 void worker_delete_node(worker_t* self, node_t *node);
 
-wire_t *worker_add_wire(worker_t* self);
-void worker_delete_wire(worker_t* self, wire_t *wire);
-
 char *worker_fresh_name(worker_t* self);
 
 wire_t *connect_value(worker_t* worker, wire_t *wire, value_t value);
