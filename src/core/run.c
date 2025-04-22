@@ -5,7 +5,7 @@ step_op(worker_t *worker, frame_t *frame, opcode_t *op) {
     switch (op->kind) {
     case OPCODE_APPLY: {
         value_t target = stack_pop(worker->value_stack);
-        apply(worker, target, op->apply.arity);
+        worker_apply(worker, target, op->apply.arity);
         return;
     }
 

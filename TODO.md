@@ -1,4 +1,3 @@
-[core] `worker_apply` instead of `apply`
 [core] `worker_run_until`
 [core] `worker_work`
 [core] extract `worker_disconnect_node`

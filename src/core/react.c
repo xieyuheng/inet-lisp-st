@@ -101,7 +101,7 @@ react_by_primitive(worker_t *worker, task_t *task) {
         }
     }
 
-    apply_primitive(worker, primitive, primitive->input_arity);
+    worker_apply(worker, primitive, primitive->input_arity);
 
     // connect output port wires to values in the stack
     for (size_t i = 0; i < primitive->output_arity; i++) {

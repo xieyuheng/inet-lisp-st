@@ -28,6 +28,8 @@ void worker_return_task(worker_t* self, task_t *task);
 
 void worker_reconnect_node(worker_t *worker, node_t *node, size_t arity);
 
+void worker_apply(worker_t *worker, value_t target, size_t arity);
+
 void worker_print_return_stack(const worker_t *self, file_t *file);
 void worker_print_value_stack(const worker_t *self, file_t *file);
 void worker_print(const worker_t *self, file_t *file);
