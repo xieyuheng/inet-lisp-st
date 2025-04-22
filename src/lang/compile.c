@@ -71,7 +71,7 @@ compile_exp(worker_t *worker, function_t *function, exp_t *exp) {
         compile_exp_list(worker, function, exp->ap.arg_list);
         compile_exp(worker, function, exp->ap.target);
         size_t arity = list_length(exp->ap.arg_list);
-        function_add_opcode(function, op_apply(arity));
+        function_add_opcode(function, opcode_apply(arity));
         return;
     }
 

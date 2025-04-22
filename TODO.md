@@ -1,3 +1,4 @@
+[lang] merge `define_*` to `deifne`
 [core] `worker_apply` instead of `apply`
 [core] extract `worker_disconnect_node`
 

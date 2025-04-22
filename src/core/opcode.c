@@ -1,9 +1,9 @@
 #include "index.h"
 
 opcode_t *
-op_apply(size_t arity) {
+opcode_apply(size_t arity) {
     opcode_t *self = new(opcode_t);
-    self->kind = OP_APPLY;
+    self->kind = OPCODE_APPLY;
     self->apply.arity = arity;
     return self;
 }
@@ -39,7 +39,7 @@ op_destroy(opcode_t **self_pointer) {
 
     opcode_t *self = *self_pointer;
     switch (self->kind) {
-    case OP_APPLY: {
+    case OPCODE_APPLY: {
         break;
     }
 
@@ -64,7 +64,7 @@ op_destroy(opcode_t **self_pointer) {
 void
 op_print(const opcode_t *op, file_t *file) {
     switch (op->kind) {
-    case OP_APPLY: {
+    case OPCODE_APPLY: {
         fprintf(file, "(apply %lu)", op->apply.arity);
         return;
     }

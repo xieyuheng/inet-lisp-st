@@ -1,7 +1,7 @@
 #pragma once
 
 typedef enum {
-    OP_APPLY,
+    OPCODE_APPLY,
     OPCODE_LITERAL,
     OPCODE_GET_VARIABLE,
     OPCODE_SET_VARIABLE,
@@ -17,7 +17,7 @@ struct opcode_t {
     };
 };
 
-opcode_t *op_apply(size_t arity);
+opcode_t *opcode_apply(size_t arity);
 opcode_t *opcode_literal(value_t value);
 opcode_t *opcode_get_variable(size_t index);
 opcode_t *opcode_set_variable(size_t index);
