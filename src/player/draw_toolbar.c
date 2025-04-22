@@ -34,7 +34,10 @@ on_click_step_button(player_t *self, canvas_t *canvas, uint8_t button, bool is_r
     if (button == 1) {
         if (is_release) {
             self->step_button_is_pressed = false;
-            worker_handle_task(self->worker);
+            task_t *task = list_pop(self->worker->task_list);
+            if (!task) return;
+            
+            worker_handle_task(self->worker, task);
             player_update(self);
         } else {
             self->step_button_is_pressed = true;

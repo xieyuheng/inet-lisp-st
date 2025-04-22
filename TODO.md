@@ -1,4 +1,3 @@
-[core] `worker_handle_task` take `task`
 [core] extract `worker_disconnect_node`
 
 # player
