@@ -1,4 +1,3 @@
-[lang] merge `define_*` to `deifne`
 [core] `worker_apply` instead of `apply`
 [core] `worker_run_until`
 [core] `worker_work`
