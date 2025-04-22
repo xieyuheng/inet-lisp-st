@@ -93,8 +93,9 @@ react_by_rule(worker_t *worker, task_t *task) {
 
 void
 worker_handle_task(worker_t *worker, task_t *task) {
-    if (task_is_primitive(task))
+    if (task_is_primitive(task)) {
         react_by_primitive(worker, task);
-    else
+    } else {
         react_by_rule(worker, task);
+    }
 }
