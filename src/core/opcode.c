@@ -62,27 +62,27 @@ opcode_destroy(opcode_t **self_pointer) {
 }
 
 void
-opcode_print(const opcode_t *op, file_t *file) {
-    switch (op->kind) {
+opcode_print(const opcode_t *self, file_t *file) {
+    switch (self->kind) {
     case OPCODE_APPLY: {
-        fprintf(file, "(apply %lu)", op->apply.arity);
+        fprintf(file, "(apply %lu)", self->apply.arity);
         return;
     }
 
     case OPCODE_LITERAL: {
         fprintf(file, "(literal ");
-        value_print(op->literal.value, file);
+        value_print(self->literal.value, file);
         fprintf(file, ")");
         return;
     }
 
     case OPCODE_GET_VARIABLE: {
-        fprintf(file, "(get-variable %ld)", op->get_variable.index);
+        fprintf(file, "(get-variable %ld)", self->get_variable.index);
         return;
     }
 
     case OPCODE_SET_VARIABLE: {
-        fprintf(file, "(set-variable %ld)", op->set_variable.index);
+        fprintf(file, "(set-variable %ld)", self->set_variable.index);
         return;
     }
     }
