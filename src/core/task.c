@@ -51,7 +51,7 @@ by_primitive_node(worker_t *worker, node_t *node) {
         }
     }
 
-    worker_return_task(worker, task_from_primitive_node(node));
+    worker_add_task(worker, task_from_primitive_node(node));
     node->is_matched = true;
 }
 
@@ -63,7 +63,7 @@ by_matched_node(worker_t *worker, node_t *node) {
         net_matcher_t *net_matcher =
             match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
-            worker_return_task(worker, task_from_rule(rule, net_matcher));
+            worker_add_task(worker, task_from_rule(rule, net_matcher));
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
                 net_matcher->matched_nodes[i]->is_matched = true;

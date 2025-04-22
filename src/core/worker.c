@@ -69,11 +69,6 @@ worker_fresh_name(worker_t* self) {
 }
 
 void
-worker_return_task(worker_t* self, task_t *task) {
-    list_unshift(self->task_list, task);
-}
-
-void
 worker_print(const worker_t *self, file_t *file) {
     fprintf(file, "<worker>\n");
 

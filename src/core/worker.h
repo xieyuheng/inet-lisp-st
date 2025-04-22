@@ -24,15 +24,16 @@ void worker_delete_wire(worker_t* self, wire_t *wire);
 
 char *worker_fresh_name(worker_t* self);
 
-void worker_return_task(worker_t* self, task_t *task);
-
-void worker_reconnect_node(worker_t *worker, node_t *node, size_t arity);
-
 wire_t *connect_value(worker_t* worker, wire_t *wire, value_t value);
+
 void worker_apply(worker_t *worker, value_t target, size_t arity);
 void worker_run_until(worker_t *worker, size_t base_length);
+
+void worker_add_task(worker_t* self, task_t *task);
 void worker_handle_task(worker_t *worker, task_t *task);
+void worker_reconnect_node(worker_t *worker, node_t *node, size_t arity);
 void worker_work(worker_t *worker);
+
 
 void worker_print_return_stack(const worker_t *self, file_t *file);
 void worker_print_value_stack(const worker_t *self, file_t *file);
