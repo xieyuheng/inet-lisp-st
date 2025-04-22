@@ -1,7 +1,7 @@
 #include "index.h"
 
 static void
-react_by_primitive(worker_t *worker, task_t *task) {
+handle_by_primitive(worker_t *worker, task_t *task) {
     node_t *node = task->primitive_node;
     primitive_t *primitive = as_primitive(node->ctor->primitive);
     assert(primitive);
@@ -78,7 +78,7 @@ delete_matched_nodes(worker_t *worker, net_matcher_t *net_matcher) {
 }
 
 static void
-react_by_rule(worker_t *worker, task_t *task) {
+handle_by_rule(worker_t *worker, task_t *task) {
     return_local_values(worker, task->net_matcher);
     delete_matched_nodes(worker, task->net_matcher);
 
@@ -94,8 +94,8 @@ react_by_rule(worker_t *worker, task_t *task) {
 void
 worker_handle_task(worker_t *worker, task_t *task) {
     if (task_is_primitive(task)) {
-        react_by_primitive(worker, task);
+        handle_by_primitive(worker, task);
     } else {
-        react_by_rule(worker, task);
+        handle_by_rule(worker, task);
     }
 }
