@@ -28,7 +28,7 @@ worker_destroy(worker_t **self_pointer) {
 }
 
 node_t *
-worker_add_node(worker_t* self, const node_ctor_t *ctor) {
+worker_new_node(worker_t* self, const node_ctor_t *ctor) {
     node_t *node = node_new(ctor, ++self->node_id_count);
 
     if (player_flag)

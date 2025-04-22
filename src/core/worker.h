@@ -16,7 +16,7 @@ struct worker_t {
 worker_t *worker_new(mod_t *mod);
 void worker_destroy(worker_t **self_pointer);
 
-node_t *worker_add_node(worker_t* self, const node_ctor_t *ctor);
+node_t *worker_new_node(worker_t* self, const node_ctor_t *ctor);
 void worker_delete_node(worker_t* self, node_t *node);
 
 char *worker_fresh_name(worker_t* self);
@@ -30,7 +30,6 @@ void worker_add_task(worker_t* self, task_t *task);
 void worker_handle_task(worker_t *worker, task_t *task);
 void worker_reconnect_node(worker_t *worker, node_t *node, size_t arity);
 void worker_work(worker_t *worker);
-
 
 void worker_print_return_stack(const worker_t *self, file_t *file);
 void worker_print_value_stack(const worker_t *self, file_t *file);

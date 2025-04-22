@@ -70,7 +70,7 @@ void
 worker_apply(worker_t *worker, value_t target, size_t arity) {
     if (is_node_ctor(target)) {
         node_ctor_t *node_ctor = as_node_ctor(target);
-        node_t *node = worker_add_node(worker, node_ctor);
+        node_t *node = worker_new_node(worker, node_ctor);
         worker_reconnect_node(worker, node, arity);
     } else if (is_function(target)) {
         function_t *function = as_function(target);
@@ -86,7 +86,7 @@ worker_apply(worker_t *worker, value_t target, size_t arity) {
             is_directly_appliable(worker, primitive, arity)) {
             apply_primitive_directly(worker, primitive);
         } else {
-            node_t *node = worker_add_node(worker, primitive->node_ctor);
+            node_t *node = worker_new_node(worker, primitive->node_ctor);
             worker_reconnect_node(worker, node, arity);
         }
     } else {
