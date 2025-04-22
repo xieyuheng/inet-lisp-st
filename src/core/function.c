@@ -11,7 +11,7 @@ function_new(size_t arity) {
     self->spec = &function_object_spec;
     self->arity = arity;
     self->local_index_hash = hash_of_string_key();
-    self->op_array = array_new_auto_with((destroy_fn_t *) op_destroy);
+    self->opcode_array = array_new_auto_with((destroy_fn_t *) op_destroy);
     return self;
 }
 
@@ -23,7 +23,7 @@ function_destroy(function_t **self_pointer) {
     function_t *self = *self_pointer;
     string_destroy(&self->name);
     hash_destroy(&self->local_index_hash);
-    array_destroy(&self->op_array);
+    array_destroy(&self->opcode_array);
     free(self);
     *self_pointer = NULL;
 }
@@ -42,17 +42,17 @@ as_function(value_t value) {
 
 size_t
 function_length(const function_t *self) {
-    return array_length(self->op_array);
+    return array_length(self->opcode_array);
 }
 
 void
-function_add_op(function_t *self, op_t *op) {
-    array_push(self->op_array, op);
+function_add_op(function_t *self, opcode_t *op) {
+    array_push(self->opcode_array, op);
 }
 
-op_t *
+opcode_t *
 function_get_op(const function_t *self, size_t index) {
-    return array_get(self->op_array, index);
+    return array_get(self->opcode_array, index);
 }
 
 void

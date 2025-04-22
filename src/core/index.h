@@ -6,7 +6,7 @@
 #include "mod.h"
 #include "frame.h"
 #include "task.h"
-#include "op.h"
+#include "opcode.h"
 #include "function.h"
 #include "primitive.h"
 #include "rule.h"

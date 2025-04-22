@@ -1,57 +1,57 @@
 #include "index.h"
 
-op_t *
+opcode_t *
 op_apply(size_t arity) {
-    op_t *self = new(op_t);
+    opcode_t *self = new(opcode_t);
     self->kind = OP_APPLY;
     self->apply.arity = arity;
     return self;
 }
 
-op_t *
-op_literal(value_t value) {
-    op_t *self = new(op_t);
-    self->kind = OP_LITERAL;
+opcode_t *
+opcode_literal(value_t value) {
+    opcode_t *self = new(opcode_t);
+    self->kind = OPCODE_LITERAL;
     self->literal.value = value;
     return self;
 }
 
-op_t *
-op_get_variable(size_t index) {
-    op_t *self = new(op_t);
-    self->kind = OP_GET_VARIABLE;
+opcode_t *
+opcode_get_variable(size_t index) {
+    opcode_t *self = new(opcode_t);
+    self->kind = OPCODE_GET_VARIABLE;
     self->get_variable.index = index;
     return self;
 }
 
-op_t *
-op_set_variable(size_t index) {
-    op_t *self = new(op_t);
-    self->kind = OP_SET_VARIABLE;
+opcode_t *
+opcode_set_variable(size_t index) {
+    opcode_t *self = new(opcode_t);
+    self->kind = OPCODE_SET_VARIABLE;
     self->set_variable.index = index;
     return self;
 }
 
 void
-op_destroy(op_t **self_pointer) {
+op_destroy(opcode_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer == NULL) return;
 
-    op_t *self = *self_pointer;
+    opcode_t *self = *self_pointer;
     switch (self->kind) {
     case OP_APPLY: {
         break;
     }
 
-    case OP_LITERAL: {
+    case OPCODE_LITERAL: {
         break;
     }
 
-    case OP_GET_VARIABLE: {
+    case OPCODE_GET_VARIABLE: {
         break;
     }
 
-    case OP_SET_VARIABLE: {
+    case OPCODE_SET_VARIABLE: {
         break;
     }
     }
@@ -62,26 +62,26 @@ op_destroy(op_t **self_pointer) {
 }
 
 void
-op_print(const op_t *op, file_t *file) {
+op_print(const opcode_t *op, file_t *file) {
     switch (op->kind) {
     case OP_APPLY: {
         fprintf(file, "(apply %lu)", op->apply.arity);
         return;
     }
 
-    case OP_LITERAL: {
+    case OPCODE_LITERAL: {
         fprintf(file, "(literal ");
         value_print(op->literal.value, file);
         fprintf(file, ")");
         return;
     }
 
-    case OP_GET_VARIABLE: {
+    case OPCODE_GET_VARIABLE: {
         fprintf(file, "(get-variable %ld)", op->get_variable.index);
         return;
     }
 
-    case OP_SET_VARIABLE: {
+    case OPCODE_SET_VARIABLE: {
         fprintf(file, "(set-variable %ld)", op->set_variable.index);
         return;
     }
