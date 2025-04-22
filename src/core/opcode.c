@@ -33,7 +33,7 @@ opcode_set_variable(size_t index) {
 }
 
 void
-op_destroy(opcode_t **self_pointer) {
+opcode_destroy(opcode_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer == NULL) return;
 
@@ -62,7 +62,7 @@ op_destroy(opcode_t **self_pointer) {
 }
 
 void
-op_print(const opcode_t *op, file_t *file) {
+opcode_print(const opcode_t *op, file_t *file) {
     switch (op->kind) {
     case OPCODE_APPLY: {
         fprintf(file, "(apply %lu)", op->apply.arity);

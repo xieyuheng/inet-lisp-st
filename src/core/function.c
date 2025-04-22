@@ -11,7 +11,7 @@ function_new(size_t arity) {
     self->spec = &function_object_spec;
     self->arity = arity;
     self->local_index_hash = hash_of_string_key();
-    self->opcode_array = array_new_auto_with((destroy_fn_t *) op_destroy);
+    self->opcode_array = array_new_auto_with((destroy_fn_t *) opcode_destroy);
     return self;
 }
 
@@ -64,7 +64,7 @@ void
 function_print(const function_t *self, file_t *file) {
     fprintf(file, "<function %s>\n", self->name);
     for (size_t i = 0; i < function_length(self); i++) {
-        op_print(function_get_opcode(self, i), file);
+        opcode_print(function_get_opcode(self, i), file);
         fprintf(file, "\n");
     }
     fprintf(file, "</function>\n");
@@ -75,11 +75,11 @@ function_print_with_cursor(const function_t *self, file_t *file, size_t cursor) 
     fprintf(file, "<function %s>\n", self->name);
     for (size_t i = 0; i < function_length(self); i++) {
         if (i == cursor) {
-            op_print(function_get_opcode(self, i), file);
+            opcode_print(function_get_opcode(self, i), file);
             fprintf(file, " <<<");
             fprintf(file, "\n");
         } else {
-            op_print(function_get_opcode(self, i), file);
+            opcode_print(function_get_opcode(self, i), file);
             fprintf(file, "\n");
         }
     }

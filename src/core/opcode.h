@@ -22,6 +22,6 @@ opcode_t *opcode_literal(value_t value);
 opcode_t *opcode_get_variable(size_t index);
 opcode_t *opcode_set_variable(size_t index);
 
-void op_destroy(opcode_t **self_pointer);
+void opcode_destroy(opcode_t **self_pointer);
 
-void op_print(const opcode_t *self, file_t *file);
+void opcode_print(const opcode_t *self, file_t *file);
