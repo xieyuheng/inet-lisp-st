@@ -1,4 +1,3 @@
-[core] extract `worker_connect`
 [core] extract `worker_disconnect_node`
 
 # player
