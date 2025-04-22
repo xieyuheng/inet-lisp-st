@@ -7,10 +7,10 @@ compile_set_variable(worker_t *worker, function_t *function, const char *name) {
     size_t index = hash_length(function->local_index_hash);
     if (hash_has(function->local_index_hash, name)) {
         size_t old_index = (size_t) hash_get(function->local_index_hash, name);
-        function_add_op(function, opcode_set_variable(old_index));
+        function_add_opcode(function, opcode_set_variable(old_index));
     } else {
         assert(hash_set(function->local_index_hash, string_copy(name), (void *) index));
-        function_add_op(function, opcode_set_variable(index));
+        function_add_opcode(function, opcode_set_variable(index));
     }
 }
 
@@ -39,7 +39,7 @@ maybe_compile_get_variable(function_t *function, const char *name) {
     if (!hash_has(function->local_index_hash, name)) return false;
 
     size_t index = (size_t) hash_get(function->local_index_hash, name);
-    function_add_op(function, opcode_get_variable(index));
+    function_add_opcode(function, opcode_get_variable(index));
     return true;
 }
 
@@ -53,7 +53,7 @@ compile_literal(worker_t *worker, function_t *function, const char *name) {
         exit(1);
     }
 
-    function_add_op(function, opcode_literal(value));
+    function_add_opcode(function, opcode_literal(value));
 }
 
 void
@@ -71,7 +71,7 @@ compile_exp(worker_t *worker, function_t *function, exp_t *exp) {
         compile_exp_list(worker, function, exp->ap.arg_list);
         compile_exp(worker, function, exp->ap.target);
         size_t arity = list_length(exp->ap.arg_list);
-        function_add_op(function, op_apply(arity));
+        function_add_opcode(function, op_apply(arity));
         return;
     }
 
@@ -82,12 +82,12 @@ compile_exp(worker_t *worker, function_t *function, exp_t *exp) {
     }
 
     case EXP_INT: {
-        function_add_op(function, opcode_literal(xint(exp->i.target)));
+        function_add_opcode(function, opcode_literal(xint(exp->i.target)));
         return;
     }
 
     case EXP_FLOAT: {
-        function_add_op(function, opcode_literal(xfloat(exp->f.target)));
+        function_add_opcode(function, opcode_literal(xfloat(exp->f.target)));
         return;
     }
     }
