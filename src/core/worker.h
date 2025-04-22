@@ -17,7 +17,7 @@ worker_t *worker_new(mod_t *mod);
 void worker_destroy(worker_t **self_pointer);
 
 node_t *worker_new_node(worker_t* self, const node_ctor_t *ctor);
-void worker_delete_node(worker_t* self, node_t *node);
+void worker_recycle_node(worker_t* self, node_t *node);
 
 char *worker_fresh_name(worker_t* self);
 

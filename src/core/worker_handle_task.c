@@ -113,7 +113,7 @@ react_by_primitive(worker_t *worker, task_t *task) {
         connect_value(worker, wire, top_value);
     }
 
-    worker_delete_node(worker, task->primitive_node);
+    worker_recycle_node(worker, task->primitive_node);
     task_destroy(&task);
 }
 
@@ -154,7 +154,7 @@ delete_matched_nodes(worker_t *worker, net_matcher_t *net_matcher) {
             }
         }
 
-        worker_delete_node(worker, matched_node);
+        worker_recycle_node(worker, matched_node);
     }
 }
 

@@ -38,7 +38,7 @@ worker_new_node(worker_t* self, const node_ctor_t *ctor) {
 }
 
 void
-worker_delete_node(worker_t* self, node_t *node) {
+worker_recycle_node(worker_t* self, node_t *node) {
     if (player_flag)
         set_delete(self->player_node_set, node);
 
