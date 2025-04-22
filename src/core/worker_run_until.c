@@ -54,7 +54,7 @@ step(worker_t *worker) {
 }
 
 void
-run_until(worker_t *worker, size_t base_length) {
+worker_run_until(worker_t *worker, size_t base_length) {
 #if DEBUG_STEP_LOG
     worker_print(worker, stdout);
     fprintf(stdout, "\n");
@@ -67,20 +67,5 @@ run_until(worker_t *worker, size_t base_length) {
         worker_print(worker, stdout);
         fprintf(stdout, "\n");
 #endif
-    }
-}
-
-void
-step_task(worker_t *worker) {
-    task_t *task = list_pop(worker->task_list);
-    if (task == NULL) return;
-
-    react(worker, task);
-}
-
-void
-run_task(worker_t *worker) {
-    while (!list_is_empty(worker->task_list)) {
-        step_task(worker);
     }
 }

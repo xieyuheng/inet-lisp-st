@@ -42,7 +42,7 @@ x_link(worker_t *worker) {
 
 void
 x_run(worker_t *worker) {
-    run_task(worker);
+    worker_work(worker);
 }
 
 void

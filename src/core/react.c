@@ -169,7 +169,7 @@ react_by_rule(worker_t *worker, task_t *task) {
     task_destroy(&task);
 
     stack_push(worker->return_stack, frame);
-    run_until(worker, base_length);
+    worker_run_until(worker, base_length);
 }
 
 void

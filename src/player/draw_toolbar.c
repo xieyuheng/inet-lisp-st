@@ -34,7 +34,7 @@ on_click_step_button(player_t *self, canvas_t *canvas, uint8_t button, bool is_r
     if (button == 1) {
         if (is_release) {
             self->step_button_is_pressed = false;
-            step_task(self->worker);
+            worker_handle_task(self->worker);
             player_update(self);
         } else {
             self->step_button_is_pressed = true;
@@ -89,7 +89,7 @@ on_click_end_button(player_t *self, canvas_t *canvas, uint8_t button, bool is_re
     if (button == 1) {
         if (is_release) {
             self->end_button_is_pressed = false;
-            run_task(self->worker);
+            worker_work(self->worker);
             player_update(self);
         } else {
             self->end_button_is_pressed = true;

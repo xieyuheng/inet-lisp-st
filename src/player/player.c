@@ -91,7 +91,7 @@ on_frame(player_t *self, canvas_t *canvas, uint64_t passed) {
         self->running_frame_count += passed;
 
     if (self->running_frame_count > canvas->frame_rate / self->running_speed) {
-        step_task(self->worker);
+        worker_handle_task(self->worker);
         player_update(self);
         self->running_frame_count = 0;
     }
