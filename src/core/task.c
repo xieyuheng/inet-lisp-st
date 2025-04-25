@@ -1,7 +1,7 @@
 #include "index.h"
 
 task_t *
-task_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
+task_new(const rule_t *rule, net_matcher_t *net_matcher) {
     task_t *self = new(task_t);
     self->rule = rule;
     self->net_matcher = net_matcher;
@@ -9,7 +9,7 @@ task_from_rule(const rule_t *rule, net_matcher_t *net_matcher) {
 }
 
 task_t *
-task_from_primitive_node(node_t *primitive_node) {
+task_new_primitive(node_t *primitive_node) {
     task_t *self = new(task_t);
     assert(node_is_primitive(primitive_node));
     self->primitive_node = primitive_node;
@@ -51,7 +51,7 @@ by_primitive_node(worker_t *worker, node_t *node) {
         }
     }
 
-    worker_add_task(worker, task_from_primitive_node(node));
+    worker_add_task(worker, task_new_primitive(node));
     node->is_matched = true;
 }
 
@@ -63,7 +63,7 @@ by_matched_node(worker_t *worker, node_t *node) {
         net_matcher_t *net_matcher =
             match_net(rule->net_pattern, rule->starting_index, node);
         if (net_matcher) {
-            worker_add_task(worker, task_from_rule(rule, net_matcher));
+            worker_add_task(worker, task_new(rule, net_matcher));
             size_t length = net_pattern_length(rule->net_pattern);
             for (size_t i = 0; i < length; i++)
                 net_matcher->matched_nodes[i]->is_matched = true;
