@@ -1,3 +1,5 @@
+[prelude] `run` & `inspect-run` & `wire-print-net` -- print top level exp
+
 # player
 
 [player] use real physics force
