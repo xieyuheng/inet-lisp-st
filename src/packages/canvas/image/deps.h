@@ -6,6 +6,4 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "../memory/index.h"
-#include "../string/index.h"
-#include "../file/index.h"
+#include "../../std/index.h"

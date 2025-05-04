@@ -10,12 +10,8 @@
 #include <X11/Xatom.h>
 #include <X11/XKBlib.h>
 
-#include "../memory/index.h"
-#include "../string/index.h"
-#include "../file/index.h"
-#include "../list/index.h"
-#include "../int/index.h"
-#include "../image/index.h"
+#include "../../std/index.h"
+
 #include "../font/index.h"
-#include "../blob/index.h"
+#include "../image/index.h"
 #include "../store/index.h"

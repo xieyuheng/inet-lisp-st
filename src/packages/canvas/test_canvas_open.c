@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-test_canvas(void) {
+test_canvas_open(void) {
     test_start();
 
     canvas_t *canvas = canvas_new(3 * TILE, 3 * TILE, 10);
