@@ -32,7 +32,7 @@ cflags = \
 	-D_TIME_BITS=64 \
 	-D_FILE_OFFSET_BITS=64 \
 	$(tsan_cflags) \
-	 $(CFLAGS)
+	$(CFLAGS)
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
 lib = $(patsubst src/%, lib/%, $(patsubst %.c, %.o, $(src)))
