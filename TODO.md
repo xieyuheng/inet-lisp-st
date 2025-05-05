@@ -1,4 +1,3 @@
-ambr compute_exp run_exp
 # player
 
 [player] use real physics force

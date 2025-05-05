@@ -144,8 +144,8 @@ execute(worker_t *worker, stmt_t *stmt) {
         return;
     }
 
-    case STMT_COMPUTE_EXP: {
-        run_exp_and_print(worker, stmt->compute_exp.exp);
+    case STMT_RUN_EXP: {
+        run_exp_and_print(worker, stmt->run_exp.exp);
         return;
     }
 
