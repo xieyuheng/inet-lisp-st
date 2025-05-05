@@ -22,7 +22,7 @@ void worker_recycle_node(worker_t* self, node_t *node);
 char *worker_fresh_name(worker_t* self);
 
 void worker_apply(worker_t *worker, value_t target, size_t arity);
-void worker_run_until(worker_t *worker, size_t base_length);
+void worker_run_until(worker_t *worker, size_t return_stack_base);
 
 void worker_add_task(worker_t* self, task_t *task);
 void worker_handle_task(worker_t *worker, task_t *task);

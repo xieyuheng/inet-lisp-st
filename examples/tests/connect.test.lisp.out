@@ -1,1 +1,6 @@
--<>-!value-(sole₁)
+<net>
+:root -<>-!value-(sole₁)
+(sole₁
+ :value! -<>-)
+</net>
+

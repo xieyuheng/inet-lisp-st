@@ -82,13 +82,13 @@ handle_by_rule(worker_t *worker, task_t *task) {
     return_local_values(worker, task->net_matcher);
     delete_matched_nodes(worker, task->net_matcher);
 
-    size_t base_length = stack_length(worker->return_stack);
+    size_t return_stack_base = stack_length(worker->return_stack);
     frame_t *frame = frame_new(task->rule->function);
 
     task_destroy(&task);
 
     stack_push(worker->return_stack, frame);
-    worker_run_until(worker, base_length);
+    worker_run_until(worker, return_stack_base);
 }
 
 void

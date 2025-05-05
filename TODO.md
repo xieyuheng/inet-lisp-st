@@ -1,8 +1,4 @@
-[prelude] remove `run` & `inspect-run` -- print top level exp
-[prelude] remove `print` and `println`
-[lang] `run_exp`
-[lang] `run_exp_and_print`
-
+ambr compute_exp run_exp
 # player
 
 [player] use real physics force

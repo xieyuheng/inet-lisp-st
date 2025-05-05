@@ -100,26 +100,11 @@ translate_pattern_tree(worker_t *worker, exp_t *pattern_exp) {
     return pattern_exp_list;
 }
 
-static void
-compute_exp(worker_t *worker, exp_t *exp) {
-    size_t arity = 0;
-    function_t *function = function_new(arity);
-    compile_exp(worker, function, exp);
-
-    size_t base_length = stack_length(worker->return_stack);
-    frame_t *frame = frame_new(function);
-    stack_push(worker->return_stack, frame);
-    worker_run_until(worker, base_length);
-
-    function_destroy(&function);
-    return;
-}
-
 void
 execute(worker_t *worker, stmt_t *stmt) {
     switch (stmt->kind) {
     case STMT_DEFINE: {
-        compute_exp(worker, stmt->define.exp);
+        run_exp(worker, stmt->define.exp);
         value_t value = stack_pop(worker->value_stack);
         define(worker->mod, stmt->define.name, value);
         return;
@@ -160,7 +145,7 @@ execute(worker_t *worker, stmt_t *stmt) {
     }
 
     case STMT_COMPUTE_EXP: {
-        compute_exp(worker, stmt->compute_exp.exp);
+        run_exp_and_print(worker, stmt->compute_exp.exp);
         return;
     }
 
