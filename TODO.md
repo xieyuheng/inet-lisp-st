@@ -1,4 +1,7 @@
-[prelude] `run` & `inspect-run` & `wire-print-net` -- print top level exp
+[prelude] remove `run` & `inspect-run` -- print top level exp
+[prelude] remove `print` and `println`
+[lang] `run_exp`
+[lang] `run_exp_and_print`
 
 # player
 
