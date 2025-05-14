@@ -31,7 +31,7 @@ Define three nodes `(zero)`, `(add1)` and `(add)`:
 ```
 
 ```
-value!   value!        value
+value!   value!        result
   |        |             |
 (zero)   (add1)        (add)
            |           /   \
@@ -46,7 +46,7 @@ The rule between `(add1)` and `(add)`:
 ```
 
 ```
-     value             value            value
+     result            result           result
        |                 |                |
      (add)      =>                =>    (add1)
      /   \                 \              |
@@ -63,7 +63,7 @@ The rule between `(zero)` and `(add)`:
 ```
 
 ```
-     value          value         value
+     result         result        result
        |              |             |
      (add)     =>             =>    |
      /   \              \            \
@@ -102,7 +102,7 @@ The whole program with test:
 
 (define (two) (add1 (add1 (zero))))
 
-(inspect-run (add (two) (two)))
+(add (two) (two))
 ```
 
 ### List
@@ -120,10 +120,9 @@ The whole program with test:
 
 (define-node sole value!)
 
-(inspect-run
-  (append
-    (cons (sole) (cons (sole) (cons (sole) (null))))
-    (cons (sole) (cons (sole) (cons (sole) (null))))))
+(append
+ (cons (sole) (cons (sole) (cons (sole) (null))))
+ (cons (sole) (cons (sole) (cons (sole) (null)))))
 ```
 
 ### More
