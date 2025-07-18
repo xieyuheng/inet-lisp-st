@@ -147,7 +147,7 @@ Dependencies:
 Compile:
 
 ```
-git clone https://github.com/cicada-lang/inet-lisp-st
+git clone https://github.com/xieyuheng/inet-lisp-st
 cd inet-lisp-st
 make -j
 make test
@@ -186,10 +186,10 @@ make clean    # clean up compiled files
 
 ## Implementations
 
-- [inet-cute](https://github.com/cicada-lang/inet-cute)
-- [inet-js](https://github.com/cicada-lang/inet-js)
-- [inet-forth](https://github.com/cicada-lang/inet-forth)
-- [inet-lisp-st](https://github.com/cicada-lang/inet-lisp-st)
+- [inet-cute](https://github.com/xieyuheng/inet-cute)
+- [inet-js](https://github.com/xieyuheng/inet-js)
+- [inet-forth](https://github.com/xieyuheng/inet-forth)
+- [inet-lisp-st](https://github.com/xieyuheng/inet-lisp-st)
 
 ## References
 
