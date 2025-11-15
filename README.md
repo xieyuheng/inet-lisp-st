@@ -164,7 +164,7 @@ commands:
   play -- play files
   info -- print system info
   test-self -- run self test
-  test-packages -- run test for packages
+  test-helpers -- run test for helpers
   version -- print version
   help -- print help message
 ```
