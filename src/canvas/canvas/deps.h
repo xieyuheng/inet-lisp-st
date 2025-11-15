@@ -10,7 +10,7 @@
 #include <X11/Xatom.h>
 #include <X11/XKBlib.h>
 
-#include "../../std/index.h"
+#include "../../helpers/index.h"
 
 #include "../font/index.h"
 #include "../image/index.h"
