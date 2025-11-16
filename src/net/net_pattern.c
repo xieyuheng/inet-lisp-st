@@ -23,14 +23,14 @@ net_pattern_t *
 net_pattern_new(list_t *node_pattern_list) {
     net_pattern_t *self = new(net_pattern_t);
 
-    self->node_pattern_array = array_new_auto();
+    self->node_pattern_array = make_array_auto();
     node_pattern_t *node_pattern = list_first(node_pattern_list);
     while (node_pattern) {
         array_push(self->node_pattern_array, node_pattern);
         node_pattern = list_next(node_pattern_list);
     }
 
-    self->local_name_set = string_set_new();
+    self->local_name_set = string_make_set();
     init_local_name_set(self->local_name_set, self->node_pattern_array);
     self->local_name_array = set_to_array(self->local_name_set);
     return self;

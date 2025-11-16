@@ -14,8 +14,8 @@ player_new(worker_t *worker) {
     canvas->title = "inet debug";
     self->canvas = canvas;
 
-    self->node_hash = hash_new();
-    self->node_model_hash = hash_new();
+    self->node_hash = make_hash();
+    self->node_model_hash = make_hash();
     hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
 
     self->is_running = false;
@@ -114,7 +114,7 @@ on_frame(player_t *self, canvas_t *canvas, uint64_t passed) {
 
 hash_t *
 player_new_node_hash(player_t *self) {
-    hash_t *node_hash = hash_new();
+    hash_t *node_hash = make_hash();
     node_t *node = set_first(self->worker->player_node_set);
     while (node) {
         hash_set(node_hash, (void *) node->id, node);

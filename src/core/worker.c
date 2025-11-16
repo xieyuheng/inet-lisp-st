@@ -4,11 +4,11 @@ worker_t *
 worker_new(mod_t *mod) {
     worker_t *self = new_page_aligned(worker_t);
     self->mod = mod;
-    self->task_list = list_new_with((destroy_fn_t *) task_destroy);
+    self->task_list = make_list_with((destroy_fn_t *) task_destroy);
     // TODO We should use value_destroy to create value_stack.
-    self->value_stack = stack_new();
-    self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
-    self->player_node_set = set_new();
+    self->value_stack = make_stack();
+    self->return_stack = make_stack_with((destroy_fn_t *) frame_destroy);
+    self->player_node_set = make_set();
     self->node_id_count = 0;
     return self;
 }

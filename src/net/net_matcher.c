@@ -6,8 +6,8 @@ net_matcher_new(const net_pattern_t *net_pattern) {
     self->net_pattern = net_pattern;
     self->value_hash = hash_of_string_key();
     self->matched_nodes = allocate_pointers(net_pattern_length(net_pattern));
-    self->principal_name_list = string_list_new();
-    self->matched_principal_name_list = string_list_new();
+    self->principal_name_list = string_make_list();
+    self->matched_principal_name_list = string_make_list();
     return self;
 }
 

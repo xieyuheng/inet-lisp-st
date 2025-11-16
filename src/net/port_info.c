@@ -20,8 +20,8 @@ port_info_destroy(port_info_t **self_pointer) {
 }
 
 array_t *
-port_info_array_new(size_t size) {
-    return array_new_with(size, (destroy_fn_t *) port_info_destroy);
+port_info_make_array(size_t size) {
+    return make_array_with(size, (destroy_fn_t *) port_info_destroy);
 }
 
 port_info_t *

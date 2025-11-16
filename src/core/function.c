@@ -11,7 +11,7 @@ function_new(size_t arity) {
     self->spec = &function_object_spec;
     self->arity = arity;
     self->local_index_hash = hash_of_string_key();
-    self->opcode_array = array_new_auto_with((destroy_fn_t *) opcode_destroy);
+    self->opcode_array = make_array_auto_with((destroy_fn_t *) opcode_destroy);
     return self;
 }
 

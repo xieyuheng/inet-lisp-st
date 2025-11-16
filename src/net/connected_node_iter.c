@@ -11,8 +11,8 @@ connected_node_iter_new(node_t *root) {
     assert(root);
     connected_node_iter_t *self = new(connected_node_iter_t);
     self->root = root;
-    self->occurred_node_set = set_new();
-    self->remaining_node_list = list_new();
+    self->occurred_node_set = make_set();
+    self->remaining_node_list = make_list();
     return self;
 }
 
