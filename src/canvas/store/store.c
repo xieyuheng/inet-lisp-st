@@ -10,7 +10,7 @@ store_new(const char *base) {
     store_t *self = new(store_t);
     self->base = base;
     self->cached_blob_hash = hash_of_string_key();
-    hash_set_destroy_fn(self->cached_blob_hash, (destroy_fn_t *) blob_destroy);
+    hash_put_destroy_fn(self->cached_blob_hash, (destroy_fn_t *) blob_destroy);
     return self;
 }
 
@@ -46,7 +46,7 @@ store_get_cache(store_t *self, const char* path) {
 }
 
 void
-store_set_cache(store_t *self, const char* path, blob_t *blob) {
+store_put_cache(store_t *self, const char* path, blob_t *blob) {
     char *key = string_copy(path);
     bool ok = hash_set(self->cached_blob_hash, key, blob);
     if (!ok) string_destroy(&key);
@@ -80,7 +80,7 @@ store_get(store_t *self, const char* path) {
 
     blob_t *fresh_blob = store_get_fresh(self, path);
     if (fresh_blob) {
-        store_set_cache(self, path, fresh_blob);
+        store_put_cache(self, path, fresh_blob);
     }
 
     return fresh_blob;

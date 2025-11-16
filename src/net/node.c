@@ -22,7 +22,7 @@ node_destroy(node_t **self_pointer) {
 }
 
 void
-node_set_value(node_t *self, size_t index, value_t value) {
+node_put_value(node_t *self, size_t index, value_t value) {
     assert(index < self->ctor->arity);
     array_set(self->value_array, index, value);
 

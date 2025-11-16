@@ -2,7 +2,7 @@
 
 static void
 reconnect_input(node_t *node, size_t index, value_t value) {
-    node_set_value(node, index, value);
+    node_put_value(node, index, value);
 }
 
 static value_t
@@ -10,7 +10,7 @@ reconnect_output(node_t *node, size_t index) {
     wire_t *node_wire = wire_new();
     wire_t *free_wire = wire_new();
 
-    node_set_value(node, index, node_wire);
+    node_put_value(node, index, node_wire);
 
     node_wire->opposite = free_wire;
     free_wire->opposite = node_wire;

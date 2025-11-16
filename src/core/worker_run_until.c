@@ -22,7 +22,7 @@ step_op(worker_t *worker, frame_t *frame, opcode_t *op) {
 
     case OPCODE_SET_VARIABLE: {
         value_t value = stack_pop(worker->value_stack);
-        frame_set_variable(frame, op->set_variable.index, value);
+        frame_put_variable(frame, op->set_variable.index, value);
         return;
     }
     }

@@ -19,7 +19,7 @@ define_rule_star(worker_t *worker, list_t *node_pattern_list, list_t *exp_list) 
     size_t arity = array_length(local_name_array);
     function_t *function = function_new(arity);
     list_t *local_name_list = list_from_array(local_name_array);
-    compile_set_variable_list(worker, function, local_name_list);
+    compile_put_variable_list(worker, function, local_name_list);
     compile_exp_list(worker, function, exp_list);
 
     node_pattern_t *node_pattern = list_first(node_pattern_list);

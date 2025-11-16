@@ -10,7 +10,7 @@ struct node_t {
 node_t *node_new(const node_ctor_t *ctor, size_t id);
 void node_destroy(node_t **self_pointer);
 
-void node_set_value(node_t *self, size_t index, value_t value);
+void node_put_value(node_t *self, size_t index, value_t value);
 value_t node_get_value(const node_t *self, size_t index);
 
 void node_print_name(const node_t *self, file_t *file);

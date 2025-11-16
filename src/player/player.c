@@ -16,7 +16,7 @@ player_new(worker_t *worker) {
 
     self->node_hash = make_hash();
     self->node_model_hash = make_hash();
-    hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
+    hash_put_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
 
     self->is_running = false;
     self->running_frame_count = 0;
